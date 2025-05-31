@@ -10,3 +10,18 @@ coverage
 .vscode
 *.log
 .git
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+
+# SQLite temporary/journal files
+*.sqlite-journal
+*.sqlite3-journal
+*.db-journal
+*.db3-journal
+
+# Env files
+*.env

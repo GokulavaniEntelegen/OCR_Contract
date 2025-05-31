@@ -1,22 +1,27 @@
-import express, { NextFunction, Request, Response } from 'express';
+import 'reflect-metadata';
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+import { createExpressServer } from 'routing-controllers';
 
-// Middleware example
-app.use(express.json());
+import { config } from './config';
+import { UserController } from './controllers/UserController';
+import { AppDataSource } from './data-source';
 
-// Typed route handler
-app.get('/api/hello', (req: Request, res: Response) => {
-    res.json({ message: 'Hello, world!' });
-});
+async function startServer() {
+    try {
+        await AppDataSource.initialize();
+        console.log('💽 Connected to SQLite database.');
 
-// Error handler with types
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send({ error: 'Something went wrong!' });
-});
+        const app = createExpressServer({
+            controllers: [UserController],
+            cors: true,
+        });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+        app.listen(config.port, () => {
+            console.log(`🚀 Server running at http://localhost:${config.port}`);
+        });
+    } catch (error) {
+        console.error('Error starting server:', error);
+    }
+}
+
+startServer();
