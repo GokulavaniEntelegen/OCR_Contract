@@ -24,7 +24,7 @@ const data2 = [
 ];
 
 const data3 = [
-  { name: '3 Rejected', value: 40, color: '#0f63fe' },
+  { name: '3 Rejected', value: 100, color: '#0f63fe' },
   { name: '3 Rejected', value: 35, color: '#16dacc' },
   { name: '3 Rejected', value: 25, color: '#fbb040' },
 ];

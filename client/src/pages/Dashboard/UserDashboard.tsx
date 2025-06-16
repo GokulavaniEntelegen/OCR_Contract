@@ -81,6 +81,7 @@ import MainLogoIcon from "../../assets/MainLogo.svg"
 import SettingsCustomIcon from "../../assets/Setting.svg"
 import NotificationIcon from "../../assets/Notification.svg"
 import PsaiImg from "../../assets/Psai.png";
+import Tabletry from "client/src/components/Tables";
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled("input")({
@@ -515,162 +516,12 @@ function Dashboard() {
                 </Box>
                 </Typography>
             </Paper> */}
-            <div className="uploadtables" style={{marginTop: "50px"}}>
+            <div className="uploadtables" style={{marginTop: "60px"}}>
             <Box sx = {{pointerEvents: "none", opacity: "0.3"}}>
-            <div>
-            <div className="filterandpagin">
-                
-                <Button
-                variant="outlined"
-                startIcon={<FilterAltIcon />}
-                sx={{
-                    borderRadius: '15px',
-                    fontWeight: 500,
-                    padding: "8px 16px",
-                    fontSize: "15px",
-                    marginRight: "15px",
-                    marginLeft: "20px",
-                    marginTop: "21px",
-                    height: "35px",
-                    textTransform: "none",
-                    '& .MuiButton-startIcon': {
-                    color: '#1976d2',
-                    },
-                }}
-                >
-                Filter
-                </Button>
-
-                <TextField
-                    style={{ width:"180px", marginTop: "18px" }}
-                    label="Customer Name"
-                    size="small"
-                    variant="outlined"
-                    value={searchQuery}
-                    onChange={(event) => setSeacrchQuery(event.target.value)}
-                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: "50px"} }}
-                />
-
-                <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                        placeholderText="Start Date"
-                        dateFormat="dd MMM yyyy"
-                        className="custom-datepicker"
-                      />
-                
-                      <DatePicker
-                        selected={endDate}
-                        onChange={(date) => setEndDate(date)}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        minDate={startDate ?? undefined}
-                        placeholderText="End Date"
-                        dateFormat="dd MMM yyyy"
-                        className="custom-datepicker"
-                      />
-                    </div>
-
-
-                <TablePagination
-                    component="div"
-                    count={rows.length}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    onPageChange={handlePageChange}
-                    onRowsPerPageChange={handleRowsPerPageChange}
-                    rowsPerPageOptions={[5, 10, 25]}
-                    style={{marginTop: "15px"}}
-                />
-            </div>
-            <TableContainer>
-                <Table sx={{ minWidth: 500 }}>
-                    <TableHead style={{ backgroundColor: "lightgrey" }}>
-                        <TableRow>
-                            <TableCell padding="checkbox">
-                                <Checkbox
-                                    indeterminate={selected.length > 0 && selected.length < rows.length}
-                                    checked={selected.length > 0 && selected.length === rows.length}
-                                    onChange={handleAllSelect}
-                                />
-                            </TableCell>
-                            <TableCell><strong>CONTACT NO</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>CUSTOMER NAME</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>ADDRESS</strong></TableCell>
-                            <TableCell><strong>START DATE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>BATCH GENEREATED</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>QUANTITY RECEIVED</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>VENDOR CODE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>BILL CLAUSE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                            <TableCell><strong>TAGS</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {paginatedrows.map((row, index) => {
-                            const rowIndex = page * rowsPerPage + index;
-                            const isItemSelected = isSelected(rowIndex);
-                            return (
-                                <TableRow
-                                    key={index}
-                                    hover
-                                    role="checkbox"
-                                    aria-checked={isItemSelected}
-                                    selected={isItemSelected}
-                                    onClick={() => handleClick(rowIndex)}
-                                >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            checked={isItemSelected}
-                                            onChange={() => handleClick(rowIndex)}
-                                        />
-                                    </TableCell>
-                                    <TableCell style={{ color: "blue" }}>
-                                        <CellWithFlag flag={row.flags.contact}>{row.contact}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.name}>{row.name}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.address}>{row.address}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.startDate}>{row.startDate}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.batchGenerated}>
-                                            <BatchFormat label={row.batchGenerated} />
-                                        </CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.quantityReceive}>
-                                            <QuantityReceivedChip status={row.quantityReceive} />
-                                        </CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.vendorCode}>{row.vendorCode}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.billClause}>{row.billClause}</CellWithFlag>
-                                    </TableCell>
-                                    <TableCell>
-                                        <CellWithFlag flag={row.flags.tags}>
-                                            <TagsFormat label={row.tags} />
-                                        </CellWithFlag>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            </div>
+                <Tabletry/>
             </Box>
             </div>
+            
             </div>
 
             </Box>

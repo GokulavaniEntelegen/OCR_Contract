@@ -7,6 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import UploadIcon from '@mui/icons-material/Upload';
 import CustomCharts from "client/src/components/Charts";
+import Tabletry from "client/src/components/Tables";
 
 function AllContracts() {
     return(
@@ -55,7 +56,9 @@ function AllContracts() {
                     <div style={{width: "100%", marginTop: "60px"}}>
                         <CustomCharts/>
                     </div>
-
+                    <div className="contracttable" style={{marginTop: "60px"}}>
+                        <Tabletry/>
+                    </div>
                 </div>
             </Box>
         </div>
