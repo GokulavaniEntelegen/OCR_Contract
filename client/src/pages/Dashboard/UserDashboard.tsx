@@ -409,197 +409,8 @@ function Dashboard() {
     const [step, setStep] = useState(0);
 
   return (
-    <div className="container" style={{ display: "flex", padding: "0px 0px 50px 0px", width: "100%"}}>
-        
-      {/* <Box sx={{ display: 'flex', height: '100vh'}}>
-      
-      <IconButton
-        onClick={toggleHamburger}
-        sx={{
-          position: 'fixed',
-          top: 16,
-          left: 12,
-          zIndex: 1500,
-          color: "white"
-        //   backgroundColor: 'white',
-        }}
-      >
-        <LogoDevIcon/>
-      </IconButton>
-
-      
-    {hamburgerOpen && ( 
-        <Box
-          sx={{
-            width: 60,
-            height: '100vh',
-            backgroundColor: '#1c2b36',
-            paddingTop: 7,
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            zIndex: 1000,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {icons.map(({ key, icon, tooltip }) => (
-            <Tooltip title={tooltip} placement="right" key={key}>
-              <IconButton
-                onClick={() => handleIconClick(key)}
-                sx={{
-                  color: selectedKey === key && drawerOpen ? '#3399FF' : '#fff',
-                  marginY: 1,
-                }}
-              >
-                {icon}
-              </IconButton>
-            </Tooltip>
-          ))}
-        </Box>
-         )}
-
-    //   Drawer with content
-      {hamburgerOpen && ( 
-        <Drawer
-          variant="persistent"
-          anchor="left"
-          open={drawerOpen}
-          PaperProps={{
-            sx: {
-              width: 300,
-              marginLeft: '60px',
-            },
-          }}
-        >
-          <Box p={2}>
-            <ContentComponent selected={selectedKey} />
-          </Box>
-        </Drawer>
-       )}
-
-    //   Main Content Area
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginLeft: hamburgerOpen
-            ? drawerOpen
-              ? '360px'
-              : '60px'
-            : '0px',
-          padding: 3,
-          transition: 'margin-left 0.3s',
-        }}
-      />
-      </Box> */}
-
-      <Box sx={{ display: 'flex', height: '100vh', marginRight: "50px" }}>
-        <Box
-            sx={{
-            width: "52px",
-            height: '100vh',
-            backgroundColor: '#051235',
-            paddingTop: 3,
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            zIndex: 1000,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: "15px"
-            }}
-        >
-            <IconButton style={{display: "flex", alignItems: "center",marginBottom: "65px"}}><img src={MainLogoIcon} alt="icon" width={40} height={40} /></IconButton>
-            {icons.map(({ key, icon, tooltip }) => (
-            <Tooltip title={tooltip} placement="right" key={key}>
-                <IconButton
-                // onClick={() => handleIconClick(key)}
-                sx={{
-                    color: selectedKey === key ? '#3399FF' : '#fff',
-                    marginY: 1,
-                }}
-                >
-                <img src= {icon} alt="icon" width={24} height={24} />
-                </IconButton>
-            </Tooltip>
-            ))}
-        </Box>
-        </Box>
-
-      
-      
-        <div style={{width: "100%", display: "flex", flexDirection: "column"}}>
-            <div className="topbar">
-                <div className="searchbar">
-                    <TextField
-                    variant="outlined"
-                    placeholder="Search in clause"
-                    size="small"
-                    sx={{
-                        width: "100%",
-                        maxWidth: 400,
-                        '& .MuiOutlinedInput-root': {
-                        borderRadius: '4px',
-                        backgroundColor: '#F4F4F4',
-                        '& input': {
-                            fontSize: '20px', // 👈 Increase text size here
-                            marginLeft: "5px"
-                        },
-                        '& .MuiInputAdornment-root svg': {
-                            fontSize: '25px', // 👈 Optional: increase icon size
-                            borderRight: "1px solid lightgray",
-                            paddingRight: "10px"
-                        },
-                        '&.Mui-focused fieldset': {
-                            border: "0.25px solid #C4C4C4",
-                        },
-                        },
-                    }}
-                    InputProps={{
-                        startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                        ),
-                    }}
-                    />
-                </div>
-                <div className="settings-profile" style={{display: "flex",alignItems: "center"}}>
-                    <div style={{paddingRight: 20, paddingLeft: 20 , borderLeft: "1px solid #F0F0F0"}}>
-                    <IconButton sx = {{color: "black",border: "1px solid lightgray", borderRadius: "18px", backgroundColor: "#F9F9F94D"}}>
-                        <img src={SettingsCustomIcon} alt="icon" width={24} height={24} />
-                    </IconButton>
-                    </div>
-
-                    <div style={{paddingRight: 20, paddingLeft: 20 , borderLeft: "1px solid #F0F0F0", borderRight: "1px solid #F0F0F0"}}>
-                    <IconButton sx = {{color: "black",border: "1px solid lightgray", borderRadius: "18px", backgroundColor: ""}}>
-                        <img src={NotificationIcon} alt="icon" width={24} height={24} />
-                    </IconButton>
-                    </div>
-
-                    <Box
-                        display="flex"
-                        alignItems="center"
-                        sx={{
-                            padding: '3px 10px',
-                            width: 'fit-content',
-                            marginLeft: "20px",
-                            borderRadius: "30px",
-                            border: "1px solid #F0F0F0",
-                            marginRight: "30px"
-                        }}
-                        >
-                        <Avatar sx={{ bgcolor: '#3f51b5', marginRight: 1 }}>
-                            {getInitials(name)}
-                        </Avatar>
-                        <Typography variant="body1" sx = {{fontFamily: "Poppins"}}>{name}</Typography>
-                    </Box>
-
-                </div>
-            </div>
-            <Box sx={{width: "100%",minHeight: "100vh" }}>
+    <div>
+        <Box sx={{width: "100%",minHeight: "100vh" }}>
             {/* Removed the original Paper with "Welcome" and "Navigate" text */}
             {/* Purple Gradient Banner/Card - Integrated here */}
             <div style={{padding: "50px 30px 0px 30px"}}>
@@ -863,9 +674,8 @@ function Dashboard() {
             </div>
 
             </Box>
-        </div>
 
-        <Modal open = {showModal}>
+            <Modal open = {showModal}>
             <Box
                 sx={{
                     position: 'absolute',
@@ -1077,9 +887,7 @@ function Dashboard() {
                     </Box>
                 )}
             </Box>
-        </Modal>
-
-
+            </Modal>
     </div>
   );
 }
