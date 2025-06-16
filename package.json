@@ -46,7 +46,9 @@
   "dependencies": {
     "@fontsource/poppins": "^5.2.6",
     "@fontsource/roboto": "^5.2.6",
+    "@mui/x-charts": "^8.5.2",
     "react-datepicker": "^8.4.0",
+    "recharts": "^2.15.3",
     "sass": "^1.89.2"
   }
 }
