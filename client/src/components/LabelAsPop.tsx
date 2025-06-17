@@ -127,7 +127,7 @@ const LabelAs: React.FC = () => {
                 <p>Enter Label Name</p>
                 <IconButton onClick={handleEnterClose}><CloseIcon sx = {{color: "black"}} /></IconButton>
             </div>
-            <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px"}}>Label name</p>
+            <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily: "Poppins"}}>Label Name</p>
             <TextField
             variant="outlined"
             fullWidth

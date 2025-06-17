@@ -2,12 +2,14 @@ import React from "react";
 import './AllContracts.scss';
 import { Box, Button } from "@mui/material";
 
-import HideWidgetsIcon from "../../assets/HideWidgetsIcon.jpg"
+import HideWidgetsIcon from "../../assets/HideWidgetsIcon.svg"
 import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import UploadIcon from '@mui/icons-material/Upload';
 import CustomCharts from "client/src/components/Charts";
 import Tabletry from "client/src/components/Tables";
+import ImportContractPop from "client/src/components/ImportContractPop";
+import UploadCustomIcon from "../../assets/UploadCustom.svg"
 
 function AllContracts() {
     return(
@@ -22,23 +24,24 @@ function AllContracts() {
                     <div className="options">
                         <Button
                             variant="text"
-                            startIcon = {<AddIcon/>}
+                            startIcon = {<img src = {HideWidgetsIcon} style={{width: "18px", height: "18px"}}/>}
                             sx={{textTransform: "none", fontSize: "16px", color: "#1093FF", fontFamily: "Poppins", fontWeight: '500'}}
                             >
                                 Hide Widgets
                         </Button>
-                        <Button
+                        {/* <Button
                             variant="text"
                             startIcon = {<CloudDownloadIcon/>}
                             sx={{textTransform: "none", fontSize: "16px", color: "#1093FF", fontFamily: "Poppins", fontWeight: '500'}}
                             >
                                 Import Details
-                        </Button>
+                        </Button> */}
+                        <ImportContractPop/>
 
                         <Button
                             // onClick={}
                             variant="contained"
-                            startIcon = {<UploadIcon/>}
+                            startIcon = {<img src = {UploadCustomIcon} style={{width: "18px", height: "18px"}}/>}
                             style={{
                                 textTransform: "none", 
                                 fontFamily: "Poppins",

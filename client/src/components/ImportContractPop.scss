@@ -1,0 +1,35 @@
+@use "../global_styles/typography.scss" as *;
+
+
+
+.uploadbox {
+    padding: 32px;
+    border-radius: 20px;
+    width: 40.375rem;
+    border: 1px solid lightgray;
+
+    .import-text {
+        @include headline-small;
+            font-weight: 600;
+            font-size: 22px;
+    }
+    
+    .smallbox {
+        width: 36.375rem;
+        height: 14.25rem;
+        border-radius: 8px;
+        border: 1px solid #E4E7EC;
+        margin-top: 8px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .dragtext {
+            @include title-medium;
+            font-weight: 500;
+            color: #303030;
+        }
+    }
+}
