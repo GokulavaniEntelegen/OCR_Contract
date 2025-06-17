@@ -1,5 +1,5 @@
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Chip, Button ,Box, IconButton, Tab, Tabs} from "@mui/material";
-import React, { useState } from "react";
+import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Chip, Button ,Box, IconButton, Tab, Tabs, Popover, Stack, ButtonBase, InputAdornment, List, ListItem, ListItemText ,ListItemIcon} from "@mui/material";
+import React, { use, useState } from "react";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -12,6 +12,14 @@ import { FC } from "react";
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import AddIcon from '@mui/icons-material/Add';
 import Filter_BlackIcon from "../assets/Filter_Black.svg";
+import "./Tables.scss";
+import CloseIcon from '@mui/icons-material/Close';
+import { Category } from "@mui/icons-material";
+import SearchIcon from '@mui/icons-material/Search';
+import RenameIcon from "../assets/Rename.svg";
+import DuplicateIcon from "../assets/Duplicate.svg";
+import DeleteIcon from "../assets/Delete.svg";
+
 
 type Flags = {
   contact: string;
@@ -280,10 +288,63 @@ function Tabletry() {
 
     
     const [tab, setTab] = React.useState(0);
-
+    
     const handleChange = (event: React.SyntheticEvent, newTab: number) => {
-    setTab(newTab);
+        setTab(newTab);
     };
+    
+    const [anchorElFilter, setAnchorElFilter] = useState<HTMLElement |null>(null);
+    
+    const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElFilter(event.currentTarget);
+    }
+
+    const handleFilterClose = () => {
+        setAnchorElFilter(null);
+    }
+
+    const filterOpen = Boolean(anchorElFilter);
+    const categories: string[] = ["Contact No.", "Customer Name", "Contract Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
+    const subcategories: string[] = ["IT Services Contracts", "Sub-Contract", "SLA", "Master service level Agreement", "Sub-Contract", "SLA", "Master service level Agreement"];
+
+    const [subchecked, setSubchecked] = useState<string[]>([]);
+
+    const handleToggle = (value: string) => () => {
+    if (value === 'all') {
+      if (subchecked.length === subcategories.length) {
+        setSubchecked([]);
+      } else {
+        setSubchecked([...subcategories]);
+      }
+    } else {
+      const currentIndex = subchecked.indexOf(value);
+      const newChecked = [...subchecked];
+
+      if (currentIndex === -1) {
+        newChecked.push(value);
+      } else {
+        newChecked.splice(currentIndex, 1);
+      }
+
+      setSubchecked(newChecked);
+    }
+  };
+
+  const isAllSelected = subchecked.length === subcategories.length;
+  const [anchorElAddView, setAnchorElAddView] = useState<HTMLElement |null>(null);
+
+  const handleAddViewClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElAddView(event.currentTarget);
+    }
+
+    const handleAddViewClose = () => {
+        setAnchorElAddView(null);
+    }
+
+    const addViewOpen = Boolean(anchorElAddView);
+
+    const [newView, setNewView] = useState("");
+
 
     return(
         <div className="uploadtables" style={{marginTop: "50px", border: "0.5px solid lightgray", borderRadius: "4px", padding: "10px 20px 0 20px"}}>
@@ -326,11 +387,91 @@ function Tabletry() {
                                 minHeight: "48px",
                             }}
                             />
+                            <IconButton onClick={handleAddViewClick}>
                             <Tab
                             label={<AddIcon />}
                             sx={{ fontWeight: 600, textTransform: "none", minHeight: "48px" }}
                             />
+                            </IconButton>
                         </Tabs>
+
+                        <Popover open = {addViewOpen} anchorEl={anchorElAddView} onClose={handleAddViewClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
+                            paper: {
+                            elevation: 0,
+                            sx: {
+                                boxShadow: "none",
+                            },
+                            },
+                        }}>
+                            <div className="addview-box">
+                                <div className="addviewtop">
+                                    <p>Add View</p>
+                                    <IconButton onClick={handleAddViewClose}><CloseIcon sx = {{color: "black"}} /></IconButton>
+                                </div>
+                                <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px"}}>Enter a view name</p>
+                                <TextField
+                                variant="outlined"
+                                fullWidth
+                                placeholder="AI View"
+                                value={newView}
+                                onChange={(event) => setNewView(event.target.value)}
+                                sx={{
+                                    marginBottom: "7px",
+                                    '& .MuiInputBase-root': {
+                                    borderRadius: '4px',
+                                    fontSize: '16px',
+                                    fontFamily: 'Poppins, sans-serif',
+                                    '& fieldset': {
+                                        borderWidth: '0.5px',
+                                        borderColor: '#C4C4C4',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: '#999',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: '#000',
+                                    },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                    padding: '10px 12px',
+                                    fontSize: '14px',
+                                    fontFamily: 'Poppins, sans-serif',
+                                    color: '#42474E',
+                                    },
+                                    '& .MuiInputBase-input::placeholder': {
+                                    color: '#42474E',
+                                    fontSize: '14px',
+                                    fontWeight: 400,
+                                    opacity: 1,
+                                    },
+                                }}
+                                />
+                                <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
+                                    <Button
+                                    onClick={handleFilterClose}
+                                    variant="outlined"
+                                    style={{
+                                        textTransform: "none", 
+                                        fontSize: "16px", 
+                                        padding: "10px 20px 10px 20px",
+                                        border: "1px solid gray",
+                                        color: "#1093FF"
+                                        }} 
+                                    className="actions">Cancel</Button>
+                                    <Button
+                                    
+                                    variant="contained"
+                                    style={{
+                                        textTransform: "none", 
+                                        fontSize: "16px", 
+                                        padding: "10px 25px 10px 25px",
+                                        backgroundColor: "#1093FF",
+                                        boxShadow: "none"
+                                        }} 
+                                    className="actions">Save</Button>
+                                </div>
+                            </div>
+                        </Popover>
 
                         <TablePagination
                             component="div"
@@ -349,12 +490,14 @@ function Tabletry() {
                             }}
                         />
                     </Box>
+
                     
                 </div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
             <div className="filterandpagin">
                 <Button
                 variant="outlined"
+                onClick={handleFilterClick}
                 startIcon={<img src={Filter_BlackIcon} style={{width: "24", height: "24"}}/>}
                 sx={{
                     borderRadius: '30px',
@@ -376,6 +519,160 @@ function Tabletry() {
                 >
                 Filter
                 </Button>
+                <Popover open={filterOpen} anchorEl={anchorElFilter} onClose={handleFilterClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
+                    paper: {
+                    elevation: 0,
+                    sx: {
+                        boxShadow: "none",
+                    },
+                    },
+                }}>
+                    <div className = "filter-box">
+                        <Box className = "filtertop">
+                            <p>Filters</p>
+                            <IconButton onClick={handleFilterClose}><CloseIcon sx = {{color: "black"}} /></IconButton>
+                        </Box>
+                        <div style={{display: 'flex'}}>
+                        <div className = "filterleft" style = {{width: "30%",backgroundColor: "#EBEBEB"}}>
+                            <Stack>
+                                <Box sx={{borderBottom: "1px solid gray"}}>
+                                <p style={{fontFamily: "Poppins", fontWeight: 600, fontSize: "15px", padding: "20px 10px 20px 40px"}}>CATEGORIES</p>
+                                </Box>
+                                {categories.map((category, index) => (
+                                    <ButtonBase
+                                    key={index}
+                                    //   onClick={() => handleClick(category)} // your click logic
+                                    sx={{
+                                        justifyContent: "flex-start",
+                                        width: "100%",
+                                        pl: "40px",
+                                        py: "20px",
+                                    }}
+                                    >
+                                    <p className="catnames" style={{ margin: 0 }}>{category}</p>
+                                    </ButtonBase>
+                                ))}
+                            </Stack>
+                        </div>
+                        <div className = "filterright" style={{width: "70%"}}>
+                            <div style={{display: "flex", justifyContent: "space-between", width: "100%", flexWrap: "nowrap", alignItems: "center", marginTop: "20px"}}>
+                                <div className="searchbar" style={{marginLeft: "20px", maxWidth: "200px"}}>
+                                <TextField
+                                variant="outlined"
+                                placeholder="Search in clause"
+                                size="small"
+                                sx={{
+                                    // width: "100%",
+                                    maxWidth: 200,
+                                    '& .MuiOutlinedInput-root': {
+                                    borderRadius: '4px',
+                                    backgroundColor: '#F4F4F4',
+                                    '& input': {
+                                        fontSize: '14px', // 👈 Increase text size here
+                                        marginLeft: "5px",
+                                        fontFamily: "Poppins"   
+                                    },
+                                    '& .MuiInputAdornment-root svg': {
+                                        fontSize: '30px', // 👈 Optional: increase icon size
+                                        borderRight: "1px solid lightgray",
+                                        paddingRight: "10px"
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        border: "0.25px solid #C4C4C4",
+                                    },
+                                    },
+                                }}
+                                InputProps={{
+                                    startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                    ),
+                                }}
+                                />
+                                </div>
+                                <Button onClick = {() => {setSubchecked([])}} style={{textTransform: "none", fontFamily: "Poppins", fontWeight: "500", fontSize: "15px", color: "#1093FF", marginRight: "10px"}}>Clear All</Button>
+                            </div>
+                            <div className = "subcatlist"style={{marginLeft: "20px", marginTop: "8px"}}>
+                                <List>
+                                    <ListItem dense disablePadding onClick={handleToggle('all')} sx={{ cursor: 'pointer', borderBottom: "0.5px solid #E4E4E4", marginBottom: "4px"}}>
+                                        <ListItemIcon sx={{ minWidth: '30px' }}>
+                                        <Checkbox
+                                            edge="start"
+                                            checked={isAllSelected}
+                                            // indeterminate={subchecked.length > 0 && !isAllSelected}
+                                            tabIndex={-1}
+                                            disableRipple
+                                            sx={{'& .MuiSvgIcon-root': {
+                                                borderRadius: '16px', // or '8px' for more rounding
+                                            },
+                                            '&.Mui-checked': {
+                                            color: '#45464B', // Checked color
+                                            },
+                                            }}
+                                        />
+                                        </ListItemIcon>
+                                        <ListItemText primary={<p style={{fontSize: "15px", fontFamily: "Poppins", fontWeight: "600",color: "#606060"}}>Select All ({subcategories.length})</p>}></ListItemText>
+                                    </ListItem>
+                                    {subcategories.map((subcategory) => (
+                                        <ListItem
+                                        key={subcategory}
+                                        dense
+                                        disablePadding
+                                        onClick={handleToggle(subcategory)}
+                                        sx={{ cursor: 'pointer',borderBottom: "0.5px solid #E4E4E4", marginBottom: "4px" }}
+                                        >
+                                        <ListItemIcon sx={{ minWidth: '30px' }}>
+                                            <Checkbox
+                                            edge="start"
+                                            checked={subchecked.includes(subcategory)}
+                                            tabIndex={-1}
+                                            disableRipple
+                                            sx={{'& .MuiSvgIcon-root': {
+                                                borderRadius: '16px', // or '8px' for more rounding
+                                            },
+                                            '&.Mui-checked': {
+                                            color: '#45464B', // Checked color
+                                            },
+                                            }}
+                                            />
+                                        </ListItemIcon>
+                                        <ListItemText primary={subcategory} />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            </div>
+                                
+                        </div>
+
+                        </div>
+                        <div className="buttons" style={{borderTop: "0.5px solid lightgray", padding: "10px"}}>
+                            
+                            <Button
+                            onClick={handleFilterClose}
+                            variant="outlined"
+                            style={{
+                                textTransform: "none", 
+                                fontSize: "16px", 
+                                padding: "10px 20px 10px 20px",
+                                border: "1px solid gray",
+                                color: "#1093FF"
+                                }} 
+                            className="actions">Cancel</Button>
+                            <Button
+                            
+                            variant="contained"
+                            style={{
+                                textTransform: "none", 
+                                fontSize: "16px", 
+                                padding: "10px 25px 10px 25px",
+                                backgroundColor: "#1093FF",
+                                boxShadow: "none"
+                                }} 
+                            className="actions">Save</Button>
+                        </div>
+                    </div>
+                </Popover>
 
                 <TextField
                     style={{ width:"180px", marginTop: "18px" }}
@@ -411,7 +708,7 @@ function Tabletry() {
                         className="custom-datepicker"
                       />
                 </div>
-                
+
             </div>
             <Button style={{textTransform: "none", fontFamily: "Poppins", fontWeight: "500", fontSize: "16px", color: "#1093FF"}}>Clear All</Button>
             </div>

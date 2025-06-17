@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Chip, CssBaseline, ThemeProvider, createTheme, Box, Typography, Stack, IconButton } from "@mui/material";
+import React, { useState } from "react";
+import { Button, Chip, CssBaseline, ThemeProvider, createTheme, Box, Typography, Stack, IconButton, Popover } from "@mui/material";
 import '@fontsource/roboto';
 import UploadIcon from "@mui/icons-material/Upload";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -8,6 +8,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell
 } from 'recharts';
+import ChartsMenu from "./ChartsMenu";
 
 const data = [
   { month: 'May', renewable: 20, nonrenewable: 10 },
@@ -30,6 +31,7 @@ const data3 = [
 ];
 
 const CustomCharts = () => {
+    const [open, setOpen] =useState(false)
   const theme = createTheme({
     typography: {
       fontFamily: 'Roboto, Arial',
@@ -49,7 +51,7 @@ const CustomCharts = () => {
               <Chip style = {{backgroundColor: "#E2E2E2", color: "#373738", fontFamily: "Poppins", fontSize: "12px"}} label="By quarter" />
             </Box>
             <IconButton><img src={Filter_BlackIcon} alt="icon" width={20} height={20} /></IconButton>
-            <IconButton><MoreVertIcon /></IconButton>
+            <ChartsMenu/>
           </Box>
           <ResponsiveContainer width="100%" height="80%" style={{marginLeft: "-30px"}}>
             <BarChart data={data} margin={{ right: 20, left: 20, bottom: 5 }} barSize={20}>
@@ -76,7 +78,7 @@ const CustomCharts = () => {
               <Chip style = {{backgroundColor: "#E2E2E2", color: "#373738", fontFamily: "Poppins", fontSize: "12px"}} label="By quarter" />
             </Box>
             <IconButton><img src={Filter_BlackIcon} alt="icon" width={20} height={20} /></IconButton>
-            <IconButton><MoreVertIcon /></IconButton>
+            <ChartsMenu/>
           </Box>
           <ResponsiveContainer width="100%" height="80%" style={{marginLeft: "-30px"}}>
             <BarChart data={data2} margin={{ right: 20, left: 20, bottom: 5 }} barSize={20}>
@@ -98,7 +100,7 @@ const CustomCharts = () => {
             </Box>
             <Box>
               <IconButton><img src={Filter_BlackIcon} alt="icon" width={20} height={20} /></IconButton>
-              <IconButton><MoreVertIcon /></IconButton>
+              <ChartsMenu/>
             </Box>
           </Box>
           <Box sx={{ display: "flex", borderTop: "1px solid lightgray", height: "200px" }}>
@@ -134,6 +136,7 @@ const CustomCharts = () => {
             </Box>
           </Box>
         </Box>
+        {/* <Popover  open={open} onClose={}><h1>Menu</h1></Popover> */}
       </div>
     </ThemeProvider>
   );
