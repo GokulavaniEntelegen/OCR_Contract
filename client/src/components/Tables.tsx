@@ -14,11 +14,15 @@ import AddIcon from '@mui/icons-material/Add';
 import Filter_BlackIcon from "../assets/Filter_Black.svg";
 import "./Tables.scss";
 import CloseIcon from '@mui/icons-material/Close';
-import { Category } from "@mui/icons-material";
+import { BorderLeft, Category } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import RenameIcon from "../assets/Rename.svg";
 import DuplicateIcon from "../assets/Duplicate.svg";
-import DeleteIcon from "../assets/Delete.svg";
+import DeleteCustomIcon from "../assets/Delete.svg";
+import LabelIcon from "../assets/Label.svg"
+import ExportNewIcon from "../assets/ExportNew.svg"
+import ChatBotIcon from "../assets/ChatBot.svg"
+import LabelAs from "./LabelAsPop";
 
 
 type Flags = {
@@ -711,6 +715,17 @@ function Tabletry() {
 
             </div>
             <Button style={{textTransform: "none", fontFamily: "Poppins", fontWeight: "500", fontSize: "16px", color: "#1093FF"}}>Clear All</Button>
+            </div>
+            <div className="apply-actions" style={{marginBottom: "23px", display: "flex", alignItems: "center"}}>
+                <p className="apply">Apply Action: </p>
+                <div className="actionicons" style={{display: "flex", gap: "10px", marginLeft: "10px"}}>
+                    {/* <IconButton sx = {{py: 0}}><img src={LabelIcon} style={{width: "24px", height: "24px"}}/></IconButton> */}
+                    <LabelAs/>
+                    <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={DeleteCustomIcon} style={{width: "24px", height: "24px"}}/></IconButton></div>
+                    <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={ExportNewIcon} style={{width: "19px", height: "19px"}}/></IconButton></div>
+                    <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={ChatBotIcon} style={{width: "24px", height: "24px"}}/></IconButton></div>
+                </div>
+                
             </div>
             <TableContainer>
                 <Table sx={{ minWidth: 500 }}>

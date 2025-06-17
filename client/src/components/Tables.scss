@@ -48,3 +48,8 @@
     }
 }
 
+.apply {
+    @include body-large;
+    font-weight: 500;
+    color: #606060;
+}

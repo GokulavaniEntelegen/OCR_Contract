@@ -548,7 +548,7 @@ function DashboardLayout() {
                             marginLeft: "5px"
                         },
                         '& .MuiInputAdornment-root svg': {
-                            fontSize: '25px', // 👈 Optional: increase icon size
+                            fontSize: '35px', // 👈 Optional: increase icon size
                             borderRight: "1px solid lightgray",
                             paddingRight: "10px"
                         },
