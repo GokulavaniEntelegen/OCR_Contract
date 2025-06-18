@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard/UserDashboard";
 import DashboardLayout from "./pages/Dashboard/UserDashboardLayout";
 import AllContracts from "./pages/AllContracts/AllContracts";
 import ActivityHistory from "./pages/ActivityHistory/ActivityHistory";
-
+import AIChat from "./pages/AIChat/AIChat";
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
             <Route index element = {<Dashboard/>}/>
             <Route path="all-contracts" element = {<AllContracts/>}/>
             <Route path="activity-history" element = {<ActivityHistory/>}/>
+            <Route path="AI-chat" element = {<AIChat/>}/>
           </Route>
         </Routes>
         </BrowserRouter>        

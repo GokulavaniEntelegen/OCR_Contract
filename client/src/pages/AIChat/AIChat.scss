@@ -1,0 +1,26 @@
+@use "../../global_styles/typography.scss" as *;
+
+.sidepanel {
+    width: 15%;
+    border-right: 1px solid #E7E7E7;
+    min-height: 100vh;
+    padding: 31px 42px auto 42px;
+
+    .listtext {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 16px;
+        color: #606060;
+    }
+
+    .today {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 16px;
+        color: #606060;
+    }
+}
+
+.chatpanel {
+    flex: 1;
+}
