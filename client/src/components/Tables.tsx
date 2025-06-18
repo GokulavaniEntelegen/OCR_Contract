@@ -23,6 +23,7 @@ import LabelIcon from "../assets/Label.svg"
 import ExportNewIcon from "../assets/ExportNew.svg"
 import ChatBotIcon from "../assets/ChatBot.svg"
 import LabelAs from "./LabelAsPop";
+import OutSourceIcon from "../assets/OutSource.svg"
 
 
 type Flags = {
@@ -144,17 +145,19 @@ const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
                 <span
                     style={{
                         position: "absolute",
-                        top: 2,
-                        left: 0,
+                        top: 0,
+                        left: -10,
+                        right: 0,
                         height: 7,
                         width: 7,
-                        backgroundColor: "red",
-                        borderRadius: "50%",
+                        padding:0,
+                        // backgroundColor: "red",
+                        // borderRadius: "50%",
                         zIndex: 1,
                     }}
-                />
+                ><img src={OutSourceIcon} style={{width: "13.07px", height: "12.4px"}}/></span>
             )}
-            <div style={{ paddingLeft: flag === "outsource" ? 7 : 0 }}>
+            <div style={{ paddingLeft: flag === "outsource" ? 4 : 0 }}>
                 {children}
             </div>
         </div>

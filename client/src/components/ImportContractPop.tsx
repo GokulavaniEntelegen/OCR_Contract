@@ -147,7 +147,7 @@ const ImportContractPop: React.FC = () => {
                     <p className="import-text">Import Contract Details</p>
                     <div className="smallbox">
                         <IconButton><img src = {ImportFileIcon} style = {{width: "269", height: "85"}}/></IconButton>
-                        <p className="dragtext">Drag and drop your files here or <a style={{color: "#1093FF"}}>Browse Files</a></p>
+                        <p className="dragtext">Drag and drop your files here or <a style={{color: "#1093FF", cursor: "p"}}>Browse Files</a></p>
                     </div>
                 </div>
             </Popover>

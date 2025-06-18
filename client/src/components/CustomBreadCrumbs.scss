@@ -1,0 +1,6 @@
+@use "../global_styles/typography.scss" as *;
+
+.words {
+    @include label-medium;
+    font-weight: 500;
+}
