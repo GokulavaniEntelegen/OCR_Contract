@@ -30,7 +30,7 @@ const data3 = [
   { name: '3 Rejected', value: 25, color: '#fbb040' },
 ];
 
-const CustomCharts = () => {
+const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
     const [open, setOpen] =useState(false)
   const theme = createTheme({
     typography: {
@@ -39,6 +39,7 @@ const CustomCharts = () => {
   });
 
   return (
+    !show && (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ display: "flex", gap: "20px", marginTop: "20px", width: "100%" }} className="threeCharts">
@@ -139,6 +140,7 @@ const CustomCharts = () => {
         {/* <Popover  open={open} onClose={}><h1>Menu</h1></Popover> */}
       </div>
     </ThemeProvider>
+    )
   );
 };
 

@@ -1,5 +1,5 @@
 import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Chip, Button ,Box, IconButton, Tab, Tabs, Popover, Stack, ButtonBase, InputAdornment, List, ListItem, ListItemText ,ListItemIcon} from "@mui/material";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -24,7 +24,9 @@ import ExportNewIcon from "../assets/ExportNew.svg"
 import ChatBotIcon from "../assets/ChatBot.svg"
 import LabelAs from "./LabelAsPop";
 import OutSourceIcon from "../assets/OutSource.svg"
-
+import ExpandDownIcon from "../assets/ExpandDown.svg"
+import FilterBlueIcon from "../assets/FilterBlue.svg"
+import CancelCustomIcon from "../assets/CancelCustom.svg"
 
 type Flags = {
   contact: string;
@@ -166,7 +168,7 @@ const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
 
 const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
 
-function Tabletry() {
+const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
     const getInitials = (name: string) => {
     return name?.charAt(0).toUpperCase(); // Gets first letter
   };
@@ -271,9 +273,18 @@ function Tabletry() {
 
         return <span>{status}</span>;
     }
-
+    
+    useEffect(() => {
+        if(show) {
+            setRowsPerPage(11)
+        } else {
+            setRowsPerPage(8)
+        }
+        console.log("Shows useeffect has been called");
+    },[show])
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(8);
+
 
     function handlePageChange(event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) {
         setPage(newPage);
@@ -484,7 +495,7 @@ function Tabletry() {
                             component="div"
                             count={rows.length}
                             page={page}
-                            rowsPerPage={8}
+                            rowsPerPage={rowsPerPage}
                             onPageChange={handlePageChange}
                             // onRowsPerPageChange={handleRowsPerPageChange}
                             rowsPerPageOptions={[]}
@@ -505,7 +516,7 @@ function Tabletry() {
                 <Button
                 variant="outlined"
                 onClick={handleFilterClick}
-                startIcon={<img src={Filter_BlackIcon} style={{width: "24", height: "24"}}/>}
+                startIcon={<img src={FilterBlueIcon} style={{width: "24", height: "24"}}/>}
                 sx={{
                     borderRadius: '30px',
                     fontWeight: 500,
@@ -514,7 +525,7 @@ function Tabletry() {
                     fontFamily: "Poppins",
                     marginRight: "15px",
                     marginLeft: "20px",
-                    marginTop: "21px",
+                    marginTop: "0px",
                     height: "35px",
                     color:"black",
                     border: "0.5px solid lightgray",
@@ -680,16 +691,39 @@ function Tabletry() {
                         </div>
                     </div>
                 </Popover>
-
-                <TextField
-                    style={{ width:"180px", marginTop: "18px" }}
-                    label="Customer Name"
-                    size="small"
-                    variant="outlined"
-                    value={searchQuery}
-                    onChange={(event) => setSeacrchQuery(event.target.value)}
-                    sx={{ "& .MuiOutlinedInput-root": { borderRadius: "50px"} }}
+                <Chip
+                label="Contract Title: Master Service Agreement"
+                deleteIcon={<img src = {CancelCustomIcon} style={{width: "24px", height: "24px"}}/>}
+                onDelete={() => {}}
+                sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    border: "1px solid #D4D4D4",
+                    fontFamily: "Poppins",
+                    fontSize: "12px",
+                    padding: "5px",
+                    // marginTop: "18px",
+                    // width: "180px"
+                }}
                 />
+
+                <Chip
+                label="Customer Name: Remy Jan"
+                deleteIcon={<img src = {CancelCustomIcon} style={{width: "24px", height: "24px"}}/>}
+                onDelete={() => {}}
+                sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    border: "1px solid #D4D4D4",
+                    fontFamily: "Poppins",
+                    fontSize: "12px",
+                    padding: "5px",
+                    marginLeft: "10px"
+                    // marginTop: "18px",
+                    // width: "180px"
+                }}
+                />
+                {/* <IconButton><img src = {CancelCustomIcon}/></IconButton> */}
 
                 <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
                       <DatePicker
@@ -773,7 +807,7 @@ function Tabletry() {
                                             onChange={() => handleClick(rowIndex)}
                                         />
                                     </TableCell>
-                                    <TableCell style={{padding: "0px"}}><IconButton><ArrowCircleDownIcon/></IconButton></TableCell>
+                                    <TableCell style={{padding: "0px"}}><IconButton><img src = {ExpandDownIcon} style={{width: "15px", height: "15px"}}/></IconButton></TableCell>
                                     <TableCell style={{ color: "blue", fontFamily: "Poppins"}}>
                                         <CellWithFlag flag={row.flags.contact}>{row.contact}</CellWithFlag>
                                     </TableCell>

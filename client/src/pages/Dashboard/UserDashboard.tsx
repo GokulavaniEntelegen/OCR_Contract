@@ -518,7 +518,7 @@ function Dashboard() {
             </Paper> */}
             <div className="uploadtables" style={{marginTop: "60px"}}>
             <Box sx = {{pointerEvents: "none", opacity: "0.3"}}>
-                <Tabletry/>
+                <Tabletry show = {true}/>
             </Box>
             </div>
             

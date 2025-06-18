@@ -28,7 +28,7 @@ function createData(
 
 let rows: IData[] = [];
 
-for(let i =0;i<100;i++) {
+for(let i =0;i<50;i++) {
     rows.push(createData(1234567890, "Changed", "4m ago", "Jhon Dar"))
 }
 

@@ -87,6 +87,8 @@ import MainLogoIcon from '../../assets/MainLogo.svg';
 import SettingsCustomIcon from '../../assets/Setting.svg';
 import NotificationIcon from '../../assets/Notification.svg';
 import PsaiImg from '../../assets/Psai.png';
+import SearchCustomIcon from "../../assets/SearchCustomIcon.svg"
+
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled('input')({
@@ -656,11 +658,12 @@ function DashboardLayout() {
                                     borderRadius: '4px',
                                     backgroundColor: '#F4F4F4',
                                     '& input': {
-                                        fontSize: '20px', // 👈 Increase text size here
+                                        fontSize: '16px', // 👈 Increase text size here
                                         marginLeft: '5px',
+                                        fontFamily: "Poppins" 
                                     },
                                     '& .MuiInputAdornment-root svg': {
-                                        fontSize: '35px', // 👈 Optional: increase icon size
+                                        fontSize: '25px', // 👈 Optional: increase icon size
                                         borderRight: '1px solid lightgray',
                                         paddingRight: '10px',
                                     },
@@ -671,8 +674,8 @@ function DashboardLayout() {
                             }}
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchIcon />
+                                    <InputAdornment position="start" style={{paddingRight: "10px",borderRight: '1px solid lightgray'}}>
+                                        <img src = {SearchCustomIcon} style={{width: "13.54px", height: "13.54px"}}/>
                                     </InputAdornment>
                                 ),
                             }}

@@ -16,7 +16,7 @@ function CustomBreadCrumbs () {
                 <Link
                 underline="hover"
                 color="#84878A"
-                // href="/material-ui/react-breadcrumbs/"
+                href="/activity-history"
                 aria-current="page"
                 >
                 <p className="words">Activity History</p>

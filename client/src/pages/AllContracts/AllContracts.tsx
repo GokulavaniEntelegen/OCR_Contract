@@ -1,7 +1,7 @@
 import React from "react";
 import './AllContracts.scss';
 import { Box, Button } from "@mui/material";
-
+import { useState } from "react";
 import HideWidgetsIcon from "../../assets/HideWidgetsIcon.svg"
 import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
@@ -10,8 +10,19 @@ import CustomCharts from "client/src/components/Charts";
 import Tabletry from "client/src/components/Tables";
 import ImportContractPop from "client/src/components/ImportContractPop";
 import UploadCustomIcon from "../../assets/UploadCustom.svg"
+import ShowWidgetsIcon from "../../assets/ShowWidgets.svg"
 
 function AllContracts() {
+    
+    const [show, setShow] = useState(false);
+    const handleShow = () => {
+        if(show) {
+            setShow(false);
+        } else {
+            setShow(true);
+        }
+    }
+
     return(
         <div>
             <Box sx={{width: "100%",minHeight: "100vh" }}>
@@ -24,10 +35,11 @@ function AllContracts() {
                     <div className="options">
                         <Button
                             variant="text"
-                            startIcon = {<img src = {HideWidgetsIcon} style={{width: "18px", height: "18px"}}/>}
+                            onClick={handleShow}
+                            startIcon = {<img src = {(show) ? (ShowWidgetsIcon) : (HideWidgetsIcon)} style={{width: "18px", height: "18px"}}/>}
                             sx={{textTransform: "none", fontSize: "16px", color: "#1093FF", fontFamily: "Poppins", fontWeight: '500'}}
                             >
-                                Hide Widgets
+                                {(show) ? (<p>Show Widgets</p>) : (<p>Hide Widgets</p>)}
                         </Button>
                         {/* <Button
                             variant="text"
@@ -56,11 +68,11 @@ function AllContracts() {
 
                     </div>
 
-                    <div style={{width: "100%", marginTop: "60px"}}>
-                        <CustomCharts/>
+                    <div style={{width: "100%", marginTop: "50px"}}>
+                        <CustomCharts show = {show}/>
                     </div>
                     <div className="contracttable" style={{marginTop: "60px"}}>
-                        <Tabletry/>
+                        <Tabletry show = {show}/>
                     </div>
                 </div>
             </Box>
