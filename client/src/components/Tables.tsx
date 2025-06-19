@@ -323,7 +323,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
     const filterOpen = Boolean(anchorElFilter);
     const categories: string[] = ["Contact No.", "Customer Name", "Contract Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
-    const subcategories: string[] = ["IT Services Contracts", "Sub-Contract", "SLA", "Master service level Agreement", "Sub-Contract", "SLA", "Master service level Agreement"];
+    const subcategories: string[] = ["IT Services Contracts", "Sub-Contract 1", "SLA 1", "Master service level Agreement 1", "Sub-Contract 2", "SLA 2", "Master service level Agreement 2"];
 
     const [subchecked, setSubchecked] = useState<string[]>([]);
 

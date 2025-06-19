@@ -5,6 +5,7 @@ import DashboardLayout from "./pages/Dashboard/UserDashboardLayout";
 import AllContracts from "./pages/AllContracts/AllContracts";
 import ActivityHistory from "./pages/ActivityHistory/ActivityHistory";
 import AIChat from "./pages/AIChat/AIChat";
+import ContractScan from "./pages/ContractScan/ContractScan";
 
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
         <Routes>
           <Route path="/" element={<DashboardLayout/>}>
             <Route index element = {<Dashboard/>}/>
-            <Route path="all-contracts" element = {<AllContracts/>}/>
-            <Route path="activity-history" element = {<ActivityHistory/>}/>
-            <Route path="AI-chat" element = {<AIChat/>}/>
+            <Route path="/all-contracts" element = {<AllContracts/>}/>
+            <Route path="/activity-history" element = {<ActivityHistory/>}/>
+            <Route path="/ai-chat" element = {<AIChat/>}/>
+            <Route path="/contract-scan" element = {<ContractScan/>}/>
           </Route>
         </Routes>
         </BrowserRouter>        

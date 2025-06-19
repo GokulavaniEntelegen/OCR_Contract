@@ -1,0 +1,97 @@
+@use "../../global_styles/typography.scss" as *;
+
+.fullcontract {
+    width: 100%;
+
+    .contracttext {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 24px;
+        padding-left: 16px;
+    }
+
+    .fileandforms {
+        display: flex;
+        border: 1px solid #9A9A9A80;
+        border-radius: 16px;
+        margin-top: 15px;
+
+
+        .file {
+            flex: 1;
+            border-right: 1px solid #9A9A9A80;
+            height: 51.94rem;
+            width: 41.94rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .upl {
+                    
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                    
+                .upltext {
+                    font-family: Poppins;
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .forms {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            
+            .formtop {
+                padding: 14px 20px;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid lightgray;
+                align-items: center;
+                flex-shrink: 0;
+
+                .edittext {
+                    @include title-large;
+                    font-weight: 600;
+                }
+
+                .edittopactions {
+                    display: flex;
+                    gap: 10px;
+
+                    .resettext {
+                        font-family: Poppins;
+                        font-weight: 500;
+                        font-size: 14px;
+                        letter-spacing: 0.1px;
+                        color: #1093FF;
+                        padding-right: 10px;
+                    }
+                }
+
+            }
+
+            .formdata {
+                padding: 13px;
+                flex: 1;
+                overflow-y: auto;
+
+                .sectionheader {
+                    font-family: Poppins;
+                    font-weight: 500;
+                    font-size: 14px;
+                    color: #25213B;
+                }
+            }
+            .formbottom {
+                padding: 10px;
+                flex-shrink: 0;
+                border-top: 1px solid lightgray;
+            }
+        }
+    }
+}

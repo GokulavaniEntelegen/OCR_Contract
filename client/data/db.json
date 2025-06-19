@@ -1,0 +1,85 @@
+{
+    "formsections": [
+        {
+            "header": "Section 1",
+            "fields": [
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey",
+                    "aifield": true
+                },
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor"
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey",
+                    "aifield": true
+                },
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey"
+                }
+            ]
+        },
+        {
+            "header": "Section 2",
+            "fields": [
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor"
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey"
+                },
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey"
+                },
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                }
+                
+            ]
+        },
+        {
+            "header": "Section 3",
+            "fields": [
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                },
+                {
+                    "label": "Address",
+                    "value": "101 Townseed Street, Sanchet address Hat street New Jersey",
+                    "aifield": true
+                },
+                {
+                    "label": "Customer Name",
+                    "value": "Jhon Dor",
+                    "aifield": true
+                }
+            ]
+        }
+    ]
+}

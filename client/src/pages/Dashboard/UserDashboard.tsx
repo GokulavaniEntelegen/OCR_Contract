@@ -463,7 +463,8 @@ function Dashboard() {
                         fontSize:"18px",
                         width:"200px",
                         textTransform: "none",
-                        borderRadius: 2, // Rounded corners for button
+                        borderRadius: 2,
+                        fontFamily: "Poppins" // Rounded corners for button
                         // px: 2, // Padding horizontal
                         // py: 0.5, // Padding vertical
                     }}
@@ -483,6 +484,7 @@ function Dashboard() {
                     // No 'disabled' or 'loading' state here
                     sx={{
                     //   color: 'white', // White text color
+                    fontFamily: "Poppins",
                     borderColor: 'white', // White border
                     bgcolor: 'rgba(255, 255, 255, 0.8)',
                     '&:hover': {
@@ -715,7 +717,7 @@ function Dashboard() {
                             <Box><IconButton><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
 
                             <Box sx = {{mt: "20px", textAlign: "center"}} className = "clickupl">
-                                <p><span style={{color: "#2B80EC"}}><u><a>Click to Upload</a></u></span>{' '}
+                                <p><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
                                 <span>or Drag and drop </span></p>
                                <p>a contract PDF or Word doc</p>
                             </Box>
@@ -730,7 +732,8 @@ function Dashboard() {
                                 textTransform: "none", 
                                 fontSize: "18px", 
                                 padding: "10px 20px 10px 20px", 
-                                border: "1px solid gray"
+                                border: "1px solid gray",
+                                fontFamily: "Poppins"
                                 }} 
                             >Skip
                         </Button>
