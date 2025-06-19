@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Icon, IconButton, TextField } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Button, Icon, IconButton, InputAdornment, TextField } from "@mui/material";
 import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs";
 import "./ContractScan.scss";
 import UploadBigIcon from "../../assets/Upload.svg";
@@ -9,13 +9,16 @@ import DeleteBlueIcon from "../../assets/TrashBlue.svg";
 import ImportBlueIcon from "../../assets/ImportBlue.svg";
 import DuplicateBlueIcon from "../../assets/DuplicateBlue.svg";
 import ExportDataBlueIcon from "../../assets/ExportDataBlue.svg";
-import ResetBlueIcon from "../../assets/ResetBlue.svg"
+import ResetBlueIcon from "../../assets/ResetBlue.svg";
+import OutSourceIcon from "../../assets/OutSource.svg";
+import ZoomInIcon from "../../assets/ZoomIn.svg";
+import ZoomOutIcon from "../../assets/ZoomOut.svg";
 
 function ContractScan() {
 
     const [formData, setFormData] = useState<Isection[]>([]);
     const [formLoading, setFormLoading] = useState<Boolean>(true);
-
+    
     interface Ifield {
         label: string;
         value: string;
@@ -41,17 +44,64 @@ function ContractScan() {
         })
     },[]);
 
+    const fileInputRef = useRef<HTMLInputElement|null>(null);
+    const [file, setFile] = useState<File | null>(null);
+    const [previewURL, setPreviewURL] = useState<string | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedfile = event.target.files?.[0];
+
+        if(selectedfile) {
+            const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
+            if(!isValidType) {
+                alert("Upload a valid file type (img or pdf)");
+                return;
+            }
+            setFile(selectedfile);
+            setPreviewURL(URL.createObjectURL(selectedfile));
+        }
+    };
+
+    const handleUploadIconClick = () => {
+        fileInputRef.current?.click();
+    }
+
     return(
         <Box sx={{minHeight: "100vh"}} className = "fullcontract">
-            <div style={{padding: "30px 30px 0px 30px"}}>
+            <div style={{padding: "30px 80px 0px 80px"}}>
                 <CustomBreadCrumbs replacetext="Contract Scan"/>
                 <p className="contracttext">Contract Scan</p>
                 <div className="fileandforms">
-                    <div className="file">
+                    <div className="file" style={{display: (!file) ? ("flex"): ("block")}}>
+                        {!file && (
                         <div className="upl">
-                            <IconButton><img src = {UploadBigIcon} style={{width: "85px", height: "85px"}}/></IconButton>
+                            <IconButton onClick={handleUploadIconClick}><img src = {UploadBigIcon} style={{width: "85px", height: "85px"}}/></IconButton>
                             <p className="upltext">Upload Invoice</p>
                         </div>
+                        )} 
+                        <input type="file"
+                        ref = {fileInputRef}
+                        onChange={handleFileChange}
+                        style={{display: "none"}}
+                        accept="image/*,application/pdf"
+                        />
+                        
+                        {file?.type.startsWith("image/") && previewURL && (
+                            <img src = {previewURL} style={{width: "100%", height: "95%"}}/>
+                        )}
+
+                        {file?.type === "application/pdf" && previewURL && (
+                            <iframe src = {previewURL} style={{width: "100%", height: "100%"}}/>
+                        )}
+
+                        {file && 
+                        <div style={{display: "flex", justifyContent: "flex-end"}}>
+                        <div className="zoomactions">
+                            <IconButton><img src = {ZoomInIcon} style={{width: "24px", height: "24px", borderRight: "1px solid lightgray", paddingRight: "20px"}}/></IconButton>
+                            <IconButton><img src = {ZoomOutIcon} style={{width: "24px", height: "24px"}}/></IconButton>
+                        </div>
+                        </div>
+                        }
                     </div>
                     <div className="forms">
                         <div className="formtop">
@@ -76,8 +126,8 @@ function ContractScan() {
                                 <p className="sectionheader" style={{marginTop: (index === 0) ? ("auto"): ("24px")}}>{section.header}</p>
                                 <div className="fields">
                                 {section.fields.map((field,index) => (
-                                    <div>
-                                        
+                                    
+                                    <div>                                        
                                         <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "5px", fontFamily: "Poppins"}}>{field.label}</p>
                                         <TextField
                                         variant="outlined"
@@ -85,13 +135,27 @@ function ContractScan() {
                                         // placeholder="AI View"
                                         value={field.value}
                                         // onChange={(event) => setNewLabel(event.target.value)}
-                                        inputProps={{
+
+                                        InputProps={{
+                                                ...(field.aifield && {
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                    <img
+                                                        src={OutSourceIcon}
+                                                        alt="icon"
+                                                        style={{ width: "17px", height: "17px" }}
+                                                    />
+                                                    </InputAdornment>
+                                                ),
+                                                }),
+                                            }}
+                                            inputProps={{
                                             style: {
                                             whiteSpace: 'nowrap',
                                             overflow: 'hidden',
                                             textOverflow: 'ellipsis',
                                             maxWidth: "20ch"
-                                            },
+                                            }
                                         }}
                                         sx={{
                                             marginBottom: "7px",

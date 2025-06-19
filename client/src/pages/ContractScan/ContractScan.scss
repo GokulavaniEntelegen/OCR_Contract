@@ -26,6 +26,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 24px;
+            background-color: #F6F6F6;
+            border-radius: 16px;
+            flex-direction: column;
 
             .upl {
                     
@@ -39,6 +43,19 @@
                     font-size: 24px;
                     font-weight: 500;
                 }
+            }
+
+            .zoomactions {
+                display: inline-flex;
+                gap: 5px;
+                border: 1px solid #BBBBBB;
+                justify-content: flex-end;
+                align-items: flex-end;
+                background-color: #FFFFFF;
+                // box-sizing: border-box;
+                border-radius: 7px;
+                width: fit-content;
+                margin-top: 10px;
             }
         }
 
