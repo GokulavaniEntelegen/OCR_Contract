@@ -2,10 +2,11 @@
 
 .fullcontract {
     width: 100%;
+    padding-bottom: 100px;
 
     .contracttext {
         font-family: Poppins;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 24px;
         padding-left: 16px;
     }
@@ -19,7 +20,7 @@
 
         .file {
             flex: 1;
-            border-right: 1px solid #9A9A9A80;
+            // border-right: 1px solid #9A9A9A80;
             height: 51.94rem;
             width: 41.94rem;
             display: flex;
@@ -45,6 +46,7 @@
             display: flex;
             flex-direction: column;
             flex: 1;
+            border-left: 1px solid #9A9A9A80;
             
             .formtop {
                 padding: 14px 20px;
@@ -56,7 +58,7 @@
 
                 .edittext {
                     @include title-large;
-                    font-weight: 600;
+                    font-weight: 500;
                 }
 
                 .edittopactions {
@@ -79,12 +81,20 @@
                 padding: 13px;
                 flex: 1;
                 overflow-y: auto;
+                
 
                 .sectionheader {
                     font-family: Poppins;
-                    font-weight: 500;
-                    font-size: 14px;
+                    font-weight: 600;
+                    font-size: 16px;
                     color: #25213B;
+                    // margin-top: 30px;
+                }
+
+                .fields {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    column-gap: 20px;
                 }
             }
             .formbottom {

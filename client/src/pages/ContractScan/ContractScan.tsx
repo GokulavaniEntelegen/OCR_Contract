@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Icon, IconButton } from "@mui/material";
+import { Box, Button, Icon, IconButton, TextField } from "@mui/material";
 import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs";
 import "./ContractScan.scss";
 import UploadBigIcon from "../../assets/Upload.svg";
@@ -73,12 +73,60 @@ function ContractScan() {
                         <div className="formdata">
                         {formData.map((section,index) => (
                             <div key = {index}>
-                                <p className="sectionheader">{section.header}</p>
+                                <p className="sectionheader" style={{marginTop: (index === 0) ? ("auto"): ("24px")}}>{section.header}</p>
+                                <div className="fields">
                                 {section.fields.map((field,index) => (
                                     <div>
-                                        {<p>{field.label} : {field.value}</p>}
+                                        
+                                        <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "5px", fontFamily: "Poppins"}}>{field.label}</p>
+                                        <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        // placeholder="AI View"
+                                        value={field.value}
+                                        // onChange={(event) => setNewLabel(event.target.value)}
+                                        inputProps={{
+                                            style: {
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            maxWidth: "20ch"
+                                            },
+                                        }}
+                                        sx={{
+                                            marginBottom: "7px",
+                                            '& .MuiInputBase-root': {
+                                            borderRadius: '4px',
+                                            fontSize: '16px',
+                                            fontFamily: 'Poppins, sans-serif',
+                                            '& fieldset': {
+                                                borderWidth: '0.5px',
+                                                borderColor: '#C4C4C4',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#999',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#000',
+                                            },
+                                            },
+                                            '& .MuiInputBase-input': {
+                                            padding: '10px 12px',
+                                            fontSize: '14px',
+                                            fontFamily: 'Poppins, sans-serif',
+                                            color: '#42474E',
+                                            },
+                                            '& .MuiInputBase-input::placeholder': {
+                                            color: '#42474E',
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            opacity: 1,
+                                            },
+                                        }}
+                                        />
                                     </div>
                                 ))}
+                                </div>
                             </div>
                         ))}
                         </div>
