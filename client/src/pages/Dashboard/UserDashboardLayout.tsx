@@ -606,14 +606,18 @@ function DashboardLayout() {
       />
       </Box> */}
 
-            <Box sx={{ display: 'flex', height: '100vh', marginRight: '50px' }}>
-                <Box
+            <Box className = "sidebar" sx={{ display: 'flex', height: '100vh'}}>
+                <Box className = "sidebar"
                     sx={{
-                        width: '52px',
+                        minwidth: '52px',
+                        maxWidth: "400px",
+                        width: "52px",
+                        overflow: "hidden",
+                        flexShrink: 0,
                         height: '100vh',
                         backgroundColor: '#051235',
                         paddingTop: 3,
-                        position: 'fixed',
+                        // position: 'fixed',
                         top: 0,
                         left: 0,
                         zIndex: 1000,
@@ -621,14 +625,22 @@ function DashboardLayout() {
                         flexDirection: 'column',
                         alignItems: 'center',
                         gap: '15px',
+                        transition: "all 0.3s ease",
+                        "&: hover": {
+                            width: "250px",
+                            alignItems: "flex-start",
+                        },
+                        color: "white"
                     }}
                 >
+                    <Box sx = {{marginLeft: "10px",".sidebar:hover &": {marginLeft: "10px"}}}>
                     <IconButton
-                        style={{ display: 'flex', alignItems: 'center', marginBottom: '65px' }}
+                        style={{ display: 'flex', alignItems: 'center', marginBottom: '65px', marginLeft: "-5px"}}
                     >
                         <img src={MainLogoIcon} alt="icon" width={40} height={40} />
                     </IconButton>
                     {icons.map(({ key, icon, tooltip }) => (
+                        <Box style={{display: "flex", alignItems: "center", marginTop: "15px"}}>
                         <Tooltip title={tooltip} placement="right" key={key}>
                             <IconButton
                                 // onClick={() => handleIconClick(key)}
@@ -640,7 +652,27 @@ function DashboardLayout() {
                                 <img src={icon} alt="icon" width={24} height={24} />
                             </IconButton>
                         </Tooltip>
+                        <Typography
+                        className="sidebar-label"
+                        sx={{
+                            whiteSpace: "nowrap",
+                            opacity: 0,
+                            width: 0,
+                            visibility: "hidden",
+                            marginLeft: "15px",
+                            transition: "opacity 0.5s ease, visibility 0.5s ease",
+                            ".sidebar:hover &": {
+                            opacity: 1,
+                            visibility: "visible",
+                            width: "auto"
+                            },
+                        }}
+                        >
+                        <p style={{fontFamily: "Poppins", fontSize: "14px"}}>{tooltip}</p>
+                        </Typography>
+                        </Box>
                     ))}
+                    </Box>
                 </Box>
             </Box>
 

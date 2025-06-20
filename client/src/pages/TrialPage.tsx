@@ -1,10 +1,12 @@
 import React from "react";
 import ExamplePop from "../components/ExamplePop";
+import ChatBotPop from "../components/ChatBotPop";
 
 const Trialpage = () => {
     return(
         <>
         <ExamplePop/>
+        <ChatBotPop/>
         </>
     );
 }

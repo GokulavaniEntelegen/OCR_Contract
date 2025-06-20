@@ -31,15 +31,15 @@
 }
 
 /* Sidebar */
-.sidebar {
-    width: 130px;
-    background-color: #e3e0e0;
-    border-right: 2px solid #ddd;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+// .sidebar {
+//     width: 130px;
+//     background-color: #e3e0e0;
+//     border-right: 2px solid #ddd;
+//     padding: 1rem;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+// }
 
 .sidebar-title {
     font-size: 1.2rem;
@@ -346,3 +346,9 @@
     font-family: "Poppins";
     margin-top: 10px;
 }
+
+// .sidebar:hover .sidebarname p{
+//     opacity: 1;
+//     color: white;
+//     display: block;
+// }
