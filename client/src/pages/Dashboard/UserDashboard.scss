@@ -205,7 +205,10 @@
 .filterandpagin
 {
     display: flex;
+    gap: 16px;
     align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .custom-datepicker {

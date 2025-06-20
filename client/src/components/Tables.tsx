@@ -1,4 +1,4 @@
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Chip, Button ,Box, IconButton, Tab, Tabs, Popover, Stack, ButtonBase, InputAdornment, List, ListItem, ListItemText ,ListItemIcon} from "@mui/material";
+import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Chip, Button ,Box, IconButton, Tab, Tabs, Popover, Stack, ButtonBase, InputAdornment, List, ListItem, ListItemText ,ListItemIcon, TablePaginationProps} from "@mui/material";
 import React, { use, useEffect, useState } from "react";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -27,6 +27,9 @@ import OutSourceIcon from "../assets/OutSource.svg"
 import ExpandDownIcon from "../assets/ExpandDown.svg"
 import FilterBlueIcon from "../assets/FilterBlue.svg"
 import CancelCustomIcon from "../assets/CancelCustom.svg"
+import DateIcon from "../assets/DateIcon.svg";
+import LeftCustomIcon from "../assets/LeftCustom.svg";
+import RightCustomIcon from "../assets/RightCustom.svg";
 
 type Flags = {
   contact: string;
@@ -169,7 +172,7 @@ const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
 const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
 
 const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
-    
+
     const getInitials = (name: string) => {
     return name?.charAt(0).toUpperCase(); // Gets first letter
   };
@@ -364,6 +367,43 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
     const [newView, setNewView] = useState("");
 
+    interface CustomPaginationActionsProps {
+        count: number;
+        page: number;
+        rowsPerPage: number;
+        onPageChange: TablePaginationProps['onPageChange'];
+    }
+
+    const CustomPaginationActions: React.FC<CustomPaginationActionsProps> = ({
+    count,
+    page,
+    rowsPerPage,
+    onPageChange,
+    }) => {
+    const totalPages = Math.ceil(count / rowsPerPage);
+
+    const handleBack = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, page - 1);
+    };
+
+    const handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onPageChange(event, page + 1);
+    };
+
+    return (
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <IconButton onClick={handleBack} disabled={page === 0} style={{flex: 1}}>
+            <img src = {LeftCustomIcon} style={{width: "11.67px", height: "11.67px"}}/>
+        </IconButton>
+        <span style={{ fontWeight: 500, fontFamily: "Poppins" }}>
+            Page {page + 1} of {totalPages}
+        </span>
+        <IconButton onClick={handleNext} disabled={page >= totalPages - 1} style={{flex: 1}}>
+            <img src = {RightCustomIcon} style={{width: "11.67px", height: "11.67px"}}/>
+        </IconButton>
+        </Box>
+    );
+    };
 
     return(
         <div className="uploadtables" style={{marginTop: "50px", border: "0.5px solid lightgray", borderRadius: "4px", padding: "10px 20px 0 20px"}}>
@@ -500,20 +540,23 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                             onPageChange={handlePageChange}
                             // onRowsPerPageChange={handleRowsPerPageChange}
                             rowsPerPageOptions={[]}
+                            labelDisplayedRows={() => ""}
+                            ActionsComponent={(props) => <CustomPaginationActions {...props} />}
                             sx={{
-                            mt: "0px",
-                            "& .MuiTablePagination-toolbar": {
-                                minHeight: "48px", // match tab height
+                                "& .MuiTablePagination-toolbar": {
+                                justifyContent: "center", // center the entire thing
+                                display: "block",
                                 alignItems: "center",
-                            },
+                                marginTop:"15px"
+                                },
                             }}
                         />
                     </Box>
 
-                    
                 </div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
             <div className="filterandpagin">
+
                 <Button
                 variant="outlined"
                 onClick={handleFilterClick}
@@ -524,7 +567,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     padding: "4px 16px",
                     fontSize: "17px",
                     fontFamily: "Poppins",
-                    marginRight: "15px",
+                    // marginRight: "15px",
                     marginLeft: "20px",
                     marginTop: "0px",
                     height: "35px",
@@ -538,6 +581,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                 >
                 Filter
                 </Button>
+
                 <Popover open={filterOpen} anchorEl={anchorElFilter} onClose={handleFilterClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
                     paper: {
                     elevation: 0,
@@ -692,6 +736,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                         </div>
                     </div>
                 </Popover>
+
                 <Chip
                 label="Contract Title: Master Service Agreement"
                 deleteIcon={<img src = {CancelCustomIcon} style={{width: "24px", height: "24px"}}/>}
@@ -701,8 +746,8 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     backgroundColor: "white",
                     border: "1px solid #D4D4D4",
                     fontFamily: "Poppins",
-                    fontSize: "12px",
-                    padding: "5px",
+                    fontSize: "13px",
+                    padding: "7px 5px",
                     // marginTop: "18px",
                     // width: "180px"
                 }}
@@ -717,16 +762,33 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     backgroundColor: "white",
                     border: "1px solid #D4D4D4",
                     fontFamily: "Poppins",
-                    fontSize: "12px",
+                    fontSize: "13px",
                     padding: "5px",
-                    marginLeft: "10px"
+                    marginLeft: "7px 5px"
                     // marginTop: "18px",
                     // width: "180px"
                 }}
                 />
                 {/* <IconButton><img src = {CancelCustomIcon}/></IconButton> */}
 
-                <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
+                <Chip
+                label={<div style={{display: "flex", gap: "10px", alignItems: "center"}}><p>Date Range: </p><img src = {DateIcon} style={{width: "13.33px", height: "13.33px"}}/> <p>DD/MM/YYYY - DD/MM/YYYY</p></div>}
+                deleteIcon={<img src = {CancelCustomIcon} style={{width: "24px", height: "24px"}}/>}
+                onDelete={() => {}}
+                sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    border: "1px solid #D4D4D4",
+                    fontFamily: "Poppins",
+                    fontSize: "13px",
+                    padding: "5px",
+                    marginLeft: "7px 5px"
+                    // marginTop: "18px",
+                    // width: "180px"
+                }}
+                />  
+
+                {/* <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
                       <DatePicker
                         selected={startDate}
                         onChange={(date) => setStartDate(date)}
@@ -749,7 +811,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                         dateFormat="dd MMM yyyy"
                         className="custom-datepicker"
                       />
-                </div>
+                </div> */}
 
             </div>
             <Button style={{textTransform: "none", fontFamily: "Poppins", fontWeight: "500", fontSize: "16px", color: "#1093FF"}}>Clear All</Button>
