@@ -1,10 +1,16 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { List, ListItem, ListItemIcon, ListItemText, Button } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Button, IconButton } from "@mui/material";
 import NewChatIcon from "../../assets/NewChat.svg"
 import SearchCustomIcon from "../../assets/SearchCustomIcon.svg"
 import DownArrowIcon from "../../assets/DownArrow.svg"
 import "./AIChat.scss"
+import ExamplePopIcon from "../../assets/ExamplePop.svg";
+import StarIcon from "../../assets/Star.svg";
+import WarningIcon from "../../assets/Warning.svg";
+import ClipButtonIcon from "../../assets/ClipButton.svg";
+import MicCustomIcon from "../../assets/MicCustom.svg";
+import SendCustomIcon from "../../assets/SendCustom.svg";
 
 function AIChat() {
     return (
@@ -41,7 +47,64 @@ function AIChat() {
                         ><p className="today">Today</p></Button>
                     </div>
                     <div className="chatpanel">
+                        <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
+                            
+                            <div className="middlecomps">
+                                <div className="examplesai">
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px"}}>
+                                        <img src = {ExamplePopIcon} style={{width: "48px", height: "48px"}}/>
+                                        <p className="exampleaitext">Examples</p>
+                                        <p className="exbelowtext" style={{marginTop: "10px"}}><u>Explain quantum computing in simple terms →</u></p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext"><u>Got any creative ideas for a 10 year old's birthday? →</u></p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext"><u>How do I make an HTTP request in Javascript? →</u></p>
+                                    </div>
+                                </div>
+                                <div className="capabilitiesai">
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px"}}>
+                                        <img src = {StarIcon} style={{width: "48px", height: "48px"}}/>
+                                        <p className="exampleaitext">Capabilities</p>
+                                        <p className="exbelowtext" style={{marginTop: "10px"}}>Remembers what user said earlier in the conversation</p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext">Allows user to provide follow-up corrections</p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext">Trained to decline inappropriate requests</p>
+                                    </div>
+                                </div>
+                                <div className="limitationsai">
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px"}}>
+                                        <img src = {WarningIcon} style={{width: "48px", height: "48px"}}/>
+                                        <p className="exampleaitext">Limitations</p>
+                                        <p className="exbelowtext" style={{marginTop: "10px"}}>May occasionally generate incorrect information</p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext">May occasionally produce harmful instructions or biased</p>
+                                    </div>
+                                    <div style={{border: "2px solid #E7E7E7", borderRadius: "12px", padding: "20px 24px", marginTop: "16px"}}>
+                                        <p className="exbelowtext">Limited knowledge of world and events after 2021</p>
+                                    </div>
+                                </div>
 
+                            </div>
+
+                            <div className="promptbox">
+                                <div className="promptboxcomps">
+                                    <div style={{display: "flex", gap: "8px", alignItems: "center"}}>
+                                    <IconButton> <img src = {ClipButtonIcon} style={{width: "20px", height: "20px"}}/></IconButton>
+                                    <p className="asktext">Ask Chat or @mention</p>
+                                    </div>
+                                    <div style={{display: "flex", alignItems: "center", gap: "8px"}}>
+                                        <IconButton> <img src = {MicCustomIcon} style={{width: "20px", height: "20px"}}/></IconButton>
+                                        <IconButton> <img src = {SendCustomIcon} style={{width: "20px", height: "20px"}}/></IconButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Box>                        

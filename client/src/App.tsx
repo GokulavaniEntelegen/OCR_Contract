@@ -1,4 +1,5 @@
 import React from "react"
+import "@fontsource/inter";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from "./pages/Dashboard/UserDashboard";
 import DashboardLayout from "./pages/Dashboard/UserDashboardLayout";

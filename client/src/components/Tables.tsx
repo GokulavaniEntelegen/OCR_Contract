@@ -169,6 +169,7 @@ const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
 const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
 
 const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
+    
     const getInitials = (name: string) => {
     return name?.charAt(0).toUpperCase(); // Gets first letter
   };
