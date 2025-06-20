@@ -13,6 +13,7 @@ import ResetBlueIcon from "../../assets/ResetBlue.svg";
 import OutSourceIcon from "../../assets/OutSource.svg";
 import ZoomInIcon from "../../assets/ZoomIn.svg";
 import ZoomOutIcon from "../../assets/ZoomOut.svg";
+import LoadingAIICon from "../../assets/LoadingAI.svg"
 
 function ContractScan() {
 
@@ -66,6 +67,15 @@ function ContractScan() {
         fileInputRef.current?.click();
     }
 
+    const [AILoading, setAILoading] = useState<Boolean>(false);
+    const handleAILoading = () => {
+        if(AILoading) {
+            setAILoading(false);
+        } else {
+            setAILoading(true);
+        }
+    }
+
     return(
         <Box sx={{minHeight: "100vh"}} className = "fullcontract">
             <div style={{padding: "30px 80px 0px 80px"}}>
@@ -103,6 +113,7 @@ function ContractScan() {
                         </div>
                         }
                     </div>
+                    {(!AILoading) ? (
                     <div className="forms">
                         <div className="formtop">
                             <p className="edittext">Edit Result</p>
@@ -222,7 +233,18 @@ function ContractScan() {
                             </div>
                         </div>
                     </div>
+                    ):
+                    <div style={{flex: 1, padding: "35px", borderLeft: "1px solid #9A9A9A80"}}>
+                        <div style={{display: "flex", alignItems: "center", gap:"15px"}}>
+                        <img src = {LoadingAIICon} style={{width: "46px", height: "46px"}}/>
+                        <p style={{fontFamily: "Poppins", fontSize: "14px", fontWeight: "500"}}>AI is Identifying Fields</p>
+                        </div>
+                    </div>
+                    }
                 </div>
+                <Button 
+                onClick={handleAILoading}
+                >Loading...</Button>
             </div>
         </Box>  
     );
