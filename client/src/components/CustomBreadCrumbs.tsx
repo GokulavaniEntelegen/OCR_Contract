@@ -3,7 +3,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import"./CustomBreadCrumbs.scss";
 
-const CustomBreadCrumbs: React.FC<{replacetext: string}> = ({replacetext}) => {
+const CustomBreadCrumbs: React.FC<{replacetext: string, tonav: string}> = ({replacetext, tonav}) => {
     return(
     <div style={{paddingLeft: "16px"}}>
             <Breadcrumbs aria-label="breadcrumb" sx = {{ '& .css-jhr02i-MuiBreadcrumbs-separator': {marginLeft: "2px", marginRight: "6px", color: "#0F93FF"}}}>
@@ -15,7 +15,7 @@ const CustomBreadCrumbs: React.FC<{replacetext: string}> = ({replacetext}) => {
                 <Link
                 underline="hover"
                 color="#84878A"
-                href="/activity-history"
+                href={`${tonav}`}
                 aria-current="page"
                 >
                 <p className="words">{replacetext}</p>

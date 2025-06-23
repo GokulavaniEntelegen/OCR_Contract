@@ -82,6 +82,9 @@ import SettingsCustomIcon from "../../assets/Setting.svg"
 import NotificationIcon from "../../assets/Notification.svg"
 import PsaiImg from "../../assets/Psai.png";
 import Tabletry from "client/src/components/Tables";
+import FileWithTickIcon from "../../assets/FileWithTick.svg";
+import CreateCustomIcon from "../../assets/CreateCustom.svg";
+
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled("input")({
@@ -558,35 +561,36 @@ function Dashboard() {
                 <div className="grid-container">
                 <ListItem className="grid-item" sx={{py: "18px"}}>
                     <ListItemIcon>
-                    <FileOpenOutlinedIcon color="primary" />
+                    {/* <FileOpenOutlinedIcon color="primary" /> */}
+                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Vendor & Sales Contracts</p>}/>
                 </ListItem>
 
                 <ListItem className="grid-item" sx={{py: "18px"}}>
                     <ListItemIcon>
-                    <FileOpenOutlinedIcon color="primary" />
+                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Lease Contracts</p>}/>
                 </ListItem>
 
                 <ListItem className="grid-item" sx={{py: "18px"}}>
                     <ListItemIcon>
-                    <FileOpenOutlinedIcon color="primary" />
+                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>NDAs</p>}/>
                 </ListItem>
 
                 <ListItem className="grid-item" sx={{py: "18px"}}>
                     <ListItemIcon>
-                    <FileOpenOutlinedIcon color="primary" />
+                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Employment Contracts</p>}/>
                 </ListItem>
 
                 <ListItem className="grid-item center" sx={{py: "14px"}}>
                     <ListItemIcon>
-                    <FileOpenOutlinedIcon color="primary" />
+                    <img src = {CreateCustomIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Create a custom contract types</p>}/>
                 </ListItem>

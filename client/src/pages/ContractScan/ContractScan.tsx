@@ -17,7 +17,7 @@ import LoadingAIICon from "../../assets/LoadingAI.svg"
 
 function ContractScan() {
 
-    const [formData, setFormData] = useState<Isection[]>([]);
+    const [formData, setFormData] = useState<newIfield[]>([]);
     const [formLoading, setFormLoading] = useState<Boolean>(true);
     
     interface Ifield {
@@ -31,11 +31,31 @@ function ContractScan() {
         fields: Ifield[];
     }
 
+    interface newIfield {
+        label: string
+        value: string
+        aiflag: boolean
+    }
+
+    const [fieldData,setFieldData] = useState<string[]>([""]);
+
+    const handleChange = (index: number, value: string) => {
+        const updatedFields = [...fieldData];
+        updatedFields[index] = value;
+        setFieldData(updatedFields);
+
+        const updatedFormData = formData;
+        updatedFormData[index].value = value;
+        setFormData(updatedFormData);
+    }
+
+
     useEffect(() => {
-        axios.get<Isection[]>(`${API_BASE_URL}/formsections`)
+        axios.get<newIfield[]>(`${API_BASE_URL}/formsections`)
         
         .then((response) => {
             setFormData(response.data);
+            setFieldData(response.data.map(field => field.value));
             setFormLoading(false);
         })
 
@@ -76,10 +96,26 @@ function ContractScan() {
         }
     }
 
+
+    const handleReset = () => {
+        setFieldData([""])
+    }
+
+    const saveTableRows = async () => {
+        try {
+            const newRow = {fields: formData};
+            const response = await axios.post(`${API_BASE_URL}/tablerows`,newRow);
+            console.log("New Row updated to tablerows successfully: "+ response.data);
+        }
+        catch(error) {
+            console.log("Error Occured during saving a row to tablerows present at db.json: " + error);
+        }
+    };
+
     return(
         <Box sx={{minHeight: "100vh"}} className = "fullcontract">
             <div style={{padding: "30px 80px 0px 80px"}}>
-                <CustomBreadCrumbs replacetext="Contract Scan"/>
+                <CustomBreadCrumbs replacetext="Contract Scan" tonav="\contract-scan"/>
                 <p className="contracttext">Contract Scan</p>
                 <div className="fileandforms">
                     <div className="file" style={{display: (!file) ? ("flex"): ("block")}}>
@@ -115,6 +151,7 @@ function ContractScan() {
                     </div>
                     {(!AILoading) ? (
                     <div className="forms">
+
                         <div className="formtop">
                             <p className="edittext">Edit Result</p>
                             <div className="edittopactions">
@@ -125,17 +162,19 @@ function ContractScan() {
                                 
                                 <Button 
                                 variant="outlined" 
+                                onClick={handleReset}
                                 startIcon = {<img src = {ResetBlueIcon} style={{width: "18px", height: "18px", paddingLeft: "10px"}}/>}
                                 style={{textTransform: "none", border: "1px solid #72777F"}}>
                                     <p className="resettext">Reset</p>
                                 </Button>
                             </div>
                         </div>
+
                         <div className="formdata">
-                        {formData.map((section,index) => (
+                        {/* {formData.map((section,index) => (
                             <div key = {index}>
                                 <p className="sectionheader" style={{marginTop: (index === 0) ? ("auto"): ("24px")}}>{section.header}</p>
-                                <div className="fields">
+                                <div className="fields" >
                                 {section.fields.map((field,index) => (
                                     
                                     <div>                                        
@@ -203,7 +242,76 @@ function ContractScan() {
                                 ))}
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
+
+                        <div className="fields" >
+                                {formData.map((field,index) => (
+                                    
+                                    <div>                                        
+                                        <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "5px", fontFamily: "Poppins"}}>{field.label}</p>
+                                        <TextField
+                                        variant="outlined"
+                                        key={index}
+                                        fullWidth
+                                        // placeholder="AI View"
+                                        value={fieldData[index] || ""}
+                                        // onChange={(event) => setNewLabel(event.target.value)}
+                                        onChange={(e) => handleChange(index,e.target.value)}
+                                        InputProps={{
+                                                ...(field.aiflag && {
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                    <img
+                                                        src={OutSourceIcon}
+                                                        alt="icon"
+                                                        style={{ width: "17px", height: "17px" }}
+                                                    />
+                                                    </InputAdornment>
+                                                ),
+                                                }),
+                                            }}
+                                            inputProps={{
+                                            style: {
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            maxWidth: "20ch"
+                                            }
+                                        }}
+                                        sx={{
+                                            marginBottom: "7px",
+                                            '& .MuiInputBase-root': {
+                                            borderRadius: '4px',
+                                            fontSize: '16px',
+                                            fontFamily: 'Poppins, sans-serif',
+                                            '& fieldset': {
+                                                borderWidth: '0.5px',
+                                                borderColor: '#C4C4C4',
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#999',
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#000',
+                                            },
+                                            },
+                                            '& .MuiInputBase-input': {
+                                            padding: '10px 12px',
+                                            fontSize: '14px',
+                                            fontFamily: 'Poppins, sans-serif',
+                                            color: '#42474E',
+                                            },
+                                            '& .MuiInputBase-input::placeholder': {
+                                            color: '#42474E',
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            opacity: 1,
+                                            },
+                                        }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="formbottom">
@@ -222,6 +330,7 @@ function ContractScan() {
                                 <Button
                                 variant="contained"
                                 // onClick={handleOpenUpl}
+                                onClick={saveTableRows}
                                 style={{
                                     textTransform: "none", 
                                     fontSize: "16px", 
@@ -232,6 +341,7 @@ function ContractScan() {
                                 className="actions">Reviewed</Button>
                             </div>
                         </div>
+
                     </div>
                     ):
                     <div style={{flex: 1, padding: "35px", borderLeft: "1px solid #9A9A9A80"}}>

@@ -30,6 +30,8 @@ import CancelCustomIcon from "../assets/CancelCustom.svg"
 import DateIcon from "../assets/DateIcon.svg";
 import LeftCustomIcon from "../assets/LeftCustom.svg";
 import RightCustomIcon from "../assets/RightCustom.svg";
+import axios from "axios";
+import {API_BASE_URL} from "../../api";
 
 type Flags = {
   contact: string;
@@ -139,14 +141,14 @@ const rows = [
 ];
 
 type CellWithFlagProps = {
-  flag?: string;         // optional, could be "outsource" or others
+  flag?: boolean;         // optional, could be "outsource" or others
   children: ReactNode;   // any JSX passed between <CellWithFlag>...</CellWithFlag>
 };
 
 const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
     return (
         <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
-            {flag === "outsource" && (
+            {(flag) && (
                 <span
                     style={{
                         position: "absolute",
@@ -162,7 +164,7 @@ const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
                     }}
                 ><img src={OutSourceIcon} style={{width: "13.07px", height: "12.4px"}}/></span>
             )}
-            <div style={{ paddingLeft: flag === "outsource" ? 4 : 0 }}>
+            <div style={{ paddingLeft: (flag) ? 4 : 0 }}>
                 {children}
             </div>
         </div>
@@ -299,7 +301,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
         setPage(0);
     }
 
-    const paginatedrows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    // const paginatedrows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
     const [searchQuery, setSeacrchQuery] = useState("");
 
     const [startDate, setStartDate] = useState<Date | null>(null);
@@ -404,6 +406,34 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
         </Box>
     );
     };
+
+    interface newIfield {
+        label: string;
+        value: string;
+        aiflag: boolean;
+    }
+
+    const [rowsData, setRowsData] = useState<Itablerow[]>([]);
+
+    const paginatedrows = rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+
+    interface Itablerow {
+        id: string
+        fields: newIfield[];
+    }
+
+    useEffect(() => {
+        axios.get<Itablerow[]>(`${API_BASE_URL}/tablerows`)
+        
+        .then((response) => {
+            setRowsData(response.data);
+        })
+
+        .catch((error) => {
+            console.error("Error occured at Table.tsx while fetching data from tablerows: "+ error);
+        })
+    },[]);
 
     return(
         <div className="uploadtables" style={{marginTop: "50px", border: "0.5px solid lightgray", borderRadius: "4px", padding: "10px 20px 0 20px"}}>
@@ -534,7 +564,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
                         <TablePagination
                             component="div"
-                            count={rows.length}
+                            count={rowsData.length}
                             page={page}
                             rowsPerPage={rowsPerPage}
                             onPageChange={handlePageChange}
@@ -839,15 +869,23 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                 />
                             </TableCell>
                             <TableCell></TableCell>
-                            <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>CONTACT NO</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
+                            {/* <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>CONTACT NO</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>CUSTOMER NAME</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>CONTRACT TITLE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>START DATE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>BATCH GENEREATED</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>AUTO RENEWAL TERM</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
+                            <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>PAYMENT TERM</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell> */}
                             {/* <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>VENDOR CODE</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell> */}
-                            <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>PAYMENT TERM</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
                             {/* <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>TAGS</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell> */}
+                            {rowsData.length > 0 &&
+                            rowsData[0].fields.map((field,index) => {
+                                if(field.label !== "Web Site" && field.label !== "Address" && field.label !== "Phone") {
+                                return (
+                                <TableCell><strong style={{fontFamily: "Poppins", color: "#45464B"}}>{field.label.toUpperCase()}</strong><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></TableCell>
+                                );
+                            }
+                            })}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -871,34 +909,35 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                         />
                                     </TableCell>
                                     <TableCell style={{padding: "0px"}}><IconButton><img src = {ExpandDownIcon} style={{width: "15px", height: "15px"}}/></IconButton></TableCell>
+                                    
                                     <TableCell style={{ color: "blue", fontFamily: "Poppins"}}>
-                                        <CellWithFlag flag={row.flags.contact}>{row.contact}</CellWithFlag>
+                                        <CellWithFlag flag={row.fields[0].aiflag}>{row.fields[0].value}</CellWithFlag>
                                     </TableCell>
                                     <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500" }}>
-                                        <CellWithFlag flag={row.flags.name}>{row.name}</CellWithFlag>
+                                        <CellWithFlag flag={row.fields[1].aiflag}>{row.fields[1].value}</CellWithFlag>
                                     </TableCell>
                                     <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500" }}>
-                                        <CellWithFlag flag={row.flags.address}>{row.address}</CellWithFlag>
+                                        <CellWithFlag flag={row.fields[2].aiflag}>{row.fields[2].value}</CellWithFlag>
                                     </TableCell>
                                     <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500" }}>
-                                        <CellWithFlag flag={row.flags.startDate}>{row.startDate}</CellWithFlag>
+                                        <CellWithFlag flag={row.fields[3].aiflag}>{row.fields[3].value}</CellWithFlag>
                                     </TableCell>
                                     <TableCell style={{fontFamily: "Poppins", fontWeight: "500" }}>
-                                        <CellWithFlag flag={row.flags.batchGenerated}>
-                                            <BatchFormat label={row.batchGenerated} />
+                                        <CellWithFlag flag={row.fields[4].aiflag}>
+                                            <BatchFormat label={row.fields[4].value} />
                                         </CellWithFlag>
                                     </TableCell>
                                     <TableCell style={{fontFamily: "Poppins", fontWeight: "500" }}>
-                                        <CellWithFlag flag={row.flags.quantityReceive}>
-                                            <QuantityReceivedChip status={row.quantityReceive} />
+                                        <CellWithFlag flag={row.fields[5].aiflag}>
+                                            <QuantityReceivedChip status={row.fields[5].value}/>
                                         </CellWithFlag>
+                                    </TableCell>
+                                    <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500"}}>
+                                        <CellWithFlag flag={row.fields[6].aiflag}><p style={{maxWidth: "20ch", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{row.fields[6].value}</p></CellWithFlag>
                                     </TableCell>
                                     {/* <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500" }}>
                                         <CellWithFlag flag={row.flags.vendorCode}>{row.vendorCode}</CellWithFlag>
                                     </TableCell> */}
-                                    <TableCell style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: "500", whiteSpace: "no", wordBreak: "break-word", maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis"}}>
-                                        <CellWithFlag flag={row.flags.billClause}>{row.billClause}</CellWithFlag>
-                                    </TableCell>
                                     {/* <TableCell style={{fontFamily: "Poppins", fontWeight: "500" }}>
                                         <CellWithFlag flag={row.flags.tags}>
                                             <TagsFormat label={row.tags} />
