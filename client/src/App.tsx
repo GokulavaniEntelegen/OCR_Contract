@@ -5,6 +5,7 @@ import ImportContractPop from "./components/importcontractpop";
 import DeletePopoverExample from "./components/deletepopexample";
 import EditPop from "./components/editpop";
 import Settings from "./components/settings";
+import CustomFields from "./components/customfields";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/deletepopover" element={< DeletePopoverExample />} />
           <Route path="/editpop" element={<EditPop />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/customfields" element={< CustomFields />}  />
         </Routes>
       </div>
     </Router>
