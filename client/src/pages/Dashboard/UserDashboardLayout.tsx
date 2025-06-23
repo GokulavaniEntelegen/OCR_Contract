@@ -609,7 +609,7 @@ function DashboardLayout() {
             <Box className = "sidebar" sx={{ display: 'flex', height: '100vh'}}>
                 <Box className = "sidebar"
                     sx={{
-                        minwidth: '52px',
+                        minwidth: '15px',
                         maxWidth: "400px",
                         width: "52px",
                         overflow: "hidden",
@@ -649,7 +649,7 @@ function DashboardLayout() {
                                     marginY: 1,
                                 }}
                             >
-                                <img src={icon} alt="icon" width={24} height={24} />
+                                <img src={icon} alt="icon" width={20} height={20} />
                             </IconButton>
                         </Tooltip>
                         <Typography

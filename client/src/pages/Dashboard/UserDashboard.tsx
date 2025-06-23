@@ -418,12 +418,13 @@ function Dashboard() {
             {/* Removed the original Paper with "Welcome" and "Navigate" text */}
             {/* Purple Gradient Banner/Card - Integrated here */}
             <div style={{padding: "50px 30px 0px 30px"}}>
-            <Typography sx={{fontSize: "40px", fontWeight: "bold", fontFamily: "Poppins"}}>Hello Maria!</Typography>
-            <Typography variant="h6" sx={{color: "#808080", fontFamily: "Poppins"}}>Simple Dummy text of the printing</Typography>
+            <Typography sx={{fontSize: "24px", fontWeight: "bold", fontFamily: "Poppins"}}>Hello Maria!</Typography>
+            <p className = "simple" style={{color: "#808080", fontFamily: "Poppins"}}>Simple Dummy text of the printing</p>
             <Paper className="violet-paper"
                 elevation={3}
                 sx={{
                 p: 4,
+                paddingLeft: "20px",
                 mt: 4, // Margin top to separate from AppBar
                 borderRadius: 2, // Rounded corners
                 // background: 'linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)', // Purple gradient
@@ -442,7 +443,7 @@ function Dashboard() {
             >
 
                 <div style={{display: "flex", gap: "50px", alignItems: "flex-start", flexDirection: "column", marginLeft: "15px"}}>
-                <Typography sx={{fontSize: "26px", color: "#494A4E", width: "650px", fontWeight: "500", fontFamily: "Poppins"}}>
+                <Typography sx={{fontSize: "20px", color: "#494A4E", maxWidth: "500px", fontWeight: "600", fontFamily: "Poppins"}}>
                 To get started by uploading contracts or importing contracts to apply the functionalities.
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 2 }}>
@@ -463,7 +464,7 @@ function Dashboard() {
                         // '&:hover': {
                         //   bgcolor: '#f0f0f0', // Lighter hover
                         // },
-                        fontSize:"18px",
+                        fontSize:"14px",
                         width:"200px",
                         textTransform: "none",
                         borderRadius: 2,
@@ -495,7 +496,7 @@ function Dashboard() {
                         color: '#f0f0f0',
                     },
                     textTransform: "none",
-                    fontSize: "18px",
+                    fontSize: "14px",
                     borderRadius: 2, // Rounded corners for button
                     px: 3,
                     py: 1.5,
@@ -538,7 +539,7 @@ function Dashboard() {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: "900px",
+                    width: "50vw",
                     height: "530px",
                     bgcolor: 'background.paper',
                     boxShadow: 24,
