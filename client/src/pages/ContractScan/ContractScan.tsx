@@ -14,8 +14,12 @@ import OutSourceIcon from "../../assets/OutSource.svg";
 import ZoomInIcon from "../../assets/ZoomIn.svg";
 import ZoomOutIcon from "../../assets/ZoomOut.svg";
 import LoadingAIICon from "../../assets/LoadingAI.svg"
+import ChatBotPop from "client/src/components/ChatBotPop";
+import { useNavigate } from "react-router-dom";
 
 function ContractScan() {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<newIfield[]>([]);
     const [formLoading, setFormLoading] = useState<Boolean>(true);
@@ -110,6 +114,7 @@ function ContractScan() {
         catch(error) {
             console.log("Error Occured during saving a row to tablerows present at db.json: " + error);
         }
+        navigate("/all-contracts");
     };
 
     return(
@@ -141,7 +146,8 @@ function ContractScan() {
                         )}
 
                         {file && 
-                        <div style={{display: "flex", justifyContent: "flex-end"}}>
+                        <div style={{display: "flex", justifyContent: "space-between", alignItems:"center", marginTop: "-10px"}}>
+                            <ChatBotPop/>
                         <div className="zoomactions">
                             <IconButton><img src = {ZoomInIcon} style={{width: "24px", height: "24px", borderRight: "1px solid lightgray", paddingRight: "20px"}}/></IconButton>
                             <IconButton><img src = {ZoomOutIcon} style={{width: "24px", height: "24px"}}/></IconButton>

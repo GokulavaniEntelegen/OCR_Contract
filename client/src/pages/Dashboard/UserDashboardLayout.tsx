@@ -87,8 +87,8 @@ import MainLogoIcon from '../../assets/MainLogo.svg';
 import SettingsCustomIcon from '../../assets/Setting.svg';
 import NotificationIcon from '../../assets/Notification.svg';
 import PsaiImg from '../../assets/Psai.png';
-import SearchCustomIcon from "../../assets/SearchCustomIcon.svg"
-
+import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
+import DownArrowIcon from "../../assets/DownArrow.svg";
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled('input')({
@@ -707,7 +707,10 @@ function DashboardLayout() {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start" style={{paddingRight: "10px",borderRight: '1px solid lightgray'}}>
+                                        <div style={{display: "flex", gap: "5px",alignItems: "center"}}>
                                         <img src = {SearchCustomIcon} style={{width: "13.54px", height: "13.54px"}}/>
+                                        <IconButton><img src = {DownArrowIcon} style={{width:"8px", height: "5px"}}/></IconButton>
+                                        </div>
                                     </InputAdornment>
                                 ),
                             }}

@@ -37,7 +37,7 @@ const ChatBotPop: React.FC = () => {
             <img src = {ChatBotBlueIcon} style={{width: "60px", height: "60px"}}/>
         </IconButton>
 
-        <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "center", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "100px", marginTop: "20px"}}slotProps={{
+        <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "top", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "10px", marginTop: "-20px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {

@@ -260,7 +260,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                 <Box display="flex" alignItems="center" gap={0.5}>
                 <CancelIcon sx={{ color: "red", fontSize: "18px" }} />
                 <span style={{ color: "#45464B", fontFamily: "Poppins", fontWeight: 500, fontSize: "14px" }}>
-                    {status}
+                    <p style={{maxWidth: "10ch", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{status}</p>
                 </span>
                 </Box>
             );
@@ -277,7 +277,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
             );
         }
 
-        return <span>{status}</span>;
+        return <span><p style={{maxWidth: "20ch", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden"}}>{status}</p></span>;
     }
     
     useEffect(() => {
@@ -435,8 +435,17 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
         })
     },[]);
 
+
+    const [tabsArray,setTabsArray] = useState<string[]>(["All", "AI Generated"]);
+
+    const handleNewView= () => {
+        const updatedView = [...tabsArray,newView];
+        setTabsArray(updatedView);
+        handleAddViewClose();
+    };
+
     return(
-        <div className="uploadtables" style={{marginTop: "50px", border: "0.5px solid lightgray", borderRadius: "4px", padding: "10px 20px 0 20px"}}>
+        <div className="uploadtables" style={{marginTop: "50px", border: "0.5px solid lightgray", borderRadius: "4px", padding: "10px 20px 30px 20px"}}>
             <div>
                 <div>
                     <Box
@@ -456,8 +465,10 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                             indicatorColor="primary"
                             sx={{ fontFamily: "Poppins", minHeight: "48px" }} // ensure tabs are not too tall
                         >
-                            <Tab
-                            label="All"
+                            
+                            {tabsArray.map((tab,index) => (
+                                <Tab
+                            label={tab}
                             sx={{
                                 fontWeight: 600,
                                 textTransform: "none",
@@ -466,16 +477,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                 minHeight: "48px",
                             }}
                             />
-                            <Tab
-                            label="AI Generated"
-                            sx={{
-                                fontWeight: 600,
-                                textTransform: "none",
-                                fontFamily: "Poppins",
-                                fontSize: "16px",
-                                minHeight: "48px",
-                            }}
-                            />
+                            ))}
                             <IconButton onClick={handleAddViewClick}>
                             <Tab
                             label={<AddIcon />}
@@ -497,7 +499,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                     <p>Add View</p>
                                     <IconButton onClick={handleAddViewClose}><CloseIcon sx = {{color: "black"}} /></IconButton>
                                 </div>
-                                <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px"}}>Enter a view name</p>
+                                <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a view name</p>
                                 <TextField
                                 variant="outlined"
                                 fullWidth
@@ -537,7 +539,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                 />
                                 <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
                                     <Button
-                                    onClick={handleFilterClose}
+                                    onClick={handleAddViewClose}
                                     variant="outlined"
                                     style={{
                                         textTransform: "none", 
@@ -548,7 +550,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                         }} 
                                     className="actions">Cancel</Button>
                                     <Button
-                                    
+                                    onClick = {handleNewView}
                                     variant="contained"
                                     style={{
                                         textTransform: "none", 

@@ -9,6 +9,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell
 } from 'recharts';
 import ChartsMenu from "./ChartsMenu";
+import "./Charts.scss";
 
 const data = [
   { month: 'May', renewable: 20, nonrenewable: 10 },
@@ -42,7 +43,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
     !show && (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px", width: "100%" }} className="threeCharts">
+      <div style={{gap: "20px", marginTop: "20px", width: "100%" }} className="threeCharts">
         
         {/* Chart 1 */}
         <Box sx={{ flex: 1, height: "280px", backgroundColor: "#EAF9FF", borderRadius: "8px", border: "0.5px solid lightgray", minWidth: 0 }}>
