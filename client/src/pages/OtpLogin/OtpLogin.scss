@@ -1,0 +1,21 @@
+@use "../../global_styles/typography.scss" as *;
+.emailotp {
+    @include display-small;
+}
+
+.simple2step {
+    @include body-large;
+    color: #8D8D8D;
+}
+
+.enterotp {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.oopsmsg {
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 400;
+}

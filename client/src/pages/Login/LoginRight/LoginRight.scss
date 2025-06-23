@@ -1,0 +1,56 @@
+.login-right {
+  width: 50%;
+  background-color: #e8f4ff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.login-image {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.login-right h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.login-right p {
+  font-size: 14px;
+  color: #333;
+  max-width: 80%;
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+.dot {
+  width: 20px;
+  height: 5px;
+  background-color: #d3d3d3;
+  border-radius: 10px;
+}
+
+.dot.active {
+  background-color: #007bff;
+}
+
+.imagright {
+  display: flex;
+}
+
+@media (max-width: 978px) {
+  .imagright {
+    display: none;
+  }
+}

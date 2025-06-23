@@ -9,6 +9,14 @@ import ActivityHistory from "./pages/ActivityHistory/ActivityHistory";
 import AIChat from "./pages/AIChat/AIChat";
 import ContractScan from "./pages/ContractScan/ContractScan";
 import Trialpage from "./pages/TrialPage";
+import SignIn from "./pages/Login/SignIn";
+import LoginLeft from "./pages/Login/LoginLeft/LoginLeft";
+import ResetPassword from "./pages/ResertPassword/ResetPassword";
+import OtpLogin from "./pages/OtpLogin/OtpLogin";
+import CreateAccount from "./pages/CreateAccount/CreateAccount";
+import CreateNewPassword from "./pages/CreatePassword/CreatePassword";
+import Invite from "./pages/InvitTeam/InvitTeam";
+import SetAccPassword from "./pages/SetPassword/SetPassword";
 
 
 function App() {
@@ -16,13 +24,23 @@ function App() {
     return (
         <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DashboardLayout/>}>
+          <Route path="/dashboard" element={<DashboardLayout/>}>
             <Route index element = {<Dashboard/>}/>
-            <Route path="/all-contracts" element = {<AllContracts/>}/>
-            <Route path="/activity-history" element = {<ActivityHistory/>}/>
-            <Route path="/ai-chat" element = {<AIChat/>}/>
-            <Route path="/contract-scan" element = {<ContractScan/>}/>
-            <Route path="/trial-page" element = {<Trialpage/>}/>
+            <Route path="all-contracts" element = {<AllContracts/>}/>
+            <Route path="activity-history" element = {<ActivityHistory/>}/>
+            <Route path="ai-chat" element = {<AIChat/>}/>
+            <Route path="contract-scan" element = {<ContractScan/>}/>
+            <Route path="trial-page" element = {<Trialpage/>}/>
+          </Route>
+
+          <Route path="/login" element = {<SignIn/>}>
+          <Route index element={<LoginLeft/>} />
+          <Route path="reset-password" element={<ResetPassword />} />
+          <Route path='otp-login' element={<OtpLogin/>}/>
+          <Route path ="create-account" element = {<CreateAccount/>}/>
+          <Route path="createnewpassword" element={<CreateNewPassword/>} />
+          <Route path="invite" element={<Invite/>}/>
+          <Route path="setaccpassword" element={<SetAccPassword/>} />
           </Route>
         </Routes>
         </BrowserRouter>        

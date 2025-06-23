@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/react-slick": "^0.23.13",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
     "concurrently": "^9.1.2",
@@ -48,7 +49,10 @@
     "@fontsource/roboto": "^5.2.6",
     "@mui/x-charts": "^8.5.2",
     "react-datepicker": "^8.4.0",
+    "react-otp-input": "^3.1.1",
+    "react-slick": "^0.30.3",
     "recharts": "^2.15.3",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "slick-carousel": "^1.8.1"
   }
 }

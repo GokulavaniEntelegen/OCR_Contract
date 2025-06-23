@@ -1,0 +1,6 @@
+@use "../../global_styles/typography.scss" as *;
+
+.inviterest {
+    @include display-small;
+    font-weight: 600;
+}
