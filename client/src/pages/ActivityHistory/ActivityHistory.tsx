@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs";
+import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs/CustomBreadCrumbs";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

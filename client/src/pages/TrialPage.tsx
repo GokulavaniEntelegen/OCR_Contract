@@ -1,5 +1,5 @@
 import React from "react";
-import ExamplePop from "../components/ExamplePop";
+import ExamplePop from "../components/ExamplePop/ExamplePop";
 import ChatBotPop from "../components/ChatBotPop/ChatBotPop";
 
 const Trialpage = () => {

@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Popover, FormControlLabel, Checkbox, IconButton, TextField } from "@mui/material";
 import ImportDetailsIcon from "../assets/ImportDetails.svg";
 import { useState } from "react";
-import ExamplePopIcon from "../assets/ExamplePop.svg";
+import ExamplePopIcon from "../../assets/ExamplePop.svg";
 import "./ExamplePop.scss";
 import UploadCustomIcon from "../assets/UploadCustom.svg";
-import UploadBlueIcon from "../assets/UploadBlue.svg";
+import UploadBlueIcon from "../../assets/UploadBlue.svg";
 
 const ExamplePop: React.FC = () => {
     
