@@ -89,6 +89,7 @@ import NotificationIcon from '../../assets/Notification.svg';
 import PsaiImg from '../../assets/Psai.png';
 import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
 import DownArrowIcon from "../../assets/DownArrow.svg";
+import {Link} from "react-router-dom";
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled('input')({
@@ -640,6 +641,7 @@ function DashboardLayout() {
                         <img src={MainLogoIcon} alt="icon" width={40} height={40} />
                     </IconButton>
                     {icons.map(({ key, icon, tooltip }) => (
+                        <Link to = "#" style={{textDecoration: "none", color: "inherit"}}>
                         <Box style={{display: "flex", alignItems: "center", marginTop: "15px"}}>
                         <Tooltip title={tooltip} placement="right" key={key}>
                             <IconButton
@@ -671,6 +673,7 @@ function DashboardLayout() {
                         <p style={{fontFamily: "Poppins", fontSize: "14px"}}>{tooltip}</p>
                         </Typography>
                         </Box>
+                        </Link>
                     ))}
                     </Box>
                 </Box>

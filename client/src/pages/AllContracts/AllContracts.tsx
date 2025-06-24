@@ -48,7 +48,7 @@ function AllContracts() {
                             >
                                 Import Details
                         </Button> */}
-                        <ImportContractPop/>
+                        <ImportContractPop fromtext="allcontracts"/>
 
                         <Button
                             // onClick={}

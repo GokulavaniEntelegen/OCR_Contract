@@ -8,6 +8,7 @@ import '@fontsource/roboto'; // Loads default weight (400)
 import '@fontsource/poppins';
 import { ReactNode } from "react";
 import { FC } from "react";
+import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
 
 
 import {
@@ -69,8 +70,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // import './tabletrycss.css';
+import UploadCustomIcon from "../../assets/Upload.svg"
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import UploadCustomIcon from "../../assets/Upload.svg";
 import DashboardCustomIcon from "../../assets/Dashboard.svg";
 import RecentExtractionIcon from "../../assets/RecentExtraction.svg";
 import ReportIcon from "../../assets/Report.svg";
@@ -84,6 +85,7 @@ import PsaiImg from "../../assets/Psai.png";
 import Tabletry from "client/src/components/Tables";
 import FileWithTickIcon from "../../assets/FileWithTick.svg";
 import CreateCustomIcon from "../../assets/CreateCustom.svg";
+import ImportContractPop from "client/src/components/ImportContractPop";
 
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
@@ -467,7 +469,9 @@ function Dashboard() {
                         fontSize:"14px",
                         width:"200px",
                         textTransform: "none",
-                        borderRadius: 2,
+                        backgroundColor: "#1093FF",
+                        boxShadow: "none",
+                        borderRadius: "4px",
                         fontFamily: "Poppins" // Rounded corners for button
                         // px: 2, // Padding horizontal
                         // py: 0.5, // Padding vertical
@@ -482,29 +486,31 @@ function Dashboard() {
                     /> */}
                     </Button>
                 {/* </MuiLink> */}
-                <Button
+                <ImportContractPop fromtext="dashboard"/>
+                {/* <Button
                     variant="outlined" // Outlined button for "Import Contract"
-                    startIcon={<CloudDownloadIcon/>} // Example icon
+                    startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
                     // No 'disabled' or 'loading' state here
                     sx={{
                     //   color: 'white', // White text color
                     fontFamily: "Poppins",
                     borderColor: 'white', // White border
                     bgcolor: 'rgba(255, 255, 255, 0.8)',
+                    color: "#1093FF",
                     '&:hover': {
-                        borderColor: '#f0f0f0',
-                        color: '#f0f0f0',
+                        borderColor: 'black',
+                        // color: '#f0f0f0',
                     },
                     textTransform: "none",
                     fontSize: "14px",
-                    borderRadius: 2, // Rounded corners for button
+                    borderRadius: "4px", // Rounded corners for button
                     px: 3,
                     py: 1.5,
                     width: "280px"
                     }}
                 >
                     Import Contract
-                </Button>
+                </Button> */}
                 </Box>
                 </div>
             </Paper>
