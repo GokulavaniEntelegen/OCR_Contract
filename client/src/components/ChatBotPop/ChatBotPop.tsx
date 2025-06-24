@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Popover, FormControlLabel, Checkbox, IconButton, TextField, Box } from "@mui/material";
 import { useState } from "react";
-import ChatBotBlueIcon from "../assets/ChatBotBlue.svg";
+import ChatBotBlueIcon from "../../assets/ChatBotBlue.svg";
 import ChatBack from "../assets/ChatBack.png";
 import "./ChatBotPop.scss";
-import CancelWhiteIcon from "../assets/CancelWhite.svg";
-import SmileyCustomIcon from "../assets/SmileyCustom.svg";
-import GalleryCustomIcon from "../assets/GalleryCustom.svg";
-import ArrowBlueRightIcon from "../assets/ArrowBlueRight.svg";
-import AiAvatar from "../assets/AiAvatar.svg";
+import CancelWhiteIcon from "../../assets/CancelWhite.svg";
+import SmileyCustomIcon from "../../assets/SmileyCustom.svg";
+import GalleryCustomIcon from "../../assets/GalleryCustom.svg";
+import ArrowBlueRightIcon from "../../assets/ArrowBlueRight.svg";
+import AiAvatar from "../../assets/AiAvatar.svg";
 import { BorderBottom, BorderTop } from "@mui/icons-material";
 
 

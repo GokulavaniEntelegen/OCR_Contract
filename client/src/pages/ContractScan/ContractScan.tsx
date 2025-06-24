@@ -14,7 +14,7 @@ import OutSourceIcon from "../../assets/OutSource.svg";
 import ZoomInIcon from "../../assets/ZoomIn.svg";
 import ZoomOutIcon from "../../assets/ZoomOut.svg";
 import LoadingAIICon from "../../assets/LoadingAI.svg"
-import ChatBotPop from "client/src/components/ChatBotPop";
+import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
 import { useNavigate } from "react-router-dom";
 
 function ContractScan() {
