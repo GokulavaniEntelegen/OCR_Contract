@@ -54,12 +54,12 @@ const LoginRight = () => {
         </Slider>
       </Box>
 
-      <Typography
-        variant="h6"
-        sx={{ fontWeight:"bold", marginBottom: 1, fontFamily: "Poppins, sans-serif", fontSize: '22px', height: '32px' }}
+      <p
+        className="uplinvtext"
+        style={{ fontWeight:"bold",fontFamily: "Poppins, sans-serif", fontSize: '24px', height: '32px' }}
       >
         Upload Invoice
-      </Typography>
+      </p>
 
       {/* <Typography
         variant="body1"
@@ -70,21 +70,20 @@ const LoginRight = () => {
 
       </Typography> */}
 
-      <Typography
-        variant="body1"
-        sx={{
+      <p
+        style={{
           color: "#000000",
-          maxWidth: 360,
+          minWidth: 400,
           fontFamily: "Poppins, sans-serif",
           fontWeight: 400,
-          fontSize: "17px",
+          fontSize: "16px",
           letterSpacing: "0.25px",
-          lineHeight: "20px",
-          text_Indent:"-2em"
+          lineHeight: "24px",
+          // text_Indent:"-2em"
         }}
       >
         Click 'Upload Invoice', choose your file, and hit 'Save' to securely store your invoice for easy access later!
-      </Typography>
+      </p>
 
 
       <Box sx={{ display: "flex", gap: 1, marginTop: 3 }}>

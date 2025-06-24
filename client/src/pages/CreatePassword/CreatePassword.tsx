@@ -70,10 +70,10 @@ const CreateNewPassword = () => {
           fullWidth
           size="small"
           sx={{
-            mb: 0,
+            mb: 1,
             backgroundColor: "#fafafa",
             fontFamily: "Poppins, sans-serif",
-            paddingBottom: "8px",
+            // paddingBottom: "8px",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',
              opacity: 1, // important to make sure the color is not faded

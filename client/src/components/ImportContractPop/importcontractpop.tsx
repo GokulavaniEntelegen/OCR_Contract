@@ -56,7 +56,7 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
                 bgcolor: 'rgba(255, 255, 255, 0.8)',
                 color: "#1093FF",
                 '&:hover': {
-                    borderColor: 'black',
+                    borderColor: 'none',
                     // color: '#f0f0f0',
                 },
                 textTransform: "none",
@@ -163,11 +163,12 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
             </div>
             </Popover>
 
-            <Popover open = {popopenUpl} anchorEl={anchorElUpl} onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-250px", marginTop: "20px"}}slotProps={{
+            <Popover open = {popopenUpl} anchorEl={anchorElUpl} onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-670px", marginTop: "-100px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {
                 boxShadow: "none",
+                borderRadius: "20px",   
             },
             },
             }}>
