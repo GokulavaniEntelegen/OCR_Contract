@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import "./OtpLogin.scss"
 import OtpInput from "react-otp-input";
+import ShowMsgTickIcon from "../../assets/ShowMsgTick.svg";
+import CloseGrayIcon from "../../assets/CloseGrey.svg";
+import GreenTickOtpIcon from "../../assets/GreenTickOtp.svg";
 
 function OtpLogin() {
 
   const [otp, setOtp] = useState<string>("");
+  const [showSentMsg, setShowSentMsg] = useState<boolean>(false);
+
+  const handleOtpLogin = () => {
+    if(showSentMsg) {
+      setShowSentMsg(false);
+    }else {
+      setShowSentMsg(true);
+    }
+  }
 
   return (
     <Box
@@ -22,6 +34,14 @@ function OtpLogin() {
         alignItems: "flex-start",
       }}
     >
+      {showSentMsg && (
+        <div className="showmsg">
+          <img src = {GreenTickOtpIcon} style={{width: "38px", height: "38px"}}/>
+          <p style = {{color: "#475467", fontFamily: "Poppins", fontSize: "12px"}}><b>OTP Sent Successfully</b> to your email/mobile</p>
+          <IconButton onClick={() => {setShowSentMsg(false)}}><img src = {CloseGrayIcon} style={{width: "24px", height: "24px"}}/></IconButton>
+        </div>
+      )}
+
       <p className="emailotp">Enter Email OTP</p>
       <p className="simple2step">Its a simple 2 step verification. Enter your 6 digit code sent to tyour registered email.</p>
       <div style={{ marginTop: "7px" }}>
@@ -50,7 +70,9 @@ function OtpLogin() {
         <p className="oopsmsg" style={{ color: "#0000FF" }}>Resend OTP</p>
       </div>
 
-      <Button variant="contained" sx={{
+      <Button variant="contained"
+      onClick={handleOtpLogin}
+      sx={{
         width: "100%",
         bgcolor: "#1093FF",
         borderRadius: "4px",

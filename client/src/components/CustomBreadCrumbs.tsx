@@ -9,14 +9,14 @@ const CustomBreadCrumbs: React.FC<{replacetext: string, tonav: string}> = ({repl
     <div style={{paddingLeft: "16px"}}>
             <Breadcrumbs aria-label="breadcrumb" sx = {{ '& .css-jhr02i-MuiBreadcrumbs-separator': {marginLeft: "2px", marginRight: "6px", color: "#0F93FF"}}}>
 
-                <Link underline="hover" color="#0F93FF" href="/">
+                <Link underline="hover" color="#0F93FF" href="/dashboard">
                 <p className="words">Home</p>
                 </Link>
 
                 <Link
                 underline="hover"
                 color="#84878A"
-                href={`${tonav}`}
+                href={`/dashboard/${tonav}`}
                 aria-current="page"
                 >
                 <p className="words">{replacetext}</p>

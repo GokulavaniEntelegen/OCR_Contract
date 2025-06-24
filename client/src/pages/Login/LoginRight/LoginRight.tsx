@@ -18,7 +18,7 @@ const LoginRight = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
-    pauseOnHover: true,
+    // pauseOnHover: true,
     beforeChange: (oldIndex: number, newIndex: number) => setCurrentSlide(newIndex),
   };
 

@@ -120,7 +120,7 @@ function ContractScan() {
     return(
         <Box sx={{minHeight: "100vh"}} className = "fullcontract">
             <div style={{padding: "30px 80px 0px 80px"}}>
-                <CustomBreadCrumbs replacetext="Contract Scan" tonav="\contract-scan"/>
+                <CustomBreadCrumbs replacetext="Contract Scan" tonav="contract-scan"/>
                 <p className="contracttext">Contract Scan</p>
                 <div className="fileandforms">
                     <div className="file" style={{display: (!file) ? ("flex"): ("block")}}>
