@@ -4,9 +4,10 @@ import ImportDetailsIcon from "../assets/ImportDetails.svg"
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import"./ImportContractPop.scss";
-import ImportFileIcon from "./assets/ImportFile.svg"
+import ImportFileIcon from "../assets/ImportFile.svg";
+import ImportBlueIcon from "../assets/ImportBlueCustom.svg";
 
-const ImportContractPop: React.FC = () => {
+const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -33,14 +34,40 @@ const ImportContractPop: React.FC = () => {
     
     return (
         <>
-            <Button
+            {(fromtext === "allcontracts") ? 
+            (<Button
                 variant="text"
                 onClick={handleOpen}
                 startIcon = {<img src = {ImportDetailsIcon} style={{height: "18px", width: "18px"}}/>}
                 sx={{textTransform: "none", fontSize: "16px", color: "#1093FF", fontFamily: "Poppins", fontWeight: '500'}}
                 >
                     Import Details
-            </Button>
+            </Button>): 
+            (<Button
+                variant="outlined" // Outlined button for "Import Contract"
+                onClick={handleOpen}
+                startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
+                // No 'disabled' or 'loading' state here
+                sx={{
+                //   color: 'white', // White text color
+                fontFamily: "Poppins",
+                borderColor: 'white', // White border
+                bgcolor: 'rgba(255, 255, 255, 0.8)',
+                color: "#1093FF",
+                '&:hover': {
+                    borderColor: 'black',
+                    // color: '#f0f0f0',
+                },
+                textTransform: "none",
+                fontSize: "14px",
+                borderRadius: "4px", // Rounded corners for button
+                px: 3,
+                py: 1.5,
+                width: "280px"
+                }}
+            >
+                Import Contract
+            </Button>)}
 
             <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-250px", marginTop: "20px"}}slotProps={{
             paper: {
