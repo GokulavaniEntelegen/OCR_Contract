@@ -1,0 +1,20 @@
+@use "../../global_styles/typography.scss" as *;
+
+
+* {
+    margin: 0;
+    padding: 0;
+
+    .contract-actions {
+    display: flex;
+
+        .all{
+            @include headline-small;
+            font-weight: 600;
+        }
+        .options{
+            display: flex;
+            gap: 25px;
+        }
+}
+}

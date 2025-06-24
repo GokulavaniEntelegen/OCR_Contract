@@ -1,0 +1,24 @@
+@use "../global_styles/typography.scss" as *;
+
+.examplebox {
+    padding: 20px 24px;
+    border-radius: 24px;
+    border: 1px solid lightgray;
+
+    .exampletext {
+        @include headline-small;
+        font-weight: 500;
+    }
+
+    .explaintext {
+        @include body-large;
+        font-weight: 400;
+        color: #919191;
+    }
+
+    .examplebuttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+    }
+}

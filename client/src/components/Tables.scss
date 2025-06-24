@@ -1,0 +1,55 @@
+@use "../global_styles/typography.scss" as *;
+
+.filter-box {
+    border-radius: 20px;
+    width: 700px;
+    border: 1px solid lightgray;
+
+    .filtertop {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 10px 10px 20px;
+        border-bottom: 1PX solid lightgray;
+    }
+
+    .filtertop p {
+        font-family: Poppins;
+        font-weight: 600;
+        color: #303030;
+        font-size: 24px;
+    }
+
+    .filterleft { 
+
+        .catnames {
+            @include body-medium;
+            font-size: 15px;
+        }
+    }
+}
+
+.addview-box {
+    border-radius: 20px;
+    width: 400px;
+    border: 1px solid lightgray;
+    padding: 30px;
+
+    .addviewtop p {
+        @include headline-small;
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    .addviewtop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 0px 10px 0px;
+    }
+}
+
+.apply {
+    @include body-large;
+    font-weight: 500;
+    color: #606060;
+}

@@ -1,0 +1,12 @@
+@use "../global_styles/typography.scss" as *;
+
+.labelasbox {
+    width: 18.31rem;
+    // height: 20.56rem;
+    padding: 24px;
+    border: 0.5px solid lightgray;
+    border-radius: 15px;
+    .labelasboxtop {
+        border-bottom: 1px solid #1093FF;
+    }
+}

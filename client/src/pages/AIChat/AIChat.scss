@@ -1,0 +1,117 @@
+@use "../../global_styles/typography.scss" as *;
+
+.sidepanel {
+    width: 15%;
+    border-right: 1px solid #E7E7E7;
+    min-height: 100vh;
+    padding: 31px 42px auto 42px;
+
+    .listtext {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 16px;
+        color: #606060;
+    }
+
+    .today {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 16px;
+        color: #606060;
+    }
+}
+
+.chatpanel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 250px 300px 150px 300px;
+
+    .middlecomps {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+
+        .examplesai {
+            flex: 1;
+
+            .exampleaitext {
+                font-family: Inter;
+                font-weight: 500;
+                font-size: 18px;
+                margin-top: 25px;
+            }
+
+            .exbelowtext {
+                font-family: Inter;
+                font-weight: 400;
+                font-size: 14px;
+                color: #919191;
+                
+            }
+        }
+        .capabilitiesai {
+            flex: 1;
+
+            .exampleaitext {
+                font-family: Inter;
+                font-weight: 500;
+                font-size: 18px;
+                margin-top: 25px;
+            }
+
+            .exbelowtext {
+                font-family: Inter;
+                font-weight: 400;
+                font-size: 14px;
+                color: #919191;
+                
+            }
+        }
+        .limitationsai {
+            flex: 1;
+
+            .exampleaitext {
+                font-family: Inter;
+                font-weight: 500;
+                font-size: 18px;
+                margin-top: 25px;
+            }
+
+            .exbelowtext {
+                font-family: Inter;
+                font-weight: 400;
+                font-size: 14px;
+                color: #919191;
+                
+            }
+        }
+    }
+
+    .promptbox {
+            display: flex;
+            justify-content: center;
+            // width: 200px;
+            // height: 200px;
+            border: 1px solid gray;
+            // align-items: center;
+            margin-top: auto;
+            border-radius: 8px;
+            border: 1px solid #E7E7E7;
+        }
+
+        .promptboxcomps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            width: 100%;
+
+            .asktext {
+                font-family: Poppins;
+                font-size: 16px;
+                font-weight: 500;   
+            }
+        }
+}

@@ -1,0 +1,14 @@
+@use "../global_styles/typography.scss" as *;
+
+
+.threeCharts {
+    display: flex;
+    flex-direction: row;
+}
+
+
+@media (max-width :1214px) {
+    .threeCharts {
+        flex-direction: column;
+    }
+}
