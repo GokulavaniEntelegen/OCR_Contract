@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { List, ListItem, ListItemIcon, ListItemText, Button, IconButton } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Button, IconButton, TextField, InputAdornment } from "@mui/material";
 import NewChatIcon from "../../assets/NewChat.svg"
 import SearchCustomIcon from "../../assets/SearchCustomIcon.svg"
 import DownArrowIcon from "../../assets/DownArrow.svg"
@@ -92,18 +92,66 @@ function AIChat() {
 
                             </div>
 
-                            <div className="promptbox">
-                                <div className="promptboxcomps">
-                                    <div style={{display: "flex", gap: "8px", alignItems: "center"}}>
-                                    <IconButton> <img src = {ClipButtonIcon} style={{width: "20px", height: "20px"}}/></IconButton>
-                                    <p className="asktext">Ask Chat or @mention</p>
-                                    </div>
-                                    <div style={{display: "flex", alignItems: "center", gap: "8px"}}>
-                                        <IconButton> <img src = {MicCustomIcon} style={{width: "20px", height: "20px"}}/></IconButton>
-                                        <IconButton> <img src = {SendCustomIcon} style={{width: "20px", height: "20px"}}/></IconButton>
-                                    </div>
-                                </div>
-                            </div>
+                            <TextField
+                            fullWidth
+                            variant="outlined"
+                            placeholder="Ask Chat or @mention"
+                            InputProps={{
+                                startAdornment: (
+                                <InputAdornment position="start">
+                                    <IconButton>
+                                    <img
+                                        src={ClipButtonIcon}
+                                        alt="clip"
+                                        style={{ width: "20px", height: "20px" }}
+                                    />
+                                    </IconButton>
+                                </InputAdornment>
+                                ),
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton>
+                                    <img
+                                        src={MicCustomIcon}
+                                        alt="mic"
+                                        style={{ width: "20px", height: "20px" }}
+                                    />
+                                    </IconButton>
+                                    <IconButton>
+                                    <img
+                                        src={SendCustomIcon}
+                                        alt="send"
+                                        style={{ width: "20px", height: "20px" }}
+                                    />
+                                    </IconButton>
+                                </InputAdornment>
+                                ),
+                                sx: {
+                                fontFamily: "Poppins",
+                                fontSize: "16px",
+                                fontWeight: 500,
+                                borderRadius: "8px",
+                                backgroundColor: "#fff",
+                                height: "48px",
+                                },
+                            }}
+                            sx={{
+                                borderRadius: "8px",
+                                marginTop: "auto",
+                                "& .MuiOutlinedInput-root": {
+                                borderRadius: "8px",
+                                padding: "0 8px",
+                                },
+                                "& .MuiOutlinedInput-notchedOutline": {
+                                border: "1px solid #E7E7E7",
+                                },
+                                "& input::placeholder": {
+                                fontFamily: "Poppins",
+                                fontSize: "16px",
+                                fontWeight: 500,
+                                },
+                            }}
+                            />
                         </div>
                     </div>
                 </div>

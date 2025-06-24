@@ -35,7 +35,7 @@ for(let i =0;i<50;i++) {
 function ActivityHistory() {
     return(
         <div>
-            <Box sx={{width: "100%",minHeight: "100vh" }}>
+            <Box className = "actifullbox" sx={{width: "100%",minHeight: "100vh" }}>
                 <div style={{padding: "29px 30px 0px 27px"}}>
 
                     <CustomBreadCrumbs replacetext="Activity History" tonav="activity-history"/>
@@ -49,7 +49,7 @@ function ActivityHistory() {
                             <TableRow>
                                 <TableCell sx={{ width: "25%", py:"8px" }}><div style={{display: "flex", alignItems: "center"}}><p className="tablewords">CONTRACT NO</p><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></div></TableCell>
                                 <TableCell sx={{ width: "25%", py:"8px" }}><div style={{display: "flex", alignItems: "center"}}><p className="tablewords">EVENT</p><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></div></TableCell>
-                                <TableCell sx={{ width: "25%", py:"8px" }}><div style={{display: "flex", alignItems: "center"}}><p className="tablewords">WHEN</p><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></div></TableCell>
+                                <TableCell sx={{ width: "25s%", py:"8px" }}><div style={{display: "flex", alignItems: "center"}}><p className="tablewords">WHEN</p><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></div></TableCell>
                                 <TableCell sx={{ width: "25%", py:"8px" }}><div style={{display: "flex", alignItems: "center"}}><p className="tablewords">WHO</p><UnfoldMoreIcon sx = {{verticalAlign: "middle", marginLeft: "4px", fontSize: "small"}}/></div></TableCell>
                             </TableRow>
                             </TableHead>

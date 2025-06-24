@@ -186,10 +186,6 @@
     object-fit: contain;
 }
 
-.filterandpagin
-{
-    display: flex;
-}
 
 .custom-datepicker {
   border-radius: 100px;
@@ -213,6 +209,8 @@
     align-items: center;
     margin-bottom: 20px;
     margin-top: 20px;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .custom-datepicker {
@@ -234,6 +232,13 @@
 .choose{
     @include headline-small;
     margin-top: 20px;
+}
+
+@media (max-width: 1192px) {
+    .choose {
+    font-size: 18px;
+    padding: 0;
+    }
 }
 
 .stepper{
@@ -297,6 +302,13 @@
     font-size: large;
 }
 
+@media (max-width: 1192px) {
+    .descopt {
+        margin-top: 5px;
+        font-size: 15px;
+    }
+}
+
 .descbox {
     width: 100%;
     margin-top: 10px;
@@ -311,7 +323,7 @@
     
     .content {
         padding: 12px;
-        font-size: 18px;
+        font-size: 16px;
         font-family: "Poppins";
         font-weight: 400;
         line-height: 100%;
@@ -319,7 +331,14 @@
         color: gray;
         border-radius: 7px;
     }
+
+    @media (max-width: 1192px) {
+    .content {
+        font-size: 14px;
+    }
 }
+}
+
 
 .upload-box {
     background-color: #F6F6F6;

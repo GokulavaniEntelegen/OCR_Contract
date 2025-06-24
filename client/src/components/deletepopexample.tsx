@@ -47,7 +47,8 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import DeleteIcon from '../assets/Delete.svg';
+// import DeleteIcon from '../assets/Delete.svg';
+import DeleteIcon from "../assets/DeleteBlack.svg";
 import deleteImage from '../assets/EmptyState.svg';
 
 const DeletePopoverExample: React.FC = () => {
@@ -65,11 +66,9 @@ const DeletePopoverExample: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div>
       {/* Delete icon button */}
-      <IconButton onClick={handleClick}>
-        <img src={DeleteIcon} alt="Delete Icon" />
-      </IconButton>
+      <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}} onClick={handleClick} ><img src={DeleteIcon} style={{width: "24px", height: "24px"}}/></IconButton></div>
 
       {/* Popover */}
       <Popover
@@ -114,9 +113,10 @@ const DeletePopoverExample: React.FC = () => {
             variant="outlined"
             onClick={handleClose}
             sx={{
-              border: '2px solid #72777F',
+              border: '1px solid #72777F',
               width: 100,
               borderRadius: 1,
+              color: "#1093FF",
               fontWeight: 500,
               textTransform: 'none',
               fontFamily: 'Poppins, sans-serif',
@@ -128,9 +128,10 @@ const DeletePopoverExample: React.FC = () => {
             variant="contained"
             onClick={handleDelete}
             sx={{
-              backgroundColor: '#007BFF',
+              backgroundColor: '#1093FF',
               width: 100,
               borderRadius: 1,
+              boxShadow: "none",
               fontWeight: 500,
               textTransform: 'none',
               fontFamily: 'Poppins, sans-serif',

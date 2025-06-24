@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import"./ImportContractPop.scss";
 import ImportFileIcon from "../../assets/ImportFile.svg";
 import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
+import ImpFileIc from "../../assets/Uplo.svg";
 
 const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
 
@@ -173,7 +174,7 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
                 <div className="uploadbox">
                     <p className="import-text">Import Contract Details</p>
                     <div className="smallbox">
-                        <IconButton><img src = {ImportFileIcon} style = {{width: "269", height: "85"}}/></IconButton>
+                        <IconButton><img src = {ImpFileIc} style = {{width: "85", height: "85"}}/></IconButton>
                         <p className="dragtext">Drag and drop your files here or <a style={{color: "#1093FF", cursor: "p"}}>Browse Files</a></p>
                     </div>
                 </div>

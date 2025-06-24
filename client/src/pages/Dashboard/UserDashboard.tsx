@@ -648,7 +648,7 @@ function Dashboard() {
                                 fullWidth
                                 multiline
                                 minRows={4}
-                                maxRows={8}
+                                maxRows={7}
                                 placeholder="Enter your description here..."
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
@@ -665,8 +665,9 @@ function Dashboard() {
                                     },
                                     },
                                     '& .MuiInputBase-input::placeholder': {
-                                    fontSize: '18px', // increase placeholder size
+                                    fontSize: '16px', // increase placeholder size
                                     color: '#555',
+                                    fontFamily :"Poppins",
                                     },
                                 }}
                             />
@@ -691,9 +692,11 @@ function Dashboard() {
                             variant="outlined"
                             style={{
                                 textTransform: "none", 
-                                fontSize: "18px", 
+                                fontSize: "17px", 
                                 padding: "10px 20px 10px 20px", 
-                                border: "1px solid gray"
+                                border: "1px solid gray",
+                                boxShadow : "none",
+                                color: "#1093FF"
                                 }} 
                             className="actions">Cancel</Button>
                             <Button
@@ -701,8 +704,10 @@ function Dashboard() {
                             variant="contained"
                             style={{
                                 textTransform: "none", 
-                                fontSize: "18px", 
-                                padding: "10px 25px 10px 25px"
+                                fontSize: "17px", 
+                                padding: "10px 25px 10px 25px",
+                                boxShadow : "none",
+                                backgroundColor: "#1093FF"
                                 }} 
                             className="actions">Next</Button>
                         </div>

@@ -32,6 +32,7 @@ import LeftCustomIcon from "../../assets/LeftCustom.svg";
 import RightCustomIcon from "../../assets/RightCustom.svg";
 import axios from "axios";
 import { API_BASE_URL } from "../../../api";
+import DeletePopoverExample from "../deletepopexample";
 
 
 type Flags = {
@@ -464,7 +465,9 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                             onChange={handleChange}
                             textColor="primary"
                             indicatorColor="primary"
-                            sx={{ fontFamily: "Poppins", minHeight: "48px" }} // ensure tabs are not too tall
+                            variant="scrollable"
+                            scrollButtons = "auto"
+                            sx={{ fontFamily: "Poppins", minHeight: "48px", marginBottom: "-5px"}} // ensure tabs are not too tall
                         >
                             
                             {tabsArray.map((tab,index) => (
@@ -770,8 +773,9 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     </div>
                 </Popover>
 
+                <div style={{display: "flex", gap: "10px", overflowX: "auto", whiteSpace: "nowrap"}}>
                 <Chip
-                label="Contract Title: Master Service Agreement"
+                label="Contract Title: Master Service Agreement"    
                 deleteIcon={<img src = {CancelCustomIcon} style={{width: "24px", height: "24px"}}/>}
                 onDelete={() => {}}
                 sx={{
@@ -820,6 +824,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     // width: "180px"
                 }}
                 />  
+                </div>
 
                 {/* <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
                       <DatePicker
@@ -854,7 +859,8 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                 <div className="actionicons" style={{display: "flex", gap: "10px", marginLeft: "10px"}}>
                     {/* <IconButton sx = {{py: 0}}><img src={LabelIcon} style={{width: "24px", height: "24px"}}/></IconButton> */}
                     <LabelAs/>
-                    <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={DeleteCustomIcon} style={{width: "24px", height: "24px"}}/></IconButton></div>
+                    {/* <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={DeleteCustomIcon} style={{width: "24px", height: "24px"}}/></IconButton></div> */}
+                    <DeletePopoverExample/>
                     <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={ExportNewIcon} style={{width: "19px", height: "19px"}}/></IconButton></div>
                     <div style={{borderLeft: "0.5px solid lightgray", display: "flex", alignItems: "center", paddingLeft: "10px"}}><IconButton sx = {{py: 0}}><img src={ChatBotIcon} style={{width: "24px", height: "24px"}}/></IconButton></div>
                 </div>

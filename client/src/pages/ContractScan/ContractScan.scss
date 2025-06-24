@@ -13,10 +13,10 @@
 
     .fileandforms {
         display: flex;
+        flex-direction: row;
         border: 1px solid #9A9A9A80;
         border-radius: 16px;
         margin-top: 15px;
-
 
         .file {
             flex: 1;
@@ -31,6 +31,8 @@
             border-radius: 16px;
             flex-direction: column;
             border-right: 1px solid #9A9A9A80;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
 
             .upl {
                     
@@ -122,6 +124,12 @@
                 flex-shrink: 0;
                 border-top: 1px solid lightgray;
             }
+        }
+    }
+
+    @media (max-width: 1192px) {
+        .fileandforms {
+            flex-direction: column;
         }
     }
 }

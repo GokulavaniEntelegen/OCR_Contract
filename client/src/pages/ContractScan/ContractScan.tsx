@@ -321,7 +321,7 @@ function ContractScan() {
                         </div>
 
                         <div className="formbottom">
-                            <div className="buttons" style={{padding: "0px 30px 2px 0px", marginBottom: "-20px"}}>
+                            <div className="buttons" style={{padding: "0px 30px 12px 0px", marginBottom: "-20px"}}>
                                 <Button
                                 // onClick={handleClose}
                                 variant="outlined"
