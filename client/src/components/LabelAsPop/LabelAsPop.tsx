@@ -63,7 +63,7 @@ const LabelAs: React.FC = () => {
   return (
     <>
       <IconButton sx = {{py: 0}}><img src={LabelIcon} style={{width: "24px", height: "24px"}} onClick = {handleOpen}/></IconButton>
-      <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
+      <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
                 paper: {
                 elevation: 0,
                 sx: {
@@ -114,7 +114,7 @@ const LabelAs: React.FC = () => {
             </div>
       </Popover>
 
-      <Popover open = {enterOpen} anchorEl={anchorElEnter} onClose={handleEnterClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "100px", marginTop: "-100px"}}slotProps={{
+      <Popover open = {enterOpen} anchorEl={anchorElEnter} onClose={handleEnterClose} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "100px", marginTop: "-100px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {

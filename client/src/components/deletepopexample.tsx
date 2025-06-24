@@ -75,6 +75,7 @@ const DeletePopoverExample: React.FC = () => {
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={handleClose}
+        disableScrollLock
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

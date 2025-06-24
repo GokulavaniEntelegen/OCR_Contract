@@ -70,11 +70,12 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
                 Import Contract
             </Button>)}
 
-            <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-250px", marginTop: "20px"}}slotProps={{
+            <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} disableScrollLock anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-250px", marginTop: "20px", borderRadius: "20px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {
                 boxShadow: "none",
+                borderRadius: "20px",
             },
             },
             }}>
@@ -163,7 +164,7 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
             </div>
             </Popover>
 
-            <Popover open = {popopenUpl} anchorEl={anchorElUpl} onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-670px", marginTop: "-100px"}}slotProps={{
+            <Popover open = {popopenUpl} anchorEl={anchorElUpl} disableScrollLock onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-670px", marginTop: "-100px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {

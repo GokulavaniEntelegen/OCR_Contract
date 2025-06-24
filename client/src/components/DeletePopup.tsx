@@ -21,6 +21,7 @@ const DeleteConfirmationPopover: React.FC<DeleteConfirmationPopoverProps> = ({
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
+      disableScrollLock
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'center',

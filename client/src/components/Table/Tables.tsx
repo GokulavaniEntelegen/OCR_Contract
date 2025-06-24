@@ -490,7 +490,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                             </IconButton>
                         </Tabs>
 
-                        <Popover open = {addViewOpen} anchorEl={anchorElAddView} onClose={handleAddViewClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
+                        <Popover open = {addViewOpen} anchorEl={anchorElAddView} onClose={handleAddViewClose} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
                             paper: {
                             elevation: 0,
                             sx: {
@@ -618,7 +618,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                 Filter
                 </Button>
 
-                <Popover open={filterOpen} anchorEl={anchorElFilter} onClose={handleFilterClose} anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
+                <Popover open={filterOpen} anchorEl={anchorElFilter} onClose={handleFilterClose} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "30px", marginTop: "-50px"}}slotProps={{
                     paper: {
                     elevation: 0,
                     sx: {

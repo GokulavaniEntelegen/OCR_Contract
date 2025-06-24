@@ -31,7 +31,7 @@ const ExamplePop: React.FC = () => {
                     Example
             </Button>
 
-            <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} anchorOrigin={{vertical: "center", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "100px", marginTop: "20px"}}slotProps={{
+            <Popover open = {popopen} anchorEl={anchorEl} onClose={handleClose} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "100px", marginTop: "20px"}}slotProps={{
                 paper: {
                 elevation: 0,
                 sx: {
