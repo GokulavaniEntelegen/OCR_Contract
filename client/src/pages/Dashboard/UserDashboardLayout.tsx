@@ -367,12 +367,12 @@ function DashboardLayout() {
     const [selectedKey, setSelectedKey] = useState(null);
 
     const icons = [
-        { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard' },
-        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction' },
-        { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download' },
-        { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template' },
-        { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription' },
-        { key: 'help', icon: HelpIcon, tooltip: 'Help' },
+        { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard', link: "/dashboard" },
+        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction', link: "#" },
+        { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download', link: "#" },
+        { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template', link: "#" },
+        { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription', link: "#" },
+        { key: 'help', icon: HelpIcon, tooltip: 'Help', link: "#" },
     ];
 
     const toggleHamburger = () => {
@@ -640,8 +640,8 @@ function DashboardLayout() {
                     >
                         <img src={MainLogoIcon} alt="icon" width={40} height={40} />
                     </IconButton>
-                    {icons.map(({ key, icon, tooltip }) => (
-                        <Link to = "#" style={{textDecoration: "none", color: "inherit"}}>
+                    {icons.map(({ key, icon, tooltip, link }) => (
+                        <Link key = {key} to = {link} style={{textDecoration: "none", color: "inherit"}}>
                         <Box style={{display: "flex", alignItems: "center", marginTop: "15px"}}>
                         <Tooltip title={tooltip} placement="right" key={key}>
                             <IconButton
