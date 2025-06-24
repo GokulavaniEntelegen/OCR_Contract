@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button, IconButton, MenuItem } from '@mui/m
 import Hamburger from '../assets/Frame.svg';
 import Vector from '../assets/Vector.svg';
 import { Margin } from '@mui/icons-material';
-// import dropdown from '../assets/Dropdown.svg';
+import dropdown from '../assets/Dropdown.svg';
 
 const SettingsContent: React.FC = () => {
     return (
@@ -112,54 +112,57 @@ const SettingsContent: React.FC = () => {
                         />
                     </Box>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%', }}>
-                        <p style={{ margin: 1, color: '#606060', fontFamily: 'poppins,sans-serif', }}>Data Type</p>
-                        <TextField
-                            select
-                            placeholder="Example:Invoice"
-                            variant="outlined"
-                            size="small"
-                            sx={{
-                                fontFamily: 'Poppins, sans-serif',
+                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%' }}>
+                        <p style={{ margin: 1, color: '#606060', fontFamily: 'poppins,sans-serif' }}>Data Type</p>
 
-
-                                // Select text styling
-                                '& .MuiSelect-select': {
+                        <Box sx={{ position: 'relative' }}>
+                            <TextField
+                                select
+                                placeholder="Example:Invoice"
+                                variant="outlined"
+                                size="small"
+                                defaultValue=""
+                                fullWidth
+                                SelectProps={{
+                                    IconComponent: () => null  // Remove default icon
+                                }}
+                                sx={{
                                     fontFamily: 'Poppins, sans-serif',
-                                    // fontSize: '14px',
-                                    color: '#45464B',
-                                    padding: '8px 0',
-                                },
+                                    '& .MuiSelect-select': {
+                                        fontFamily: 'Poppins, sans-serif',
+                                        color: '#45464B',
+                                        padding: '8px 0',
+                                    },
+                                    '& .MuiOutlinedInput-notchedOutline': {
+                                        border: 'none',
+                                        borderBottom: '1px solid #D1D5DB',
+                                        borderRadius: '4px',
+                                    },
+                                }}
+                            >
+                                <MenuItem value="Invoice" sx={{ fontFamily: 'poppins,sans-serif' }}>
+                                    Example: Invoice
+                                </MenuItem>
+                            </TextField>
 
-                                // Remove top/left/right borders and keep only bottom
-                                '& .MuiOutlinedInput-notchedOutline': {
-                                    border: 'none',
-                                    borderBottom: '1px solid #D1D5DB', // base bottom line
-                                    borderRadius: '4px',
-                                },
-                            }
-                            }
+                            {/* ✅ Custom dropdown icon */}
+                            <IconButton
+                                size="small"
+                                sx={{
+                                    position: 'absolute',
+                                    right: 8,
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    pointerEvents: 'none'
+                                }}
+                            >
+                                {/* Replace with your own icon or image if needed */}
+                               <img src={dropdown} alt="dropdown" style={{ width: 8, height: 8 }} />
 
-                            defaultValue=""
-                            fullWidth
-                        // SelectProps={{
-                        //     IconComponent: () => (
-                        //         <IconButton>
-                        //         <img
-                        //             src={dropdown}
-                        //             alt="dropdown"
-                        //             style={{ width: 16, height: 16, marginRight: 8 }}
-                        //         />
-                        //         </IconButton>
-                        //     )
-
-                        // }}
-                        >
-                            <MenuItem value="Invoice"
-                                sx={{ fontFamily: 'poppins,sans-serif' }}>Example: Invoice</MenuItem>
-                        </TextField>
-
+                            </IconButton>
+                        </Box>
                     </Box>
+
 
                     {/* </Box> */}
 
