@@ -20,7 +20,7 @@ function Invite() {
         }}
         >
             <p className="inviterest">Invite the rest of the team</p>
-            <div style={{width: "100%"}}>
+            <div style={{width: "100%",display: "flex", flexDirection: "column", gap:"2px", paddingBottom: "3px"}}>
                 {/* <p style={{margin: 0, fontSize: "12px", color: "#606060"}}>Full Name</p> */}
                 <TextField
                 variant="outlined"
@@ -149,7 +149,7 @@ function Invite() {
             
             <Button
             variant="text"
-            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#747474", display: "flex", justifyContent: "flex-end"}}>
+            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#747474", display: "flex", justifyContent: "flex-end", fontFamily: "Poppins"}}>
                 Skip
             </Button>
             </div>

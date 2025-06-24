@@ -33,7 +33,7 @@ function CreateAccount() {
             <p className="welcome" style={{ marginBottom: "7px" }}>Welcome to Contract Books</p>
             <p className="create" style={{ marginTop: "0px", }}>Create your account</p>
 
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%", paddingBottom: "14px" }}>
                 <p style={{ margin: 0, fontSize: "12px", color: "#606060" }}>Full Name</p>
                 <TextField
                     variant="outlined"

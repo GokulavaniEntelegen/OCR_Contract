@@ -32,7 +32,8 @@ const SetAccPassword = () => {
             fontWeight: 600,
             marginBottom: "1px",
             fontFamily: "Poppins, sans-serif",
-            letterSpacing:'0%'
+            letterSpacing:'0%',
+            paddingBottom: "32px"
             
           }}
         >
@@ -73,6 +74,7 @@ const SetAccPassword = () => {
           size="small"
           sx={{
             mb: 0,
+            paddingBottom: "8px",
             backgroundColor: "#fafafa",
             fontFamily: "Poppins, sans-serif",
             '& .MuiInputBase-input::placeholder': {
@@ -116,7 +118,8 @@ const SetAccPassword = () => {
           variant="contained"
           fullWidth
           sx={{
-            backgroundColor: "#007bff",
+            backgroundColor: "#1093FF",
+            boxShadow: "none",
             textTransform: "none",
             fontWeight: 500,
             fontFamily: "Poppins, sans-serif",

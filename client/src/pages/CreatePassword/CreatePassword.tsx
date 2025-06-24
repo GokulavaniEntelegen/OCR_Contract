@@ -22,7 +22,7 @@ const CreateNewPassword = () => {
           padding: 2,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         <p
@@ -44,6 +44,7 @@ const CreateNewPassword = () => {
             marginTop: '0px',
             textAlign: "center",
             fontFamily: "Poppins, sans-serif",
+            paddingBottom: "32px",
           }}
         >
           Set a strong password to secure your account.
@@ -72,6 +73,7 @@ const CreateNewPassword = () => {
             mb: 0,
             backgroundColor: "#fafafa",
             fontFamily: "Poppins, sans-serif",
+            paddingBottom: "8px",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',
              opacity: 1, // important to make sure the color is not faded
@@ -113,13 +115,11 @@ const CreateNewPassword = () => {
           variant="contained"
           fullWidth
           sx={{
-            backgroundColor: "#007bff",
+            backgroundColor: "#1093FF",
             textTransform: "none",
             fontWeight: 500,
             fontFamily: "Poppins, sans-serif",
-            "&:hover": {
-              backgroundColor: "#006ae6",
-            },
+            boxShadow: "none"
           }}
         >
           Confirm Password

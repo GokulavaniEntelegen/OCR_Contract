@@ -39,7 +39,8 @@ const ResetPassword = () => {
             textAlign: "center",     // keep heading centered
             fontSize: '35px',
             display: "flex",
-            alignItems: "flex-start"
+            alignItems: "flex-start",
+            paddingBottom: "32px"
           }}
         >
           Reset Your Password
@@ -72,6 +73,7 @@ const ResetPassword = () => {
              color: '#42474E',
              fontFamily:"Poppins,sans-serif",
              opacity: 1, // important to make sure the color is not faded
+             paddingBottom: "24px",
              },
             
           }}
