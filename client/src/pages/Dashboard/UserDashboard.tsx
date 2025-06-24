@@ -565,37 +565,37 @@ function Dashboard() {
                 
 
                 <div className="grid-container">
-                <ListItem className="grid-item" sx={{py: "18px"}}>
-                    <ListItemIcon>
+                <ListItem className="grid-item" sx={{py: "16px"}}>
+                    <ListItemIcon style={{minWidth:"40px"}}>
                     {/* <FileOpenOutlinedIcon color="primary" /> */}
                     <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Vendor & Sales Contracts</p>}/>
                 </ListItem>
 
-                <ListItem className="grid-item" sx={{py: "18px"}}>
-                    <ListItemIcon>
+                <ListItem className="grid-item" sx={{py: "12px"}}>
+                    <ListItemIcon style={{minWidth:"40px"}}>
                     <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Lease Contracts</p>}/>
                 </ListItem>
 
-                <ListItem className="grid-item" sx={{py: "18px"}}>
-                    <ListItemIcon>
+                <ListItem className="grid-item" sx={{py: "16px"}}>
+                    <ListItemIcon style={{minWidth:"40px"}}>
                     <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>NDAs</p>}/>
                 </ListItem>
 
-                <ListItem className="grid-item" sx={{py: "18px"}}>
-                    <ListItemIcon>
+                <ListItem className="grid-item" sx={{py: "16px"}}>
+                    <ListItemIcon style={{minWidth:"40px"}}>
                     <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Employment Contracts</p>}/>
                 </ListItem>
 
                 <ListItem className="grid-item center" sx={{py: "14px"}}>
-                    <ListItemIcon>
+                    <ListItemIcon style={{minWidth:"40px"}}>
                     <img src = {CreateCustomIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
                     <ListItemText primary={<p>Create a custom contract types</p>}/>
@@ -608,10 +608,11 @@ function Dashboard() {
                     variant="outlined"
                     style={{
                         textTransform: "none", 
-                        fontSize: "18px", 
+                        fontSize: "16px", 
                         padding: "10px 20px 10px 20px", 
                         border: "1px solid gray",
-                        fontFamily: "Poppins"
+                        fontFamily: "Poppins",
+                        color: "#1093FF"
                         }} 
                     className="actions">Cancel</Button>
                     <Button
@@ -619,9 +620,11 @@ function Dashboard() {
                     variant="contained"
                     style={{
                         textTransform: "none", 
-                        fontSize: "18px", 
+                        fontSize: "16px", 
                         padding: "10px 25px 10px 25px",
-                        fontFamily: "Poppins"
+                        fontFamily: "Poppins",
+                        backgroundColor: "#1093FF",
+                        boxShadow: "none"
                         }} 
                     className="actions">Next</Button>
                 </div>

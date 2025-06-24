@@ -1,7 +1,11 @@
 import { Box, Typography, TextField, Button, Divider } from "@mui/material";
+import { Link,useNavigate } from "react-router-dom";
 // import GoogleIcon from "../../assets/Google.svg"; // Optional: Or use image if needed
 import GoogleIcon from "../../../assets/Google.svg"
 const LoginLeft = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -37,6 +41,7 @@ const LoginLeft = () => {
     </Typography>
   </Box>
 
+  <Link to ="/create-account" style={{textDecoration: "none", color: "inherit"}}>
   <Box sx={{ display: "flex", flexDirection: "column", alignItems: "left", mt:"4px"}}>
     <Typography sx={{fontFamily: "Poppins", fontWeight: 400,color :"#8D8D8D"}}>No Account?</Typography>
     <Typography
@@ -45,6 +50,7 @@ const LoginLeft = () => {
       Sign up
     </Typography>
   </Box>
+  </Link>
 </Box>
 
 
@@ -85,7 +91,7 @@ const LoginLeft = () => {
           }}
           
         />
-
+        <Link to = "/reset-password" style={{textDecoration: "none", color: "inherit", marginBottom: 3, display: "flex", alignItems: "flex-end", justifyContent: "flex-end"}}>
         <Typography
           variant="caption"
           color="error"
@@ -94,8 +100,11 @@ const LoginLeft = () => {
         >
           Forgot Password
         </Typography>
+        </Link>
 
-        <Button variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
+        <Button
+        onClick={() => {navigate("/dashboard")}} 
+        variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
           Sign in
         </Button>
 

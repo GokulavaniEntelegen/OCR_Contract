@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SetAccPassword = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -117,6 +121,7 @@ const SetAccPassword = () => {
         <Button
           variant="contained"
           fullWidth
+          onClick={()=>{navigate("/")}}
           sx={{
             backgroundColor: "#1093FF",
             boxShadow: "none",

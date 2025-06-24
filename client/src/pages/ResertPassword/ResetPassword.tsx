@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -81,9 +85,11 @@ const ResetPassword = () => {
 
         <Button
           variant="contained"
+          onClick={() => {navigate("/otp-login")}}
           fullWidth
           sx={{
             backgroundColor: "#1093FF",
+            boxShadow: "none",
             textTransform: "none",
             fontWeight: 500,
             fontFamily: "Poppins, sans-serif",
@@ -92,7 +98,7 @@ const ResetPassword = () => {
             },
           }}
         >
-          Confirm Password
+          Get OTP
         </Button>
       </Box>
     </Box>

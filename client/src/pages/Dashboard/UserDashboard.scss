@@ -263,7 +263,8 @@
   p {
         @include body-large;
         color: #2B80EC;
-        font-size: larger;
+        // font-size: 10px;
+        // font-size: larger;
     }
 
 }
@@ -271,8 +272,9 @@
 .grid-item {
   background-color: #F3F9FF;
   border-radius: 8px;
-  padding: 20px 12px;
+//   padding: 20px 12px;
   display: flex;
+//   gap: -10px;
   align-items: center;
 }
 

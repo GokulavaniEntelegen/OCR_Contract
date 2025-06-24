@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button } from "@mui/material";
 import "./CreateAccount.scss"
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -8,6 +9,7 @@ import CheckIcon from '@mui/icons-material/Check';
 
 function CreateAccount() {
 
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [companyName, setCompanyName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -200,7 +202,10 @@ function CreateAccount() {
             </div>
 
 
-            <Button variant="contained" sx={{
+            <Button variant="contained"
+            disabled = {!checked}
+            onClick={() => {navigate("/createnewpassword")}}
+            sx={{
                 width: "100%",
                 bgcolor: "#1093FF",
                 borderRadius: "4px",

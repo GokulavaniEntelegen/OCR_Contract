@@ -39,7 +39,7 @@ function App() {
             <Route path="trial-page" element = {<Trialpage/>}/>
           </Route>
 
-          <Route path="/login" element = {<SignIn/>}>
+          <Route path="/" element = {<SignIn/>}>
           <Route index element={<LoginLeft/>} />
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path='otp-login' element={<OtpLogin/>}/>

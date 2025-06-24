@@ -5,18 +5,22 @@ import OtpInput from "react-otp-input";
 import ShowMsgTickIcon from "../../assets/ShowMsgTick.svg";
 import CloseGrayIcon from "../../assets/CloseGrey.svg";
 import GreenTickOtpIcon from "../../assets/GreenTickOtp.svg";
+import { useNavigate } from "react-router-dom";
 
 function OtpLogin() {
 
   const [otp, setOtp] = useState<string>("");
   const [showSentMsg, setShowSentMsg] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleOtpLogin = () => {
-    if(showSentMsg) {
-      setShowSentMsg(false);
-    }else {
-      setShowSentMsg(true);
-    }
+    setShowSentMsg(prev => !prev);
+
+    setTimeout(() => {
+      console.log("Waited 2 seconds");
+      navigate("/setaccpassword")
+    }, 2000);
+    // navigate("/setaccpassword")
   }
 
   return (
