@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ShareIcon from "@mui/icons-material/Share";
 import RenameIcon from "../../assets/Rename.svg";
 import DuplicateIcon from "../../assets/Duplicate.svg";
-import DeleteCustomIcon from "../../assets/Delete.svg";  
+import DeleteCustomIcon from "../../assets/DeleteBlack.svg";  
 
 
 const ChartsMenu: React.FC = () => {
@@ -31,14 +31,20 @@ const ChartsMenu: React.FC = () => {
       <IconButton onClick={handleOpen}>
         <MoreVertIcon />
       </IconButton>
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+      <div style={{backgroundColor: "#EAF9FF"}}>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}  PaperProps={{
+        sx: {
+          backgroundColor: "#EAF9FF",
+        },
+      }}>
         {options.map((option, index) => (
-          <MenuItem key={index} onClick={handleClose} >
-            <ListItemIcon><img src = {option.icon} style={{height: "20", width: "20"}}></img></ListItemIcon>
+          <MenuItem key={index} onClick={handleClose}>
+            <ListItemIcon style={{width: "16px", height: "16px"}}><img src = {option.icon} style={{height: "16px", width: "16px"}}></img></ListItemIcon>
             <ListItemText primary={<p style={{fontFamily: "Poppins", fontSize: "16px"}}>{option.label}</p>} />
           </MenuItem>
         ))}
       </Menu>
+      </div>
     </>
   );
 };
