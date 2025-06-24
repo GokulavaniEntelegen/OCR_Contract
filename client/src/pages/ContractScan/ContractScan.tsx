@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Icon, IconButton, InputAdornment, TextField } from "@mui/material";
-import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs";
+import CustomBreadCrumbs from "client/src/components/CustomBreadCrumbs/CustomBreadCrumbs";
 import "./ContractScan.scss";
 import UploadBigIcon from "../../assets/Upload.svg";
 import {API_BASE_URL} from "../../../api";

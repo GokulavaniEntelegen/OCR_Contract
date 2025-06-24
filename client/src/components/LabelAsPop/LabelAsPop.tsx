@@ -1,8 +1,8 @@
 import React, { use, useState } from "react";
 import { IconButton, Popover, List, ListItem, ListItemIcon, ListItemText, Checkbox, Button, TextField, FormControlLabel} from "@mui/material";
-import LabelIcon from "../assets/Label.svg";
+import LabelIcon from "../../assets/Label.svg";
 import "./LabelAsPop.scss";
-import SearchCustomIcon from "../assets/SearchCustomIcon.svg";
+import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
 import CloseIcon from '@mui/icons-material/Close';
 
 const LabelAs: React.FC = () => {

@@ -7,8 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import UploadIcon from '@mui/icons-material/Upload';
 import CustomCharts from "../../components/Charts/Charts"
-import Tabletry from "client/src/components/Tables";
-import ImportContractPop from "client/src/components/importcontractpop";
+import Tabletry from "client/src/components/Table/Tables";
+import ImportContractPop from "client/src/components/ImportContractPop/importcontractpop";
 import UploadCustomIcon from "../../assets/UploadCustom.svg"
 import ShowWidgetsIcon from "../../assets/ShowWidgets.svg"
 

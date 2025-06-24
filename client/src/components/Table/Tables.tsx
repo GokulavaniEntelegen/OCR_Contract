@@ -18,20 +18,21 @@ import { BorderLeft, Category } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import RenameIcon from "../assets/Rename.svg";
 import DuplicateIcon from "../assets/Duplicate.svg";
-import DeleteCustomIcon from "../assets/Delete.svg";
+import DeleteCustomIcon from "../../assets/Delete.svg";
 import LabelIcon from "../assets/Label.svg"
-import ExportNewIcon from "../assets/ExportNew.svg"
-import ChatBotIcon from "../assets/ChatBot.svg"
-import LabelAs from "./LabelAsPop";
-import OutSourceIcon from "../assets/OutSource.svg"
-import ExpandDownIcon from "../assets/ExpandDown.svg"
-import FilterBlueIcon from "../assets/FilterBlue.svg"
-import CancelCustomIcon from "../assets/CancelCustom.svg"
-import DateIcon from "../assets/DateIcon.svg";
-import LeftCustomIcon from "../assets/LeftCustom.svg";
-import RightCustomIcon from "../assets/RightCustom.svg";
+import ExportNewIcon from "../../assets/ExportNew.svg"
+import ChatBotIcon from "../../assets/ChatBot.svg"
+import LabelAs from "../LabelAsPop/LabelAsPop";
+import OutSourceIcon from "../../assets/OutSource.svg"
+import ExpandDownIcon from "../../assets/ExpandDown.svg"
+import FilterBlueIcon from "../../assets/FilterBlue.svg"
+import CancelCustomIcon from "../../assets/CancelCustom.svg"
+import DateIcon from "../../assets/DateIcon.svg";
+import LeftCustomIcon from "../../assets/LeftCustom.svg";
+import RightCustomIcon from "../../assets/RightCustom.svg";
 import axios from "axios";
-import {API_BASE_URL} from "../../api";
+import { API_BASE_URL } from "../../../api";
+
 
 type Flags = {
   contact: string;

@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Popover, FormControlLabel, Checkbox, IconButton, TextField } from "@mui/material";
-import ImportDetailsIcon from "../assets/ImportDetails.svg"
+import ImportDetailsIcon from "../../assets/ImportDetails.svg"
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import"./ImportContractPop.scss";
-import ImportFileIcon from "../assets/ImportFile.svg";
-import ImportBlueIcon from "../assets/ImportBlueCustom.svg";
+import ImportFileIcon from "../../assets/ImportFile.svg";
+import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
 
 const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
 
