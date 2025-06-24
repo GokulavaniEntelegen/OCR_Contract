@@ -85,9 +85,8 @@ import PsaiImg from "../../assets/Psai.png";
 import Tabletry from "client/src/components/Tables";
 import FileWithTickIcon from "../../assets/FileWithTick.svg";
 import CreateCustomIcon from "../../assets/CreateCustom.svg";
-import ImportContractPop from "client/src/components/ImportContractPop";
-
-
+// import ImportContractPop from "client/src/components/ImportContractPop";
+import ImportContractPop from "../../components/importcontractpop"
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
