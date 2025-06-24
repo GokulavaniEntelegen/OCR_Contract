@@ -3,6 +3,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import"./CustomBreadCrumbs.scss";
 
+
 const CustomBreadCrumbs: React.FC<{replacetext: string, tonav: string}> = ({replacetext, tonav}) => {
     return(
     <div style={{paddingLeft: "16px"}}>
