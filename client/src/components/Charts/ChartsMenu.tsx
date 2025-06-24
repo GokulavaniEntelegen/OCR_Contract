@@ -4,9 +4,9 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShareIcon from "@mui/icons-material/Share";
-import RenameIcon from "../assets/Rename.svg";
-import DuplicateIcon from "../assets/Duplicate.svg";
-import DeleteCustomIcon from "../assets/Delete.svg";  
+import RenameIcon from "../../assets/Rename.svg";
+import DuplicateIcon from "../../assets/Duplicate.svg";
+import DeleteCustomIcon from "../../assets/Delete.svg";  
 
 
 const ChartsMenu: React.FC = () => {

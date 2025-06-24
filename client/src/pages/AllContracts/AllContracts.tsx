@@ -6,7 +6,7 @@ import HideWidgetsIcon from "../../assets/HideWidgetsIcon.svg"
 import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import UploadIcon from '@mui/icons-material/Upload';
-import CustomCharts from "client/src/components/Charts";
+import CustomCharts from "../../components/Charts/Charts"
 import Tabletry from "client/src/components/Tables";
 import ImportContractPop from "client/src/components/ImportContractPop";
 import UploadCustomIcon from "../../assets/UploadCustom.svg"
