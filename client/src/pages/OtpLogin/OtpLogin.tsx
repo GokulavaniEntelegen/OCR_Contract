@@ -22,7 +22,7 @@ function OtpLogin() {
         alignItems: "flex-start",
       }}
     >
-      <p className="emailotp" style={{ marginBottom: 3, marginTop: 3 }}>Enter Email OTP</p>
+      <p className="emailotp">Enter Email OTP</p>
       <p className="simple2step">Its a simple 2 step verification. Enter your 6 digit code sent to tyour registered email.</p>
       <div style={{ marginTop: "7px" }}>
         <p className="enterotp">Enter OTP</p>

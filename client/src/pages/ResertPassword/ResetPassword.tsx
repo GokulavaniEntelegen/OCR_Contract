@@ -37,7 +37,9 @@ const ResetPassword = () => {
             width: "100%",          // ensures same width as inputs
             maxWidth: "100%",       // makes sure it doesn't overflow
             textAlign: "center",     // keep heading centered
-            fontSize: '35px'
+            fontSize: '35px',
+            display: "flex",
+            alignItems: "flex-start"
           }}
         >
           Reset Your Password

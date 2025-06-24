@@ -16,12 +16,12 @@ const LoginLeft = () => {
       }}
     >
       <Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    mb: "28px",
-  }}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        mb: "28px",
+      }}
 >
   <Box>
   <Typography
@@ -37,10 +37,10 @@ const LoginLeft = () => {
     </Typography>
   </Box>
 
-  <Box sx={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
-    <Typography sx={{ fontWeight: 400,color :"#8D8D8D"}}>No Account?</Typography>
+  <Box sx={{ display: "flex", flexDirection: "column", alignItems: "left", mt:"4px"}}>
+    <Typography sx={{fontFamily: "Poppins", fontWeight: 400,color :"#8D8D8D"}}>No Account?</Typography>
     <Typography
-      sx={{ color: "#1a73e8", fontWeight: 500, cursor: "pointer" }}
+      sx={{ fontFamily:"Poppins" ,color: "#2B80EC", fontWeight: 500, cursor: "pointer" }}
     >
       Sign up
     </Typography>
@@ -95,7 +95,7 @@ const LoginLeft = () => {
           Forgot Password
         </Typography>
 
-        <Button variant="contained" fullWidth sx={{ backgroundColor: "#007bff", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif'}}>
+        <Button variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
           Sign in
         </Button>
 
@@ -132,6 +132,7 @@ const LoginLeft = () => {
             padding: "10px 20px",
             borderRadius: "6px",
             fontFamily: 'Poppins, sans-serif',
+            border :"none",
           }}
         >
           Sign in with google
