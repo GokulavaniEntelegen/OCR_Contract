@@ -37,7 +37,7 @@ function CreateAccount() {
             <p className="create" style={{ marginTop: "0px", }}>Create your account</p>
 
             <div style={{ width: "100%", paddingBottom: "14px" }}>
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060" }}>Full Name</p>
+                <p className="lableName" style={{ margin: 0,  }}>Full Name</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -81,7 +81,7 @@ function CreateAccount() {
 
                 />
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Company Name</p>
+                <p className="lableName" style={{ margin: 0,  marginTop: "8px" }}>Company Name</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -121,7 +121,7 @@ function CreateAccount() {
                 />
 
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Phone Number</p>
+                <p className="lableName" style={{ margin: 0,  marginTop: "8px" }}>Phone Number</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -161,7 +161,7 @@ function CreateAccount() {
                 />
 
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Email ID</p>
+                <p className="lableName" style={{ margin: 0,  marginTop: "8px" }}>Email ID</p>
                 <TextField
                     variant="outlined"
                     fullWidth

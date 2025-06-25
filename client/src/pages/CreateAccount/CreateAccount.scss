@@ -9,21 +9,25 @@
 
 .create {
     @include display-small;
-    font-weight: 600;
-    font-size: 32px;
+    font-weight: 500;
+    font-size: 34px;
     align-items: flex-start;
     padding-bottom: 24px;
+}
+.lableName{
+  font-size: 14px;
+  color: #606060;
 }
 
 @media (max-width: 978px) {
   .welcome {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .create {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 }

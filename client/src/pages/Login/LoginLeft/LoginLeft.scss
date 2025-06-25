@@ -10,6 +10,12 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.labelNames{
+  font-size: 14px;
+  color: #606060;
+ 
+}
+
 .login-left__header {
   display: flex;
   justify-content: space-between;
@@ -128,4 +134,10 @@ login-form label,
   font-size: 12px;
   line-height: 1;
   letter-spacing: 0;
+}
+
+@media (min-width:2000px){
+  .login-wrapper{
+height: 60vh;
+  }
 }
