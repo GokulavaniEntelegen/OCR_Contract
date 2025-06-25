@@ -59,9 +59,9 @@ const LoginLeft = () => {
       </Typography> */}
 
       <Box component="form" noValidate sx={{ fontFamily: 'Poppins, sans-serif', display: "flex", flexDirection: "column" }}>
-        <Typography variant="body2" mb={0.4}  sx={{ fontFamily: 'Poppins, sans-serif',color :"#606060" }}>
+        <p className="labelNames" style={{ fontFamily: 'Poppins, sans-serif',}}>
           Enter your username or email address
-        </Typography>
+        </p>
         <TextField
           variant="outlined"
           placeholder="Gracia.m@safenet.com"
@@ -71,13 +71,13 @@ const LoginLeft = () => {
           sx={{ mb: 2,'& .MuiInputBase-input::placeholder': {
              color: '#42474E',
              fontFamily:"Poppins,sans-serif",
-             opacity: 1, // important to make sure the color is not faded
+             opacity: 1, 
              }, }}
         />
 
-        <Typography variant="body2" mb={0.5} sx={{ fontFamily: 'Poppins, sans-serif',color :"#606060"}}>
+        <p className="labelNames" style={{ fontFamily: 'Poppins, sans-serif',}}>
           Password
-        </Typography>
+        </p>
         <TextField
           variant="outlined"
           placeholder="********************"
@@ -104,7 +104,7 @@ const LoginLeft = () => {
 
         <Button
         onClick={() => {navigate("/dashboard")}} 
-        variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
+        variant="contained" fullWidth sx={{ backgroundColor: "#1093FF",   textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
           Sign in
         </Button>
 
