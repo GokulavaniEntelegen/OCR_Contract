@@ -111,6 +111,30 @@
                     color: #25213B;
                     // margin-top: 30px;
                 }
+                .viewedit {
+                        padding: 12px 24px;
+                        // width: 100%;
+                        background-color: #EBF1FF;
+                        border: 1px solid #D0D5DD;
+                        border-radius: 4px;
+                        margin-bottom: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 8px;
+
+                        .outof {
+                            color: #475467;
+                            font-family: Poppins;
+                            font-weight: 500;
+                            font-size: 12px;
+                        }
+                        .view {
+                            @include label-medium;
+                            font-weight: 500;
+                            color: #1093FF;
+                        }
+                    }
 
                 .fields {
                     display: grid;
