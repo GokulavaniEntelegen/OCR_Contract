@@ -429,7 +429,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
         axios.get<Itablerow[]>(`${API_BASE_URL}/tablerows`)
         
         .then((response) => {
-            setRowsData(response.data);
+            setRowsData(response.data.reverse());
         })
 
         .catch((error) => {
