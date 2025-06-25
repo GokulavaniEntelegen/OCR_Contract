@@ -315,14 +315,15 @@ function ContractScan() {
                                             fontFamily: 'Poppins, sans-serif',
                                             '& fieldset': {
                                                 borderWidth: '0.5px',
-                                                borderColor: '#C4C4C4',
+                                                // borderColor: '#C4C4C4',
+                                                borderColor:  (showHighlights && changedIndexes.includes(index)) ? "#0F93FF": "#C4C4C4",
                                             },
                                             '&:hover fieldset': {
                                                 borderColor: '#999',
                                             },
-                                            '&.Mui-focused fieldset': {
-                                                borderColor: '#000',
-                                            },
+                                            // '&.Mui-focused fieldset': {
+                                            //     borderColor: '#000',
+                                            // },   
                                             },
                                             '& .MuiInputBase-input': {
                                             padding: '10px 12px',
