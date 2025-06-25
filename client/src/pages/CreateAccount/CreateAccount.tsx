@@ -205,7 +205,7 @@ function CreateAccount() {
 
             <Button variant="contained"
             disabled = {!checked}
-            onClick={() => {navigate("/createnewpassword")}}
+            onClick={() => {navigate("/setaccpassword")}}
             sx={{
                 width: "100%",
                 bgcolor: "#1093FF",

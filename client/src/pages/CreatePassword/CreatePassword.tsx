@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 const CreateNewPassword = () => {
+  const navigate=useNavigate()
   return (
     <Box
       sx={{
@@ -112,6 +113,7 @@ const CreateNewPassword = () => {
         />
 
         <Button
+        onClick={()=>navigate('/')}
           variant="contained"
           fullWidth
           sx={{

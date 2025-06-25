@@ -18,7 +18,7 @@ function OtpLogin() {
 
     setTimeout(() => {
       console.log("Waited 2 seconds");
-      navigate("/setaccpassword")
+      navigate("/createnewpassword")
     }, 2000);
     // navigate("/setaccpassword")
   }
