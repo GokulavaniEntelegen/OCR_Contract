@@ -27,15 +27,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 250px 250px 150px 250px;
+    padding: 100px 150px 150px 150px;
 
     .middlecomps {
         display: flex;
         justify-content: center;
         gap: 24px;
+        height: 100%;
 
         .examplesai {
             flex: 1;
+            height: 100%;
 
             .exampleaitext {
                 font-family: Inter;
@@ -54,6 +56,10 @@
         }
         .capabilitiesai {
             flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            // justify-content: space-between;
 
             .exampleaitext {
                 font-family: Inter;
@@ -72,6 +78,7 @@
         }
         .limitationsai {
             flex: 1;
+            height: 100%;
 
             .exampleaitext {
                 font-family: Inter;

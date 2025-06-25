@@ -126,29 +126,29 @@ function AIChat() {
                                     </IconButton>
                                 </InputAdornment>
                                 ),
-                                sx: {
-                                fontFamily: "Poppins",
-                                fontSize: "16px",
-                                fontWeight: 500,
-                                borderRadius: "8px",
-                                backgroundColor: "#fff",
-                                height: "48px",
-                                },
                             }}
                             sx={{
                                 borderRadius: "8px",
-                                marginTop: "auto",
+                                marginTop: "175px",
                                 "& .MuiOutlinedInput-root": {
                                 borderRadius: "8px",
                                 padding: "0 8px",
+                                backgroundColor: "#fff",
+                                fontFamily: "Poppins",
+                                fontSize: "16px",
+                                fontWeight: 500,
+                                height: "48px",
+                                color: "#000000",
                                 },
                                 "& .MuiOutlinedInput-notchedOutline": {
                                 border: "1px solid #E7E7E7",
                                 },
-                                "& input::placeholder": {
+                                "& .MuiInputBase-input::placeholder": {
+                                color: "#000000",
+                                opacity: 1,
                                 fontFamily: "Poppins",
                                 fontSize: "16px",
-                                fontWeight: 500,
+                                fontWeight: 400,
                                 },
                             }}
                             />
