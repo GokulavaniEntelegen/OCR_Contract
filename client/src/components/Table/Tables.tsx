@@ -503,7 +503,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                     <p>Add View</p>
                                     <IconButton onClick={handleAddViewClose}><CloseIcon sx = {{color: "black"}} /></IconButton>
                                 </div>
-                                <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a view name</p>
+                                <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
                                 <TextField
                                 variant="outlined"
                                 fullWidth
