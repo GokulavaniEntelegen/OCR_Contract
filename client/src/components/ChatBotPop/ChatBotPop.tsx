@@ -21,15 +21,16 @@ const ChatBotPop: React.FC = () => {
         {"text": "I have a question about the return policy for a product I purchased.", "typing": true, "time": "now"}
     ]
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-        const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-            setAnchorEl(event.currentTarget);
-        };
-        
-        const handleClose = () => {
-            setAnchorEl(null);
-        };
-        
-        const popopen = Boolean(anchorEl);
+    
+    const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    
+    const popopen = Boolean(anchorEl);
     
     return (
         <>
