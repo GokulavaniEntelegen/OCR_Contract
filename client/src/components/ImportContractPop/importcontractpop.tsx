@@ -164,7 +164,7 @@ const ImportContractPop: React.FC<{fromtext: string}> = ({fromtext}) => {
             </div>
             </Popover>
 
-            <Popover open = {popopenUpl} anchorEl={anchorElUpl} disableScrollLock onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none", marginLeft: "-670px", marginTop: "-100px"}}slotProps={{
+            <Popover open = {popopenUpl} anchorEl={anchorElUpl} disableScrollLock onClose={handleCloseUpl} anchorOrigin={{vertical: "bottom", horizontal:"left"}} sx={{boxShadow: "none",  marginLeft: (fromtext === "allcontracts") ? "-670px" : "140px", marginTop: "-100px"}}slotProps={{
             paper: {
             elevation: 0,
             sx: {

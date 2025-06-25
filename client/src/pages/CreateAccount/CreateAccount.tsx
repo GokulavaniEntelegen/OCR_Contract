@@ -21,7 +21,8 @@ function CreateAccount() {
             sx={{
                 // width: "50%",
                 flex: 1,
-                p: 8,
+                p: {md: 8, sm: 4},
+                width: "100%",  
                 backgroundColor: "#fff",
                 display: "flex",
                 flexDirection: "column",
@@ -80,7 +81,7 @@ function CreateAccount() {
 
                 />
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "15px" }}>Company Name</p>
+                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Company Name</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -120,7 +121,7 @@ function CreateAccount() {
                 />
 
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "15px" }}>Phone Number</p>
+                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Phone Number</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -160,7 +161,7 @@ function CreateAccount() {
                 />
 
 
-                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "15px" }}>Email ID</p>
+                <p style={{ margin: 0, fontSize: "12px", color: "#606060", marginTop: "8px" }}>Email ID</p>
                 <TextField
                     variant="outlined"
                     fullWidth
@@ -215,7 +216,7 @@ function CreateAccount() {
                 lineHeight: "20px",
                 fontWeight: "500",
                 boxShadow: 'none',
-                marginTop: "30px",
+                marginTop: "14px",
                 marginBottom: "25px",
                 py: "10px"
             }}>

@@ -114,7 +114,7 @@ function ContractScan() {
         catch(error) {
             console.log("Error Occured during saving a row to tablerows present at db.json: " + error);
         }
-        navigate("/all-contracts");
+        navigate("/dashboard/all-contracts");
     };
 
     return(
