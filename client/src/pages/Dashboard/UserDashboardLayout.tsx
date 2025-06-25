@@ -523,7 +523,7 @@ function DashboardLayout() {
     const [step, setStep] = useState(0);
 
     return (
-        <div className="container" style={{ display: 'flex', flex: 1, height: "100vh" }}>
+        <div className="container" style={{ display: 'flex', flex: 1, height: "100vh", overflowY: "hidden" }}>
             {/* <Box sx={{ display: 'flex', height: '100vh'}}>
       
       <IconButton

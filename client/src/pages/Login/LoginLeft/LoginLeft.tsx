@@ -103,7 +103,7 @@ const LoginLeft = () => {
         </Link>
 
         <Button
-        onClick={() => {navigate("/dashboard")}} 
+        onClick={() => {navigate("/invite")}} 
         variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
           Sign in
         </Button>

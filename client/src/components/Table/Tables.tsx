@@ -736,7 +736,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                                             }}
                                             />
                                         </ListItemIcon>
-                                        <ListItemText primary={subcategory} />
+                                        <ListItemText primary={<p style={{fontFamily: "Poppins", color: "#606060", fontSize: "14px"}}>{subcategory}</p>} />
                                         </ListItem>
                                     ))}
                                 </List>

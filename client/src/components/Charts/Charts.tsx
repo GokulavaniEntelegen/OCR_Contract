@@ -77,7 +77,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
         <Box sx={{ flex: 1, height: "280px", backgroundColor: "#EAF9FF", borderRadius: "8px", border: "0.5px solid lightgray", minWidth: 0 }}>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1, ml: 5, mb: "13px"}}>
             <Box sx={{ mr: "auto", display: "flex", gap: 2, alignItems: "center"}}>
-              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434"}}>{chartName1}</p>
+              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", maxWidth: "20ch"}}>{chartName1}</p>
               <Chip style = {{backgroundColor: "#E2E2E2", color: "#373738", fontFamily: "Poppins", fontSize: "12px"}} label="By quarter" />
             </Box>
             <IconButton><img src={Filter_BlackIcon} alt="icon" width={20} height={20} /></IconButton>
@@ -91,7 +91,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
               <Tooltip />
               <Legend verticalAlign="top" align="right" layout="horizontal" iconType="circle" wrapperStyle={{
                     fontFamily: 'Poppins',
-                    fontSize: '13px',
+                    fontSize: '10px',
                     color: 'black',
                 }}/>
               <Bar dataKey="renewable" fill="#0f94fd" name="Renewable" radius={[10, 10, 0, 0]} />
@@ -104,7 +104,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
         <Box sx={{ flex: 1, height: "280px", backgroundColor: "#EAF9FF", borderRadius: "8px", border: "0.5px solid lightgray", minWidth: 0 }}>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1, ml: 5, mb: "13px"}}>
             <Box sx={{ mr: "auto", display: "flex", gap: 2, alignItems: "center" }}>
-              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434"}}>{chartName2}</p>
+              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", maxWidth: "20ch"}}>{chartName2}</p>
               <Chip style = {{backgroundColor: "#E2E2E2", color: "#373738", fontFamily: "Poppins", fontSize: "12px"}} label="By quarter" />
             </Box>
             <IconButton><img src={Filter_BlackIcon} alt="icon" width={20} height={20} /></IconButton>
@@ -125,7 +125,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
         <Box sx={{ flex: 1, backgroundColor: "#EAF9FF", borderRadius: "8px", border: "0.5px solid lightgray", overflow: "hidden", minWidth: 0 }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 3, py: 1.5 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434"}}>{chartName3}</p>
+              <p style={{fontFamily: "Poppins", fontSize: "16px", fontWeight: "600", color: "#343434", whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", maxWidth: "20ch"}}>{chartName3}</p>
               <Chip style = {{backgroundColor: "#E2E2E2", color: "#373738", fontFamily: "Poppins", fontSize: "12px"}} label="By quarter" />
             </Box>
             <Box>
@@ -170,7 +170,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({show}) => {
               {data3.map((item, index) => (
                 <Box key={index} sx={{ display: "flex", alignItems: "center",flex: 1, py: 1, px: 6, borderBottom: index !== data3.length - 1 ? "1px solid lightgray" : "none" }}>
                   <span style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: item.color, display: "inline-block", marginRight: "10px" }} />
-                  <p style = {{color: "#475569", fontWeight: 500, fontSize: "17px", fontFamily: "Poppins"}}>{item.name}</p>
+                  <p style = {{color: "#475569", fontWeight: 500, fontSize: "13px", fontFamily: "Poppins"}}>{item.name}</p>
                 </Box>
               ))}
             </Box>

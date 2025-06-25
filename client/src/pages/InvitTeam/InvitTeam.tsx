@@ -2,10 +2,16 @@ import React, { use, useState } from "react"
 import "./InviteTeam.scss"
 import { Box, TextField, Button } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from "react-router-dom";
+
+
 function Invite() {
     const [email1, setEmail1] = useState("");
     const [email2, setEmail2] = useState("");
     const [email3, setEmail3] = useState("");
+
+    const navigate = useNavigate();
+    
     return(
         <Box
         sx={{
@@ -154,7 +160,9 @@ function Invite() {
             </Button>
             </div>
 
-            <Button variant="contained" sx = {{width: "100%",
+            <Button variant="contained" 
+            onClick={() => {navigate("/dashboard")}}
+            sx = {{width: "100%",
                     bgcolor: "#1093FF", 
                     borderRadius: "4px", 
                     fontFamily:"Poppins", 
@@ -166,7 +174,7 @@ function Invite() {
                     marginTop: "30px",
                     marginBottom: "25px",
                     py: "10px"}}>
-                        Send Invites
+                        Send Invites and Login
                 </Button>
 
         </Box>

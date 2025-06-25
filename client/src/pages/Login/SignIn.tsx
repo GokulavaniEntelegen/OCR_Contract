@@ -14,7 +14,7 @@ const SignIn = () => {
         <Outlet/>
       <LoginRight />
       </div>
-    </div>
+    </div>  
   );
 };
 
