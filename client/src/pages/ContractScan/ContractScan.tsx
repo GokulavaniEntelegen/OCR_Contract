@@ -16,11 +16,21 @@ import ZoomOutIcon from "../../assets/ZoomOut.svg";
 import LoadingAIICon from "../../assets/LoadingAI.svg"
 import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
 import AlertIcon from "../../assets/Alert.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function ContractScan() {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const file = location.state?.selectedfile
+        if(file) {
+            setFile(file);
+            setPreviewURL(URL.createObjectURL(file));
+            console.log("file name: "+file?.name);
+        }
+    },[location.state]);
 
     const [formData, setFormData] = useState<newIfield[]>([]);
     const [formLoading, setFormLoading] = useState<Boolean>(true);

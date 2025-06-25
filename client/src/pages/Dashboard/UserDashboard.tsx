@@ -9,6 +9,7 @@ import '@fontsource/poppins';
 import { ReactNode } from "react";
 import { FC } from "react";
 import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
+import { useRef } from "react";
 
 
 import {
@@ -216,6 +217,27 @@ function Dashboard() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [userName, setUserName] = useState("Static User"); // Default to Static Use
   const [name,setName] = useState("Manikandan");
+
+
+    const fileInputRef = useRef<HTMLInputElement|null>(null);
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            const selectedfile = event.target.files?.[0];
+    
+            if(selectedfile) {
+                const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
+                if(!isValidType) {
+                    alert("Upload a valid file type (img or pdf)");
+                    return;
+                }
+                setFile(selectedfile);
+                if(selectedfile) {
+                    navigate("/dashboard/contract-scan", {state: {selectedfile}})
+                }
+            }
+        };
+
   useEffect(() => {
       const userEmail = localStorage.getItem("email");
       if (userEmail) {
@@ -731,11 +753,11 @@ function Dashboard() {
                         <p style={{fontWeight: 500}}>Upload your files</p>
                         </div>
 
-                        <Box className = "upload-box">
-                            <Box><IconButton><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
+                        <Box className = "upload-box" onClick = {() => {fileInputRef.current?.click();}} style = {{cursor: 'pointer'}}>
+                            <Box><IconButton onClick = {() => {fileInputRef.current?.click();}}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
 
                             <Box sx = {{mt: "20px", textAlign: "center"}} className = "clickupl">
-                                <p><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
+                                <p ><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
                                 <span>or Drag and drop </span></p>
                                <p>a contract PDF or Word doc</p>
                             </Box>
@@ -760,6 +782,12 @@ function Dashboard() {
                 )}
             </Box>
             </Modal>
+            <input 
+            type = "file"
+            ref = {fileInputRef}
+            onChange={handleFileChange}
+            style={{display: "none"}}
+            />
     </div>
   );
 }

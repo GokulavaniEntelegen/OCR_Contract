@@ -368,11 +368,11 @@ function DashboardLayout() {
 
     const icons = [
         { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard', link: "/dashboard" },
-        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction', link: "#" },
+        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction', link: "/dashboard/all-contracts" },
         { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download', link: "#" },
         { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template', link: "#" },
         { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription', link: "#" },
-        { key: 'help', icon: HelpIcon, tooltip: 'Help', link: "#" },
+        { key: 'help', icon: HelpIcon, tooltip: 'Help', link: "/dashboard/AI-Chat" },
     ];
 
     const toggleHamburger = () => {
