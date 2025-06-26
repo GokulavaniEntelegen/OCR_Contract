@@ -458,6 +458,17 @@ function Dashboard() {
     };
 
     const {contractTypes, contractSelected, setContractSelected} = useContractContext();
+    const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
+
+    const handleItemSelect = (index: number) => {
+        if(itemsSelectedIndexes.includes(index)) {
+            const updatedItemsIndexes = itemsSelectedIndexes.filter((num) => num !== index);
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }else {
+            const updatedItemsIndexes = [...itemsSelectedIndexes, index];
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }
+    }
 
   return (
     <div>
@@ -710,7 +721,10 @@ function Dashboard() {
 
                         <Box className = "content-container">
                             {items.map((item, index) => (
-                                <Box className = "content">{item}</Box>
+                                <Box className = "content" 
+                                key={index}
+                                onClick = {() => {handleItemSelect(index)}}
+                                style = {{ cursor: "pointer", backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit"}}>{item}</Box>
                             ))}
                             <Button
                             variant="text"
