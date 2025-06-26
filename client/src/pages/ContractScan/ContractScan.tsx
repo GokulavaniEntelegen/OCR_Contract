@@ -14,7 +14,7 @@ import OutSourceIcon from "../../assets/OutSource.svg";
 import ZoomInIcon from "../../assets/ZoomIn.svg";
 import ZoomOutIcon from "../../assets/ZoomOut.svg";
 import LoadingAIICon from "../../assets/LoadingAI.svg"
-import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
+// import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
 import AlertIcon from "../../assets/Alert.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -172,7 +172,7 @@ function ContractScan() {
                         {file?.type === "application/pdf" && previewURL && (
                             <iframe src = {previewURL} style={{width: "100%", height: "100%"}}/>
                         )}
-
+{/* 
                         {file && 
                         <div style={{display: "flex", justifyContent: "space-between", alignItems:"center", marginTop: "-10px"}}>
                             <ChatBotPop/>
@@ -181,7 +181,7 @@ function ContractScan() {
                             <IconButton><img src = {ZoomOutIcon} style={{width: "24px", height: "24px"}}/></IconButton>
                         </div>
                         </div>
-                        }
+                        } */}
                     </div>
                     {(!AILoading) ? (
                     <div className="forms">
