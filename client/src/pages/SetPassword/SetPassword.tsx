@@ -121,7 +121,7 @@ const SetAccPassword = () => {
         <Button
           variant="contained"
           fullWidth
-          onClick={()=>{navigate("/")}}
+          onClick={()=>{navigate("/invite")}}
           sx={{
             backgroundColor: "#1093FF",
             boxShadow: "none",
