@@ -3,14 +3,11 @@ import "./InviteTeam.scss"
 import { Box, TextField, Button } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
-
-
 function Invite() {
+    const navigate=useNavigate()
     const [email1, setEmail1] = useState("");
     const [email2, setEmail2] = useState("");
     const [email3, setEmail3] = useState("");
-
-    const navigate = useNavigate();
     
     return(
         <Box
@@ -154,15 +151,14 @@ function Invite() {
             </Button>
             
             <Button
+            onClick={()=>{navigate("/")}}
             variant="text"
             sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#747474", display: "flex", justifyContent: "flex-end", fontFamily: "Poppins"}}>
                 Skip
             </Button>
             </div>
 
-            <Button variant="contained" 
-            onClick={() => {navigate("/dashboard")}}
-            sx = {{width: "100%",
+            <Button  onClick={()=>{navigate("/")}} variant="contained" sx = {{width: "100%",
                     bgcolor: "#1093FF", 
                     borderRadius: "4px", 
                     fontFamily:"Poppins", 
