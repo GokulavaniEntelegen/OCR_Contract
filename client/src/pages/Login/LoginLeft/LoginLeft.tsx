@@ -104,7 +104,7 @@ const LoginLeft = () => {
 
         <Button
         onClick={() => {navigate("/dashboard")}} 
-        variant="contained" fullWidth sx={{ backgroundColor: "#1093FF",   textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
+        variant="contained" fullWidth sx={{ backgroundColor: "#1093FF", mb: 1,textTransform: "none" ,fontFamily: 'Poppins,sans-serif', boxShadow: "none"}}>
           Sign in
         </Button>
 
