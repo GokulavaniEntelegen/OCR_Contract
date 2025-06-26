@@ -498,7 +498,7 @@ function Dashboard() {
         }
     };
 
-    const handleContractTypeSubmit = async () => {
+    const handleContractTypeSubmit = () => {
         setStep((prev) => prev + 1);
         // await axios.patch(`${API_BASE_URL}/processdata`, {
         //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
@@ -529,6 +529,22 @@ function Dashboard() {
             setItemsSelectedIndexes(updatedItemsIndexes);
         }
     }
+
+   const handleItemTagsSubmit = () => {
+    setStep((prev) => prev + 1);
+
+    if (itemsSelectedIndexes.length !== 0) {
+        const itemsSelected = itemsSelectedIndexes.map((index) => itemTags[index]);
+        setJsonData(prev => ({
+            ...prev, 
+            processdata: {
+                ...prev.processdata,
+                tags: itemsSelected
+            }
+        }))
+    }
+    setItemsSelectedIndexes([]);
+    };
 
     return (
         <div>
@@ -787,8 +803,8 @@ function Dashboard() {
                             <Box className="content-container">
                                 {itemTags.map((item, index) => (
                                     <Box className="content" 
-                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#EFF8FF": "inherit"}}
-                                    onClick = {() => handleItemSelect(index)}>{item}</Box>
+                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
+                                    onClick = {() => handleItemSelect(index)}><p style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}>{item}</p></Box>
                                 ))}
                                 <Button onClick={handleAddViewClick}
                                     variant="text"
@@ -892,7 +908,7 @@ function Dashboard() {
                                     }}
                                     className="actions">Cancel</Button>
                                 <Button
-                                    onClick={() => { setStep((prev) => prev + 1) }}
+                                    onClick={() => { handleItemTagsSubmit() }}
                                     variant="contained"
                                     style={{
                                         textTransform: "none",
