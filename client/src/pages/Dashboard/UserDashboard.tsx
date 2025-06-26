@@ -503,7 +503,7 @@ function Dashboard() {
         // await axios.patch(`${API_BASE_URL}/processdata`, {
         //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
         // });
-        (contractSelected) ? (
+        (contractSelected !== null) ? (
         setJsonData(prev => ({
             ...prev, 
             processdata: {
