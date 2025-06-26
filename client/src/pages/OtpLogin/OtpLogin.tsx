@@ -54,17 +54,23 @@ function OtpLogin() {
           value={otp}
           onChange={setOtp}
           numInputs={6}
+          containerStyle={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems:'center',
+            gap: "25px",
+          }}
           inputStyle={{
             width: "2.8rem",
             height: "2.8rem",
-            margin: "0 0.5rem",
+            // margin: "0 0.5rem",
             fontSize: "1rem",
             borderRadius: "8px",
             border: "1px solid #ccc",
             textAlign: "center",
             fontFamily: "Poppins"
           }}
-        //   isInputNum
+          //   isInputNum
           shouldAutoFocus
           renderInput={(props) => <input {...props} />}
         />
@@ -75,19 +81,19 @@ function OtpLogin() {
       </div>
 
       <Button variant="contained"
-      onClick={handleOtpLogin}
-      sx={{
-        width: "100%",
-        bgcolor: "#1093FF",
-        borderRadius: "4px",
-        fontFamily: "Poppins",
-        textTransform: "none",
-        fontSize: "14px",
-        lineHeight: "20px",
-        fontWeight: "500",
-        boxShadow: 'none',
-        marginTop: "18px"
-      }}>
+        onClick={handleOtpLogin}
+        sx={{
+          width: "100%",
+          bgcolor: "#1093FF",
+          borderRadius: "4px",
+          fontFamily: "Poppins",
+          textTransform: "none",
+          fontSize: "14px",
+          lineHeight: "20px",
+          fontWeight: "500",
+          boxShadow: 'none',
+          marginTop: "18px"
+        }}>
         Login
       </Button>
 
