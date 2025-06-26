@@ -12,6 +12,7 @@ import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
 import { useRef } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "client/api";
+import CloseIcon from '@mui/icons-material/Close';
 
 import {
   AppBar,
@@ -30,7 +31,8 @@ import {
   ListItemText,
   Button,
   Avatar, // Added Button import for the card
-  Modal
+  Modal,
+  Popover
 } from "@mui/material";
 import { styled } from "@mui/material/styles"; // Added styled for VisuallyHiddenInput
 import {
@@ -221,6 +223,26 @@ function Dashboard() {
   const [userName, setUserName] = useState("Static User"); // Default to Static Use
   const [name,setName] = useState("Manikandan");
 
+  const [anchorElContractAdd, setAnchorElContractAdd] = useState<null | HTMLElement>(null);
+  const handleContractAddOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElContractAdd(event.currentTarget);
+    };
+      const handleCloseContractAdd = () => {
+        setAnchorElContractAdd(null);
+    };
+    
+    const popopen = Boolean(anchorElContractAdd);
+
+    const[newContract, setNewContract]= useState<string>("");
+
+    const handleNewContractAdd = () => {
+        if(newContract !== "" ) {
+            const updatedContractTypes= [...contractTypes, newContract];
+            setContractTypes(updatedContractTypes);
+            setNewContract("");
+            setAnchorElContractAdd(null);
+        }
+    }
 
     const fileInputRef = useRef<HTMLInputElement|null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -439,8 +461,8 @@ function Dashboard() {
     const [step, setStep] = useState(0);
 
 
-    // const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
-    // const [contractSelected, setContractSelected] = useState<number | null>(null);
+    const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
+    const [contractSelected, setContractSelected] = useState<number | null>(null);
 
     const handleContractSelect = (index: number) => {
         if(contractSelected === index) {
@@ -455,9 +477,21 @@ function Dashboard() {
         // await axios.patch(`${API_BASE_URL}/processdata`, {
         //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
         // });
+        (contractSelected) ? (
+        setJsonData(prev => ({
+            ...prev, 
+            processdata: {
+                ...prev.processdata,
+                "contract-type": contractTypes[contractSelected]
+            }
+        }))
+        ): ("");
+        setContractSelected(null);
     };
 
-    const {contractTypes, contractSelected, setContractSelected} = useContractContext();
+    // const {contractTypes, contractSelected, setContractSelected} = useContractContext();
+
+    const {jsonData,setJsonData} = useContractContext();
     const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
 
     const handleItemSelect = (index: number) => {
@@ -543,7 +577,7 @@ function Dashboard() {
                     </Button>
                 {/* </MuiLink> */}
                 <ImportContractPop fromtext="dashboard"/>
-                {/* <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>    */}
+                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>   
                 {/* <Button
                     variant="outlined" // Outlined button for "Import Contract"
                     startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
@@ -636,7 +670,9 @@ function Dashboard() {
                     </ListItem>
                 ))}
 
-                <ListItem className="grid-item center" sx={{py: "14px"}}>
+                <ListItem className="grid-item center" 
+                onClick={(event) => handleContractAddOpen(event)}
+                sx={{py: "14px", cursor: "pointer"}}>
                     <ListItemIcon style={{minWidth:"40px"}}>
                     <img src = {CreateCustomIcon} style={{width: "24", height: "24"}}/>
                     </ListItemIcon>
@@ -805,6 +841,84 @@ function Dashboard() {
                         </Box>
                     </Box>
                 )}
+                <Popover open = {popopen} anchorEl={anchorElContractAdd} onClose={handleCloseContractAdd} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "-600px", marginTop: "-50px"}}slotProps={{
+                paper: {
+                elevation: 0,
+                sx: {
+                    boxShadow: "none",
+                    borderRadius: "20px"
+                },
+                },
+            }}>
+                <div className="addview-box">
+                    <div className="addviewtop">
+                        <p>Add View</p>
+                        <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
+                    </div>
+                    <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
+                    <TextField
+                    variant="outlined"
+                    fullWidth
+                    placeholder="AI View"
+                    value={newContract}
+                    onChange={(event) => setNewContract(event.target.value)}
+                    sx={{
+                        marginBottom: "7px",
+                        '& .MuiInputBase-root': {
+                        borderRadius: '4px',
+                        fontSize: '16px',
+                        fontFamily: 'Poppins, sans-serif',
+                        '& fieldset': {
+                            borderWidth: '0.5px',
+                            borderColor: '#C4C4C4',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#999',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#000',
+                        },
+                        },
+                        '& .MuiInputBase-input': {
+                        padding: '10px 12px',
+                        fontSize: '14px',
+                        fontFamily: 'Poppins, sans-serif',
+                        color: '#42474E',
+                        },
+                        '& .MuiInputBase-input::placeholder': {
+                        color: '#42474E',
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        opacity: 1,
+                        },
+                    }}
+                    />
+                    <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
+                        <Button
+                        onClick={handleCloseContractAdd}
+                        variant="outlined"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 20px 10px 20px",
+                            border: "1px solid gray",
+                            color: "#1093FF"
+                            }} 
+                        className="actions">Cancel</Button>
+                        <Button
+                        onClick = {handleNewContractAdd}
+                        variant="contained"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 25px 10px 25px",
+                            backgroundColor: "#1093FF",
+                            boxShadow: "none"
+                            }} 
+                        className="actions">Save</Button>
+                    </div>
+                </div>
+            </Popover>
             </Box>
             </Modal>
             <input 
@@ -813,6 +927,8 @@ function Dashboard() {
             onChange={handleFileChange}
             style={{display: "none"}}
             />
+
+
     </div>
   );
 }
