@@ -519,6 +519,7 @@ function Dashboard() {
 
     const {jsonData,setJsonData} = useContractContext();
     const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
+    
     return (
         <div>
             <Box sx={{ width: "100%", minHeight: "100vh" }}>
