@@ -15,34 +15,37 @@
                             "item": {
                               "item": {
                                 "item": {
-                                  "contract-type": "",
-                                  "tags": []
+                                  "item": {
+                                    "contract-type": "",
+                                    "tags": []
+                                  },
+                                  "contract-type": "Vendor & Sales Contracts"
                                 },
-                                "contract-type": "Vendor & Sales Contracts"
+                                "contract-type": "Lease Contracts"
                               },
-                              "contract-type": "Lease Contracts"
+                              "contract-type": "Employment Contracts"
                             },
-                            "contract-type": "Employment Contracts"
+                            "contract-type": "Lease Contracts"
                           },
-                          "contract-type": "Lease Contracts"
+                          "contract-type": "Vendor & Sales Contracts"
                         },
-                        "contract-type": "Vendor & Sales Contracts"
+                        "contract-type": "Lease Contracts"
                       },
                       "contract-type": "Lease Contracts"
                     },
-                    "contract-type": "Lease Contracts"
+                    "contract-type": "Vendor & Sales Contracts"
                   },
                   "contract-type": "Vendor & Sales Contracts"
                 },
-                "contract-type": "Vendor & Sales Contracts"
+                "contract-type": "Lease Contracts"
               },
-              "contract-type": "Lease Contracts"
+              "contract-type": "Vendor & Sales Contracts"
             },
-            "contract-type": "Vendor & Sales Contracts"
+            "contract-type": "NDAs"
           },
           "contract-type": "NDAs"
         },
-        "contract-type": "NDAs"
+        "contract-type": "Employment Contracts"
       },
       "contract-type": "Employment Contracts"
     },

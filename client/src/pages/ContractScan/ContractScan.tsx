@@ -172,17 +172,17 @@ function ContractScan() {
                         {file?.type === "application/pdf" && previewURL && (
                             <iframe src = {previewURL} style={{width: "100%", height: "100%"}}/>
                         )}
-{/* 
+                        {/* 
                         {file && 
                         <div style={{display: "flex", justifyContent: "space-between", alignItems:"center", marginTop: "-10px"}}>
-                            <ChatBotPop/>
+                            <ChatBotPop/> */}
                         <div className="zoomactions">
                             <IconButton><img src = {ZoomInIcon} style={{width: "24px", height: "24px", borderRight: "1px solid lightgray", paddingRight: "20px"}}/></IconButton>
                             <IconButton><img src = {ZoomOutIcon} style={{width: "24px", height: "24px"}}/></IconButton>
                         </div>
                         </div>
-                        } */}
-                    </div>
+                        
+                    {/* </div> */}
                     {(!AILoading) ? (
                     <div className="forms">
 

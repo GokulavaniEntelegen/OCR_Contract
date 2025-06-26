@@ -91,6 +91,7 @@ import FileWithTickIcon from "../../assets/FileWithTick.svg";
 import CreateCustomIcon from "../../assets/CreateCustom.svg";
 // import ImportContractPop from "client/src/components/ImportContractPop";
 import ImportContractPop from "../../components/ImportContractPop/importcontractpop"
+import { useContractContext } from "client/src/context/AuthContext";
 // VisuallyHiddenInput for file input (needed for the Upload button)
 
 const VisuallyHiddenInput = styled("input")({
@@ -240,6 +241,26 @@ function Dashboard() {
 
     const addViewOpen = Boolean(anchorElAddView);
 
+  const [anchorElContractAdd, setAnchorElContractAdd] = useState<null | HTMLElement>(null);
+  const handleContractAddOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElContractAdd(event.currentTarget);
+    };
+      const handleCloseContractAdd = () => {
+        setAnchorElContractAdd(null);
+    };
+    
+    const popopen = Boolean(anchorElContractAdd);
+
+    const[newContract, setNewContract]= useState<string>("");
+
+    const handleNewContractAdd = () => {
+        if(newContract !== "" ) {
+            const updatedContractTypes= [...contractTypes, newContract];
+            setContractTypes(updatedContractTypes);
+            setNewContract("");
+            setAnchorElContractAdd(null);
+        }
+    }
 
     const handleNewTag = () => {
         const updatedView = [...itemTags, newTag];
@@ -479,11 +500,25 @@ function Dashboard() {
 
     const handleContractTypeSubmit = async () => {
         setStep((prev) => prev + 1);
-        await axios.patch(`${API_BASE_URL}/processdata`, {
-            "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
-        });
+        // await axios.patch(`${API_BASE_URL}/processdata`, {
+        //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
+        // });
+        (contractSelected) ? (
+        setJsonData(prev => ({
+            ...prev, 
+            processdata: {
+                ...prev.processdata,
+                "contract-type": contractTypes[contractSelected]
+            }
+        }))
+        ): ("");
+        setContractSelected(null);
     };
 
+    // const {contractTypes, contractSelected, setContractSelected} = useContractContext();
+
+    const {jsonData,setJsonData} = useContractContext();
+    const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
     return (
         <div>
             <Box sx={{ width: "100%", minHeight: "100vh" }}>
@@ -554,9 +589,14 @@ function Dashboard() {
                         accept=".pdf,.docx,.csv" // Example accept types
                         onClick={handleFileChange} // Placeholder handler
                     /> */}
+                    </Button>
+                {/* </MuiLink> */}
+                <ImportContractPop fromtext="dashboard"/>
+                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>   
+                {/* <Button
                                 </Button>
                                 {/* </MuiLink> */}
-                                <ImportContractPop fromtext="dashboard" />
+                                {/* <ImportContractPop fromtext="dashboard" /> */}
                                 {/* <Button
                     variant="outlined" // Outlined button for "Import Contract"
                     startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
@@ -649,7 +689,8 @@ function Dashboard() {
                                     </ListItem>
                                 ))}
 
-                                <ListItem className="grid-item center" sx={{ py: "14px" }}>
+                                <ListItem className="grid-item center" sx={{ py: "14px" }} 
+                                onClick={(event) => handleContractAddOpen(event)}>
                                     <ListItemIcon style={{ minWidth: "40px" }}>
                                         <img src={CreateCustomIcon} style={{ width: "24", height: "24" }} />
                                     </ListItemIcon>
@@ -659,7 +700,7 @@ function Dashboard() {
 
                             <div className="buttons">
                                 <Button
-                                    onClick={() => { setShowModal(false) }}
+                                    onClick={() => { setShowModal(false); setContractSelected(null)}}
                                     variant="outlined"
                                     style={{
                                         textTransform: "none",
@@ -875,25 +916,104 @@ function Dashboard() {
                                     <p>a contract PDF or Word doc</p>
                                 </Box>
                             </Box>
-                            <p className="or">Or</p>
-                            <Box style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-                                <Button
-                                    onClick={() => { setShowModal(false); setStep(0) }}
-                                    variant="outlined"
-                                    className="skipbutt"
-                                    style={{
-                                        textTransform: "none",
-                                        fontSize: "18px",
-                                        padding: "10px 20px 10px 20px",
-                                        border: "1px solid gray",
-                                        fontFamily: "Poppins"
-                                    }}
-                                >Skip
-                                </Button>
-                            </Box>
+                            
+                        <p className="or">Or</p>
+                        <Box style = {{display: "flex", justifyContent: "center", marginTop: "20px"}}>
+                        <Button
+                            onClick={() => {setShowModal(false); setStep(0)}}
+                            variant="outlined"
+                            className="skipbutt" 
+                            style={{
+                                textTransform: "none", 
+                                fontSize: "18px", 
+                                padding: "10px 20px 10px 20px", 
+                                border: "1px solid gray",
+                                fontFamily: "Poppins"
+                                }} 
+                            >Skip
+                        </Button>
                         </Box>
-                    )}
-                </Box>
+                    </Box>
+                )}
+                <Popover open = {popopen} anchorEl={anchorElContractAdd} onClose={handleCloseContractAdd} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "-600px", marginTop: "-50px"}}slotProps={{
+                paper: {
+                elevation: 0,
+                sx: {
+                    boxShadow: "none",
+                    borderRadius: "20px"
+                },
+                },
+            }}>
+                <div className="addview-box">
+                    <div className="addviewtop">
+                        <p>Add View</p>
+                        <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
+                    </div>
+                    <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
+                    <TextField
+                    variant="outlined"
+                    fullWidth
+                    placeholder="AI View"
+                    value={newContract}
+                    onChange={(event) => setNewContract(event.target.value)}
+                    sx={{
+                        marginBottom: "7px",
+                        '& .MuiInputBase-root': {
+                        borderRadius: '4px',
+                        fontSize: '16px',
+                        fontFamily: 'Poppins, sans-serif',
+                        '& fieldset': {
+                            borderWidth: '0.5px',
+                            borderColor: '#C4C4C4',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#999',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#000',
+                        },
+                        },
+                        '& .MuiInputBase-input': {
+                        padding: '10px 12px',
+                        fontSize: '14px',
+                        fontFamily: 'Poppins, sans-serif',
+                        color: '#42474E',
+                        },
+                        '& .MuiInputBase-input::placeholder': {
+                        color: '#42474E',
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        opacity: 1,
+                        },
+                    }}
+                    />
+                    <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
+                        <Button
+                        onClick={handleCloseContractAdd}
+                        variant="outlined"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 20px 10px 20px",
+                            border: "1px solid gray",
+                            color: "#1093FF"
+                            }} 
+                        className="actions">Cancel</Button>
+                        <Button
+                        onClick = {handleNewContractAdd}
+                        variant="contained"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 25px 10px 25px",
+                            backgroundColor: "#1093FF",
+                            boxShadow: "none"
+                            }} 
+                        className="actions">Save</Button>
+                    </div>
+                </div>
+            </Popover>
+            </Box>
             </Modal>
             <input
                 type="file"
