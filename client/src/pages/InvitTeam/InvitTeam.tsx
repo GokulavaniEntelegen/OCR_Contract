@@ -158,7 +158,7 @@ function Invite() {
             </Button>
             </div>
 
-            <Button  onClick={()=>{navigate("/")}} variant="contained" sx = {{width: "100%",
+            <Button  onClick={()=>{navigate("/dashboard")}} variant="contained" sx = {{width: "100%",
                     bgcolor: "#1093FF", 
                     borderRadius: "4px", 
                     fontFamily:"Poppins", 
