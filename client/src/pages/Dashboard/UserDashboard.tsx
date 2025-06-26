@@ -10,7 +10,8 @@ import { ReactNode } from "react";
 import { FC } from "react";
 import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
 import { useRef } from "react";
-
+import axios from "axios";
+import { API_BASE_URL } from "client/api";
 
 import {
   AppBar,
@@ -435,6 +436,25 @@ function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(0);
 
+
+    const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
+    const [contractSelected, setContractSelected] = useState<number | null>(null);
+
+    const handleContractSelect = (index: number) => {
+        if(contractSelected === index) {
+            setContractSelected(null);
+        }else {
+        setContractSelected(index);
+        }
+    };
+
+    const handleContractTypeSubmit = async() => {
+        setStep((prev) => prev + 1);
+        await axios.patch(`${API_BASE_URL}/processdata`, {
+            "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
+        });
+    };
+
   return (
     <div>
         <Box sx={{width: "100%",minHeight: "100vh" }}>
@@ -567,7 +587,7 @@ function Dashboard() {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: "50vw",
-                    height: "530px",
+                    // height: "530px",
                     bgcolor: 'background.paper',
                     boxShadow: 24,
                     p: 6,
@@ -587,34 +607,18 @@ function Dashboard() {
                 
 
                 <div className="grid-container">
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    {/* <FileOpenOutlinedIcon color="primary" /> */}
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Vendor & Sales Contracts</p>}/>
-                </ListItem>
 
-                <ListItem className="grid-item" sx={{py: "12px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Lease Contracts</p>}/>
-                </ListItem>
-
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>NDAs</p>}/>
-                </ListItem>
-
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Employment Contracts</p>}/>
-                </ListItem>
+                {contractTypes.map((contractType, index) => (
+                    <ListItem key = {index}
+                    onClick = {() => handleContractSelect(index)} 
+                    style={{cursor: "pointer",transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "2px solid #2B80EC" : "none" }}
+                    className="grid-item" sx={{py: "14px"}}>
+                        <ListItemIcon style={{minWidth:"40px"}}>
+                        <img src = {FileWithTickIcon} style={{width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit"}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={<p style = {{color: (contractSelected === index) ? "white" : "#2B80EC", transition: "all 0.3s ease"}} >{contractType}</p>}/>
+                    </ListItem>
+                ))}
 
                 <ListItem className="grid-item center" sx={{py: "14px"}}>
                     <ListItemIcon style={{minWidth:"40px"}}>
@@ -638,14 +642,15 @@ function Dashboard() {
                         }} 
                     className="actions">Cancel</Button>
                     <Button
-                    onClick={() => { setStep((prev) => prev + 1)}}
+                    onClick={() => {handleContractTypeSubmit()}}
+                    disabled = {contractSelected === null}
                     variant="contained"
                     style={{
                         textTransform: "none", 
                         fontSize: "16px", 
                         padding: "10px 25px 10px 25px",
                         fontFamily: "Poppins",
-                        backgroundColor: "#1093FF",
+                        // backgroundColor: "#1093FF",
                         boxShadow: "none"
                         }} 
                     className="actions">Next</Button>

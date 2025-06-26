@@ -1,4 +1,14 @@
 {
+  "processdata": {
+    "item": {
+      "item": {
+        "contract-type": "",
+        "tags": []
+      },
+      "contract-type": "Vendor & Sales Contracts"
+    },
+    "contract-type": "Lease Contracts"
+  },
   "formsections": [
     {
       "label": "Contract No.",
