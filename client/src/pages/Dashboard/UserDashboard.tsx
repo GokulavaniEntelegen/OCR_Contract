@@ -263,10 +263,12 @@ function Dashboard() {
     }
 
     const handleNewTag = () => {
-        const updatedView = [...itemTags, newTag];
+        if(newTag !==""){
+    const updatedView = [...itemTags, newTag];
         setItemTags(updatedView);
         handleAddTagClose();
         setNewTag('')
+        }
 
     };
 
@@ -817,7 +819,7 @@ function Dashboard() {
                                     <TextField
                                         variant="outlined"
                                         fullWidth
-                                        placeholder="AI View"
+                                        placeholder="Add tag"
                                         value={newTag}
                                         onChange={(event) => setNewTag(() => event.target.value)}
                                         sx={{
@@ -959,14 +961,14 @@ function Dashboard() {
             }}>
                 <div className="addview-box">
                     <div className="addviewtop">
-                        <p>Add View</p>
+                        <p>Add custom cotract type</p>
                         <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
                     </div>
                     <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
                     <TextField
                     variant="outlined"
                     fullWidth
-                    placeholder="AI View"
+                    placeholder="Contract type"
                     value={newContract}
                     onChange={(event) => setNewContract(event.target.value)}
                     sx={{
