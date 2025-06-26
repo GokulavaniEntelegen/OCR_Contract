@@ -76,7 +76,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // import './tabletrycss.css';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import UploadCustomIcon from '../../assets/Upload.svg';
+import UploadCustomIcon from '../../assets/UploadCustom.svg';
 import DashboardCustomIcon from '../../assets/Dashboard.svg';
 import RecentExtractionIcon from '../../assets/RecentExtraction.svg';
 import ReportIcon from '../../assets/Report.svg';
@@ -91,6 +91,7 @@ import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
 import DownArrowIcon from "../../assets/DownArrow.svg";
 import {Link} from "react-router-dom";
 import ChatBotPop from 'client/src/components/ChatBotPop/ChatBotPop';
+import HistoryIcon from '@mui/icons-material/History';
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled('input')({
@@ -374,6 +375,7 @@ function DashboardLayout() {
         { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template', link: "#" },
         { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription', link: "#" },
         { key: 'help', icon: HelpIcon, tooltip: 'Help', link: "/dashboard/AI-Chat" },
+        { key: 'history', icon: UploadCustomIcon, tooltip: 'Activity History', link: "/dashboard/activity-history" },
     ];
 
     const toggleHamburger = () => {
@@ -637,6 +639,7 @@ function DashboardLayout() {
                 >
                     <Box sx = {{marginLeft: "10px",".sidebar:hover &": {marginLeft: "10px"}}}>
                     <IconButton
+                        onClick={() => navigate("/dashboard")}
                         style={{ display: 'flex', alignItems: 'center', marginBottom: '65px', marginLeft: "-5px"}}
                     >
                         <img src={MainLogoIcon} alt="icon" width={40} height={40} />

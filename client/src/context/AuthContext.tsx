@@ -1,9 +1,22 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import data from "../../data/data.json";
+
+// interface ContractContextType {
+//   contractSelected: number | null;
+//   setContractSelected: (index: number | null) => void;
+//   contractTypes: string[];
+// }
+
+interface jsonDataType {
+  processdata: {
+    "contract-type": string;
+    tags: string[];
+  };
+}
 
 interface ContractContextType {
-  contractSelected: number | null;
-  setContractSelected: (index: number | null) => void;
-  contractTypes: string[];
+  jsonData: jsonDataType,
+  setJsonData: React.Dispatch<React.SetStateAction<jsonDataType>>;
 }
 
 const ContractContext = createContext<ContractContextType | undefined>(undefined);
@@ -14,12 +27,11 @@ interface ContractProviderProps {
 
 // ✅ JSX.Element works if @types/react is installed and tsconfig is set up
 export const ContractProvider = ({ children }: ContractProviderProps): React.JSX.Element => {
-  const [contractSelected, setContractSelected] = useState<number | null>(null);
-  const contractTypes = ["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"];
   
+  const [jsonData, setJsonData] = useState<jsonDataType>(data);
 
   return (
-    <ContractContext.Provider value={{ contractSelected, setContractSelected, contractTypes }}>
+    <ContractContext.Provider value={{ jsonData,setJsonData}}>
       {children}
     </ContractContext.Provider>
   );
