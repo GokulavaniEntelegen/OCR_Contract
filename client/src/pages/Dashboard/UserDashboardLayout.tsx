@@ -90,6 +90,7 @@ import PsaiImg from '../../assets/Psai.png';
 import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
 import DownArrowIcon from "../../assets/DownArrow.svg";
 import {Link} from "react-router-dom";
+import ChatBotPop from 'client/src/components/ChatBotPop/ChatBotPop';
 
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled('input')({
@@ -786,7 +787,11 @@ function DashboardLayout() {
 
                 <div style={{ flex: 1, overflowY: 'auto' }}>
                     <Outlet />
+                   
                 </div>
+                 <Box className="chat-bot">
+                    <ChatBotPop/>
+                    </Box>
             </div>
         </div>
     );
