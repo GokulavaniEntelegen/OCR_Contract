@@ -621,7 +621,7 @@ function Dashboard() {
                     </Button>
                 {/* </MuiLink> */}
                 <ImportContractPop fromtext="dashboard"/>
-                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>   
+                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}} style={{opacity: 0}}>h</Button>   
                 {/* <Button
                                 </Button>
                                 {/* </MuiLink> */}
