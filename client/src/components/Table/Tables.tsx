@@ -442,10 +442,12 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
     const [tabsArray,setTabsArray] = useState<string[]>(["All", "AI Generated"]);
 
     const handleNewView= () => {
-        const updatedView = [...tabsArray,newView];
+        if(newView!==""){
+            const updatedView = [...tabsArray,newView];
         setTabsArray(updatedView);
         handleAddViewClose();
         setNewView('')
+        }
     };
 
     return(

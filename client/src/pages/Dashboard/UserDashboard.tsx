@@ -263,10 +263,12 @@ function Dashboard() {
     }
 
     const handleNewTag = () => {
-        const updatedView = [...itemTags, newTag];
+        if(newTag !==""){
+    const updatedView = [...itemTags, newTag];
         setItemTags(updatedView);
         handleAddTagClose();
         setNewTag('')
+        }
 
     };
 
@@ -498,7 +500,7 @@ function Dashboard() {
         }
     };
 
-    const handleContractTypeSubmit = async () => {
+    const handleContractTypeSubmit = () => {
         setStep((prev) => prev + 1);
         // await axios.patch(`${API_BASE_URL}/processdata`, {
         //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
@@ -529,6 +531,22 @@ function Dashboard() {
             setItemsSelectedIndexes(updatedItemsIndexes);
         }
     }
+
+   const handleItemTagsSubmit = () => {
+    setStep((prev) => prev + 1);
+
+    if (itemsSelectedIndexes.length !== 0) {
+        const itemsSelected = itemsSelectedIndexes.map((index) => itemTags[index]);
+        setJsonData(prev => ({
+            ...prev, 
+            processdata: {
+                ...prev.processdata,
+                tags: itemsSelected
+            }
+        }))
+    }
+    setItemsSelectedIndexes([]);
+    };
 
     return (
         <div>
@@ -603,7 +621,7 @@ function Dashboard() {
                     </Button>
                 {/* </MuiLink> */}
                 <ImportContractPop fromtext="dashboard"/>
-                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>   
+                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}} style={{opacity: 0}}>h</Button>   
                 {/* <Button
                                 </Button>
                                 {/* </MuiLink> */}
@@ -787,8 +805,8 @@ function Dashboard() {
                             <Box className="content-container">
                                 {itemTags.map((item, index) => (
                                     <Box className="content" 
-                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#EFF8FF": "inherit"}}
-                                    onClick = {() => handleItemSelect(index)}>{item}</Box>
+                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
+                                    onClick = {() => handleItemSelect(index)}><p style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}>{item}</p></Box>
                                 ))}
                                 <Button onClick={handleAddViewClick}
                                     variant="text"
@@ -817,7 +835,7 @@ function Dashboard() {
                                     <TextField
                                         variant="outlined"
                                         fullWidth
-                                        placeholder="AI View"
+                                        placeholder="Add tag"
                                         value={newTag}
                                         onChange={(event) => setNewTag(() => event.target.value)}
                                         sx={{
@@ -892,7 +910,7 @@ function Dashboard() {
                                     }}
                                     className="actions">Cancel</Button>
                                 <Button
-                                    onClick={() => { setStep((prev) => prev + 1) }}
+                                    onClick={() => { handleItemTagsSubmit() }}
                                     variant="contained"
                                     style={{
                                         textTransform: "none",
@@ -959,14 +977,14 @@ function Dashboard() {
             }}>
                 <div className="addview-box">
                     <div className="addviewtop">
-                        <p>Add View</p>
+                        <p>Add custom cotract type</p>
                         <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
                     </div>
                     <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
                     <TextField
                     variant="outlined"
                     fullWidth
-                    placeholder="AI View"
+                    placeholder="Contract type"
                     value={newContract}
                     onChange={(event) => setNewContract(event.target.value)}
                     sx={{
