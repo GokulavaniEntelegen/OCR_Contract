@@ -7,11 +7,19 @@ import data from "../../data/data.json";
 //   contractTypes: string[];
 // }
 
+
+interface Ifield {
+  "label": string;
+  "value": string;
+  "aiflag": boolean;
+}
+
 interface jsonDataType {
   processdata: {
     "contract-type": string;
     tags: string[];
-  };
+  },
+  formsections: Ifield[];
 }
 
 interface ContractContextType {
