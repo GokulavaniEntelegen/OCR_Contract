@@ -519,6 +519,17 @@ function Dashboard() {
 
     const {jsonData,setJsonData} = useContractContext();
     const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
+
+    const handleItemSelect = (index: number) => {
+        if(itemsSelectedIndexes.includes(index)) {
+            const updatedItemsIndexes = itemsSelectedIndexes.filter((num) => num !== index);
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }else {
+            const updatedItemsIndexes = [...itemsSelectedIndexes, index];
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }
+    }
+
     return (
         <div>
             <Box sx={{ width: "100%", minHeight: "100vh" }}>
@@ -775,7 +786,9 @@ function Dashboard() {
 
                             <Box className="content-container">
                                 {itemTags.map((item, index) => (
-                                    <Box className="content">{item}</Box>
+                                    <Box className="content" 
+                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#EFF8FF": "inherit"}}
+                                    onClick = {() => handleItemSelect(index)}>{item}</Box>
                                 ))}
                                 <Button onClick={handleAddViewClick}
                                     variant="text"
