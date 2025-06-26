@@ -4,6 +4,7 @@ import { Box, TextField, Button } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 function Invite() {
+
     const navigate=useNavigate()
     const [email1, setEmail1] = useState("");
     const [email2, setEmail2] = useState("");

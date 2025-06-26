@@ -14,13 +14,23 @@ import OutSourceIcon from "../../assets/OutSource.svg";
 import ZoomInIcon from "../../assets/ZoomIn.svg";
 import ZoomOutIcon from "../../assets/ZoomOut.svg";
 import LoadingAIICon from "../../assets/LoadingAI.svg"
-import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
+// import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
 import AlertIcon from "../../assets/Alert.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function ContractScan() {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const file = location.state?.selectedfile
+        if(file) {
+            setFile(file);
+            setPreviewURL(URL.createObjectURL(file));
+            console.log("file name: "+file?.name);
+        }
+    },[location.state]);
 
     const [formData, setFormData] = useState<newIfield[]>([]);
     const [formLoading, setFormLoading] = useState<Boolean>(true);
@@ -73,8 +83,11 @@ function ContractScan() {
         })
     },[]);
 
-    const changedIndexes = fieldData.map((value: string, index: number) =>
+    const changedIndexes1 = fieldData.map((value: string, index: number) =>
         value !== initFiledVals[index] ? index : null
+    ).filter((index): index is number => index !== null);
+
+    const changedIndexes = formData.map((field: newIfield, index: number) => field.value !== initFiledVals[index] ? index : null
     ).filter((index): index is number => index !== null);
 
     const fileInputRef = useRef<HTMLInputElement|null>(null);
@@ -110,7 +123,13 @@ function ContractScan() {
 
 
     const handleReset = () => {
-        setFieldData([""])
+        setFieldData([""]);
+        const newFormData = formData.map((field: newIfield) => ({
+            ...field,
+            value: "",
+            }));
+        setFormData(newFormData);
+        changedIndexes.length = formData.length; 
     }
 
     const saveTableRows = async () => {
@@ -153,7 +172,7 @@ function ContractScan() {
                             <iframe src = {previewURL} style={{width: "100%", height: "100%"}}/>
                         )}
 
-                        {file && 
+                        {/* {file && 
                         <div style={{display: "flex", justifyContent: "space-between", alignItems:"center", marginTop: "-10px"}}>
                             <ChatBotPop/>
                         <div className="zoomactions">
@@ -161,7 +180,7 @@ function ContractScan() {
                             <IconButton><img src = {ZoomOutIcon} style={{width: "24px", height: "24px"}}/></IconButton>
                         </div>
                         </div>
-                        }
+                        } */}
                     </div>
                     {(!AILoading) ? (
                     <div className="forms">
@@ -262,7 +281,7 @@ function ContractScan() {
                         <div className="viewedit">
                             <img src= {AlertIcon} style = {{width: "16px", height: "16px"}} />
                             <div style={{display: "flex", gap: "16px", alignItems: "center"}}>
-                            <p className="outof">{changedIndexes.length} out of {fieldData.length} fields has been edited</p>
+                            <p className="outof">{changedIndexes.length} out of {formData.length} fields has been edited</p>
                             {/* <p className="view" style={{cursor: "pointer"}}>View Edits</p> */}
                             <Button 
                             variant="text"

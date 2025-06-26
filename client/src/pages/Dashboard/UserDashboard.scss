@@ -270,7 +270,7 @@
 }
 
 .grid-item {
-  background-color: #F3F9FF;
+//   background-color: #F3F9FF;
   border-radius: 8px;
 //   padding: 20px 12px;
   display: flex;
@@ -370,6 +370,13 @@
     @include label-large;
     font-family: "Poppins";
     margin-top: 10px;
+}
+.chat-bot{
+    padding: 10px;
+    width: fit-content;
+    position: fixed;
+    left: 50px;
+    bottom: 1px;
 }
 
 // .sidebar:hover .sidebarname p{

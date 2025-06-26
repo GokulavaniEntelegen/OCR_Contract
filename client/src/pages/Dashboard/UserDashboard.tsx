@@ -9,7 +9,9 @@ import '@fontsource/poppins';
 import { ReactNode } from "react";
 import { FC } from "react";
 import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
-
+import { useRef } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "client/api";
 
 import {
   AppBar,
@@ -216,6 +218,27 @@ function Dashboard() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [userName, setUserName] = useState("Static User"); // Default to Static Use
   const [name,setName] = useState("Manikandan");
+
+
+    const fileInputRef = useRef<HTMLInputElement|null>(null);
+    const [file, setFile] = useState<File | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            const selectedfile = event.target.files?.[0];
+    
+            if(selectedfile) {
+                const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
+                if(!isValidType) {
+                    alert("Upload a valid file type (img or pdf)");
+                    return;
+                }
+                setFile(selectedfile);
+                if(selectedfile) {
+                    navigate("/dashboard/contract-scan", {state: {selectedfile}})
+                }
+            }
+        };
+
   useEffect(() => {
       const userEmail = localStorage.getItem("email");
       if (userEmail) {
@@ -413,6 +436,25 @@ function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(0);
 
+
+    const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
+    const [contractSelected, setContractSelected] = useState<number | null>(null);
+
+    const handleContractSelect = (index: number) => {
+        if(contractSelected === index) {
+            setContractSelected(null);
+        }else {
+        setContractSelected(index);
+        }
+    };
+
+    const handleContractTypeSubmit = async() => {
+        setStep((prev) => prev + 1);
+        await axios.patch(`${API_BASE_URL}/processdata`, {
+            "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
+        });
+    };
+
   return (
     <div>
         <Box sx={{width: "100%",minHeight: "100vh" }}>
@@ -545,7 +587,7 @@ function Dashboard() {
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     width: "50vw",
-                    height: "530px",
+                    // height: "530px",
                     bgcolor: 'background.paper',
                     boxShadow: 24,
                     p: 6,
@@ -565,34 +607,18 @@ function Dashboard() {
                 
 
                 <div className="grid-container">
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    {/* <FileOpenOutlinedIcon color="primary" /> */}
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Vendor & Sales Contracts</p>}/>
-                </ListItem>
 
-                <ListItem className="grid-item" sx={{py: "12px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Lease Contracts</p>}/>
-                </ListItem>
-
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>NDAs</p>}/>
-                </ListItem>
-
-                <ListItem className="grid-item" sx={{py: "16px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {FileWithTickIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Employment Contracts</p>}/>
-                </ListItem>
+                {contractTypes.map((contractType, index) => (
+                    <ListItem key = {index}
+                    onClick = {() => handleContractSelect(index)} 
+                    style={{cursor: "pointer",transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "2px solid #2B80EC" : "none" }}
+                    className="grid-item" sx={{py: "14px"}}>
+                        <ListItemIcon style={{minWidth:"40px"}}>
+                        <img src = {FileWithTickIcon} style={{width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit"}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={<p style = {{color: (contractSelected === index) ? "white" : "#2B80EC", transition: "all 0.3s ease"}} >{contractType}</p>}/>
+                    </ListItem>
+                ))}
 
                 <ListItem className="grid-item center" sx={{py: "14px"}}>
                     <ListItemIcon style={{minWidth:"40px"}}>
@@ -616,14 +642,15 @@ function Dashboard() {
                         }} 
                     className="actions">Cancel</Button>
                     <Button
-                    onClick={() => { setStep((prev) => prev + 1)}}
+                    onClick={() => {handleContractTypeSubmit()}}
+                    disabled = {contractSelected === null}
                     variant="contained"
                     style={{
                         textTransform: "none", 
                         fontSize: "16px", 
                         padding: "10px 25px 10px 25px",
                         fontFamily: "Poppins",
-                        backgroundColor: "#1093FF",
+                        // backgroundColor: "#1093FF",
                         boxShadow: "none"
                         }} 
                     className="actions">Next</Button>
@@ -731,11 +758,11 @@ function Dashboard() {
                         <p style={{fontWeight: 500}}>Upload your files</p>
                         </div>
 
-                        <Box className = "upload-box">
-                            <Box><IconButton><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
+                        <Box className = "upload-box" onClick = {() => {fileInputRef.current?.click();}} style = {{cursor: 'pointer'}}>
+                            <Box><IconButton onClick = {() => {fileInputRef.current?.click();}}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
 
                             <Box sx = {{mt: "20px", textAlign: "center"}} className = "clickupl">
-                                <p><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
+                                <p ><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
                                 <span>or Drag and drop </span></p>
                                <p>a contract PDF or Word doc</p>
                             </Box>
@@ -760,6 +787,12 @@ function Dashboard() {
                 )}
             </Box>
             </Modal>
+            <input 
+            type = "file"
+            ref = {fileInputRef}
+            onChange={handleFileChange}
+            style={{display: "none"}}
+            />
     </div>
   );
 }
