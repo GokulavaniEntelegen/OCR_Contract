@@ -89,6 +89,8 @@ import FileWithTickIcon from "../../assets/FileWithTick.svg";
 import CreateCustomIcon from "../../assets/CreateCustom.svg";
 // import ImportContractPop from "client/src/components/ImportContractPop";
 import ImportContractPop from "../../components/ImportContractPop/importcontractpop"
+import { useContractContext } from "client/src/context/AuthContext";
+
 // VisuallyHiddenInput for file input (needed for the Upload button)
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -437,8 +439,8 @@ function Dashboard() {
     const [step, setStep] = useState(0);
 
 
-    const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
-    const [contractSelected, setContractSelected] = useState<number | null>(null);
+    // const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
+    // const [contractSelected, setContractSelected] = useState<number | null>(null);
 
     const handleContractSelect = (index: number) => {
         if(contractSelected === index) {
@@ -454,6 +456,8 @@ function Dashboard() {
             "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
         });
     };
+
+    const {contractTypes, contractSelected, setContractSelected} = useContractContext();
 
   return (
     <div>
@@ -528,6 +532,7 @@ function Dashboard() {
                     </Button>
                 {/* </MuiLink> */}
                 <ImportContractPop fromtext="dashboard"/>
+                {/* <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>    */}
                 {/* <Button
                     variant="outlined" // Outlined button for "Import Contract"
                     startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
