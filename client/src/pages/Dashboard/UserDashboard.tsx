@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import './UserDashboard.scss';
 import FileOpenOutlinedIcon from '@mui/icons-material/FileOpenOutlined';
-import { Grid, List, ListItem} from "@mui/material";
+import { Grid, List, ListItem, Popover } from "@mui/material";
 import ProgressStepper from "./ProgressStepper";
 import '@fontsource/roboto'; // Loads default weight (400)
 import '@fontsource/poppins';
@@ -12,45 +12,47 @@ import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
 import { useRef } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "client/api";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Divider,
-  Paper,
-  Breadcrumbs,
-  Link as MuiLink,
-  Container,
-  ListItemIcon,
-  ListItemText,
-  Button,
-  Avatar, // Added Button import for the card
-  Modal
+    AppBar,
+    Toolbar,
+    Typography,
+    Box,
+    IconButton,
+    Menu,
+    MenuItem,
+    Divider,
+    Paper,
+    Breadcrumbs,
+    Link as MuiLink,
+    Container,
+    ListItemIcon,
+    ListItemText,
+    Button,
+    Avatar, // Added Button import for the card
+    Modal
 } from "@mui/material";
 import { styled } from "@mui/material/styles"; // Added styled for VisuallyHiddenInput
 import {
-  Dashboard as DashboardIconMui,
-  PictureAsPdf as PictureAsPdfIconMui,
-  Notifications as NotificationsIconMui,
-  AccountCircle as AccountCircleIconMui,
-  ExitToApp as ExitToAppIconMui,
-  UploadFile as UploadFileIcon, // Added UploadFileIcon for the button
-  Description as DocIcon,
-  Padding,
-  Opacity, // Added DocIcon for 'Import Contract' button
+    Dashboard as DashboardIconMui,
+    PictureAsPdf as PictureAsPdfIconMui,
+    Notifications as NotificationsIconMui,
+    AccountCircle as AccountCircleIconMui,
+    ExitToApp as ExitToAppIconMui,
+    UploadFile as UploadFileIcon, // Added UploadFileIcon for the button
+    Description as DocIcon,
+    Padding,
+    Opacity, // Added DocIcon for 'Import Contract' button
 } from "@mui/icons-material";
 
 import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 import {
-  Drawer,
-  Tooltip,
+    Drawer,
+    Tooltip,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -61,11 +63,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import SearchIcon from '@mui/icons-material/Search';
-import {TextField, InputAdornment} from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Chip} from "@mui/material";
+import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Chip } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -89,55 +91,57 @@ import FileWithTickIcon from "../../assets/FileWithTick.svg";
 import CreateCustomIcon from "../../assets/CreateCustom.svg";
 // import ImportContractPop from "client/src/components/ImportContractPop";
 import ImportContractPop from "../../components/ImportContractPop/importcontractpop"
+import { useContractContext } from "client/src/context/AuthContext";
 // VisuallyHiddenInput for file input (needed for the Upload button)
+
 const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
 });
 
 type Flags = {
-  contact: string;
-  name: string;
-  address: string;
-  startDate: string;
-  batchGenerated: string;
-  quantityReceive: string;
-  vendorCode: string;
-  billClause: string;
-  tags: string;
+    contact: string;
+    name: string;
+    address: string;
+    startDate: string;
+    batchGenerated: string;
+    quantityReceive: string;
+    vendorCode: string;
+    billClause: string;
+    tags: string;
 };
 
 const createData = (
-  contact: number,
-  name: string,
-  address: string,
-  startDate: string,
-  batchGenerated: string,
-  quantityReceive: string,
-  vendorCode: number,
-  billClause: string,
-  tags: string,
-  flags: Flags
+    contact: number,
+    name: string,
+    address: string,
+    startDate: string,
+    batchGenerated: string,
+    quantityReceive: string,
+    vendorCode: number,
+    billClause: string,
+    tags: string,
+    flags: Flags
 ) => {
-  return {
-    contact,
-    name,
-    address,
-    startDate,
-    batchGenerated,
-    quantityReceive,
-    vendorCode,
-    billClause,
-    tags,
-    flags
-  };
+    return {
+        contact,
+        name,
+        address,
+        startDate,
+        batchGenerated,
+        quantityReceive,
+        vendorCode,
+        billClause,
+        tags,
+        flags
+    };
 };
 
 const rows = [
@@ -182,8 +186,8 @@ const rows = [
 // Component to display a red dot on top right of the cell if flag === "outsource"
 
 type CellWithFlagProps = {
-  flag?: string;         // optional, could be "outsource" or others
-  children: ReactNode;   // any JSX passed between <CellWithFlag>...</CellWithFlag>
+    flag?: string;         // optional, could be "outsource" or others
+    children: ReactNode;   // any JSX passed between <CellWithFlag>...</CellWithFlag>
 };
 
 const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
@@ -214,109 +218,155 @@ const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "
 
 function Dashboard() {
 
-  const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [userName, setUserName] = useState("Static User"); // Default to Static Use
-  const [name,setName] = useState("Manikandan");
+    const navigate = useNavigate();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [userName, setUserName] = useState("Static User"); // Default to Static Use
+    const [name, setName] = useState("Manikandan");
 
+    const [anchorElAddView, setAnchorElAddView] = useState<HTMLElement | null>(null);
 
-    const fileInputRef = useRef<HTMLInputElement|null>(null);
+    const [newTag, setNewTag] = useState("");
+
+    const [itemTags, setItemTags] = useState<string[]>(items);
+
+    const handleAddViewClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElAddView(event.currentTarget);
+    }
+
+    const handleAddTagClose = () => {
+        setAnchorElAddView(null);
+        setNewTag('')
+
+    }
+
+    const addViewOpen = Boolean(anchorElAddView);
+
+  const [anchorElContractAdd, setAnchorElContractAdd] = useState<null | HTMLElement>(null);
+  const handleContractAddOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElContractAdd(event.currentTarget);
+    };
+      const handleCloseContractAdd = () => {
+        setAnchorElContractAdd(null);
+    };
+    
+    const popopen = Boolean(anchorElContractAdd);
+
+    const[newContract, setNewContract]= useState<string>("");
+
+    const handleNewContractAdd = () => {
+        if(newContract !== "" ) {
+            const updatedContractTypes= [...contractTypes, newContract];
+            setContractTypes(updatedContractTypes);
+            setNewContract("");
+            setAnchorElContractAdd(null);
+        }
+    }
+
+    const handleNewTag = () => {
+        const updatedView = [...itemTags, newTag];
+        setItemTags(updatedView);
+        handleAddTagClose();
+        setNewTag('')
+
+    };
+
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [file, setFile] = useState<File | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-            const selectedfile = event.target.files?.[0];
-    
-            if(selectedfile) {
-                const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
-                if(!isValidType) {
-                    alert("Upload a valid file type (img or pdf)");
-                    return;
-                }
-                setFile(selectedfile);
-                if(selectedfile) {
-                    navigate("/dashboard/contract-scan", {state: {selectedfile}})
-                }
-            }
-        };
+        const selectedfile = event.target.files?.[0];
 
-  useEffect(() => {
-      const userEmail = localStorage.getItem("email");
-      if (userEmail) {
-        setUserName(userEmail);
-      }
-    }, []); 
+        if (selectedfile) {
+            const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
+            if (!isValidType) {
+                alert("Upload a valid file type (img or pdf)");
+                return;
+            }
+            setFile(selectedfile);
+            if (selectedfile) {
+                navigate("/dashboard/contract-scan", { state: { selectedfile } })
+            }
+        }
+    };
+
+    useEffect(() => {
+        const userEmail = localStorage.getItem("email");
+        if (userEmail) {
+            setUserName(userEmail);
+        }
+    }, []);
     //  const handleMenu = (event) => {
     //   setAnchorEl(event.currentTarget);
     // };
-  
+
     const handleClose = () => {
-      setAnchorEl(null);
+        setAnchorEl(null);
     };
-  
+
     const handleLogout = () => {
-      // Clear static user data from localStorage
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-      localStorage.removeItem("email"); 
-      // Navigate back to the login page
-      navigate("/"); // Assuming your login route is "/"
-      setAnchorEl(null); // Close the menu after logout
+        // Clear static user data from localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("email");
+        // Navigate back to the login page
+        navigate("/"); // Assuming your login route is "/"
+        setAnchorEl(null); // Close the menu after logout
     };
 
-  // Placeholder for file change, not functional in Dashboard context
-//   const handleFileChange = (event) => {
-//      const file = event.target.files?.[0];
-//      if (file) {
-//        console.log("File selected in Dashboard:", file.name);
-       
-//        // Navigate to translate page and send file through state
-//        navigate('/TranslatePage', { state: { file } });
-//       }
-//     //console.log("File selected in Dashboard (not for upload here):");
-//     // navigate("/TranslatePage", { state: { trigger: true } })
-//     // This function is just a placeholder to prevent errors,
-//     // actual file handling should be in TranslatorApp.
-//   };
+    // Placeholder for file change, not functional in Dashboard context
+    //   const handleFileChange = (event) => {
+    //      const file = event.target.files?.[0];
+    //      if (file) {
+    //        console.log("File selected in Dashboard:", file.name);
 
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedKey, setSelectedKey] = useState(null);
+    //        // Navigate to translate page and send file through state
+    //        navigate('/TranslatePage', { state: { file } });
+    //       }
+    //     //console.log("File selected in Dashboard (not for upload here):");
+    //     // navigate("/TranslatePage", { state: { trigger: true } })
+    //     // This function is just a placeholder to prevent errors,
+    //     // actual file handling should be in TranslatorApp.
+    //   };
 
-  const icons = [
-    { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard' },
-    { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction' },
-    { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download' },
-    { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template' },
-    { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription' },
-    { key: 'help', icon: HelpIcon, tooltip: 'Help' },
-  ];
+    const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [selectedKey, setSelectedKey] = useState(null);
 
-  const toggleHamburger = () => {
-    setHamburgerOpen((prev) => {
-      if (prev) {
-        // closing everything
-        setDrawerOpen(false);
-        setSelectedKey(null);
-      }
-      return !prev;
-    });
-  };
+    const icons = [
+        { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard' },
+        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction' },
+        { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download' },
+        { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template' },
+        { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription' },
+        { key: 'help', icon: HelpIcon, tooltip: 'Help' },
+    ];
 
-//   const handleIconClick = (key) => {
-//     if (selectedKey === key && drawerOpen) {
-//       setDrawerOpen(false);
-//       setSelectedKey(null);
-//     } else {
-//       setSelectedKey(key);
-//       setDrawerOpen(true);
-//     }
-//   };
+    const toggleHamburger = () => {
+        setHamburgerOpen((prev) => {
+            if (prev) {
+                // closing everything
+                setDrawerOpen(false);
+                setSelectedKey(null);
+            }
+            return !prev;
+        });
+    };
 
-  const getInitials = (name: string) => {
-    return name?.charAt(0).toUpperCase(); // Gets first letter
-  };
+    //   const handleIconClick = (key) => {
+    //     if (selectedKey === key && drawerOpen) {
+    //       setDrawerOpen(false);
+    //       setSelectedKey(null);
+    //     } else {
+    //       setSelectedKey(key);
+    //       setDrawerOpen(true);
+    //     }
+    //   };
 
-      const [selected, setSelected] = useState<(number | string)[]>([]);
+    const getInitials = (name: string) => {
+        return name?.charAt(0).toUpperCase(); // Gets first letter
+    };
+
+    const [selected, setSelected] = useState<(number | string)[]>([]);
 
     const handleAllSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
@@ -342,7 +392,7 @@ function Dashboard() {
     const isSelected = (index: number) => selected.indexOf(index) !== -1;
 
     type BatchFormatProps = {
-    label: string;
+        label: string;
     };
     const BatchFormat: FC<BatchFormatProps> = ({ label }) => (
         <Chip
@@ -389,7 +439,7 @@ function Dashboard() {
         );
     }
 
-    function QuantityReceivedChip({ status }: {status: string}) {
+    function QuantityReceivedChip({ status }: { status: string }) {
         if (status === "Short on qty") {
             return (
                 <Chip
@@ -441,86 +491,111 @@ function Dashboard() {
     const [contractSelected, setContractSelected] = useState<number | null>(null);
 
     const handleContractSelect = (index: number) => {
-        if(contractSelected === index) {
+        if (contractSelected === index) {
             setContractSelected(null);
-        }else {
-        setContractSelected(index);
+        } else {
+            setContractSelected(index);
         }
     };
 
-    const handleContractTypeSubmit = async() => {
+    const handleContractTypeSubmit = async () => {
         setStep((prev) => prev + 1);
-        await axios.patch(`${API_BASE_URL}/processdata`, {
-            "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
-        });
+        // await axios.patch(`${API_BASE_URL}/processdata`, {
+        //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
+        // });
+        (contractSelected !== null) ? (
+        setJsonData(prev => ({
+            ...prev, 
+            processdata: {
+                ...prev.processdata,
+                "contract-type": contractTypes[contractSelected]
+            }
+        }))
+        ): ("");
+        setContractSelected(null);
     };
 
-  return (
-    <div>
-        <Box sx={{width: "100%",minHeight: "100vh" }}>
-            {/* Removed the original Paper with "Welcome" and "Navigate" text */}
-            {/* Purple Gradient Banner/Card - Integrated here */}
-            <div style={{padding: "50px 30px 0px 30px"}}>
-            <Typography sx={{fontSize: "24px", fontWeight: "bold", fontFamily: "Poppins"}}>Hello Maria!</Typography>
-            <p className = "simple" style={{color: "#808080", fontFamily: "Poppins"}}>Simple Dummy text of the printing</p>
-            <Paper className="violet-paper"
-                elevation={3}
-                sx={{
-                p: 4,
-                paddingLeft: "20px",
-                mt: 4, // Margin top to separate from AppBar
-                borderRadius: 2, // Rounded corners
-                // background: 'linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)', // Purple gradient
-                color: 'white',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start', // Align content to the left as in the image
-                gap: 2,
-                mb: 4, // Margin bottom for spacing below the card
+    // const {contractTypes, contractSelected, setContractSelected} = useContractContext();
 
-                backgroundImage: `url(${PsaiImg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: '50% 25.5%',
-                backgroundRepeat: 'no-repeat',
-                }}
-            >
+    const {jsonData,setJsonData} = useContractContext();
+    const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
 
-                <div style={{display: "flex", gap: "50px", alignItems: "flex-start", flexDirection: "column", marginLeft: "15px"}}>
-                <Typography sx={{fontSize: "20px", color: "#494A4E", maxWidth: "500px", fontWeight: "600", fontFamily: "Poppins"}}>
-                To get started by uploading contracts or importing contracts to apply the functionalities.
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                {/* <MuiLink
+    const handleItemSelect = (index: number) => {
+        if(itemsSelectedIndexes.includes(index)) {
+            const updatedItemsIndexes = itemsSelectedIndexes.filter((num) => num !== index);
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }else {
+            const updatedItemsIndexes = [...itemsSelectedIndexes, index];
+            setItemsSelectedIndexes(updatedItemsIndexes);
+        }
+    }
+
+    return (
+        <div>
+            <Box sx={{ width: "100%", minHeight: "100vh" }}>
+                {/* Removed the original Paper with "Welcome" and "Navigate" text */}
+                {/* Purple Gradient Banner/Card - Integrated here */}
+                <div style={{ padding: "50px 30px 0px 30px" }}>
+                    <Typography sx={{ fontSize: "24px", fontWeight: "bold", fontFamily: "Poppins" }}>Hello Maria!</Typography>
+                    <p className="simple" style={{ color: "#808080", fontFamily: "Poppins" }}>Simple Dummy text of the printing</p>
+                    <Paper className="violet-paper"
+                        elevation={3}
+                        sx={{
+                            p: 4,
+                            paddingLeft: "20px",
+                            mt: 4, // Margin top to separate from AppBar
+                            borderRadius: 2, // Rounded corners
+                            // background: 'linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)', // Purple gradient
+                            color: 'white',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start', // Align content to the left as in the image
+                            gap: 2,
+                            mb: 4, // Margin bottom for spacing below the card
+
+                            backgroundImage: `url(${PsaiImg})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: '50% 25.5%',
+                            backgroundRepeat: 'no-repeat',
+                        }}
+                    >
+
+                        <div style={{ display: "flex", gap: "50px", alignItems: "flex-start", flexDirection: "column", marginLeft: "15px" }}>
+                            <Typography sx={{ fontSize: "20px", color: "#494A4E", maxWidth: "500px", fontWeight: "600", fontFamily: "Poppins" }}>
+                                To get started by uploading contracts or importing contracts to apply the functionalities.
+                            </Typography>
+                            <Box sx={{ display: 'flex', gap: 2 }}>
+                                {/* <MuiLink
                     component={RouterLink}
                     to="/TranslatePage" // Link to your TranslatorApp
                     sx={{ textDecoration: 'none' }} // Remove underline from link
                 > */}
-                    <Button
-                    variant="contained"
-                    startIcon={<AddIcon/>}
-                    // component = "label"
-                    onClick={() => {setShowModal(true)}}
-                    // No 'disabled' or 'loading' state here as this is just a navigation button
-                    sx={{
-                        // bgcolor: 'white', // White background for button
-                        // color: '#6a11cb', // Purple text color
-                        // '&:hover': {
-                        //   bgcolor: '#f0f0f0', // Lighter hover
-                        // },
-                        fontSize:"14px",
-                        width:"200px",
-                        textTransform: "none",
-                        backgroundColor: "#1093FF",
-                        boxShadow: "none",
-                        borderRadius: "4px",
-                        fontFamily: "Poppins" // Rounded corners for button
-                        // px: 2, // Padding horizontal
-                        // py: 0.5, // Padding vertical
-                    }}
-                    >
-                    Upload
-                    {/* VisuallyHiddenInput is here, but its onChange won't trigger actual upload in Dashboard */}
-                    {/* <VisuallyHiddenInput
+                                <Button
+                                    variant="contained"
+                                    startIcon={<AddIcon />}
+                                    // component = "label"
+                                    onClick={() => { setShowModal(true) }}
+                                    // No 'disabled' or 'loading' state here as this is just a navigation button
+                                    sx={{
+                                        // bgcolor: 'white', // White background for button
+                                        // color: '#6a11cb', // Purple text color
+                                        // '&:hover': {
+                                        //   bgcolor: '#f0f0f0', // Lighter hover
+                                        // },
+                                        fontSize: "14px",
+                                        width: "200px",
+                                        textTransform: "none",
+                                        backgroundColor: "#1093FF",
+                                        boxShadow: "none",
+                                        borderRadius: "4px",
+                                        fontFamily: "Poppins" // Rounded corners for button
+                                        // px: 2, // Padding horizontal
+                                        // py: 0.5, // Padding vertical
+                                    }}
+                                >
+                                    Upload
+                                    {/* VisuallyHiddenInput is here, but its onChange won't trigger actual upload in Dashboard */}
+                                    {/* <VisuallyHiddenInput
                         type="file"
                         accept=".pdf,.docx,.csv" // Example accept types
                         onClick={handleFileChange} // Placeholder handler
@@ -528,7 +603,12 @@ function Dashboard() {
                     </Button>
                 {/* </MuiLink> */}
                 <ImportContractPop fromtext="dashboard"/>
+                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}}>h</Button>   
                 {/* <Button
+                                </Button>
+                                {/* </MuiLink> */}
+                                {/* <ImportContractPop fromtext="dashboard" /> */}
+                                {/* <Button
                     variant="outlined" // Outlined button for "Import Contract"
                     startIcon={<img src ={ImportBlueIcon} style={{width: "18px", height : "18px"}}/>} // Example icon
                     // No 'disabled' or 'loading' state here
@@ -552,12 +632,12 @@ function Dashboard() {
                 >
                     Import Contract
                 </Button> */}
-                </Box>
-                </div>
-            </Paper>
+                            </Box>
+                        </div>
+                    </Paper>
 
-            {/* Placeholder for the table content below the banner */}
-            {/* <Paper elevation={1} sx={{ p: 2, minHeight: '300px', bgcolor: '#f5f5f5', width: "100%"}}>
+                    {/* Placeholder for the table content below the banner */}
+                    {/* <Paper elevation={1} sx={{ p: 2, minHeight: '300px', bgcolor: '#f5f5f5', width: "100%"}}>
                 <Typography variant="body2" color="black" sx={{fontSize: "20px", fontWeight: "bold"}}>
                 Uploaded Files:
                 <Box style = {{display: "flex", flexWrap: "wrap", justifyContent: "flex-start", gap: "22px", marginTop: "20px", marginLeft: "25px"}}>
@@ -569,204 +649,287 @@ function Dashboard() {
                 </Box>
                 </Typography>
             </Paper> */}
-            <div className="uploadtables" style={{marginTop: "60px"}}>
-            <Box sx = {{pointerEvents: "none", opacity: "0.3"}}>
-                <Tabletry show = {true}/>
-            </Box>
-            </div>
-            
-            </div>
+                    <div className="uploadtables" style={{ marginTop: "60px" }}>
+                        <Box sx={{ pointerEvents: "none", opacity: "0.3" }}>
+                            <Tabletry show={true} />
+                        </Box>
+                    </div>
+
+                </div>
 
             </Box>
 
-            <Modal open = {showModal}>
-            <Box
-                sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: "50vw",
-                    // height: "530px",
-                    bgcolor: 'background.paper',
-                    boxShadow: 24,
-                    p: 6,
-                    borderRadius: 4,
-                }}
+            <Modal open={showModal}>
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: "50vw",
+                        // height: "530px",
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        p: 6,
+                        borderRadius: 4,
+                    }}
                 >
-                { step === 0 && (
-                <Box className = "step0">
-                <div className="st">
-                <div className="stepper">
-                <ProgressStepper activeStep={0}/>
-                </div>
-                </div>
-                <div className="choose">
-                <p style={{fontWeight: 500}}>Choose the contract type</p>
-                </div>
-                
+                    {step === 0 && (
+                        <Box className="step0">
+                            <div className="st">
+                                <div className="stepper">
+                                    <ProgressStepper activeStep={0} />
+                                </div>
+                            </div>
+                            <div className="choose">
+                                <p style={{ fontWeight: 500 }}>Choose the contract type</p>
+                            </div>
 
-                <div className="grid-container">
 
-                {contractTypes.map((contractType, index) => (
-                    <ListItem key = {index}
-                    onClick = {() => handleContractSelect(index)} 
-                    style={{cursor: "pointer",transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "2px solid #2B80EC" : "none" }}
-                    className="grid-item" sx={{py: "14px"}}>
-                        <ListItemIcon style={{minWidth:"40px"}}>
-                        <img src = {FileWithTickIcon} style={{width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit"}}/>
-                        </ListItemIcon>
-                        <ListItemText primary={<p style = {{color: (contractSelected === index) ? "white" : "#2B80EC", transition: "all 0.3s ease"}} >{contractType}</p>}/>
-                    </ListItem>
-                ))}
+                            <div className="grid-container">
 
-                <ListItem className="grid-item center" sx={{py: "14px"}}>
-                    <ListItemIcon style={{minWidth:"40px"}}>
-                    <img src = {CreateCustomIcon} style={{width: "24", height: "24"}}/>
-                    </ListItemIcon>
-                    <ListItemText primary={<p>Create a custom contract types</p>}/>
-                </ListItem>
-                </div>
+                                {contractTypes.map((contractType, index) => (
+                                    <ListItem key={index}
+                                        onClick={() => handleContractSelect(index)}
+                                        style={{ cursor: "pointer", transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "2px solid #2B80EC" : "none" }}
+                                        className="grid-item" sx={{ py: "14px" }}>
+                                        <ListItemIcon style={{ minWidth: "40px" }}>
+                                            <img src={FileWithTickIcon} style={{ width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit" }} />
+                                        </ListItemIcon>
+                                        <ListItemText primary={<p style={{ color: (contractSelected === index) ? "white" : "#2B80EC", transition: "all 0.3s ease" }} >{contractType}</p>} />
+                                    </ListItem>
+                                ))}
 
-                <div className="buttons">
-                    <Button
-                    onClick={() => {setShowModal(false)}}
-                    variant="outlined"
-                    style={{
-                        textTransform: "none", 
-                        fontSize: "16px", 
-                        padding: "10px 20px 10px 20px", 
-                        border: "1px solid gray",
-                        fontFamily: "Poppins",
-                        color: "#1093FF"
-                        }} 
-                    className="actions">Cancel</Button>
-                    <Button
-                    onClick={() => {handleContractTypeSubmit()}}
-                    disabled = {contractSelected === null}
-                    variant="contained"
-                    style={{
-                        textTransform: "none", 
-                        fontSize: "16px", 
-                        padding: "10px 25px 10px 25px",
-                        fontFamily: "Poppins",
-                        // backgroundColor: "#1093FF",
-                        boxShadow: "none"
-                        }} 
-                    className="actions">Next</Button>
-                </div>
-                </Box>
-                )}
+                                <ListItem className="grid-item center" sx={{ py: "14px" }} 
+                                onClick={(event) => handleContractAddOpen(event)}>
+                                    <ListItemIcon style={{ minWidth: "40px" }}>
+                                        <img src={CreateCustomIcon} style={{ width: "24", height: "24" }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={<p>Create a custom contract types</p>} />
+                                </ListItem>
+                            </div>
 
-                { step === 1 && (
-                    <Box className = "step1">
-                        <div className="st">
-                        <div className="stepper">
-                        <ProgressStepper activeStep={1}/>
-                        </div>
-                        </div>
-                        <div className="choose">
-                        <p style={{fontWeight: 500}}>New Extraction</p>
-                        </div>
-                        <div className="descopt">
-                            <p>Description</p>
-                            <p style={{color: "gray"}}>(Optional)</p>
-                        </div>
-                        <Box className = "descbox">
-                            <TextField
-                                variant="outlined"
-                                fullWidth
-                                multiline
-                                minRows={4}
-                                maxRows={7}
-                                placeholder="Enter your description here..."
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                    borderRadius: '10px',
-                                    backgroundColor: '#EFF8FF', // light blue background
-                                    '& fieldset': {
-                                        borderColor: '#2B80EC', // blue border
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: '#2B80EC', // darker blue on hover
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#2B80EC', // even darker blue when focused
-                                    },
-                                    },
-                                    '& .MuiInputBase-input::placeholder': {
-                                    fontSize: '16px', // increase placeholder size
-                                    color: '#555',
-                                    fontFamily :"Poppins",
-                                    },
-                                }}
-                            />
+                            <div className="buttons">
+                                <Button
+                                    onClick={() => { setShowModal(false); setContractSelected(null)}}
+                                    variant="outlined"
+                                    style={{
+                                        textTransform: "none",
+                                        fontSize: "16px",
+                                        padding: "10px 20px 10px 20px",
+                                        border: "1px solid gray",
+                                        fontFamily: "Poppins",
+                                        color: "#1093FF"
+                                    }}
+                                    className="actions">Cancel</Button>
+                                <Button
+                                    onClick={() => { handleContractTypeSubmit() }}
+                                    disabled={contractSelected === null}
+                                    variant="contained"
+                                    style={{
+                                        textTransform: "none",
+                                        fontSize: "16px",
+                                        padding: "10px 25px 10px 25px",
+                                        fontFamily: "Poppins",
+                                        // backgroundColor: "#1093FF",
+                                        boxShadow: "none"
+                                    }}
+                                    className="actions">Next</Button>
+                            </div>
                         </Box>
+                    )}
 
-                        <Box className = "content-container">
-                            {items.map((item, index) => (
-                                <Box className = "content">{item}</Box>
-                            ))}
-                            <Button
-                            variant="text"
-                            startIcon = {<AddIcon/>}
-                            sx={{textTransform: "none", fontSize: "18px", color: "#1093FF"}}
-                            >
-                                Add another
-                            </Button>
-                        </Box>
-
-                        <div className="buttons">
-                            <Button
-                            onClick={() => {setShowModal(false); setStep(0)}}
-                            variant="outlined"
-                            style={{
-                                textTransform: "none", 
-                                fontSize: "17px", 
-                                padding: "10px 20px 10px 20px", 
-                                border: "1px solid gray",
-                                boxShadow : "none",
-                                color: "#1093FF"
-                                }} 
-                            className="actions">Cancel</Button>
-                            <Button
-                            onClick={() => { setStep((prev) => prev + 1)}}
-                            variant="contained"
-                            style={{
-                                textTransform: "none", 
-                                fontSize: "17px", 
-                                padding: "10px 25px 10px 25px",
-                                boxShadow : "none",
-                                backgroundColor: "#1093FF"
-                                }} 
-                            className="actions">Next</Button>
-                        </div>
-
-                    </Box>
-                )}
-
-                { step === 2 && (
-                    <Box className = "step2">
-                        
-                        <div className="st">
-                        <div className="stepper">
-                        <ProgressStepper activeStep={2}/>
-                        </div>
-                        </div>
-                        
-                        <div className="choose">
-                        <p style={{fontWeight: 500}}>Upload your files</p>
-                        </div>
-
-                        <Box className = "upload-box" onClick = {() => {fileInputRef.current?.click();}} style = {{cursor: 'pointer'}}>
-                            <Box><IconButton onClick = {() => {fileInputRef.current?.click();}}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
-
-                            <Box sx = {{mt: "20px", textAlign: "center"}} className = "clickupl">
-                                <p ><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
-                                <span>or Drag and drop </span></p>
-                               <p>a contract PDF or Word doc</p>
+                    {step === 1 && (
+                        <Box className="step1">
+                            <div className="st">
+                                <div className="stepper">
+                                    <ProgressStepper activeStep={1} />
+                                </div>
+                            </div>
+                            <div className="choose">
+                                <p style={{ fontWeight: 500 }}>New Extraction</p>
+                            </div>
+                            <div className="descopt">
+                                <p>Description</p>
+                                <p style={{ color: "gray" }}>(Optional)</p>
+                            </div>
+                            <Box className="descbox">
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    multiline
+                                    minRows={4}
+                                    maxRows={7}
+                                    placeholder="Enter your description here..."
+                                    sx={{
+                                        '& .MuiOutlinedInput-root': {
+                                            borderRadius: '10px',
+                                            backgroundColor: '#EFF8FF', // light blue background
+                                            '& fieldset': {
+                                                borderColor: '#2B80EC', // blue border
+                                            },
+                                            '&:hover fieldset': {
+                                                borderColor: '#2B80EC', // darker blue on hover
+                                            },
+                                            '&.Mui-focused fieldset': {
+                                                borderColor: '#2B80EC', // even darker blue when focused
+                                            },
+                                        },
+                                        '& .MuiInputBase-input::placeholder': {
+                                            fontSize: '16px', // increase placeholder size
+                                            color: '#555',
+                                            fontFamily: "Poppins",
+                                        },
+                                    }}
+                                />
                             </Box>
+
+                            <Box className="content-container">
+                                {itemTags.map((item, index) => (
+                                    <Box className="content" 
+                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#EFF8FF": "inherit"}}
+                                    onClick = {() => handleItemSelect(index)}>{item}</Box>
+                                ))}
+                                <Button onClick={handleAddViewClick}
+                                    variant="text"
+                                    startIcon={<AddIcon />}
+                                    sx={{ textTransform: "none", fontSize: "18px", color: "#1093FF" }}
+                                >
+                                    Add another
+                                </Button>
+                            </Box>
+
+                            <Popover open={addViewOpen} anchorEl={anchorElAddView} onClose={handleAddTagClose} disableScrollLock anchorOrigin={{ vertical: "center", horizontal: "right" }} sx={{ boxShadow: "none", marginLeft: "-10px", marginTop: "-50px" }} slotProps={{
+                                paper: {
+                                    elevation: 0,
+                                    sx: {
+                                        boxShadow: "none",
+                                        borderRadius: '20px'
+                                    },
+                                },
+                            }}>
+                                <div className="addview-box">
+                                    <div className="addviewtop">
+                                        <p>Add Tag</p>
+                                        <IconButton onClick={handleAddTagClose}><CloseIcon sx={{ color: "black" }} /></IconButton>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily: "Poppins" }}>Enter a new tag name</p>
+                                    <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        placeholder="AI View"
+                                        value={newTag}
+                                        onChange={(event) => setNewTag(() => event.target.value)}
+                                        sx={{
+                                            marginBottom: "7px",
+                                            '& .MuiInputBase-root': {
+                                                borderRadius: '4px',
+                                                fontSize: '16px',
+                                                fontFamily: 'Poppins, sans-serif',
+                                                '& fieldset': {
+                                                    borderWidth: '0.5px',
+                                                    borderColor: '#C4C4C4',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: '#999',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: '#000',
+                                                },
+                                            },
+                                            '& .MuiInputBase-input': {
+                                                padding: '10px 12px',
+                                                fontSize: '14px',
+                                                fontFamily: 'Poppins, sans-serif',
+                                                color: '#42474E',
+                                            },
+                                            '& .MuiInputBase-input::placeholder': {
+                                                color: '#42474E',
+                                                fontSize: '14px',
+                                                fontWeight: 400,
+                                                opacity: 1,
+                                            },
+                                        }}
+                                    />
+                                    <div className="buttons" style={{ padding: "20px 0px 0px 0px" }}>
+                                        <Button
+                                            onClick={handleAddTagClose}
+                                            variant="outlined"
+                                            style={{
+                                                textTransform: "none",
+                                                fontSize: "16px",
+                                                padding: "10px 20px 10px 20px",
+                                                border: "1px solid gray",
+                                                color: "#1093FF"
+                                            }}
+                                            className="actions">Cancel</Button>
+                                        <Button
+                                            onClick={handleNewTag}
+                                            variant="contained"
+                                            style={{
+                                                textTransform: "none",
+                                                fontSize: "16px",
+                                                padding: "10px 25px 10px 25px",
+                                                backgroundColor: "#1093FF",
+                                                boxShadow: "none"
+                                            }}
+                                            className="actions">Save</Button>
+                                    </div>
+                                </div>
+                            </Popover>
+
+                            <div className="buttons">
+                                <Button
+                                    onClick={() => { setShowModal(false); setStep(0) }}
+                                    variant="outlined"
+                                    style={{
+                                        textTransform: "none",
+                                        fontSize: "17px",
+                                        padding: "10px 20px 10px 20px",
+                                        border: "1px solid gray",
+                                        boxShadow: "none",
+                                        color: "#1093FF"
+                                    }}
+                                    className="actions">Cancel</Button>
+                                <Button
+                                    onClick={() => { setStep((prev) => prev + 1) }}
+                                    variant="contained"
+                                    style={{
+                                        textTransform: "none",
+                                        fontSize: "17px",
+                                        padding: "10px 25px 10px 25px",
+                                        boxShadow: "none",
+                                        backgroundColor: "#1093FF"
+                                    }}
+                                    className="actions">Next</Button>
+                            </div>
+
                         </Box>
+                    )}
+
+                    {step === 2 && (
+                        <Box className="step2">
+
+                            <div className="st">
+                                <div className="stepper">
+                                    <ProgressStepper activeStep={2} />
+                                </div>
+                            </div>
+
+                            <div className="choose">
+                                <p style={{ fontWeight: 500 }}>Upload your files</p>
+                            </div>
+
+                            <Box className="upload-box" onClick={() => { fileInputRef.current?.click(); }} style={{ cursor: 'pointer' }}>
+                                <Box><IconButton onClick={() => { fileInputRef.current?.click(); }}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
+
+                                <Box sx={{ mt: "20px", textAlign: "center" }} className="clickupl">
+                                    <p ><span style={{ color: "#2B80EC" }}><u><a style={{ cursor: "pointer" }}>Click to Upload</a></u></span>{' '}
+                                        <span>or Drag and drop </span></p>
+                                    <p>a contract PDF or Word doc</p>
+                                </Box>
+                            </Box>
+                            
                         <p className="or">Or</p>
                         <Box style = {{display: "flex", justifyContent: "center", marginTop: "20px"}}>
                         <Button
@@ -785,16 +948,94 @@ function Dashboard() {
                         </Box>
                     </Box>
                 )}
+                <Popover open = {popopen} anchorEl={anchorElContractAdd} onClose={handleCloseContractAdd} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "-600px", marginTop: "-50px"}}slotProps={{
+                paper: {
+                elevation: 0,
+                sx: {
+                    boxShadow: "none",
+                    borderRadius: "20px"
+                },
+                },
+            }}>
+                <div className="addview-box">
+                    <div className="addviewtop">
+                        <p>Add View</p>
+                        <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
+                    </div>
+                    <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
+                    <TextField
+                    variant="outlined"
+                    fullWidth
+                    placeholder="AI View"
+                    value={newContract}
+                    onChange={(event) => setNewContract(event.target.value)}
+                    sx={{
+                        marginBottom: "7px",
+                        '& .MuiInputBase-root': {
+                        borderRadius: '4px',
+                        fontSize: '16px',
+                        fontFamily: 'Poppins, sans-serif',
+                        '& fieldset': {
+                            borderWidth: '0.5px',
+                            borderColor: '#C4C4C4',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#999',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#000',
+                        },
+                        },
+                        '& .MuiInputBase-input': {
+                        padding: '10px 12px',
+                        fontSize: '14px',
+                        fontFamily: 'Poppins, sans-serif',
+                        color: '#42474E',
+                        },
+                        '& .MuiInputBase-input::placeholder': {
+                        color: '#42474E',
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        opacity: 1,
+                        },
+                    }}
+                    />
+                    <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
+                        <Button
+                        onClick={handleCloseContractAdd}
+                        variant="outlined"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 20px 10px 20px",
+                            border: "1px solid gray",
+                            color: "#1093FF"
+                            }} 
+                        className="actions">Cancel</Button>
+                        <Button
+                        onClick = {handleNewContractAdd}
+                        variant="contained"
+                        style={{
+                            textTransform: "none", 
+                            fontSize: "16px", 
+                            padding: "10px 25px 10px 25px",
+                            backgroundColor: "#1093FF",
+                            boxShadow: "none"
+                            }} 
+                        className="actions">Save</Button>
+                    </div>
+                </div>
+            </Popover>
             </Box>
             </Modal>
-            <input 
-            type = "file"
-            ref = {fileInputRef}
-            onChange={handleFileChange}
-            style={{display: "none"}}
+            <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: "none" }}
             />
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Dashboard;
