@@ -365,6 +365,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
     const handleAddViewClose = () => {
         setAnchorElAddView(null);
+        setNewView('')
     }
 
     const addViewOpen = Boolean(anchorElAddView);
@@ -444,6 +445,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
         const updatedView = [...tabsArray,newView];
         setTabsArray(updatedView);
         handleAddViewClose();
+        setNewView('')
     };
 
     return(
@@ -495,6 +497,7 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                             elevation: 0,
                             sx: {
                                 boxShadow: "none",
+                                borderRadius:'20px'
                             },
                             },
                         }}>
