@@ -452,9 +452,9 @@ function Dashboard() {
 
     const handleContractTypeSubmit = async() => {
         setStep((prev) => prev + 1);
-        await axios.patch(`${API_BASE_URL}/processdata`, {
-            "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
-        });
+        // await axios.patch(`${API_BASE_URL}/processdata`, {
+        //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
+        // });
     };
 
     const {contractTypes, contractSelected, setContractSelected} = useContractContext();
@@ -646,7 +646,7 @@ function Dashboard() {
 
                 <div className="buttons">
                     <Button
-                    onClick={() => {setShowModal(false)}}
+                    onClick={() => {setShowModal(false); setContractSelected(null)}}
                     variant="outlined"
                     style={{
                         textTransform: "none", 
@@ -737,7 +737,7 @@ function Dashboard() {
 
                         <div className="buttons">
                             <Button
-                            onClick={() => {setShowModal(false); setStep(0)}}
+                            onClick={() => {setShowModal(false); setStep(0); setItemsSelectedIndexes([]); setContractSelected(null)}}
                             variant="outlined"
                             style={{
                                 textTransform: "none", 
@@ -750,13 +750,14 @@ function Dashboard() {
                             className="actions">Cancel</Button>
                             <Button
                             onClick={() => { setStep((prev) => prev + 1)}}
+                            disabled = {itemsSelectedIndexes.length === 0}
                             variant="contained"
                             style={{
                                 textTransform: "none", 
                                 fontSize: "17px", 
                                 padding: "10px 25px 10px 25px",
                                 boxShadow : "none",
-                                backgroundColor: "#1093FF"
+                                // backgroundColor: "#1093FF"
                                 }} 
                             className="actions">Next</Button>
                         </div>
@@ -778,7 +779,7 @@ function Dashboard() {
                         </div>
 
                         <Box className = "upload-box" onClick = {() => {fileInputRef.current?.click();}} style = {{cursor: 'pointer'}}>
-                            <Box><IconButton onClick = {() => {fileInputRef.current?.click();}}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
+                            <Box><IconButton><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
 
                             <Box sx = {{mt: "20px", textAlign: "center"}} className = "clickupl">
                                 <p ><span style={{color: "#2B80EC"}}><u><a style={{cursor: "pointer"}}>Click to Upload</a></u></span>{' '}
