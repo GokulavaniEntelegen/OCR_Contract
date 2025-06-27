@@ -38,6 +38,7 @@ function App() {
             <Route path="ai-chat" element = {<AIChat/>}/>
             <Route path="contract-scan" element = {<ContractScan/>}/>
             <Route path="trial-page" element = {<Trialpage/>}/>
+            <Route path="settings" element={<Settings />} />
           </Route>
 
           <Route path="/" element = {<SignIn/>}>
@@ -52,7 +53,6 @@ function App() {
 
           <Route path="/deletepopover" element={< DeletePopoverExample />} />
           <Route path="/editpop" element={<EditPop />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/customfields" element={< CustomFields />}  />
           <Route path="/notification" element={< NotificationPanel />}  />
         </Routes>

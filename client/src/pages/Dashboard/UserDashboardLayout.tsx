@@ -736,6 +736,7 @@ function DashboardLayout() {
                             }}
                         >
                             <IconButton
+                            onClick={() => {navigate("/dashboard/settings")}}
                                 sx={{
                                     color: 'black',
                                     border: '1px solid lightgray',

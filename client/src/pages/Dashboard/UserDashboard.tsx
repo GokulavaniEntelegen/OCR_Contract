@@ -13,6 +13,7 @@ import { useRef } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from 'client/api';
 import CloseIcon from '@mui/icons-material/Close';
+import InfoBigIcon from "../../assets/InfoBig.svg";
 
 import {
     AppBar,
@@ -98,6 +99,7 @@ import CreateCustomIcon from '../../assets/CreateCustom.svg';
 // import ImportContractPop from "client/src/components/ImportContractPop";
 import ImportContractPop from '../../components/ImportContractPop/importcontractpop';
 import { useContractContext } from 'client/src/context/AuthContext';
+import { info } from 'sass';
 // VisuallyHiddenInput for file input (needed for the Upload button)
 
 const VisuallyHiddenInput = styled('input')({
@@ -598,6 +600,8 @@ function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(0);
 
+    const [addAnotherModal, setAddAnotherModal] = useState(false);
+
     const [contractTypes, setContractTypes] = useState<string[]>([
         'Vendor & Sales Contracts',
         'Lease Contracts',
@@ -1011,7 +1015,8 @@ function Dashboard() {
                                     </Box>
                                 ))}
                                 <Button
-                                    onClick={handleAddViewClick}
+                                    // onClick={handleAddViewClick}
+                                    onClick={() => {setAddAnotherModal(true)}}
                                     variant="text"
                                     startIcon={<AddIcon />}
                                     sx={{
@@ -1283,7 +1288,7 @@ function Dashboard() {
                                     fontFamily: 'Poppins',
                                 }}
                             >
-                                Enter a new view name
+                                Enter a new contract type
                             </p>
                             <TextField
                                 variant="outlined"
@@ -1354,6 +1359,68 @@ function Dashboard() {
                             </div>
                         </div>
                     </Popover>
+                </Box>
+            </Modal>
+
+            <Modal open = {addAnotherModal}>
+                <Box className = "anotherbox"
+                sx = {{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: "20px 32px",
+                    borderRadius: 4,
+
+                }}>
+                    <img src = {InfoBigIcon} style={{width: "131.22x", height: "86.65px"}}/>
+                    <p className='suretext'>To add another metadata entry, you need to navigate away from this page. Would you like to proceed?</p>
+                    <Box className = "sureandcan">
+                        <Button
+                        onClick={() => {
+                            setAddAnotherModal(false);
+                        }}
+                        variant="outlined"
+                        style={{
+                            textTransform: 'none',
+                            fontSize: '14px',
+                            padding: '10px 24px',
+                            border: '1px solid gray',
+                            fontFamily: 'Poppins',
+                            color: '#1093FF',
+                        }}
+                        // className="actions"
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            navigate("/dashboard/settings", {
+                                state: {
+                                    fromloc: "dashboard"
+                                }
+                            });
+                            setAddAnotherModal(false);
+                        }}
+                        variant="contained"
+                        sx={{
+                            textTransform: 'none',
+                            fontSize: '14px',
+                            padding: '10px 24px',
+                            fontFamily: 'Poppins',
+                            backgroundColor: '#1093FF',
+                            boxShadow: 'none',
+                            '&.Mui-disabled': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.12)',
+                            },
+                        }}
+                        // className="actions"
+                    >
+                        Next
+                    </Button>
+                    </Box>
                 </Box>
             </Modal>
             <input

@@ -383,3 +383,25 @@
 //     color: white;
 //     display: block;
 // }
+
+.anotherbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 30vw;
+}
+
+.suretext {
+    @include title-medium;
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.sureandcan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
