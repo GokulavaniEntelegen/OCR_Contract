@@ -2,6 +2,9 @@
 
 .inviterest {
     @include display-small;
-    font-weight: 600;
+    font-weight: 500;
     padding-bottom: 32px;
+    font-size: 34px;
+    // line-height: 54px;
+    // letter-spacing:4px
 }
