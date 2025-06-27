@@ -23,6 +23,7 @@ import DeletePopoverExample from "./components/deletepopexample";
 import EditPop from "./components/editpop";
 import Settings from "./components/settings";
 import CustomFields from "./components/customfields";
+import NotificationPanel from "./components/NotificationPanel";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/editpop" element={<EditPop />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/customfields" element={< CustomFields />}  />
+          <Route path="/notification" element={< NotificationPanel />}  />
         </Routes>
         </BrowserRouter>        
     );

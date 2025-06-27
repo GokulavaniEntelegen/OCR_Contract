@@ -4,7 +4,7 @@ import { Box, Typography, TextField, Button, IconButton, MenuItem } from '@mui/m
 import Hamburger from '../assets/Frame.svg';
 import Vector from '../assets/Vector.svg';
 import { Margin } from '@mui/icons-material';
-// import dropdown from '../assets/Dropdown.svg';
+import dropdown from '../assets/Dropdown.svg';
 import CustomRow from './customrow';
 import plusimage from '../assets/PlusIcon.svg'
 
@@ -25,15 +25,15 @@ const CustomFields: React.FC = () => {
             </Typography>
 
 
-            <p style={{ marginBottom: '1rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif',}}>
+            <p style={{ marginBottom: '1rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif', }}>
                 <strong>Key:</strong> The name of the key that you want to extract.
             </p>
 
-            <p style={{ marginBottom: '1rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif',lineHeight:'28px',width:'80%' }}>
+            <p style={{ marginBottom: '1rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif', lineHeight: '28px', width: '80%' }}>
                 <strong>Description:</strong> Give details about what you want to extract. Explain as you are talking to a real person. This will help the AI understand your requirement. You can also specify the format or give synonyms for the key.
             </p>
 
-            <p style={{ marginBottom: '2rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif',lineHeight:'28px'}}>
+            <p style={{ marginBottom: '2rem', fontWeight: 500, fontSize: '1rem', fontFamily: 'Poppins, sans-serif', lineHeight: '28px' }}>
                 <strong>Example:</strong> Provide an example for the key. Respect the format that you want to receive the data in.
             </p>
 
@@ -41,51 +41,53 @@ const CustomFields: React.FC = () => {
 
             <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%', marginBottom: '2rem', }}>
                 <p style={{ margin: 1, color: '#606060', fontFamily: 'poppins,sans-serif', }}>Document Type</p>
-                <TextField
-                    select
-                    placeholder="Example:Invoice"
-                    variant="outlined"
-                    size="small"
-                    sx={{
-                        fontFamily: 'Poppins, sans-serif',
+                <Box sx={{ position: 'relative' }}>
+                        <TextField
+                            select
+                            placeholder="Example:Invoice"
+                            variant="outlined"
+                            size="small"
+                            defaultValue=""
+                            fullWidth
+                            SelectProps={{
+                                IconComponent: () => null  // Remove default icon
+                            }}
+                            sx={{
+                                fontFamily: 'Poppins, sans-serif',
+                                '& .MuiSelect-select': {
+                                    fontFamily: 'Poppins, sans-serif',
+                                    color: '#45464B',
+                                    padding: '8px 0',
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    border: 'none',
+                                    borderBottom: '1px solid #D1D5DB',
+                                    borderRadius: '4px',
+                                },
+                            }}
+                        >
+                            <MenuItem value="Invoice" sx={{ fontFamily: 'poppins,sans-serif' }}>
+                                Example: Invoice
+                            </MenuItem>
+                        </TextField>
 
+                        {/* ✅ Custom dropdown icon */}
+                        <IconButton
+                            size="small"
+                            sx={{
+                                position: 'absolute',
+                                right: 8,
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                pointerEvents: 'none'
+                            }}
+                        >
+                            {/* Replace with your own icon or image if needed */}
+                            <img src={dropdown} alt="dropdown" style={{ width: 8, height: 8 }} />
 
-                        // Select text styling
-                        '& .MuiSelect-select': {
-                            fontFamily: 'Poppins, sans-serif',
-                            // fontSize: '14px',
-                            color: '#45464B',
-                            padding: '8px 0',
-                        },
+                        </IconButton>
+                    </Box>
 
-                        // Remove top/left/right borders and keep only bottom
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            border: 'none',
-                            borderBottom: '1px solid #D1D5DB', // base bottom line
-                            borderRadius: '4px',
-                            backgroundColor: '#ffffff',
-                        },
-                    }
-                    }
-
-                    defaultValue=""
-                    fullWidth
-                // SelectProps={{
-                //     IconComponent: () => (
-                //         <IconButton>
-                //         <img
-                //             src={dropdown}
-                //             alt="dropdown"
-                //             style={{ width: 16, height: 16, marginRight: 8 }}
-                //         />
-                //         </IconButton>
-                //     )
-
-                // }}
-                >
-                    <MenuItem value="Invoice"
-                        sx={{ fontFamily: 'poppins,sans-serif' }}>Example: Invoice</MenuItem>
-                </TextField>
 
             </Box>
 
@@ -104,7 +106,7 @@ const CustomFields: React.FC = () => {
                     fontSize: '14px',
                     // fontWeight:'400',
                     backgroundColor: '#ffffff',
-                    width:'95%'
+                    width: '95%'
                 }}
             >
                 <Box >
@@ -160,102 +162,105 @@ const CustomFields: React.FC = () => {
                     />
                 </Box>
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%', }}>
-                    <p style={{ margin: 1, color: '#606060', fontFamily: 'poppins,sans-serif', }}>Data Type</p>
-                    <TextField
-                        select
-                        placeholder="Example:Invoice"
-                        variant="outlined"
-                        size="small"
-                        sx={{
-                            fontFamily: 'Poppins, sans-serif',
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%' }}>
+                    <p style={{ margin: 1, color: '#606060', fontFamily: 'poppins,sans-serif' }}>Data Type</p>
 
-
-                            // Select text styling
-                            '& .MuiSelect-select': {
+                    <Box sx={{ position: 'relative' }}>
+                        <TextField
+                            select
+                            placeholder="Example:Invoice"
+                            variant="outlined"
+                            size="small"
+                            defaultValue=""
+                            fullWidth
+                            SelectProps={{
+                                IconComponent: () => null  // Remove default icon
+                            }}
+                            sx={{
                                 fontFamily: 'Poppins, sans-serif',
-                                // fontSize: '14px',
-                                color: '#45464B',
-                                padding: '8px 0',
-                            },
+                                '& .MuiSelect-select': {
+                                    fontFamily: 'Poppins, sans-serif',
+                                    color: '#45464B',
+                                    padding: '8px 0',
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    border: 'none',
+                                    borderBottom: '1px solid #D1D5DB',
+                                    borderRadius: '4px',
+                                },
+                            }}
+                        >
+                            <MenuItem value="Invoice" sx={{ fontFamily: 'poppins,sans-serif' }}>
+                                Example: Invoice
+                            </MenuItem>
+                        </TextField>
 
-                            // Remove top/left/right borders and keep only bottom
-                            '& .MuiOutlinedInput-notchedOutline': {
-                                border: 'none',
-                                borderBottom: '1px solid #D1D5DB', // base bottom line
-                                borderRadius: '4px',
-                            },
-                        }
-                        }
+                        {/* ✅ Custom dropdown icon */}
+                        <IconButton
+                            size="small"
+                            sx={{
+                                position: 'absolute',
+                                right: 8,
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                pointerEvents: 'none'
+                            }}
+                        >
+                            {/* Replace with your own icon or image if needed */}
+                            <img src={dropdown} alt="dropdown" style={{ width: 8, height: 8 }} />
 
-                        defaultValue=""
-                        fullWidth
-                    // SelectProps={{
-                    //     IconComponent: () => (
-                    //         <IconButton>
-                    //         <img
-                    //             src={dropdown}
-                    //             alt="dropdown"
-                    //             style={{ width: 16, height: 16, marginRight: 8 }}
-                    //         />
-                    //         </IconButton>
-                    //     )
+                        </IconButton>
+                    </Box>
 
-                    // }}
-                    >
-                        <MenuItem value="Invoice"
-                            sx={{ fontFamily: 'poppins,sans-serif' }}>Example: Invoice</MenuItem>
-                    </TextField>
+                </Box>
+                
+                    {/* </Box> */}
+
+                    <Box sx={{ marginLeft: 'auto' }}>
+                        <img src={Vector} alt="image" style={{ height: '2rem', width: 18, paddingLeft: '24', }} />
+                    </Box>
+
+
+
 
                 </Box>
 
-                {/* </Box> */}
+                <CustomRow
+                    keyLabel="Key 1"
+                    keyPlaceholder="Invoice_ID"
+                    descriptionPlaceholder="Invoice number or ID"
+                    dataTypePlaceholder="Example: Invoice"
+                />
 
-                <Box sx={{ marginLeft: 'auto' }}>
-                    <img src={Vector} alt="image" style={{ height: '2rem', width: 18, paddingLeft: '24', }} />
-                </Box>
+                <CustomRow
+                    keyLabel="Key 1"
+                    keyPlaceholder="Invoice_ID"
+                    descriptionPlaceholder="Invoice number or ID"
+                    dataTypePlaceholder="Example: Invoice"
+                />
 
+                <Button
+                    variant="contained"
+                    sx={{
+                        backgroundColor: '#1093FF',
+                        width: 100,
+                        borderRadius: 1,
+                        fontWeight: 500,
+                        textTransform: 'none',
+                        fontFamily: 'Poppins, sans-serif',
+                        gap: 1,
+                    }}
+                >
 
+                    <img src={plusimage} alt="image" style={{ height: 12, width: 12, }} />
+                    Submit
+                </Button>
 
 
             </Box>
 
-            <CustomRow
-                keyLabel="Key 1"
-                keyPlaceholder="Invoice_ID"
-                descriptionPlaceholder="Invoice number or ID"
-                dataTypePlaceholder="Example: Invoice"
-            />
 
-            <CustomRow
-                keyLabel="Key 1"
-                keyPlaceholder="Invoice_ID"
-                descriptionPlaceholder="Invoice number or ID"
-                dataTypePlaceholder="Example: Invoice"
-            />
-
-            <Button
-                variant="contained"
-                sx={{
-                    backgroundColor: '#1093FF',
-                    width: 100,
-                    borderRadius: 1,
-                    fontWeight: 500,
-                    textTransform: 'none',
-                    fontFamily: 'Poppins, sans-serif',
-                    gap: 1,
-                }}
-            >
-
-                <img src={plusimage} alt="image" style={{ height: 12, width: 12, }} />
-                Submit
-            </Button>
-
-
-        </Box>
-
-
-    )
+            )
 };
 
-export default CustomFields;
+            export default CustomFields;
