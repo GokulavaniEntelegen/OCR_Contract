@@ -709,12 +709,12 @@ function Dashboard() {
                                 {contractTypes.map((contractType, index) => (
                                     <ListItem key={index}
                                         onClick={() => handleContractSelect(index)}
-                                        style={{ cursor: "pointer", transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "2px solid #2B80EC" : "none" }}
+                                        style={{ cursor: "pointer", transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "none" : "none" }}
                                         className="grid-item" sx={{ py: "14px" }}>
                                         <ListItemIcon style={{ minWidth: "40px" }}>
                                             <img src={FileWithTickIcon} style={{ width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit" }} />
                                         </ListItemIcon>
-                                        <ListItemText primary={<p style={{ color: (contractSelected === index) ? "white" : "#2B80EC", transition: "all 0.3s ease" }} >{contractType}</p>} />
+                                        <ListItemText primary={<p style={{ color: (contractSelected === index) ? "#2B80EC" : "#2B80EC", transition: "all 0.3s ease" }} >{contractType}</p>} />
                                     </ListItem>
                                 ))}
 
