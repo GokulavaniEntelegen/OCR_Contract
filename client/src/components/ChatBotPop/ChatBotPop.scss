@@ -1,10 +1,10 @@
-@use "../../global_styles/typography.scss" as *;
+@use '../../global_styles/typography.scss' as *;
 
 .chatbox {
     width: 30vw;
     max-width: 450px;
     overflow-y: auto;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid lightgray;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
 
     .chattop {
         padding: 30px;
-        background-size: 400% 400%;         // Zoom in 4x
+        background-size: 400% 400%; // Zoom in 4x
         background-position: top left;
         flex-shrink: 0;
 
@@ -27,7 +27,7 @@
             font-family: Source Sans Pro;
             color: white;
             font-weight: 400;
-            line-height: 28px;  
+            line-height: 28px;
         }
     }
 
@@ -40,20 +40,19 @@
         gap: 35px;
         .sentbox {
             .avatarandtext {
-            display: flex;
-            gap: 10px;
+                display: flex;
+                gap: 10px;
 
                 .assttext {
-                font-family: Source Sans Pro;
-                font-weight: 600;
-                font-size: 16px;
+                    font-family: Source Sans Pro;
+                    font-weight: 600;
+                    font-size: 16px;
                 }
 
                 .msg {
-                padding: 10px 15px;
-                font-family: Source Sans Pro;
-                font-size: 16px;
-
+                    padding: 10px 15px;
+                    font-family: Source Sans Pro;
+                    font-size: 16px;
                 }
             }
         }
@@ -78,10 +77,14 @@
             align-items: center;
 
             .reply {
-                font-family: Source Sans pro;
-                font-size: 16px;
-                font-weight: 400;
-                color: #0D082C99;
+                .MuiOutlinedInput-root {
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: #0d082c99;
+                    fieldset {
+                        border: none;
+                    }
+                }
             }
         }
 

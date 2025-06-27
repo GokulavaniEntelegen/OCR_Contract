@@ -1,6 +1,4 @@
-@use "../../global_styles/typography.scss" as *;
-
-
+@use '../../global_styles/typography.scss' as *;
 
 * {
     margin: 0;
@@ -29,7 +27,7 @@
 
 .dashboard-container {
     display: flex;
-    font-family: "Segoe UI", sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     height: 100vh;
     background-color: #f9f9f9;
 }
@@ -186,24 +184,22 @@
     object-fit: contain;
 }
 
-
 .custom-datepicker {
-  border-radius: 100px;
-  padding: 10px 14px;
-  border: 1px solid #1976d2;
-  font-size: 16px;
-  outline: none;
-  color: #333;
-  width: 100px;
+    border-radius: 100px;
+    padding: 10px 14px;
+    border: 1px solid #1976d2;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+    width: 100px;
 }
 
 .custom-datepicker:focus {
-  border-color: #1565c0;
-  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
+    border-color: #1565c0;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
 }
 
-.filterandpagin
-{
+.filterandpagin {
     display: flex;
     gap: 16px;
     align-items: center;
@@ -214,86 +210,84 @@
 }
 
 .custom-datepicker {
-  border-radius: 100px;
-  padding: 10px 14px;
-  border: 1px solid #1976d2;
-  font-size: 16px;
-  outline: none;
-  color: #333;
-  width: 100px;
+    border-radius: 100px;
+    padding: 10px 14px;
+    border: 1px solid #1976d2;
+    font-size: 16px;
+    outline: none;
+    color: #333;
+    width: 100px;
 }
 
 .custom-datepicker:focus {
-  border-color: #1565c0;
-  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
+    border-color: #1565c0;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.2);
 }
 
-
-.choose{
+.choose {
     @include headline-small;
     margin-top: 20px;
 }
 
 @media (max-width: 1192px) {
     .choose {
-    font-size: 18px;
-    padding: 0;
+        font-size: 18px;
+        padding: 0;
     }
 }
 
-.stepper{
-    margin-bottom: 35px; 
+.stepper {
+    margin-bottom: 35px;
     margin-top: 20px;
     width: 80vw;
 }
 
-.st{
+.st {
     display: flex;
     justify-content: center;
 }
 
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); // 2 columns
-  gap: 20px;
-  padding: 16px;
-  max-width: 1000px;
-  margin: 40px auto;
-  
-  p {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 columns
+    gap: 20px;
+    padding: 16px;
+    max-width: 1000px;
+    margin: 40px auto;
+
+    p {
         @include body-large;
-        color: #2B80EC;
+        color: #2b80ec;
         // font-size: 10px;
         // font-size: larger;
     }
-
 }
 
 .grid-item {
-//   background-color: #F3F9FF;
-  border-radius: 8px;
-//   padding: 20px 12px;
-  display: flex;
-//   gap: -10px;
-  align-items: center;
+    //   background-color: #F3F9FF;
+    border-radius: 8px;
+    //   padding: 20px 12px;
+    display: flex;
+    //   gap: -10px;
+    align-items: center;
 }
 
 // Center the last item
 .grid-item.center {
-  grid-column: 1 / -1;
-  justify-self: flex-start;
-  width: 100%; // optional: controls width of center item
-  background-color: #F3F9FF;
+    grid-column: 1 / -1;
+    justify-self: flex-start;
+    width: 100%; // optional: controls width of center item
+    background-color: #f3f9ff;
 }
 
-.buttons{
+.buttons {
     display: flex;
     gap: 15px;
     justify-content: flex-end;
 
-    .actions{
+    .actions {
         @include label-large;
-        font-family: "Poppins"
+        font-family: 'Poppins';
     }
 }
 
@@ -317,22 +311,20 @@
     margin-top: 10px;
 }
 
-.content-container{
+.content-container {
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 40px;
-    
+
     .content {
         padding: 12px;
-        padding-top: 7.5px;
-        padding-bottom: 7.5px;
-        font-size: 14px;
-        font-family: "Poppins";
+        font-size: 16px;
+        font-family: 'Poppins';
         font-weight: 400;
         line-height: 100%;
-        border: 1px solid #4285F4;
+        border: 1px solid #4285f4;
         color: gray;
         border-radius: 7px;
         white-space: nowrap;
@@ -341,16 +333,15 @@
     }
 
     @media (max-width: 1192px) {
-    .content {
-        font-size: 14px;
+        .content {
+            font-size: 14px;
+        }
     }
 }
-}
-
 
 .upload-box {
-    background-color: #F6F6F6;
-    border: 1px solid #E4E7EC;
+    background-color: #f6f6f6;
+    border: 1px solid #e4e7ec;
     margin-top: 40px;
     height: 220px;
     border-radius: 8px;
@@ -372,18 +363,19 @@
     margin-top: 20px;
 }
 
-.skipbutt{
+.skipbutt {
     @include label-large;
-    font-family: "Poppins";
+    font-family: 'Poppins';
     margin-top: 10px;
     font-size: 14px;
 }
-.chat-bot{
+.chat-bot {
     padding: 10px;
     width: fit-content;
     position: fixed;
-    left: 50px;
+    left: 60px;
     bottom: 1px;
+    z-index: 2;
 }
 
 // .sidebar:hover .sidebarname p{
