@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import './UserDashboard.scss';
 import FileOpenOutlinedIcon from '@mui/icons-material/FileOpenOutlined';
-import { Grid, List, ListItem, Popover } from "@mui/material";
-import ProgressStepper from "./ProgressStepper";
+import { Grid, List, ListItem, Popover } from '@mui/material';
+import ProgressStepper from './ProgressStepper';
 import '@fontsource/roboto'; // Loads default weight (400)
 import '@fontsource/poppins';
-import { ReactNode } from "react";
-import { FC } from "react";
-import ImportBlueIcon from "../../assets/ImportBlueCustom.svg";
-import { useRef } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "client/api";
+import { ReactNode } from 'react';
+import { FC } from 'react';
+import ImportBlueIcon from '../../assets/ImportBlueCustom.svg';
+import { useRef } from 'react';
+import axios from 'axios';
+import { API_BASE_URL } from 'client/api';
 import CloseIcon from '@mui/icons-material/Close';
-
 
 import {
     AppBar,
@@ -32,9 +31,9 @@ import {
     ListItemText,
     Button,
     Avatar, // Added Button import for the card
-    Modal
-} from "@mui/material";
-import { styled } from "@mui/material/styles"; // Added styled for VisuallyHiddenInput
+    Modal,
+} from '@mui/material';
+import { styled } from '@mui/material/styles'; // Added styled for VisuallyHiddenInput
 import {
     Dashboard as DashboardIconMui,
     PictureAsPdf as PictureAsPdfIconMui,
@@ -45,15 +44,12 @@ import {
     Description as DocIcon,
     Padding,
     Opacity, // Added DocIcon for 'Import Contract' button
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 
 import AddIcon from '@mui/icons-material/Add';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
-import {
-    Drawer,
-    Tooltip,
-} from '@mui/material';
+import { Drawer, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChatIcon from '@mui/icons-material/Chat';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -63,46 +59,56 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import SearchIcon from '@mui/icons-material/Search';
-import { TextField, InputAdornment } from "@mui/material";
+import { TextField, InputAdornment } from '@mui/material';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Chip } from "@mui/material";
+import {
+    Checkbox,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TablePagination,
+    TableRow,
+    Chip,
+} from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 // import './tabletrycss.css';
-import UploadCustomIcon from "../../assets/Upload.svg"
+import UploadCustomIcon from '../../assets/Upload.svg';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import DashboardCustomIcon from "../../assets/Dashboard.svg";
-import RecentExtractionIcon from "../../assets/RecentExtraction.svg";
-import ReportIcon from "../../assets/Report.svg";
-import CreateTemplateIcon from "../../assets/CreateTemplate.svg";
-import SubscriptionIcon from "../../assets/Subscription.svg";
-import HelpIcon from "../../assets/Help.svg"
-import MainLogoIcon from "../../assets/MainLogo.svg"
-import SettingsCustomIcon from "../../assets/Setting.svg"
-import NotificationIcon from "../../assets/Notification.svg"
-import PsaiImg from "../../assets/Psai.png";
-import Tabletry from "client/src/components/Table/Tables";
-import FileWithTickIcon from "../../assets/FileWithTick.svg";
-import CreateCustomIcon from "../../assets/CreateCustom.svg";
+import DashboardCustomIcon from '../../assets/Dashboard.svg';
+import RecentExtractionIcon from '../../assets/RecentExtraction.svg';
+import ReportIcon from '../../assets/Report.svg';
+import CreateTemplateIcon from '../../assets/CreateTemplate.svg';
+import SubscriptionIcon from '../../assets/Subscription.svg';
+import HelpIcon from '../../assets/Help.svg';
+import MainLogoIcon from '../../assets/MainLogo.svg';
+import SettingsCustomIcon from '../../assets/Setting.svg';
+import NotificationIcon from '../../assets/Notification.svg';
+import PsaiImg from '../../assets/Psai.png';
+import Tabletry from 'client/src/components/Table/Tables';
+import FileWithTickIcon from '../../assets/FileWithTick.svg';
+import CreateCustomIcon from '../../assets/CreateCustom.svg';
 // import ImportContractPop from "client/src/components/ImportContractPop";
-import ImportContractPop from "../../components/ImportContractPop/importcontractpop"
-import { useContractContext } from "client/src/context/AuthContext";
+import ImportContractPop from '../../components/ImportContractPop/importcontractpop';
+import { useContractContext } from 'client/src/context/AuthContext';
 // VisuallyHiddenInput for file input (needed for the Upload button)
 
-const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
     height: 1,
-    overflow: "hidden",
-    position: "absolute",
+    overflow: 'hidden',
+    position: 'absolute',
     bottom: 0,
     left: 0,
-    whiteSpace: "nowrap",
+    whiteSpace: 'nowrap',
     width: 1,
 });
 
@@ -140,136 +146,237 @@ const createData = (
         vendorCode,
         billClause,
         tags,
-        flags
+        flags,
     };
 };
 
 const rows = [
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Short on qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Short on qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "", name: "", address: "outsource", startDate: "", batchGenerated: "", quantityReceive: "", vendorCode: "", billClause: "", tags: ""
+            contact: '',
+            name: '',
+            address: 'outsource',
+            startDate: '',
+            batchGenerated: '',
+            quantityReceive: '',
+            vendorCode: '',
+            billClause: '',
+            tags: '',
         }
     ),
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Short on qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Short on qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "outsource", name: "", address: "", startDate: "", batchGenerated: "", quantityReceive: "", vendorCode: "outsource", billClause: "", tags: ""
+            contact: 'outsource',
+            name: '',
+            address: '',
+            startDate: '',
+            batchGenerated: '',
+            quantityReceive: '',
+            vendorCode: 'outsource',
+            billClause: '',
+            tags: '',
         }
     ),
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Correct Qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Correct Qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "", name: "outsource", address: "", startDate: "", batchGenerated: "", quantityReceive: "", vendorCode: "", billClause: "", tags: ""
+            contact: '',
+            name: 'outsource',
+            address: '',
+            startDate: '',
+            batchGenerated: '',
+            quantityReceive: '',
+            vendorCode: '',
+            billClause: '',
+            tags: '',
         }
     ),
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Correct Qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Correct Qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "", name: "", address: "", startDate: "", batchGenerated: "outsource", quantityReceive: "", vendorCode: "", billClause: "", tags: ""
+            contact: '',
+            name: '',
+            address: '',
+            startDate: '',
+            batchGenerated: 'outsource',
+            quantityReceive: '',
+            vendorCode: '',
+            billClause: '',
+            tags: '',
         }
     ),
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Short on qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Short on qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "", name: "", address: "", startDate: "", batchGenerated: "", quantityReceive: "", vendorCode: "", billClause: "outsource", tags: ""
+            contact: '',
+            name: '',
+            address: '',
+            startDate: '',
+            batchGenerated: '',
+            quantityReceive: '',
+            vendorCode: '',
+            billClause: 'outsource',
+            tags: '',
         }
     ),
     createData(
-        1234567890, "abcde", "sfdgbgbdbffda", "02 May, 2020", "tg1234", "Short on qty", 12345, "Billed with 45 Days", "Design",
+        1234567890,
+        'abcde',
+        'sfdgbgbdbffda',
+        '02 May, 2020',
+        'tg1234',
+        'Short on qty',
+        12345,
+        'Billed with 45 Days',
+        'Design',
         {
-            contact: "", name: "", address: "", startDate: "", batchGenerated: "", quantityReceive: "outsource", vendorCode: "", billClause: "", tags: "outsource"
+            contact: '',
+            name: '',
+            address: '',
+            startDate: '',
+            batchGenerated: '',
+            quantityReceive: 'outsource',
+            vendorCode: '',
+            billClause: '',
+            tags: 'outsource',
         }
-    )
+    ),
 ];
 
 // Component to display a red dot on top right of the cell if flag === "outsource"
 
 type CellWithFlagProps = {
-    flag?: string;         // optional, could be "outsource" or others
-    children: ReactNode;   // any JSX passed between <CellWithFlag>...</CellWithFlag>
+    flag?: string; // optional, could be "outsource" or others
+    children: ReactNode; // any JSX passed between <CellWithFlag>...</CellWithFlag>
 };
 
 const CellWithFlag: React.FC<CellWithFlagProps> = ({ flag, children }) => {
     return (
-        <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
-            {flag === "outsource" && (
+        <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
+            {flag === 'outsource' && (
                 <span
                     style={{
-                        position: "absolute",
+                        position: 'absolute',
                         top: 2,
                         left: 0,
                         height: 7,
                         width: 7,
-                        backgroundColor: "red",
-                        borderRadius: "50%",
+                        backgroundColor: 'red',
+                        borderRadius: '50%',
                         zIndex: 1,
                     }}
                 />
             )}
-            <div style={{ paddingLeft: flag === "outsource" ? 7 : 0 }}>
-                {children}
-            </div>
+            <div style={{ paddingLeft: flag === 'outsource' ? 7 : 0 }}>{children}</div>
         </div>
     );
 };
 
-const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "End Date", "Auto Renewal Term", "Payment Term", "Termination Claus", "Tags"];
+const items = [
+    'Contact No.',
+    'Customer Name',
+    'Customer Title',
+    'Start Date',
+    'End Date',
+    'Auto Renewal Term',
+    'Payment Term',
+    'Termination Claus',
+    'Tags',
+];
 
 function Dashboard() {
-
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
-    const [userName, setUserName] = useState("Static User"); // Default to Static Use
-    const [name, setName] = useState("Manikandan");
+    const [userName, setUserName] = useState('Static User'); // Default to Static Use
+    const [name, setName] = useState('Manikandan');
 
     const [anchorElAddView, setAnchorElAddView] = useState<HTMLElement | null>(null);
 
-    const [newTag, setNewTag] = useState("");
+    const [newTag, setNewTag] = useState('');
 
     const [itemTags, setItemTags] = useState<string[]>(items);
 
     const handleAddViewClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElAddView(event.currentTarget);
-    }
+    };
 
     const handleAddTagClose = () => {
         setAnchorElAddView(null);
-        setNewTag('')
-
-    }
+        setNewTag('');
+    };
 
     const addViewOpen = Boolean(anchorElAddView);
 
-  const [anchorElContractAdd, setAnchorElContractAdd] = useState<null | HTMLElement>(null);
-  const handleContractAddOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const [anchorElContractAdd, setAnchorElContractAdd] = useState<null | HTMLElement>(null);
+    const handleContractAddOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElContractAdd(event.currentTarget);
     };
-      const handleCloseContractAdd = () => {
+    const handleCloseContractAdd = () => {
         setAnchorElContractAdd(null);
     };
-    
+
     const popopen = Boolean(anchorElContractAdd);
 
-    const[newContract, setNewContract]= useState<string>("");
+    const [newContract, setNewContract] = useState<string>('');
 
     const handleNewContractAdd = () => {
-        if(newContract !== "" ) {
-            const updatedContractTypes= [...contractTypes, newContract];
+        if (newContract !== '') {
+            const updatedContractTypes = [...contractTypes, newContract];
             setContractTypes(updatedContractTypes);
-            setNewContract("");
+            setNewContract('');
             setAnchorElContractAdd(null);
         }
-    }
+    };
 
     const handleNewTag = () => {
-        if(newTag !==""){
-    const updatedView = [...itemTags, newTag];
-        setItemTags(updatedView);
-        handleAddTagClose();
-        setNewTag('')
+        if (newTag !== '') {
+            const updatedView = [...itemTags, newTag];
+            setItemTags(updatedView);
+            handleAddTagClose();
+            setNewTag('');
         }
-
     };
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -279,20 +386,21 @@ function Dashboard() {
         const selectedfile = event.target.files?.[0];
 
         if (selectedfile) {
-            const isValidType = selectedfile.type.startsWith("image/") || selectedfile.type === "application/pdf";
+            const isValidType =
+                selectedfile.type.startsWith('image/') || selectedfile.type === 'application/pdf';
             if (!isValidType) {
-                alert("Upload a valid file type (img or pdf)");
+                alert('Upload a valid file type (img or pdf)');
                 return;
             }
             setFile(selectedfile);
             if (selectedfile) {
-                navigate("/dashboard/contract-scan", { state: { selectedfile } })
+                navigate('/dashboard/contract-scan', { state: { selectedfile } });
             }
         }
     };
 
     useEffect(() => {
-        const userEmail = localStorage.getItem("email");
+        const userEmail = localStorage.getItem('email');
         if (userEmail) {
             setUserName(userEmail);
         }
@@ -307,11 +415,11 @@ function Dashboard() {
 
     const handleLogout = () => {
         // Clear static user data from localStorage
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("email");
+        localStorage.removeItem('token');
+        localStorage.removeItem('role');
+        localStorage.removeItem('email');
         // Navigate back to the login page
-        navigate("/"); // Assuming your login route is "/"
+        navigate('/'); // Assuming your login route is "/"
         setAnchorEl(null); // Close the menu after logout
     };
 
@@ -344,7 +452,7 @@ function Dashboard() {
     ];
 
     const toggleHamburger = () => {
-        setHamburgerOpen((prev) => {
+        setHamburgerOpen(prev => {
             if (prev) {
                 // closing everything
                 setDrawerOpen(false);
@@ -386,7 +494,7 @@ function Dashboard() {
         if (selectedIndex === -1) {
             newSelected = [...selected, index];
         } else {
-            newSelected = selected.filter((i) => i !== index);
+            newSelected = selected.filter(i => i !== index);
         }
         setSelected(newSelected);
     };
@@ -405,21 +513,21 @@ function Dashboard() {
                     style={{
                         height: 8,
                         width: 8,
-                        backgroundColor: "#ff9800",
-                        borderRadius: "50%",
-                        display: "inline-block",
+                        backgroundColor: '#ff9800',
+                        borderRadius: '50%',
+                        display: 'inline-block',
                     }}
                 />
             }
             sx={{
-                backgroundColor: "#fff4e5",
-                color: "#ff9800",
+                backgroundColor: '#fff4e5',
+                color: '#ff9800',
                 fontWeight: 500,
-                fontSize: "0.875rem",
-                paddingRight: "8px",
-                ".MuiChip-icon": {
-                    marginLeft: "4px",
-                    marginRight: "4px",
+                fontSize: '0.875rem',
+                paddingRight: '8px',
+                '.MuiChip-icon': {
+                    marginLeft: '4px',
+                    marginRight: '4px',
                 },
             }}
         />
@@ -431,35 +539,35 @@ function Dashboard() {
                 label={label}
                 size="small"
                 sx={{
-                    backgroundColor: "violet",
-                    color: "darkviolet",
+                    backgroundColor: 'violet',
+                    color: 'darkviolet',
                     fontWeight: 500,
-                    fontSize: "0.875rem",
-                    paddingRight: "2.5px",
+                    fontSize: '0.875rem',
+                    paddingRight: '2.5px',
                 }}
             />
         );
     }
 
     function QuantityReceivedChip({ status }: { status: string }) {
-        if (status === "Short on qty") {
+        if (status === 'Short on qty') {
             return (
                 <Chip
-                    icon={<CancelIcon style={{ color: "red" }} />}
+                    icon={<CancelIcon style={{ color: 'red' }} />}
                     label={status}
                     size="small"
-                    sx={{ backgroundColor: "#fdecea", color: "red", fontWeight: 500 }}
+                    sx={{ backgroundColor: '#fdecea', color: 'red', fontWeight: 500 }}
                 />
             );
         }
 
-        if (status === "Correct Qty") {
+        if (status === 'Correct Qty') {
             return (
                 <Chip
-                    icon={<CheckCircleIcon style={{ color: "green" }} />}
+                    icon={<CheckCircleIcon style={{ color: 'green' }} />}
                     label={status}
                     size="small"
-                    sx={{ backgroundColor: "#e6f4ea", color: "green", fontWeight: 500 }}
+                    sx={{ backgroundColor: '#e6f4ea', color: 'green', fontWeight: 500 }}
                 />
             );
         }
@@ -474,13 +582,15 @@ function Dashboard() {
         setPage(newPage);
     }
 
-    function handleRowsPerPageChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function handleRowsPerPageChange(
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) {
         setRowsPerPage(parseInt(event.target.value));
         setPage(0);
     }
 
     const paginatedrows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-    const [searchQuery, setSeacrchQuery] = useState("");
+    const [searchQuery, setSeacrchQuery] = useState('');
 
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
@@ -488,8 +598,12 @@ function Dashboard() {
     const [showModal, setShowModal] = useState(false);
     const [step, setStep] = useState(0);
 
-
-    const [contractTypes, setContractTypes] = useState<string[]>(["Vendor & Sales Contracts", "Lease Contracts", "NDAs", "Employment Contracts"]);
+    const [contractTypes, setContractTypes] = useState<string[]>([
+        'Vendor & Sales Contracts',
+        'Lease Contracts',
+        'NDAs',
+        'Employment Contracts',
+    ]);
     const [contractSelected, setContractSelected] = useState<number | null>(null);
 
     const handleContractSelect = (index: number) => {
@@ -501,66 +615,73 @@ function Dashboard() {
     };
 
     const handleContractTypeSubmit = () => {
-        setStep((prev) => prev + 1);
+        setStep(prev => prev + 1);
         // await axios.patch(`${API_BASE_URL}/processdata`, {
         //     "contract-type": (contractSelected !== null) ? contractTypes[contractSelected] : ""
         // });
-        (contractSelected !== null) ? (
-        setJsonData(prev => ({
-            ...prev, 
-            processdata: {
-                ...prev.processdata,
-                "contract-type": contractTypes[contractSelected]
-            }
-        }))
-        ): ("");
+        contractSelected !== null
+            ? setJsonData(prev => ({
+                  ...prev,
+                  processdata: {
+                      ...prev.processdata,
+                      'contract-type': contractTypes[contractSelected],
+                  },
+              }))
+            : '';
         setContractSelected(null);
     };
 
     // const {contractTypes, contractSelected, setContractSelected} = useContractContext();
 
-    const {jsonData,setJsonData} = useContractContext();
+    const { jsonData, setJsonData } = useContractContext();
     const [itemsSelectedIndexes, setItemsSelectedIndexes] = useState<number[]>([]);
 
     const handleItemSelect = (index: number) => {
-        if(itemsSelectedIndexes.includes(index)) {
-            const updatedItemsIndexes = itemsSelectedIndexes.filter((num) => num !== index);
+        if (itemsSelectedIndexes.includes(index)) {
+            const updatedItemsIndexes = itemsSelectedIndexes.filter(num => num !== index);
             setItemsSelectedIndexes(updatedItemsIndexes);
-        }else {
+        } else {
             const updatedItemsIndexes = [...itemsSelectedIndexes, index];
             setItemsSelectedIndexes(updatedItemsIndexes);
         }
-    }
+    };
 
-   const handleItemTagsSubmit = () => {
-    setStep((prev) => prev + 1);
+    const handleItemTagsSubmit = () => {
+        setStep(prev => prev + 1);
 
-    if (itemsSelectedIndexes.length !== 0) {
-        const itemsSelected = itemsSelectedIndexes.map((index) => itemTags[index]);
-        setJsonData(prev => ({
-            ...prev, 
-            processdata: {
-                ...prev.processdata,
-                tags: itemsSelected
-            }
-        }))
-    }
-    setItemsSelectedIndexes([]);
+        if (itemsSelectedIndexes.length !== 0) {
+            const itemsSelected = itemsSelectedIndexes.map(index => itemTags[index]);
+            setJsonData(prev => ({
+                ...prev,
+                processdata: {
+                    ...prev.processdata,
+                    tags: itemsSelected,
+                },
+            }));
+        }
+        setItemsSelectedIndexes([]);
     };
 
     return (
         <div>
-            <Box sx={{ width: "100%", minHeight: "100vh" }}>
+            <Box sx={{ width: '100%', minHeight: '100vh' }}>
                 {/* Removed the original Paper with "Welcome" and "Navigate" text */}
                 {/* Purple Gradient Banner/Card - Integrated here */}
-                <div style={{ padding: "30px 30px 0px 30px" }}>
-                    <Typography sx={{ fontSize: "24px", fontWeight: "bold", fontFamily: "Poppins" }}>Hello Maria!</Typography>
-                    <p className="simple" style={{ color: "#808080", fontFamily: "Poppins" }}>Simple Dummy text of the printing</p>
-                    <Paper className="violet-paper"
+                <div style={{ padding: '30px 30px 0px 30px' }}>
+                    <Typography
+                        sx={{ fontSize: '24px', fontWeight: 'bold', fontFamily: 'Poppins' }}
+                    >
+                        Hello Maria!
+                    </Typography>
+                    <p className="simple" style={{ color: '#808080', fontFamily: 'Poppins' }}>
+                        Simple Dummy text of the printing
+                    </p>
+                    <Paper
+                        className="violet-paper"
                         elevation={3}
                         sx={{
                             p: 4,
-                            paddingLeft: "20px",
+                            paddingLeft: '20px',
                             mt: 4, // Margin top to separate from AppBar
                             borderRadius: 2, // Rounded corners
                             // background: 'linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)', // Purple gradient
@@ -577,10 +698,26 @@ function Dashboard() {
                             backgroundRepeat: 'no-repeat',
                         }}
                     >
-
-                        <div style={{ display: "flex", gap: "50px", alignItems: "flex-start", flexDirection: "column", marginLeft: "15px" }}>
-                            <Typography sx={{ fontSize: "20px", color: "#494A4E", maxWidth: "500px", fontWeight: "600", fontFamily: "Poppins" }}>
-                                To get started by uploading contracts or importing contracts to apply the functionalities.
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '50px',
+                                alignItems: 'flex-start',
+                                flexDirection: 'column',
+                                marginLeft: '15px',
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontSize: '20px',
+                                    color: '#494A4E',
+                                    maxWidth: '500px',
+                                    fontWeight: '600',
+                                    fontFamily: 'Poppins',
+                                }}
+                            >
+                                To get started by uploading contracts or importing contracts to
+                                apply the functionalities.
                             </Typography>
                             <Box sx={{ display: 'flex', gap: 2 }}>
                                 {/* <MuiLink
@@ -592,7 +729,9 @@ function Dashboard() {
                                     variant="contained"
                                     startIcon={<AddIcon />}
                                     // component = "label"
-                                    onClick={() => { setShowModal(true) }}
+                                    onClick={() => {
+                                        setShowModal(true);
+                                    }}
                                     // No 'disabled' or 'loading' state here as this is just a navigation button
                                     sx={{
                                         // bgcolor: 'white', // White background for button
@@ -600,13 +739,13 @@ function Dashboard() {
                                         // '&:hover': {
                                         //   bgcolor: '#f0f0f0', // Lighter hover
                                         // },
-                                        fontSize: "14px",
-                                        width: "200px",
-                                        textTransform: "none",
-                                        backgroundColor: "#1093FF",
-                                        boxShadow: "none",
-                                        borderRadius: "4px",
-                                        fontFamily: "Poppins" // Rounded corners for button
+                                        fontSize: '14px',
+                                        width: '200px',
+                                        textTransform: 'none',
+                                        backgroundColor: '#1093FF',
+                                        boxShadow: 'none',
+                                        borderRadius: '4px',
+                                        fontFamily: 'Poppins', // Rounded corners for button
                                         // px: 2, // Padding horizontal
                                         // py: 0.5, // Padding vertical
                                     }}
@@ -618,11 +757,19 @@ function Dashboard() {
                         accept=".pdf,.docx,.csv" // Example accept types
                         onClick={handleFileChange} // Placeholder handler
                     /> */}
-                    </Button>
-                {/* </MuiLink> */}
-                <ImportContractPop fromtext="dashboard"/>
-                <Button variant="text" onClick={() => {navigate("/dashboard/trial-page")}} style={{opacity: 0}}>h</Button>   
-                {/* <Button
+                                </Button>
+                                {/* </MuiLink> */}
+                                <ImportContractPop fromtext="dashboard" />
+                                <Button
+                                    variant="text"
+                                    onClick={() => {
+                                        navigate('/dashboard/trial-page');
+                                    }}
+                                    style={{ opacity: 0 }}
+                                >
+                                    h
+                                </Button>
+                                {/* <Button
                                 </Button>
                                 {/* </MuiLink> */}
                                 {/* <ImportContractPop fromtext="dashboard" /> */}
@@ -667,14 +814,12 @@ function Dashboard() {
                 </Box>
                 </Typography>
             </Paper> */}
-                    <div className="uploadtables" style={{ marginTop: "60px" }}>
-                        <Box sx={{ pointerEvents: "none", opacity: "0.3" }}>
+                    <div className="uploadtables" style={{ marginTop: '60px' }}>
+                        <Box sx={{ pointerEvents: 'none', opacity: '0.3' }}>
                             <Tabletry show={true} />
                         </Box>
                     </div>
-
                 </div>
-
             </Box>
 
             <Modal open={showModal}>
@@ -684,7 +829,7 @@ function Dashboard() {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: "50vw",
+                        width: '50vw',
                         // height: "530px",
                         bgcolor: 'background.paper',
                         boxShadow: 24,
@@ -703,25 +848,62 @@ function Dashboard() {
                                 <p style={{ fontWeight: 500 }}>Choose the contract type</p>
                             </div>
 
-
                             <div className="grid-container">
-
                                 {contractTypes.map((contractType, index) => (
-                                    <ListItem key={index}
+                                    <ListItem
+                                        key={index}
                                         onClick={() => handleContractSelect(index)}
-                                        style={{ cursor: "pointer", transition: "all 0.3s ease", backgroundColor: (contractSelected === index) ? "#c9e5ff" : "#F3F9FF", border: (contractSelected === index) ? "none" : "none" }}
-                                        className="grid-item" sx={{ py: "14px" }}>
-                                        <ListItemIcon style={{ minWidth: "40px" }}>
-                                            <img src={FileWithTickIcon} style={{ width: "24", height: "24", color: (contractSelected === index) ? "#F3F9FF" : "inherit" }} />
+                                        style={{
+                                            cursor: 'pointer',
+                                            transition: 'all 0.3s ease',
+                                            backgroundColor:
+                                                contractSelected === index ? '#c9e5ff' : '#F3F9FF',
+                                            border: contractSelected === index ? 'none' : 'none',
+                                        }}
+                                        className="grid-item"
+                                        sx={{ py: '14px' }}
+                                    >
+                                        <ListItemIcon style={{ minWidth: '40px' }}>
+                                            <img
+                                                src={FileWithTickIcon}
+                                                style={{
+                                                    width: '24',
+                                                    height: '24',
+                                                    color:
+                                                        contractSelected === index
+                                                            ? '#F3F9FF'
+                                                            : 'inherit',
+                                                }}
+                                            />
                                         </ListItemIcon>
-                                        <ListItemText primary={<p style={{ color: (contractSelected === index) ? "#2B80EC" : "#2B80EC", transition: "all 0.3s ease" }} >{contractType}</p>} />
+                                        <ListItemText
+                                            primary={
+                                                <p
+                                                    style={{
+                                                        color:
+                                                            contractSelected === index
+                                                                ? '#2B80EC'
+                                                                : '#2B80EC',
+                                                        transition: 'all 0.3s ease',
+                                                    }}
+                                                >
+                                                    {contractType}
+                                                </p>
+                                            }
+                                        />
                                     </ListItem>
                                 ))}
 
-                                <ListItem className="grid-item center" sx={{ py: "14px" }} 
-                                onClick={(event) => handleContractAddOpen(event)}>
-                                    <ListItemIcon style={{ minWidth: "40px" }}>
-                                        <img src={CreateCustomIcon} style={{ width: "24", height: "24" }} />
+                                <ListItem
+                                    className="grid-item center"
+                                    sx={{ py: '14px' }}
+                                    onClick={event => handleContractAddOpen(event)}
+                                >
+                                    <ListItemIcon style={{ minWidth: '40px' }}>
+                                        <img
+                                            src={CreateCustomIcon}
+                                            style={{ width: '24', height: '24' }}
+                                        />
                                     </ListItemIcon>
                                     <ListItemText primary={<p>Create a custom contract types</p>} />
                                 </ListItem>
@@ -729,30 +911,42 @@ function Dashboard() {
 
                             <div className="buttons">
                                 <Button
-                                    onClick={() => { setShowModal(false); setContractSelected(null)}}
+                                    onClick={() => {
+                                        setShowModal(false);
+                                        setContractSelected(null);
+                                    }}
                                     variant="outlined"
                                     style={{
-                                        textTransform: "none",
-                                        fontSize: "16px",
-                                        padding: "10px 20px 10px 20px",
-                                        border: "1px solid gray",
-                                        fontFamily: "Poppins",
-                                        color: "#1093FF"
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        border: '1px solid gray',
+                                        fontFamily: 'Poppins',
+                                        color: '#1093FF',
                                     }}
-                                    className="actions">Cancel</Button>
+                                    className="actions"
+                                >
+                                    Cancel
+                                </Button>
                                 <Button
-                                    onClick={() => { handleContractTypeSubmit() }}
+                                    onClick={handleContractTypeSubmit}
                                     disabled={contractSelected === null}
                                     variant="contained"
-                                    style={{
-                                        textTransform: "none",
-                                        fontSize: "16px",
-                                        padding: "10px 25px 10px 25px",
-                                        fontFamily: "Poppins",
-                                        // backgroundColor: "#1093FF",
-                                        boxShadow: "none"
+                                    sx={{
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        fontFamily: 'Poppins',
+                                        backgroundColor: '#1093FF',
+                                        boxShadow: 'none',
+                                        '&.Mui-disabled': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.12)',
+                                        },
                                     }}
-                                    className="actions">Next</Button>
+                                    className="actions"
+                                >
+                                    Next
+                                </Button>
                             </div>
                         </Box>
                     )}
@@ -769,7 +963,7 @@ function Dashboard() {
                             </div>
                             <div className="descopt">
                                 <p>Description</p>
-                                <p style={{ color: "gray" }}>(Optional)</p>
+                                <p style={{ color: 'gray' }}>(Optional)</p>
                             </div>
                             <Box className="descbox">
                                 <TextField
@@ -796,7 +990,7 @@ function Dashboard() {
                                         '& .MuiInputBase-input::placeholder': {
                                             fontSize: '16px', // increase placeholder size
                                             color: '#555',
-                                            fontFamily: "Poppins",
+                                            fontFamily: 'Poppins',
                                         },
                                     }}
                                 />
@@ -804,45 +998,76 @@ function Dashboard() {
 
                             <Box className="content-container">
                                 {itemTags.map((item, index) => (
-                                    <Box className="content" 
-                                    // style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
-                                    onClick = {() => handleItemSelect(index)}><p 
-                                    // style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}
-                                    >{item}</p>
+                                    <Box
+                                        className="content"
+                                        // style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
+                                        onClick={() => handleItemSelect(index)}
+                                    >
+                                        <p
+                                        // style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}
+                                        >
+                                            {item}
+                                        </p>
                                     </Box>
                                 ))}
-                                <Button onClick={handleAddViewClick}
+                                <Button
+                                    onClick={handleAddViewClick}
                                     variant="text"
                                     startIcon={<AddIcon />}
-                                    sx={{ textTransform: "none", fontSize: "18px", color: "#1093FF" }}
+                                    sx={{
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        color: '#1093FF',
+                                        fontFamily: "Poppins"
+                                    }}
                                 >
                                     Add another
                                 </Button>
                             </Box>
 
-                            <Popover open={addViewOpen} anchorEl={anchorElAddView} onClose={handleAddTagClose} disableScrollLock anchorOrigin={{ vertical: "center", horizontal: "right" }} sx={{ boxShadow: "none", marginLeft: "-10px", marginTop: "-50px" }} slotProps={{
-                                paper: {
-                                    elevation: 0,
-                                    sx: {
-                                        boxShadow: "none",
-                                        borderRadius: '20px'
+                            <Popover
+                                open={addViewOpen}
+                                anchorEl={anchorElAddView}
+                                onClose={handleAddTagClose}
+                                disableScrollLock
+                                anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
+                                sx={{ boxShadow: 'none', marginLeft: '-10px', marginTop: '-50px' }}
+                                slotProps={{
+                                    paper: {
+                                        elevation: 0,
+                                        sx: {
+                                            boxShadow: 'none',
+                                            borderRadius: '20px',
+                                        },
                                     },
-                                },
-                            }}>
+                                }}
+                            >
                                 <div className="addview-box">
                                     <div className="addviewtop">
                                         <p>Add Tag</p>
-                                        <IconButton onClick={handleAddTagClose}><CloseIcon sx={{ color: "black" }} /></IconButton>
+                                        <IconButton onClick={handleAddTagClose}>
+                                            <CloseIcon sx={{ color: 'black' }} />
+                                        </IconButton>
                                     </div>
-                                    <p style={{ margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily: "Poppins" }}>Enter a new tag name</p>
+                                    <p
+                                        style={{
+                                            margin: 0,
+                                            fontSize: '14px',
+                                            color: '#606060',
+                                            marginTop: '15px',
+                                            fontFamily: 'Poppins',
+                                        }}
+                                    >
+                                        Enter a new tag name
+                                    </p>
                                     <TextField
                                         variant="outlined"
                                         fullWidth
                                         placeholder="Add tag"
                                         value={newTag}
-                                        onChange={(event) => setNewTag(() => event.target.value)}
+                                        onChange={event => setNewTag(() => event.target.value)}
                                         sx={{
-                                            marginBottom: "7px",
+                                            marginBottom: '7px',
                                             '& .MuiInputBase-root': {
                                                 borderRadius: '4px',
                                                 fontSize: '16px',
@@ -872,65 +1097,86 @@ function Dashboard() {
                                             },
                                         }}
                                     />
-                                    <div className="buttons" style={{ padding: "20px 0px 0px 0px" }}>
+                                    <div
+                                        className="buttons"
+                                        style={{ padding: '20px 0px 0px 0px' }}
+                                    >
                                         <Button
                                             onClick={handleAddTagClose}
                                             variant="outlined"
                                             style={{
-                                                textTransform: "none",
-                                                fontSize: "16px",
-                                                padding: "10px 20px 10px 20px",
-                                                border: "1px solid gray",
-                                                color: "#1093FF"
+                                                textTransform: 'none',
+                                                fontSize: '14px',
+                                                padding: '10px 24px',
+                                                border: '1px solid gray',
+                                                color: '#1093FF',
                                             }}
-                                            className="actions">Cancel</Button>
+                                            className="actions"
+                                        >
+                                            Cancel
+                                        </Button>
                                         <Button
                                             onClick={handleNewTag}
                                             variant="contained"
                                             style={{
-                                                textTransform: "none",
-                                                fontSize: "16px",
-                                                padding: "10px 25px 10px 25px",
-                                                backgroundColor: "#1093FF",
-                                                boxShadow: "none"
+                                                textTransform: 'none',
+                                                fontSize: '14px',
+                                                padding: '10px 24px',
+                                                backgroundColor: '#1093FF',
+                                                boxShadow: 'none',
                                             }}
-                                            className="actions">Save</Button>
+                                            className="actions"
+                                        >
+                                            Save
+                                        </Button>
                                     </div>
                                 </div>
                             </Popover>
 
                             <div className="buttons">
                                 <Button
-                                    onClick={() => { setShowModal(false); setStep(0) }}
+                                    onClick={() => {
+                                        setShowModal(false);
+                                        setStep(0);
+                                    }}
                                     variant="outlined"
                                     style={{
-                                        textTransform: "none",
-                                        fontSize: "17px",
-                                        padding: "10px 20px 10px 20px",
-                                        border: "1px solid gray",
-                                        boxShadow: "none",
-                                        color: "#1093FF"
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        border: '1px solid gray',
+                                        boxShadow: 'none',
+                                        color: '#1093FF',
                                     }}
-                                    className="actions">Cancel</Button>
+                                    className="actions"
+                                >
+                                    Cancel
+                                </Button>
                                 <Button
-                                    onClick={() => { handleItemTagsSubmit() }}
-                                    variant="contained"
-                                    style={{
-                                        textTransform: "none",
-                                        fontSize: "17px",
-                                        padding: "10px 25px 10px 25px",
-                                        boxShadow: "none",
-                                        backgroundColor: "#1093FF"
+                                    onClick={() => {
+                                        handleItemTagsSubmit();
                                     }}
-                                    className="actions">Next</Button>
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        boxShadow: 'none',
+                                        backgroundColor: '#1093FF',
+                                        '&.Mui-disabled': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.12)',
+                                        },
+                                    }}
+                                    className="actions"
+                                >
+                                    Next
+                                </Button>
                             </div>
-
                         </Box>
                     )}
 
                     {step === 2 && (
                         <Box className="step2">
-
                             <div className="st">
                                 <div className="stepper">
                                     <ProgressStepper activeStep={2} />
@@ -941,119 +1187,180 @@ function Dashboard() {
                                 <p style={{ fontWeight: 500 }}>Upload your files</p>
                             </div>
 
-                            <Box className="upload-box" onClick={() => { fileInputRef.current?.click(); }} style={{ cursor: 'pointer' }}>
-                                <Box><IconButton onClick={() => { fileInputRef.current?.click(); }}><img src={UploadCustomIcon} alt="icon" width={24} height={24} /></IconButton></Box>
+                            <Box
+                                className="upload-box"
+                                onClick={() => {
+                                    fileInputRef.current?.click();
+                                }}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                <Box>
+                                    <IconButton
+                                        onClick={() => {
+                                            fileInputRef.current?.click();
+                                        }}
+                                    >
+                                        <img
+                                            src={UploadCustomIcon}
+                                            alt="icon"
+                                            width={24}
+                                            height={24}
+                                        />
+                                    </IconButton>
+                                </Box>
 
-                                <Box sx={{ mt: "20px", textAlign: "center" }} className="clickupl">
-                                    <p ><span style={{ color: "#2B80EC" }}><u><a style={{ cursor: "pointer" }}>Click to Upload</a></u></span>{' '}
-                                        <span>or Drag and drop </span></p>
+                                <Box sx={{ mt: '20px', textAlign: 'center' }} className="clickupl">
+                                    <p>
+                                        <span style={{ color: '#2B80EC' }}>
+                                            <u>
+                                                <a style={{ cursor: 'pointer' }}>Click to Upload</a>
+                                            </u>
+                                        </span>{' '}
+                                        <span>or Drag and drop </span>
+                                    </p>
                                     <p>a contract PDF or Word doc</p>
                                 </Box>
                             </Box>
-                            
-                        <p className="or">Or</p>
-                        <Box style = {{display: "flex", justifyContent: "center", marginTop: "20px"}}>
-                        <Button
-                            onClick={() => {setShowModal(false); setStep(0)}}
-                            variant="outlined"
-                            className="skipbutt" 
-                            style={{
-                                textTransform: "none", 
-                                fontSize: "18px", 
-                                padding: "10px 20px 10px 20px", 
-                                border: "1px solid gray",
-                                fontFamily: "Poppins"
-                                }} 
-                            >Skip
-                        </Button>
+
+                            <p className="or">Or</p>
+                            <Box
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    marginTop: '20px',
+                                }}
+                            >
+                                <Button
+                                    onClick={() => {
+                                        setShowModal(false);
+                                        setStep(0);
+                                    }}
+                                    variant="outlined"
+                                    className="skipbutt"
+                                    style={{
+                                        textTransform: 'none',
+                                        // fontSize: '18px',
+                                        padding: '10px 24px',
+                                        border: '1px solid #72777F',
+                                        fontFamily: 'Poppins',
+                                    }}
+                                >
+                                    Skip
+                                </Button>
+                            </Box>
                         </Box>
-                    </Box>
-                )}
-                <Popover open = {popopen} anchorEl={anchorElContractAdd} onClose={handleCloseContractAdd} disableScrollLock anchorOrigin={{vertical: "center", horizontal:"right"}} sx={{boxShadow: "none", marginLeft: "-600px", marginTop: "-50px"}}slotProps={{
-                paper: {
-                elevation: 0,
-                sx: {
-                    boxShadow: "none",
-                    borderRadius: "20px"
-                },
-                },
-            }}>
-                <div className="addview-box">
-                    <div className="addviewtop">
-                        <p>Add custom cotract type</p>
-                        <IconButton onClick={handleCloseContractAdd}><CloseIcon sx = {{color: "black"}} /></IconButton>
-                    </div>
-                    <p style={{margin: 0, fontSize: "14px", color: "#606060", marginTop: "15px", fontFamily:"Poppins"}}>Enter a new view name</p>
-                    <TextField
-                    variant="outlined"
-                    fullWidth
-                    placeholder="Contract type"
-                    value={newContract}
-                    onChange={(event) => setNewContract(event.target.value)}
-                    sx={{
-                        marginBottom: "7px",
-                        '& .MuiInputBase-root': {
-                        borderRadius: '4px',
-                        fontSize: '16px',
-                        fontFamily: 'Poppins, sans-serif',
-                        '& fieldset': {
-                            borderWidth: '0.5px',
-                            borderColor: '#C4C4C4',
-                        },
-                        '&:hover fieldset': {
-                            borderColor: '#999',
-                        },
-                        '&.Mui-focused fieldset': {
-                            borderColor: '#000',
-                        },
-                        },
-                        '& .MuiInputBase-input': {
-                        padding: '10px 12px',
-                        fontSize: '14px',
-                        fontFamily: 'Poppins, sans-serif',
-                        color: '#42474E',
-                        },
-                        '& .MuiInputBase-input::placeholder': {
-                        color: '#42474E',
-                        fontSize: '14px',
-                        fontWeight: 400,
-                        opacity: 1,
-                        },
-                    }}
-                    />
-                    <div className="buttons" style={{padding: "20px 0px 0px 0px"}}>
-                        <Button
-                        onClick={handleCloseContractAdd}
-                        variant="outlined"
-                        style={{
-                            textTransform: "none", 
-                            fontSize: "16px", 
-                            padding: "10px 20px 10px 20px",
-                            border: "1px solid gray",
-                            color: "#1093FF"
-                            }} 
-                        className="actions">Cancel</Button>
-                        <Button
-                        onClick = {handleNewContractAdd}
-                        variant="contained"
-                        style={{
-                            textTransform: "none", 
-                            fontSize: "16px", 
-                            padding: "10px 25px 10px 25px",
-                            backgroundColor: "#1093FF",
-                            boxShadow: "none"
-                            }} 
-                        className="actions">Save</Button>
-                    </div>
-                </div>
-            </Popover>
-            </Box>
+                    )}
+                    <Popover
+                        open={popopen}
+                        anchorEl={anchorElContractAdd}
+                        onClose={handleCloseContractAdd}
+                        disableScrollLock
+                        anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
+                        sx={{ boxShadow: 'none', marginLeft: '-600px', marginTop: '-50px' }}
+                        slotProps={{
+                            paper: {
+                                elevation: 0,
+                                sx: {
+                                    boxShadow: 'none',
+                                    borderRadius: '20px',
+                                },
+                            },
+                        }}
+                    >
+                        <div className="addview-box">
+                            <div className="addviewtop">
+                                <p>Add custom cotract type</p>
+                                <IconButton onClick={handleCloseContractAdd}>
+                                    <CloseIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </div>
+                            <p
+                                style={{
+                                    margin: 0,
+                                    fontSize: '14px',
+                                    color: '#606060',
+                                    marginTop: '15px',
+                                    fontFamily: 'Poppins',
+                                }}
+                            >
+                                Enter a new view name
+                            </p>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                placeholder="Contract type"
+                                value={newContract}
+                                onChange={event => setNewContract(event.target.value)}
+                                sx={{
+                                    marginBottom: '7px',
+                                    '& .MuiInputBase-root': {
+                                        borderRadius: '4px',
+                                        fontSize: '16px',
+                                        fontFamily: 'Poppins, sans-serif',
+                                        '& fieldset': {
+                                            borderWidth: '0.5px',
+                                            borderColor: '#C4C4C4',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: '#999',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#000',
+                                        },
+                                    },
+                                    '& .MuiInputBase-input': {
+                                        padding: '10px 12px',
+                                        fontSize: '14px',
+                                        fontFamily: 'Poppins, sans-serif',
+                                        color: '#42474E',
+                                    },
+                                    '& .MuiInputBase-input::placeholder': {
+                                        color: '#42474E',
+                                        fontSize: '14px',
+                                        fontWeight: 400,
+                                        opacity: 1,
+                                    },
+                                }}
+                            />
+                            <div className="buttons" style={{ padding: '20px 0px 0px 0px' }}>
+                                <Button
+                                    onClick={handleCloseContractAdd}
+                                    variant="outlined"
+                                    style={{
+                                        textTransform: 'none',
+                                        fontSize: '16px',
+                                        padding: '10px 20px 10px 20px',
+                                        border: '1px solid gray',
+                                        color: '#1093FF',
+                                    }}
+                                    className="actions"
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    onClick={handleNewContractAdd}
+                                    variant="contained"
+                                    style={{
+                                        textTransform: 'none',
+                                        fontSize: '16px',
+                                        padding: '10px 25px 10px 25px',
+                                        backgroundColor: '#1093FF',
+                                        boxShadow: 'none',
+                                    }}
+                                    className="actions"
+                                >
+                                    Save
+                                </Button>
+                            </div>
+                        </div>
+                    </Popover>
+                </Box>
             </Modal>
             <input
                 type="file"
                 ref={fileInputRef}
                 onChange={handleFileChange}
-                style={{ display: "none" }}
+                style={{ display: 'none' }}
             />
         </div>
     );
