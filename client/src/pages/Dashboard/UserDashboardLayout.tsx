@@ -624,7 +624,7 @@ function DashboardLayout() {
                         // position: 'fixed',
                         top: 0,
                         left: 0,
-                        zIndex: 1000,
+                        zIndex: 1,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
