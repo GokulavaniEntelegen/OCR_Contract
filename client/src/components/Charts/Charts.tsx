@@ -477,6 +477,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({ show }) => {
                                                 backgroundColor: item.color,
                                                 display: 'inline-block',
                                                 marginRight: '10px',
+                                                whiteSpace: "nowrap"
                                             }}
                                         />
                                         <p
@@ -485,6 +486,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({ show }) => {
                                                 fontWeight: 500,
                                                 fontSize: '13px',
                                                 fontFamily: 'Poppins',
+                                                whiteSpace: "nowrap"
                                             }}
                                         >
                                             {item.name}
