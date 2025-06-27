@@ -36,11 +36,11 @@ function ActivityHistory() {
     return(
         <div>
             <Box className = "actifullbox" sx={{width: "100%",minHeight: "100vh" }}>
-                <div style={{padding: "29px 30px 0px 27px"}}>
+                <div style={{padding: "20px 30px 0px 27px"}}>
 
                     <CustomBreadCrumbs replacetext="Activity History" tonav="activity-history"/>
                     
-                    <p style={{fontFamily: "Poppins", fontWeight: "500", fontSize: "24px", color:"#303030", paddingTop:"4px", paddingLeft: "16px"}}>Activity History</p>
+                    <p style={{fontFamily: "Poppins", fontWeight: "600", fontSize: "24px", color:"#303030", paddingTop:"4px", paddingLeft: "16px"}}>Activity History</p>
 
                     <div className= "table" style={{padding: "16px"}}>
                         <TableContainer>

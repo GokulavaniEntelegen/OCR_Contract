@@ -68,7 +68,7 @@ function AllContracts() {
 
                     </div>
 
-                    <div style={{width: "100%", marginTop: "50px"}}>
+                    <div style={{width: "100%", marginTop: "30px"}}>
                         <CustomCharts show = {show}/>
                     </div>
                     <div className="contracttable" style={{marginTop: "60px"}}>

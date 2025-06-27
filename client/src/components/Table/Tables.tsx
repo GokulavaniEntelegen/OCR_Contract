@@ -483,7 +483,8 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                         >
                             
                             {tabsArray.map((tab,index) => (
-                                <Tab
+
+                                <Tab key={index}
                             label={tab}
                             sx={{
                                 fontWeight: 600,

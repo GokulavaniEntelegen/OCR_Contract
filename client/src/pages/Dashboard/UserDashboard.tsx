@@ -553,7 +553,7 @@ function Dashboard() {
             <Box sx={{ width: "100%", minHeight: "100vh" }}>
                 {/* Removed the original Paper with "Welcome" and "Navigate" text */}
                 {/* Purple Gradient Banner/Card - Integrated here */}
-                <div style={{ padding: "50px 30px 0px 30px" }}>
+                <div style={{ padding: "30px 30px 0px 30px" }}>
                     <Typography sx={{ fontSize: "24px", fontWeight: "bold", fontFamily: "Poppins" }}>Hello Maria!</Typography>
                     <p className="simple" style={{ color: "#808080", fontFamily: "Poppins" }}>Simple Dummy text of the printing</p>
                     <Paper className="violet-paper"

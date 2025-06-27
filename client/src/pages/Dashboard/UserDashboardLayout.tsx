@@ -620,7 +620,7 @@ function DashboardLayout() {
                         flexShrink: 0,
                         height: '100vh',
                         backgroundColor: '#051235',
-                        paddingTop: 3,
+                        paddingTop: "5px",
                         // position: 'fixed',
                         top: 0,
                         left: 0,
@@ -640,7 +640,7 @@ function DashboardLayout() {
                     <Box sx = {{marginLeft: "10px",".sidebar:hover &": {marginLeft: "10px"}}}>
                     <IconButton
                         onClick={() => navigate("/dashboard")}
-                        style={{ display: 'flex', alignItems: 'center', marginBottom: '65px', marginLeft: "-5px"}}
+                        style={{ display: 'flex', alignItems: 'center', marginBottom: '25px', marginLeft: "-5px"}}
                     >
                         <img src={MainLogoIcon} alt="icon" width={40} height={40} />
                     </IconButton>
@@ -697,9 +697,10 @@ function DashboardLayout() {
                                     borderRadius: '4px',
                                     backgroundColor: '#F4F4F4',
                                     '& input': {
-                                        fontSize: '16px', // 👈 Increase text size here
+                                        fontSize: '14px', // 👈 Increase text size here
                                         marginLeft: '5px',
-                                        fontFamily: "Poppins" 
+                                        fontFamily: "Poppins",
+                                        padding: "6px"
                                     },
                                     '& .MuiInputAdornment-root svg': {
                                         fontSize: '25px', // 👈 Optional: increase icon size
@@ -729,8 +730,8 @@ function DashboardLayout() {
                     >
                         <div
                             style={{
-                                paddingRight: 20,
-                                paddingLeft: 20,
+                                paddingRight: "15px",
+                                paddingLeft: "15px",
                                 borderLeft: '1px solid #F0F0F0',
                             }}
                         >
@@ -740,16 +741,18 @@ function DashboardLayout() {
                                     border: '1px solid lightgray',
                                     borderRadius: '18px',
                                     backgroundColor: '#F9F9F94D',
+                                    width: "36px",
+                                    height: "31.76px"
                                 }}
                             >
-                                <img src={SettingsCustomIcon} alt="icon" width={24} height={24} />
+                                <img src={SettingsCustomIcon} alt="icon" style = {{width: "24px", height: "24px"}} />
                             </IconButton>
                         </div>
 
                         <div
                             style={{
-                                paddingRight: 20,
-                                paddingLeft: 20,
+                                paddingRight: "15px",
+                                paddingLeft: "15px",
                                 borderLeft: '1px solid #F0F0F0',
                                 borderRight: '1px solid #F0F0F0',
                             }}
@@ -760,12 +763,15 @@ function DashboardLayout() {
                                     border: '1px solid lightgray',
                                     borderRadius: '18px',
                                     backgroundColor: '',
+                                    width: "36px",
+                                    height: "31.76px"
                                 }}
                             >
-                                <img src={NotificationIcon} alt="icon" width={24} height={24} />
+                                <img src={NotificationIcon} alt="icon" style = {{width: "24px", height: "24px"}} />
                             </IconButton>
                         </div>
 
+                        <Box sx = {{py:"5px"}}>
                         <div
                             style={{
                                 display: 'flex',
@@ -778,13 +784,14 @@ function DashboardLayout() {
                                 marginRight: '30px',
                             }}
                         >
-                            <Avatar sx={{ bgcolor: '#3f51b5', marginRight: 1 }}>
+                            <Avatar sx={{ bgcolor: '#3f51b5', marginRight: 1, height: "32px", width: "32px"}}>
                                 {getInitials(name)}
                             </Avatar>
-                            <Typography variant="body1" sx={{ fontFamily: 'Poppins' }}>
+                            <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontSize: "16px" }}>
                                 {name}
                             </Typography>
                         </div>
+                        </Box>
                     </div>
                 </div>
 

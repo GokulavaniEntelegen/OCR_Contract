@@ -1,10 +1,10 @@
 {
-    "processdata" : {
-        "contract-type": "",
-        "tags": []
-    },
-    
-    "formsections": [
+  "processdata": {
+    "contract-type": "",
+    "tags": []
+  },
+
+  "formsections": [
     {
       "label": "Contract No.",
       "value": "921-923-9234",
@@ -57,5 +57,5 @@
     }
   ],
 
-  "tablerows" : []
+  "tablerows": []
 }
