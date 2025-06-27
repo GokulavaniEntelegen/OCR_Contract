@@ -3,6 +3,7 @@
         "contract-type": "",
         "tags": []
     },
+    
     "formsections": [
     {
       "label": "Contract No.",
@@ -54,5 +55,7 @@
       "value": "123-456-7890",
       "aiflag": false
     }
-  ]
+  ],
+
+  "tablerows" : []
 }

@@ -33,7 +33,8 @@ import RightCustomIcon from "../../assets/RightCustom.svg";
 import axios from "axios";
 import { API_BASE_URL } from "../../../api";
 import DeletePopoverExample from "../deletepopexample";
-
+import { useContractContext } from "client/src/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type Flags = {
   contact: string;
@@ -177,6 +178,8 @@ const items = ["Contact No.", "Customer Name", "Customer Title", "Start Date", "
 
 const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
+    const navigate = useNavigate();
+    
     const getInitials = (name: string) => {
     return name?.charAt(0).toUpperCase(); // Gets first letter
   };
@@ -422,20 +425,25 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
 
 
     interface Itablerow {
-        id: string
+        // id: string
         fields: newIfield[];
     }
 
-    useEffect(() => {
-        axios.get<Itablerow[]>(`${API_BASE_URL}/tablerows`)
-        
-        .then((response) => {
-            setRowsData(response.data.reverse());
-        })
+    const {jsonData, setJsonData} = useContractContext();
 
-        .catch((error) => {
-            console.error("Error occured at Table.tsx while fetching data from tablerows: "+ error);
-        })
+    useEffect(() => {
+        // axios.get<Itablerow[]>(`${API_BASE_URL}/tablerows`)
+        
+        // .then((response) => {
+        //     setRowsData(response.data.reverse());
+        // })
+
+        // .catch((error) => {
+        //     console.error("Error occured at Table.tsx while fetching data from tablerows: "+ error);
+        // })
+        
+        setRowsData(jsonData.tablerows.reverse());
+
     },[]);
 
 
@@ -828,7 +836,9 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                     // marginTop: "18px",
                     // width: "180px"
                 }}
-                />  
+                />
+
+                <Button onClick={() => navigate("/dashboard/contract-scan")} style={{opacity: "0"}}>con</Button>
                 </div>
 
                 {/* <div style={{ display: 'flex', gap: '1rem', padding: '20px' ,marginRight: "400px"}}>
@@ -877,8 +887,8 @@ const Tabletry: React.FC<{ show: boolean }> = ({show}) => {
                         <TableRow>
                             <TableCell padding="checkbox">
                                 <Checkbox
-                                    indeterminate={selected.length > 0 && selected.length < rows.length}
-                                    checked={selected.length > 0 && selected.length === rows.length}
+                                    indeterminate={selected.length > 0 && selected.length < rowsData.length}
+                                    checked={selected.length > 0 && selected.length === rowsData.length}
                                     onChange={handleAllSelect}
                                 />
                             </TableCell>
