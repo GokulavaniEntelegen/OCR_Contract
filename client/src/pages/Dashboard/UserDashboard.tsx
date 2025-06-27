@@ -805,8 +805,11 @@ function Dashboard() {
                             <Box className="content-container">
                                 {itemTags.map((item, index) => (
                                     <Box className="content" 
-                                    style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
-                                    onClick = {() => handleItemSelect(index)}><p style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}>{item}</p></Box>
+                                    // style = {{backgroundColor: (itemsSelectedIndexes.includes(index)) ? "#c9e5ff": "inherit", cursor: "pointer"}}
+                                    onClick = {() => handleItemSelect(index)}><p 
+                                    // style={{color:(itemsSelectedIndexes.includes(index)) ? "white": "inherit" }}
+                                    >{item}</p>
+                                    </Box>
                                 ))}
                                 <Button onClick={handleAddViewClick}
                                     variant="text"
