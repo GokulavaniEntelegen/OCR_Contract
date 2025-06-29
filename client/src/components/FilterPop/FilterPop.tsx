@@ -45,17 +45,7 @@ const FilterPop: React.FC = () => {
 
     const filterOpen = Boolean(anchorElFilter);
 
-    const [categories, setCategories] = useState<string[]>([
-        'Contact No.',
-        'Customer Name',
-        'Contract Title',
-        'Start Date',
-        'End Date',
-        'Auto Renewal Term',
-        'Payment Term',
-        'Termination Claus',
-        'Tags',
-    ]);
+    const [categories, setCategories] = useState<string[]>([]);
 
     const subcategories: string[] = [
         'IT Services Contracts',
@@ -75,14 +65,18 @@ const FilterPop: React.FC = () => {
         'Master service level Agreement 2',
     ];
 
+
+
     const [subchecked, setSubchecked] = useState<string[]>([]);
 
     const handleToggle = (value: string) => () => {
         if (value === 'all') {
-            if (subchecked.length === subcategories.length) {
+            if (subchecked.length === ((currentSubCat) ? currentSubCat.length : "")) {
                 setSubchecked([]);
             } else {
-                setSubchecked([...subcategories]);
+                if(currentSubCat) {
+                    setSubchecked([...currentSubCat]);
+                }
             }
         } else {
             const currentIndex = subchecked.indexOf(value);
@@ -98,22 +92,32 @@ const FilterPop: React.FC = () => {
         }
     };
 
-    const isAllSelected = subchecked.length === subcategories.length;
+    
     const [anchorElAddView, setAnchorElAddView] = useState<HTMLElement | null>(null);
-
+    const [allSubCat, setAllSubCat] = useState<string[][]>();
     const { jsonData, setJsonData } = useContractContext();
+    const [currentSubCatIndex, setCurrentSubCatIndex] =useState<number>(0);
+    const [currentSubCat, setCurrentSubCat] = useState<string[]>();
+    const isAllSelected = subchecked.length === ((currentSubCat) ? currentSubCat.length : "");
 
-    useEffect(() => {
-        const updCategories = jsonData.formsections.map((field, index) => field.label);
-        setCategories(updCategories);
+useEffect(() => {
+    const updCategories = jsonData.formsections.map((field) => field.label);
+    setCategories(updCategories);
+}, [jsonData]);
 
-        const subcat: string[][] = categories.map((_, colIndex) => {
-            const values = jsonData.tablerows.map(row => row.fields[colIndex]?.value); // get all values at that column index
-            const uniqueValues = Array.from(new Set(values.filter(Boolean))); // filter null/undefined/empty, remove duplicates
-            return uniqueValues;
-        });
-        
-    }, []);
+useEffect(() => {
+    if (!categories.length) return;
+
+    const allsubcat: string[][] = categories.map((_, colIndex) => {
+        const values = jsonData.tablerows.map(row => row.fields[colIndex]?.value);
+        const uniqueValues = Array.from(new Set(values.filter(Boolean)));
+        return uniqueValues;
+    });
+
+    setAllSubCat(allsubcat);
+    setCurrentSubCat(allsubcat[0]);
+}, [categories, jsonData]);
+
 
     return (
         <>
@@ -199,7 +203,11 @@ const FilterPop: React.FC = () => {
                                     {categories.map((category, index) => (
                                         <ButtonBase
                                             key={index}
-                                            //   onClick={() => handleClick(category)} // your click logic
+                                            onClick={() => {
+                                            const subCat = allSubCat?.[index];
+                                            if (subCat) setCurrentSubCat(subCat);
+                                            console.log("Clicked: " + category);
+                                            }}
                                             sx={{
                                                 justifyContent: 'flex-start',
                                                 width: '100%',
@@ -323,7 +331,7 @@ const FilterPop: React.FC = () => {
                                                         color: '#606060',
                                                     }}
                                                 >
-                                                    Select All ({subcategories.length})
+                                                    Select All ({currentSubCat && currentSubCat.length})
                                                 </p>
                                             }
                                         ></ListItemText>
@@ -335,7 +343,7 @@ const FilterPop: React.FC = () => {
                                             scrollbarWidth: 'none',
                                         }}
                                     >
-                                        {subcategories.map(subcategory => (
+                                        {currentSubCat && currentSubCat.map(subcategory => (
                                             <ListItem
                                                 key={subcategory}
                                                 dense
