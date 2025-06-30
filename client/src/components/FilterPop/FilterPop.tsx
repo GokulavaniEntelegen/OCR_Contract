@@ -44,6 +44,7 @@ const FilterPop: React.FC<FilterPopProps> = ({ subchecked, setSubchecked, saveSu
 
     const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElFilter(event.currentTarget);
+        setSubchecked(saveSubchecked);
     };
 
     const handleFilterClose = () => {

@@ -709,12 +709,24 @@ const Tabletry: React.FC<{ show: boolean }> = ({ show }) => {
     };
 
     const filteredrows = rowsData.filter(row =>
-    row.fields.every((field, colIndex) => {
-        const selectedSubcats = saveSubchecked[colIndex];
-        if (!selectedSubcats || selectedSubcats.length === 0) return true;
-        return selectedSubcats.includes(field.value);
-    })
+        row.fields.every((field, colIndex) => {
+            const selectedSubcats = saveSubchecked[colIndex];
+            if (!selectedSubcats || selectedSubcats.length === 0) return true;
+            return selectedSubcats.includes(field.value);
+        })
     );
+
+    const handleFilterRemove = (catindex: number, subcatindex: number) => {
+        setSaveSubchecked(prev => {
+            const updated = [...prev]; // clone the outer array
+            const updatedCat = [...updated[catindex]]; // clone the specific inner array
+
+            updatedCat.splice(subcatindex, 1); // remove the subcategory
+            updated[catindex] = updatedCat; // update the outer array
+
+            return updated;
+        });
+    };
 
     const paginatedrows = filteredrows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
@@ -932,7 +944,9 @@ const Tabletry: React.FC<{ show: boolean }> = ({ show }) => {
                                                     {categ && categ[catindex]} : {subcat}
                                                 </p>
                                             }
-                                            onDelete={() => {}}
+                                            onDelete={() =>
+                                                handleFilterRemove(catindex, subcatindex)
+                                            }
                                             sx={{
                                                 borderRadius: '50px',
                                                 backgroundColor: 'white',
@@ -1019,6 +1033,10 @@ const Tabletry: React.FC<{ show: boolean }> = ({ show }) => {
                 </div> */}
                     </div>
                     <Button
+                        onClick={() => {
+                            setSubchecked([]);
+                            setSaveSubchecked([]);
+                        }}
                         style={{
                             textTransform: 'none',
                             fontFamily: 'Poppins',
