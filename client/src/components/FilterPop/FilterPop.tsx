@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { use, useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import FilterBlueIcon from '../../assets/FilterBlue.svg';
@@ -65,22 +65,38 @@ const FilterPop: React.FC = () => {
         'Master service level Agreement 2',
     ];
 
-
-
-    const [subchecked, setSubchecked] = useState<string[]>([]);
+    const [subchecked, setSubchecked] = useState<string[][]>([]);
 
     const handleToggle = (value: string) => () => {
+        const currentChecked = subchecked[currentCatIndex] ?? [];
+
         if (value === 'all') {
-            if (subchecked.length === ((currentSubCat) ? currentSubCat.length : "")) {
-                setSubchecked([]);
+            const isAllAlreadySelected = currentSubCat?.every(sub => currentChecked.includes(sub));
+
+            if (isAllAlreadySelected) {
+                const updatedchecked = subchecked.map((row, index) =>
+                    index === currentCatIndex ? [] : row
+                );
+                setSubchecked(updatedchecked);
             } else {
-                if(currentSubCat) {
-                    setSubchecked([...currentSubCat]);
+                if (currentSubCat) {
+                    const updatedchecked = subchecked.map((row, index) =>
+                        index === currentCatIndex ? [...currentSubCat] : row
+                    );
+
+                    if (updatedchecked.length <= currentCatIndex) {
+                        while (updatedchecked.length <= currentCatIndex) {
+                            updatedchecked.push([]);
+                        }
+                        updatedchecked[currentCatIndex] = [...currentSubCat];
+                    }
+                    setSubchecked(updatedchecked);
                 }
             }
         } else {
-            const currentIndex = subchecked.indexOf(value);
-            const newChecked = [...subchecked];
+            // Toggle single subcategory
+            const currentIndex = currentChecked.indexOf(value);
+            const newChecked = [...currentChecked];
 
             if (currentIndex === -1) {
                 newChecked.push(value);
@@ -88,36 +104,60 @@ const FilterPop: React.FC = () => {
                 newChecked.splice(currentIndex, 1);
             }
 
-            setSubchecked(newChecked);
+            const updatedSubchecked = subchecked.map((row, index) =>
+                index === currentCatIndex ? newChecked : row
+            );
+
+            // Pad if row doesn't exist
+            if (updatedSubchecked.length <= currentCatIndex) {
+                while (updatedSubchecked.length <= currentCatIndex) {
+                    updatedSubchecked.push([]);
+                }
+                updatedSubchecked[currentCatIndex] = newChecked;
+            }
+
+            setSubchecked(updatedSubchecked);
         }
     };
 
-    
     const [anchorElAddView, setAnchorElAddView] = useState<HTMLElement | null>(null);
     const [allSubCat, setAllSubCat] = useState<string[][]>();
     const { jsonData, setJsonData } = useContractContext();
-    const [currentSubCatIndex, setCurrentSubCatIndex] =useState<number>(0);
+    const [currentSubCatIndex, setCurrentSubCatIndex] = useState<number>(0);
     const [currentSubCat, setCurrentSubCat] = useState<string[]>();
-    const isAllSelected = subchecked.length === ((currentSubCat) ? currentSubCat.length : "");
+    const [currentCatIndex, setCurrentCatIndex] = useState<number>(0);
+    const isAllSelected =
+        currentSubCat?.every(sub => subchecked[currentCatIndex]?.includes(sub)) || false;
 
-useEffect(() => {
-    const updCategories = jsonData.formsections.map((field) => field.label);
-    setCategories(updCategories);
-}, [jsonData]);
+    useEffect(() => {
+        const updCategories = jsonData.formsections.map(field => field.label);
+        setCategories(updCategories);
+    }, [jsonData]);
 
-useEffect(() => {
-    if (!categories.length) return;
+    useEffect(() => {
+        if (currentSubCat) {
+            setSubchecked(prev => {
+                const updated = [...prev];
+                if (!updated[0]) {
+                    updated[0] = [];
+                }
+                return updated;
+            });
+        }
+    }, [currentSubCat]);
 
-    const allsubcat: string[][] = categories.map((_, colIndex) => {
-        const values = jsonData.tablerows.map(row => row.fields[colIndex]?.value);
-        const uniqueValues = Array.from(new Set(values.filter(Boolean)));
-        return uniqueValues;
-    });
+    useEffect(() => {
+        if (!categories.length) return;
 
-    setAllSubCat(allsubcat);
-    setCurrentSubCat(allsubcat[0]);
-}, [categories, jsonData]);
+        const allsubcat: string[][] = categories.map((_, colIndex) => {
+            const values = jsonData.tablerows.map(row => row.fields[colIndex]?.value);
+            const uniqueValues = Array.from(new Set(values.filter(Boolean)));
+            return uniqueValues;
+        });
 
+        setAllSubCat(allsubcat);
+        setCurrentSubCat(allsubcat[0]);
+    }, [categories, jsonData]);
 
     return (
         <>
@@ -204,9 +244,17 @@ useEffect(() => {
                                         <ButtonBase
                                             key={index}
                                             onClick={() => {
-                                            const subCat = allSubCat?.[index];
-                                            if (subCat) setCurrentSubCat(subCat);
-                                            console.log("Clicked: " + category);
+                                                const subCat = allSubCat?.[index];
+                                                setCurrentCatIndex(index);
+                                                if (subCat) setCurrentSubCat(subCat);
+                                                console.log('Clicked: ' + category);
+                                                setSubchecked(prev => {
+                                                    const updated = [...prev];
+                                                    if (!updated[index]) {
+                                                        updated[index] = [];
+                                                    }
+                                                    return updated;
+                                                });
                                             }}
                                             sx={{
                                                 justifyContent: 'flex-start',
@@ -331,7 +379,8 @@ useEffect(() => {
                                                         color: '#606060',
                                                     }}
                                                 >
-                                                    Select All ({currentSubCat && currentSubCat.length})
+                                                    Select All (
+                                                    {currentSubCat && currentSubCat.length})
                                                 </p>
                                             }
                                         ></ListItemText>
@@ -343,49 +392,52 @@ useEffect(() => {
                                             scrollbarWidth: 'none',
                                         }}
                                     >
-                                        {currentSubCat && currentSubCat.map(subcategory => (
-                                            <ListItem
-                                                key={subcategory}
-                                                dense
-                                                disablePadding
-                                                onClick={handleToggle(subcategory)}
-                                                sx={{
-                                                    cursor: 'pointer',
-                                                    borderBottom: '0.5px solid #E4E4E4',
-                                                    marginBottom: '4px',
-                                                }}
-                                            >
-                                                <ListItemIcon sx={{ minWidth: '30px' }}>
-                                                    <Checkbox
-                                                        edge="start"
-                                                        checked={subchecked.includes(subcategory)}
-                                                        tabIndex={-1}
-                                                        disableRipple
-                                                        sx={{
-                                                            '& .MuiSvgIcon-root': {
-                                                                borderRadius: '16px', // or '8px' for more rounding
-                                                            },
-                                                            '&.Mui-checked': {
-                                                                color: '#45464B', // Checked color
-                                                            },
-                                                        }}
-                                                    />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={
-                                                        <p
-                                                            style={{
-                                                                fontFamily: 'Poppins',
-                                                                color: '#606060',
-                                                                fontSize: '14px',
+                                        {currentSubCat &&
+                                            currentSubCat.map(subcategory => (
+                                                <ListItem
+                                                    key={subcategory}
+                                                    dense
+                                                    disablePadding
+                                                    onClick={handleToggle(subcategory)}
+                                                    sx={{
+                                                        cursor: 'pointer',
+                                                        borderBottom: '0.5px solid #E4E4E4',
+                                                        marginBottom: '4px',
+                                                    }}
+                                                >
+                                                    <ListItemIcon sx={{ minWidth: '30px' }}>
+                                                        <Checkbox
+                                                            edge="start"
+                                                            checked={subchecked[
+                                                                currentCatIndex
+                                                            ]?.includes(subcategory)}
+                                                            tabIndex={-1}
+                                                            disableRipple
+                                                            sx={{
+                                                                '& .MuiSvgIcon-root': {
+                                                                    borderRadius: '16px', // or '8px' for more rounding
+                                                                },
+                                                                '&.Mui-checked': {
+                                                                    color: '#45464B', // Checked color
+                                                                },
                                                             }}
-                                                        >
-                                                            {subcategory}
-                                                        </p>
-                                                    }
-                                                />
-                                            </ListItem>
-                                        ))}
+                                                        />
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={
+                                                            <p
+                                                                style={{
+                                                                    fontFamily: 'Poppins',
+                                                                    color: '#606060',
+                                                                    fontSize: '14px',
+                                                                }}
+                                                            >
+                                                                {subcategory}
+                                                            </p>
+                                                        }
+                                                    />
+                                                </ListItem>
+                                            ))}
                                     </div>
                                 </List>
                             </div>
