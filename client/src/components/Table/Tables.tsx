@@ -673,8 +673,6 @@ const Tabletry: React.FC<{ show: boolean }> = ({ show }) => {
 
     const [rowsData, setRowsData] = useState<Itablerow[]>([]);
 
-    const paginatedrows = rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
     interface Itablerow {
         // id: string
         fields: newIfield[];
@@ -709,6 +707,16 @@ const Tabletry: React.FC<{ show: boolean }> = ({ show }) => {
             setNewView('');
         }
     };
+
+    const filteredrows = rowsData.filter(row =>
+    row.fields.every((field, colIndex) => {
+        const selectedSubcats = saveSubchecked[colIndex];
+        if (!selectedSubcats || selectedSubcats.length === 0) return true;
+        return selectedSubcats.includes(field.value);
+    })
+    );
+
+    const paginatedrows = filteredrows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     return (
         <div
