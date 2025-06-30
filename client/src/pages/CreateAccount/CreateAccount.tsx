@@ -261,7 +261,7 @@ function CreateAccount() {
                                     backgroundColor: '#fff',
                                 }}
                             >
-                                <CheckIcon sx={{ fontSize: 18, color: '#008853' }} />
+                                <CheckIcon sx={{ fontSize: 16, color: '#008853' }} />
                             </Box>
                         }
                         sx={{

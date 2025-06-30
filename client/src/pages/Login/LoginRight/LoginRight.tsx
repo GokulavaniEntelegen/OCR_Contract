@@ -34,13 +34,13 @@ const LoginRight = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: 4,
+        padding: 6,
         textAlign: "center",
         fontFamily: "Poppins, sans-serif",
         
       }}
     >
-      <Box sx={{ width: "100%", maxWidth: 400, mb: 3 }}>
+      <Box sx={{ width: "100%", maxWidth: 400, mb: 0 }}>
         <Slider {...settings}>
           {images.map((img, index) => (
             <Box key={index}>
@@ -76,7 +76,7 @@ const LoginRight = () => {
           minWidth: 400,
           fontFamily: "Poppins, sans-serif",
           fontWeight: 400,
-          fontSize: "16px",
+          fontSize: "14px",
           letterSpacing: "0.25px",
           lineHeight: "24px",
           // text_Indent:"-2em"

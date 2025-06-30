@@ -11,20 +11,21 @@ const SetAccPassword = () => {
       sx={{
         // width: "50%",
         flex: 1,
-        p: 11,
+        p: 8,
         backgroundColor: "#fff",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         fontFamily: "Poppins, sans-serif",
+         mb: 1,
       }}
     >
       <Box
         sx={{
           width: "100%",
           maxWidth: 400,
-          padding: 2,
+          padding: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -32,12 +33,13 @@ const SetAccPassword = () => {
       >
         <p
           style={{
-            fontSize: "37px",
-            fontWeight: 600,
+            fontSize: "34px",
+            fontWeight: 500,
             marginBottom: "1px",
             fontFamily: "Poppins, sans-serif",
             letterSpacing:'0%',
-            paddingBottom: "32px"
+            paddingBottom: "32px",
+            // lineHeight:'52px'
             
           }}
         >
@@ -79,7 +81,7 @@ const SetAccPassword = () => {
           sx={{
             mb: 0,
             paddingBottom: "8px",
-            backgroundColor: "#fafafa",
+            backgroundColor: "#FFFFFF",
             fontFamily: "Poppins, sans-serif",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',
@@ -109,7 +111,7 @@ const SetAccPassword = () => {
           size="small"
           sx={{
             mb: 4,
-            backgroundColor: "#fafafa",
+            backgroundColor: "#FFFFFF",
             fontFamily: "Poppins, sans-serif",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',
@@ -128,9 +130,9 @@ const SetAccPassword = () => {
             textTransform: "none",
             fontWeight: 500,
             fontFamily: "Poppins, sans-serif",
-            "&:hover": {
-              backgroundColor: "#006ae6",
-            },
+            // "&:hover": {
+            //   backgroundColor: "#006ae6",
+            // },
           }}
         >
           Create Account

@@ -134,7 +134,7 @@ const LoginLeft = () => {
             />
           }
           sx={{
-            backgroundColor: "#eaf2fe",
+            backgroundColor: "#EDF7FF",
             color: "#1093FF",
             fontWeight: 500,
             textTransform: "none",

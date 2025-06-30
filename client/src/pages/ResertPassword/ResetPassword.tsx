@@ -35,7 +35,7 @@ const ResetPassword = () => {
         <Typography
           variant="h5"
           fontWeight={500}
-          mb={3}
+          mb={2}
           sx={{
             fontFamily: "Poppins, sans-serif",
             width: "100%",          // ensures same width as inputs
@@ -54,7 +54,7 @@ const ResetPassword = () => {
           variant="body2"
           sx={{
             fontWeight: 400,
-            mb: 1,
+            // mb: 1,
             // color: "#888",
             fontFamily: "Poppins, sans-serif",
             alignSelf: "flex-start", // aligns label to the left of form
@@ -71,7 +71,7 @@ const ResetPassword = () => {
           size="small"
           sx={{
             mb: 3,
-            backgroundColor: "#fafafa",
+            backgroundColor: "#FFFFFF",
             fontFamily: "Poppins, sans-serif",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',
@@ -93,9 +93,9 @@ const ResetPassword = () => {
             textTransform: "none",
             fontWeight: 500,
             fontFamily: "Poppins, sans-serif",
-            "&:hover": {
-              backgroundColor: "#006ae6",
-            },
+            // "&:hover": {
+            //   backgroundColor: "#006ae6",
+            // },
           }}
         >
           Get OTP
