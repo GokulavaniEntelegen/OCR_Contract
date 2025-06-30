@@ -224,7 +224,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({ show }) => {
                                         borderRadius: '50%', // ✅ Round legend icon
                                     },
                                     '& .MuiChartsAxis-line': {
-                                        stroke: 'rgba(46, 46, 46, 0.12)',
+                                        stroke: 'rgba(69, 67, 67, 0.12)',
                                     },
                                 }}
                             />
@@ -336,7 +336,7 @@ const CustomCharts: React.FC<{ show: boolean }> = ({ show }) => {
                                         borderBottomRightRadius: 0,
                                     },
                                     '& .MuiChartsAxis-line': {
-                                        stroke: 'rgba(46, 46, 46, 0.12)',
+                                        stroke: 'rgba(69, 67, 67, 0.12)',
                                     },
                                 }}
                             />
