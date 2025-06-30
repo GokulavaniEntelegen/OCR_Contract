@@ -24,7 +24,7 @@ function Invite() {
         }}
         >
             <p className="inviterest">Invite the rest of the team</p>
-            <div style={{width: "100%",display: "flex", flexDirection: "column", gap:"2px", paddingBottom: "3px"}}>
+            <div style={{width: "100%",display: "flex", flexDirection: "column", gap:"2px", paddingBottom: "3px",}}>
                 {/* <p style={{margin: 0, fontSize: "12px", color: "#606060"}}>Full Name</p> */}
                 <TextField
                 variant="outlined"
@@ -146,7 +146,7 @@ function Invite() {
             <Button
             variant="text"
             startIcon = {<AddIcon/>}
-            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#1093FF", display: "flex", alignItems: "center", justifyContent: "flex-start", fontFamily: "Poppins"}}
+            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#1093FF", display: "flex", alignItems: "center", justifyContent: "flex-start", fontFamily: "Poppins",paddingTop:'0'}}
             >
                 Add another
             </Button>
@@ -154,7 +154,7 @@ function Invite() {
             <Button
             onClick={()=>{navigate("/")}}
             variant="text"
-            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#747474", display: "flex", justifyContent: "flex-end", fontFamily: "Poppins"}}>
+            sx={{textTransform: "none", fontSize: "16px",fontWeight: "500", color: "#747474", display: "flex", justifyContent: "flex-end", fontFamily: "Poppins",paddingTop:'0'}}>
                 Skip
             </Button>
             </div>
@@ -168,7 +168,7 @@ function Invite() {
                     lineHeight:"20px",
                     fontWeight:"500",
                     boxShadow: 'none',
-                    marginTop: "30px",
+                    marginTop: "20px",
                     marginBottom: "25px",
                     py: "10px"}}>
                         Send Invites and Login

@@ -29,7 +29,7 @@ const CreateNewPassword = () => {
         <p
           style={{
             fontSize: "33px",
-            fontWeight: 400,
+            fontWeight: 500,
             marginBottom: "1px",
             fontFamily: "Poppins, sans-serif",
           }}
@@ -72,7 +72,7 @@ const CreateNewPassword = () => {
           size="small"
           sx={{
             mb: 1,
-            backgroundColor: "#fafafa",
+            backgroundColor: "#FFFFFF",
             fontFamily: "Poppins, sans-serif",
             // paddingBottom: "8px",
             '& .MuiInputBase-input::placeholder': {
@@ -103,7 +103,7 @@ const CreateNewPassword = () => {
           size="small"
           sx={{
             mb: 4,
-            backgroundColor: "#fafafa",
+            backgroundColor: "#FFFFFF",
             fontFamily: "Poppins, sans-serif",
             '& .MuiInputBase-input::placeholder': {
              color: '#42474E',

@@ -3,17 +3,20 @@
 .showmsg {
     background-color: #ECFDF3;
     // border: 1px solid #D0D5DD;
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     gap: 11px;
     align-items: center;
     padding: 5px;
     margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #8D8D8D;
 }
 
 .emailotp {
     @include display-small;
     padding: 8px 0px;
+    // font-weight: 500;
 }
 
 .simple2step {

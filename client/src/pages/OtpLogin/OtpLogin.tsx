@@ -28,8 +28,9 @@ function OtpLogin() {
       sx={{
         // width: { xs: "100%", sm: "80%", md: "50%" }, // Responsive widths
         flex : 1,
-        p: { xs: 3, sm: 4, md: 8 }, // Responsive padding
+        // p: { xs: 3, sm: 4, md: 8 }, // Responsive padding
         backgroundColor: "#fff",
+        padding: 8,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -47,7 +48,7 @@ function OtpLogin() {
       )}
 
       <p className="emailotp">Enter Email OTP</p>
-      <p className="simple2step">Its a simple 2 step verification. Enter your 6 digit code sent to tyour registered email.</p>
+      <p className="simple2step">Its a simple 2 step verification. Enter your 6 digit code sent to your registered email.</p>
       <div style={{ marginTop: "7px" }}>
         <p className="enterotp">Enter OTP</p>
         <OtpInput
@@ -61,8 +62,8 @@ function OtpLogin() {
             gap: "25px",
           }}
           inputStyle={{
-            width: "2.8rem",
-            height: "2.8rem",
+            width: "2.5rem",
+            height: "2.5rem",
             // margin: "0 0.5rem",
             fontSize: "1rem",
             borderRadius: "8px",
