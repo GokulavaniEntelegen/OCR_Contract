@@ -32,7 +32,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContractContext } from 'client/src/context/AuthContext';
 
-const FilterPop: React.FC = () => {
+interface FilterPopProps {
+  subchecked: string[][];
+  setSubchecked: React.Dispatch<React.SetStateAction<string[][]>>;
+  saveSubchecked: string[][];
+  setSaveSubchecked: React.Dispatch<React.SetStateAction<string[][]>>;
+}
+
+const FilterPop: React.FC<FilterPopProps> = ({ subchecked, setSubchecked, saveSubchecked, setSaveSubchecked }) => {
     const [anchorElFilter, setAnchorElFilter] = useState<HTMLElement | null>(null);
 
     const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -41,6 +48,7 @@ const FilterPop: React.FC = () => {
 
     const handleFilterClose = () => {
         setAnchorElFilter(null);
+        setSubchecked(saveSubchecked);
     };
 
     const filterOpen = Boolean(anchorElFilter);
@@ -65,7 +73,7 @@ const FilterPop: React.FC = () => {
         'Master service level Agreement 2',
     ];
 
-    const [subchecked, setSubchecked] = useState<string[][]>([]);
+    // const [subchecked, setSubchecked] = useState<string[][]>([]);
 
     const handleToggle = (value: string) => () => {
         const currentChecked = subchecked[currentCatIndex] ?? [];
@@ -135,16 +143,27 @@ const FilterPop: React.FC = () => {
     }, [jsonData]);
 
     useEffect(() => {
-        if (currentSubCat) {
-            setSubchecked(prev => {
-                const updated = [...prev];
-                if (!updated[0]) {
-                    updated[0] = [];
-                }
-                return updated;
-            });
+    if (!categories.length) return;
+
+    const allsubcat: string[][] = categories.map((_, colIndex) => {
+        const values = jsonData.tablerows.map(row => row.fields[colIndex]?.value);
+        const uniqueValues = Array.from(new Set(values.filter(Boolean)));
+        return uniqueValues;
+    });
+
+    setAllSubCat(allsubcat);
+    setCurrentSubCat(allsubcat[0]);
+
+    // 🛠️ Initialize subchecked for all categories immediately
+    setSubchecked((prev) => {
+        const updated = [...prev];
+        while (updated.length < allsubcat.length) {
+            updated.push([]);
         }
-    }, [currentSubCat]);
+        return updated;
+    });
+}, [categories, jsonData]);
+
 
     useEffect(() => {
         if (!categories.length) return;
@@ -408,9 +427,7 @@ const FilterPop: React.FC = () => {
                                                     <ListItemIcon sx={{ minWidth: '30px' }}>
                                                         <Checkbox
                                                             edge="start"
-                                                            checked={subchecked[
-                                                                currentCatIndex
-                                                            ]?.includes(subcategory)}
+                                                            checked={subchecked[currentCatIndex]?.includes(subcategory) || false}
                                                             tabIndex={-1}
                                                             disableRipple
                                                             sx={{
@@ -467,6 +484,7 @@ const FilterPop: React.FC = () => {
                         </Button>
                         <Button
                             variant="contained"
+                            onClick={()=>{setSaveSubchecked(subchecked);setAnchorElFilter(null);}}
                             style={{
                                 textTransform: 'none',
                                 fontSize: '16px',
