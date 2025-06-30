@@ -9,12 +9,39 @@ import { useRef, useState, useEffect } from 'react';
 import CustomBreadCrumbs from './CustomBreadCrumbs/CustomBreadCrumbs';
 import { useNavigate } from 'react-router-dom';
 import InfoBigIcon from "../assets/InfoBig.svg";
+import { useContractContext } from '../context/AuthContext';
+import AddIcon from '@mui/icons-material/Add';
 
 const SettingsContent: React.FC = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
     const [fromloc, setFromloc] = useState("");
+    
+    const [addAnotherModal, setAddAnotherModal] = useState(false);
+    const { jsonData, setJsonData } = useContractContext();
+    const [fields, setFields]= useState<string[]>();
+    const [descriptions, setDescriptions] = useState<string[]>();
+    const [dataTypes, setDataTypes] = useState<string[]>();
+    const [sections, setSections] = useState<Ifield[]>();
+    
+        const handleChangeSectionsLabel = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            const updSections = [...(sections ?? [])];
+            updSections[index].label = e.target.value;
+            setSections(updSections);
+        }
+
+    const handleChangeSectionsDesc = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const updSections = [...(sections ?? [])];
+        updSections[index].desc = e.target.value;
+        setSections(updSections);
+    }
+
+    const handleChangeSectionsDataType = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const updSections = [...(sections ?? [])];
+        updSections[index].datatype = e.target.value;
+        setSections(updSections);
+    }
 
     useEffect(() => {
     console.log("location.state:", location.state);
@@ -24,13 +51,42 @@ const SettingsContent: React.FC = () => {
     }
     }, [location.state]);
 
+
+    interface Ifield {
+    label: string;
+    value: string;
+    aiflag: boolean;
+    desc: string;
+    datatype: string;
+    }
+
+    const handleAdd = () => {
+        const newData = {
+            label: "",
+            value: "",
+            aiflag: false,
+            desc: "",
+            datatype: ""
+        }
+        const updatedAdd = [...(sections ?? []), newData];
+        setSections(updatedAdd)
+    }
+
+    useEffect(() => {
+        const updfields = jsonData.formsections.map((field, index) => field.label);
+        const upddesc = jsonData.formsections.map((field, index) => field.desc);
+        const upddatatypes = jsonData.formsections.map((field, index) => field.datatype);
+        setSections(jsonData.formsections);
+    },[])
+
     const handleAddAndCheck = () => {
         if(fromloc === "dashboard") {
             setAddAnotherModal(true);
         }
     }
 
-    const [addAnotherModal, setAddAnotherModal] = useState(false);
+
+
 
     return (
         <Box sx={{ width: '100%', minHeight: '100vh' }}>
@@ -98,7 +154,9 @@ const SettingsContent: React.FC = () => {
                         that you want to receive the data in.
                     </p>
                     {/* Input Row */}
+                    {sections?.map((field,index) => (
                     <Box
+                    key={index}
                         sx={{
                             border: '1px solid #E0E0E0',
                             borderRadius: '4px',
@@ -138,6 +196,8 @@ const SettingsContent: React.FC = () => {
                             <TextField
                                 placeholder="Invoice_ID"
                                 variant="outlined"
+                                onChange={(e) => handleChangeSectionsLabel(index,e)}
+                                value={field.label}
                                 size="small"
                                 sx={{
                                     '& input::placeholder': {
@@ -154,6 +214,8 @@ const SettingsContent: React.FC = () => {
                             {/* Description Field */}
                             <TextField
                                 placeholder="Invoice id/Invoice number/rec"
+                                onChange={(e) => handleChangeSectionsDesc(index,e)}
+                                value = {field.desc}
                                 variant="outlined"
                                 size="small"
                                 sx={{
@@ -184,7 +246,9 @@ const SettingsContent: React.FC = () => {
                                     placeholder="Example:Invoice"
                                     variant="outlined"
                                     size="small"
-                                    defaultValue=""
+                                    onChange={(e) => handleChangeSectionsDataType(index,e)}
+                                    defaultValue={field.datatype}
+                                    value={field.datatype}
                                     fullWidth
                                     SelectProps={{
                                         IconComponent: () => null, // Remove default icon
@@ -242,17 +306,22 @@ const SettingsContent: React.FC = () => {
                             />
                         </Box>
                     </Box>
+                    ))}
 
-                    <Typography
+                    <Button
                         sx={{
                             color: '#007BFF',
                             fontWeight: 500,
                             cursor: 'pointer',
                             fontFamily: 'Poppins, sans-serif',
+                            textTransform: "none"
                         }}
+                        startIcon ={<AddIcon/>}
+                        onClick = {() => handleAdd()}
                     >
-                        + Add another Meta data
-                    </Typography>
+                        Add another Meta data
+                    </Button>
+                    <p></p>
                     <Button
                         variant="contained"
                         // startIcon = {<img src = {UploadBlueIcon} style={{width: "18px", height: "18px"}}/>}

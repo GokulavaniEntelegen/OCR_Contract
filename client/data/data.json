@@ -5,55 +5,76 @@
   },
 
   "formsections": [
+    
     {
       "label": "Contract No.",
       "value": "921-923-9234",
-      "aiflag": false
+      "aiflag": false,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Customer Name",
       "value": "AMS Anmosh Suppliers",
-      "aiflag": false
+      "aiflag": false,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Contract Title",
       "value": "Master Service Agreement",
-      "aiflag": false
+      "aiflag": false,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Start Date",
       "value": "02 May, 2022",
-      "aiflag": false
+      "aiflag": false,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "End Date",
       "value": "In 3 Months",
-      "aiflag": true
+      "aiflag": true,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Auto Renewal Term",
       "value": "Non Renewal at least thirty (30)",
-      "aiflag": true
+      "aiflag": true,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Payment Term",
       "value": "Payable within 15 days of invoice",
-      "aiflag": true
+      "aiflag": true,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Web Site",
       "value": "www.prereppe.com",
-      "aiflag": true
+      "aiflag": true,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Address",
       "value": "Aboxyz Traders 45 Lightning Road",
-      "aiflag": true
+      "aiflag": true,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     },
     {
       "label": "Phone",
       "value": "123-456-7890",
-      "aiflag": false
+      "aiflag": false,
+      "desc": "Invoice Id/Invoice Number/rec",
+      "datatype": "string"
     }
   ],
 

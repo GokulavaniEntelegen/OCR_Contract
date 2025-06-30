@@ -11,6 +11,14 @@ interface Ifield {
     label: string;
     value: string;
     aiflag: boolean;
+    desc: string;
+    datatype: string;
+}
+
+
+interface FormSection {
+    type: string;
+    field: Ifield[];
 }
 
 interface TableRow {
@@ -52,3 +60,4 @@ export const useContractContext = () => {
     if (!context) throw new Error('useContractContext must be used within a ContractProvider');
     return context;
 };
+

@@ -1,0 +1,121 @@
+{
+  "processdata": {
+    "contract-type": "",
+    "tags": []
+  },
+
+  "formsections": [
+    {
+      "type": "Vendor and Sales Contracts",
+      "fields": [
+        {
+          "label": "Contract No.",
+          "value": "921-923-9234",
+          "aiflag": false
+        },
+        {
+          "label": "Customer Name",
+          "value": "AMS Anmosh Suppliers",
+          "aiflag": false
+        },
+        {
+          "label": "Contract Title",
+          "value": "Master Service Agreement",
+          "aiflag": false
+        },
+        {
+          "label": "Start Date",
+          "value": "02 May, 2022",
+          "aiflag": false
+        },
+        {
+          "label": "End Date",
+          "value": "In 3 Months",
+          "aiflag": true
+        },
+        {
+          "label": "Auto Renewal Term",
+          "value": "Non Renewal at least thirty (30)",
+          "aiflag": true
+        },
+        {
+          "label": "Payment Term",
+          "value": "Payable within 15 days of invoice",
+          "aiflag": true
+        },
+        {
+          "label": "Web Site",
+          "value": "www.prereppe.com",
+          "aiflag": true
+        },
+        {
+          "label": "Address",
+          "value": "Aboxyz Traders 45 Lightning Road",
+          "aiflag": true
+        },
+        {
+          "label": "Phone",
+          "value": "123-456-7890",
+          "aiflag": false
+        }
+      ]
+    },
+    {
+      "type": "Lease Contracts",
+      "fields": [
+        {
+          "label": "Contract No.",
+          "value": "921-923-9234",
+          "aiflag": false
+        },
+        {
+          "label": "Customer Name",
+          "value": "AMS Anmosh Suppliers",
+          "aiflag": false
+        },
+        {
+          "label": "Contract Title",
+          "value": "Master Service Agreement",
+          "aiflag": false
+        },
+        {
+          "label": "Start Date",
+          "value": "02 May, 2022",
+          "aiflag": false
+        },
+        {
+          "label": "End Date",
+          "value": "In 3 Months",
+          "aiflag": true
+        },
+        {
+          "label": "Auto Renewal Term",
+          "value": "Non Renewal at least thirty (30)",
+          "aiflag": true
+        },
+        {
+          "label": "Payment Term",
+          "value": "Payable within 15 days of invoice",
+          "aiflag": true
+        },
+        {
+          "label": "Web Site",
+          "value": "www.prereppe.com",
+          "aiflag": true
+        },
+        {
+          "label": "Address",
+          "value": "Aboxyz Traders 45 Lightning Road",
+          "aiflag": true
+        },
+        {
+          "label": "Phone",
+          "value": "123-456-7890",
+          "aiflag": false
+        }
+      ]
+    }
+  ],
+
+  "tablerows": []
+}
