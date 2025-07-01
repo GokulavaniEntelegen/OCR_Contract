@@ -82,7 +82,7 @@ function ContractScan() {
         //     setFormLoading(false);
         // })
 
-        const tempFormData = jsonData.formsections.map(field => ({ ...field }))
+        const tempFormData = jsonData.formsections.map(field => ({ ...field }));
         setFormData(jsonData.formsections.map(field => ({ ...field })));
         setFieldData(tempFormData.map(field => field.value));
         setInitFieldVals(tempFormData.map(field => field.value));
@@ -154,69 +154,99 @@ function ContractScan() {
         // }
         // const newRow= {fields: formData};
         setJsonData(prev => ({
-        ...prev,
-        tablerows: [...prev.tablerows, { fields: formData.map(field => ({ ...field })) }]
+            ...prev,
+            tablerows: [...prev.tablerows, { fields: formData.map(field => ({ ...field })) }],
         }));
         setFormData(jsonData.formsections);
         setFieldData(jsonData.formsections.map(field => field.value));
-        console.log("JsonData: " + jsonData.formsections);
+        console.log('JsonData: ' + jsonData.formsections);
         navigate('/dashboard/all-contracts');
     };
 
     const { jsonData, setJsonData } = useContractContext();
 
     return (
-        <Box sx={{ minHeight: '100vh' }} className="fullcontract">
-            <div style={{ padding: '30px 80px 0px 80px' }}>
+        <Box className="fullcontract">
+            <div style={{ padding: '30px 30px 0px 30px' }}>
                 <CustomBreadCrumbs replacetext="Contract Scan" tonav="contract-scan" />
                 <p className="contracttext">Contract Scan</p>
                 <div className="fileandforms">
                     <div className="file" style={{ display: !file ? 'flex' : 'block' }}>
-                        {!file && (
-                            <div className="upl">
-                                <IconButton onClick={handleUploadIconClick}>
-                                    <img
-                                        src={UploadBigIcon}
-                                        style={{ width: '85px', height: '85px' }}
-                                    />
-                                </IconButton>
-                                <p className="upltext">Upload Invoice</p>
-                            </div>
-                        )}
-                        <input
-                            type="file"
-                            ref={fileInputRef}
-                            onChange={handleFileChange}
-                            style={{ display: 'none' }}
-                            accept="image/*,application/pdf"
-                        />
+                        <div
+                            className="file-content"
+                            style={{ height: !file ? '4rem' : '44.94rem' }}
+                        >
+                            {!file && (
+                                <div className="upl">
+                                    <IconButton onClick={handleUploadIconClick}>
+                                        <img
+                                            src={UploadBigIcon}
+                                            style={{
+                                                width: '85px',
+                                                height: '85px',
+                                            }}
+                                        />
+                                    </IconButton>
+                                    <p className="upltext">Upload Invoice</p>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}
+                                accept="image/*,application/pdf"
+                            />
 
-                        {file?.type.startsWith('image/') && previewURL && (
-                            <img src={previewURL} style={{ width: '100%', height: '95%' }} />
-                        )}
-
-                        {file?.type === 'application/pdf' && previewURL && (
-                            <iframe src={previewURL} style={{ width: '100%', height: '100%' }} />
-                        )}
-                        {/* 
-                        {file && 
-                        <div style={{display: "flex", justifyContent: "space-between", alignItems:"center", marginTop: "-10px"}}>
-                            <ChatBotPop/> */}
-                        <div className="zoomactions">
-                            <IconButton>
+                            {file?.type.startsWith('image/') && previewURL && (
                                 <img
-                                    src={ZoomInIcon}
+                                    src={previewURL}
                                     style={{
-                                        width: '24px',
-                                        height: '24px',
-                                        borderRight: '1px solid lightgray',
-                                        paddingRight: '20px',
+                                        width: '100%',
+                                        height: '95%',
+                                        objectPosition: 'center',
+                                        // objectFit: 'contain',
                                     }}
                                 />
-                            </IconButton>
-                            <IconButton>
-                                <img src={ZoomOutIcon} style={{ width: '24px', height: '24px' }} />
-                            </IconButton>
+                            )}
+
+                            {file?.type === 'application/pdf' && previewURL && (
+                                <iframe
+                                    src={previewURL}
+                                    style={{ width: '100%', height: '100%' }}
+                                />
+                            )}
+
+                            {file && (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    {/* <p style={{ opacity: 0 }}>ejrhf</p> */}
+                                    <div className="zoomactions">
+                                        <IconButton>
+                                            <img
+                                                src={ZoomInIcon}
+                                                style={{
+                                                    width: '24px',
+                                                    height: '24px',
+                                                    borderRight: '1px solid lightgray',
+                                                    paddingRight: '20px',
+                                                }}
+                                            />
+                                        </IconButton>
+                                        <IconButton>
+                                            <img
+                                                src={ZoomOutIcon}
+                                                style={{ width: '24px', height: '24px' }}
+                                            />
+                                        </IconButton>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -388,7 +418,7 @@ function ContractScan() {
                                 )}
                                 <div className="fields">
                                     {formData.map((field, index) => (
-                                        <div>
+                                        <div className="input-field">
                                             <p
                                                 style={{
                                                     margin: 0,
@@ -481,7 +511,10 @@ function ContractScan() {
                             <div className="formbottom">
                                 <div
                                     className="buttons"
-                                    style={{ padding: '0px 30px 12px 0px', marginBottom: '-20px' }}
+                                    style={{
+                                        padding: '10px 30px 10px 10px',
+                                        // marginBottom: '-20px',
+                                    }}
                                 >
                                     <Button
                                         // onClick={handleClose}
@@ -537,7 +570,9 @@ function ContractScan() {
                         </div>
                     )}
                 </div>
-                <Button onClick={handleAILoading}>Loading...</Button>
+                <Button sx={{ opacity: 2 }} onClick={handleAILoading}>
+                    Loading...
+                </Button>
             </div>
         </Box>
     );

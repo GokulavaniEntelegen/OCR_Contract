@@ -8,88 +8,92 @@ import { useLocation } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import CustomBreadCrumbs from './CustomBreadCrumbs/CustomBreadCrumbs';
 import { useNavigate } from 'react-router-dom';
-import InfoBigIcon from "../assets/InfoBig.svg";
+import InfoBigIcon from '../assets/InfoBig.svg';
 import { useContractContext } from '../context/AuthContext';
 import AddIcon from '@mui/icons-material/Add';
 
 const SettingsContent: React.FC = () => {
-
     const navigate = useNavigate();
     const location = useLocation();
-    const [fromloc, setFromloc] = useState("");
-    
+    const [fromloc, setFromloc] = useState('');
+
     const [addAnotherModal, setAddAnotherModal] = useState(false);
     const { jsonData, setJsonData } = useContractContext();
-    const [fields, setFields]= useState<string[]>();
+    const [fields, setFields] = useState<string[]>();
     const [descriptions, setDescriptions] = useState<string[]>();
     const [dataTypes, setDataTypes] = useState<string[]>();
     const [sections, setSections] = useState<Ifield[]>();
-    
-        const handleChangeSectionsLabel = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-            const updSections = [...(sections ?? [])];
-            updSections[index].label = e.target.value;
-            setSections(updSections);
-        }
 
-    const handleChangeSectionsDesc = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChangeSectionsLabel = (
+        index: number,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const updSections = [...(sections ?? [])];
+        updSections[index].label = e.target.value;
+        setSections(updSections);
+    };
+
+    const handleChangeSectionsDesc = (
+        index: number,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const updSections = [...(sections ?? [])];
         updSections[index].desc = e.target.value;
         setSections(updSections);
-    }
+    };
 
-    const handleChangeSectionsDataType = (index: number,e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChangeSectionsDataType = (
+        index: number,
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const updSections = [...(sections ?? [])];
         updSections[index].datatype = e.target.value;
         setSections(updSections);
-    }
+    };
 
     useEffect(() => {
-    console.log("location.state:", location.state);
+        console.log('location.state:', location.state);
 
-    if (location.state?.fromloc) {
-        setFromloc(location.state.fromloc);
-    }
+        if (location.state?.fromloc) {
+            setFromloc(location.state.fromloc);
+        }
     }, [location.state]);
 
-
     interface Ifield {
-    label: string;
-    value: string;
-    aiflag: boolean;
-    desc: string;
-    datatype: string;
+        label: string;
+        value: string;
+        aiflag: boolean;
+        desc: string;
+        datatype: string;
     }
 
     const handleAdd = () => {
         const newData = {
-            label: "",
-            value: "",
+            label: '',
+            value: '',
             aiflag: false,
-            desc: "",
-            datatype: ""
-        }
+            desc: '',
+            datatype: '',
+        };
         const updatedAdd = [...(sections ?? []), newData];
-        setSections(updatedAdd)
-    }
+        setSections(updatedAdd);
+    };
 
     useEffect(() => {
         const updfields = jsonData.formsections.map((field, index) => field.label);
         const upddesc = jsonData.formsections.map((field, index) => field.desc);
         const upddatatypes = jsonData.formsections.map((field, index) => field.datatype);
         setSections(jsonData.formsections);
-    },[])
+    }, []);
 
     const handleAddAndCheck = () => {
-        if(fromloc === "dashboard") {
+        if (fromloc === 'dashboard') {
             setAddAnotherModal(true);
         }
-    }
-
-
-
+    };
 
     return (
-        <Box sx={{ width: '100%', minHeight: '100vh' }}>
+        <Box sx={{ width: '100%', minHeight: '100vh', overflowY: 'auto' }}>
             <div style={{ padding: '30px 30px 0px 30px' }}>
                 <CustomBreadCrumbs replacetext="Settings" tonav="settings" />
                 <Typography
@@ -154,32 +158,32 @@ const SettingsContent: React.FC = () => {
                         that you want to receive the data in.
                     </p>
                     {/* Input Row */}
-                    {sections?.map((field,index) => (
-                    <Box
-                    key={index}
-                        sx={{
-                            border: '1px solid #E0E0E0',
-                            borderRadius: '4px',
-                            padding: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 2,
-                            marginBottom: '1.5rem',
-                            fontFamily: 'poppins,sans-serif',
-                            fontSize: '14px',
-                            // fontWeight:'400',
-                            backgroundColor: '#ffffff',
-                        }}
-                    >
-                        <Box>
-                            <img
-                                src={Hamburger}
-                                alt="image"
-                                style={{ height: '2rem', width: 18 }}
-                            />
-                        </Box>
+                    {sections?.map((field, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                border: '1px solid #E0E0E0',
+                                borderRadius: '4px',
+                                padding: '1rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 2,
+                                marginBottom: '1.5rem',
+                                fontFamily: 'poppins,sans-serif',
+                                fontSize: '14px',
+                                // fontWeight:'400',
+                                backgroundColor: '#ffffff',
+                            }}
+                        >
+                            <Box>
+                                <img
+                                    src={Hamburger}
+                                    alt="image"
+                                    style={{ height: '2rem', width: 18 }}
+                                />
+                            </Box>
 
-                        {/* <Box 
+                            {/* <Box 
                     sx={{ 
                         display:'flex',
                         alignItems:'center',
@@ -191,121 +195,121 @@ const SettingsContent: React.FC = () => {
                         
                     }}> */}
 
-                        <Box sx={{ width: '30%' }}>
-                            <p style={{ margin: 1, color: '#606060' }}> Key 1</p>
-                            <TextField
-                                placeholder="Invoice_ID"
-                                variant="outlined"
-                                onChange={(e) => handleChangeSectionsLabel(index,e)}
-                                value={field.label}
-                                size="small"
-                                sx={{
-                                    '& input::placeholder': {
-                                        color: '#42474E', // 👈 your desired placeholder color
-                                        opacity: 1,
-                                    },
-                                }}
-                                fullWidth
-                            />
-                        </Box>
-
-                        <Box sx={{ width: '30%' }}>
-                            <p style={{ margin: 1, color: '#606060' }}>Description</p>
-                            {/* Description Field */}
-                            <TextField
-                                placeholder="Invoice id/Invoice number/rec"
-                                onChange={(e) => handleChangeSectionsDesc(index,e)}
-                                value = {field.desc}
-                                variant="outlined"
-                                size="small"
-                                sx={{
-                                    '& input::placeholder': {
-                                        color: '#42474E', // 👈 your desired placeholder color
-                                        opacity: 1,
-                                    },
-                                }}
-                                fullWidth
-                                // defaultValue="Invoice id/Invoice number/rec"
-                            />
-                        </Box>
-
-                        <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%' }}>
-                            <p
-                                style={{
-                                    margin: 1,
-                                    color: '#606060',
-                                    fontFamily: 'poppins,sans-serif',
-                                }}
-                            >
-                                Data Type
-                            </p>
-
-                            <Box sx={{ position: 'relative' }}>
+                            <Box sx={{ width: '30%' }}>
+                                <p style={{ margin: 1, color: '#606060' }}> Key 1</p>
                                 <TextField
-                                    select
-                                    placeholder="Example:Invoice"
+                                    placeholder="Invoice_ID"
+                                    variant="outlined"
+                                    onChange={e => handleChangeSectionsLabel(index, e)}
+                                    value={field.label}
+                                    size="small"
+                                    sx={{
+                                        '& input::placeholder': {
+                                            color: '#42474E', // 👈 your desired placeholder color
+                                            opacity: 1,
+                                        },
+                                    }}
+                                    fullWidth
+                                />
+                            </Box>
+
+                            <Box sx={{ width: '30%' }}>
+                                <p style={{ margin: 1, color: '#606060' }}>Description</p>
+                                {/* Description Field */}
+                                <TextField
+                                    placeholder="Invoice id/Invoice number/rec"
+                                    onChange={e => handleChangeSectionsDesc(index, e)}
+                                    value={field.desc}
                                     variant="outlined"
                                     size="small"
-                                    onChange={(e) => handleChangeSectionsDataType(index,e)}
-                                    defaultValue={field.datatype}
-                                    value={field.datatype}
+                                    sx={{
+                                        '& input::placeholder': {
+                                            color: '#42474E', // 👈 your desired placeholder color
+                                            opacity: 1,
+                                        },
+                                    }}
                                     fullWidth
-                                    SelectProps={{
-                                        IconComponent: () => null, // Remove default icon
-                                    }}
-                                    sx={{
-                                        fontFamily: 'Poppins, sans-serif',
-                                        '& .MuiSelect-select': {
-                                            fontFamily: 'Poppins, sans-serif',
-                                            color: '#45464B',
-                                            padding: '8px 0',
-                                        },
-                                        '& .MuiOutlinedInput-notchedOutline': {
-                                            border: 'none',
-                                            borderBottom: '1px solid #D1D5DB',
-                                            borderRadius: '4px',
-                                        },
-                                    }}
-                                >
-                                    <MenuItem
-                                        value="Invoice"
-                                        sx={{ fontFamily: 'poppins,sans-serif' }}
-                                    >
-                                        Example: Invoice
-                                    </MenuItem>
-                                </TextField>
+                                    // defaultValue="Invoice id/Invoice number/rec"
+                                />
+                            </Box>
 
-                                {/* ✅ Custom dropdown icon */}
-                                <IconButton
-                                    size="small"
-                                    sx={{
-                                        position: 'absolute',
-                                        right: 8,
-                                        top: '50%',
-                                        transform: 'translateY(-50%)',
-                                        pointerEvents: 'none',
+                            <Box sx={{ display: 'flex', flexDirection: 'column', width: '20%' }}>
+                                <p
+                                    style={{
+                                        margin: 1,
+                                        color: '#606060',
+                                        fontFamily: 'poppins,sans-serif',
                                     }}
                                 >
-                                    {/* Replace with your own icon or image if needed */}
-                                    <img
-                                        src={dropdown}
-                                        alt="dropdown"
-                                        style={{ width: 8, height: 8 }}
-                                    />
-                                </IconButton>
+                                    Data Type
+                                </p>
+
+                                <Box sx={{ position: 'relative' }}>
+                                    <TextField
+                                        select
+                                        placeholder="Example:Invoice"
+                                        variant="outlined"
+                                        size="small"
+                                        onChange={e => handleChangeSectionsDataType(index, e)}
+                                        defaultValue={field.datatype}
+                                        value={field.datatype}
+                                        fullWidth
+                                        SelectProps={{
+                                            IconComponent: () => null, // Remove default icon
+                                        }}
+                                        sx={{
+                                            fontFamily: 'Poppins, sans-serif',
+                                            '& .MuiSelect-select': {
+                                                fontFamily: 'Poppins, sans-serif',
+                                                color: '#45464B',
+                                                padding: '8px 0',
+                                            },
+                                            '& .MuiOutlinedInput-notchedOutline': {
+                                                border: 'none',
+                                                borderBottom: '1px solid #D1D5DB',
+                                                borderRadius: '4px',
+                                            },
+                                        }}
+                                    >
+                                        <MenuItem
+                                            value="Invoice"
+                                            sx={{ fontFamily: 'poppins,sans-serif' }}
+                                        >
+                                            Example: Invoice
+                                        </MenuItem>
+                                    </TextField>
+
+                                    {/* ✅ Custom dropdown icon */}
+                                    <IconButton
+                                        size="small"
+                                        sx={{
+                                            position: 'absolute',
+                                            right: 8,
+                                            top: '50%',
+                                            transform: 'translateY(-50%)',
+                                            pointerEvents: 'none',
+                                        }}
+                                    >
+                                        {/* Replace with your own icon or image if needed */}
+                                        <img
+                                            src={dropdown}
+                                            alt="dropdown"
+                                            style={{ width: 8, height: 8 }}
+                                        />
+                                    </IconButton>
+                                </Box>
+                            </Box>
+
+                            {/* </Box> */}
+
+                            <Box sx={{ marginLeft: 'auto' }}>
+                                <img
+                                    src={Vector}
+                                    alt="image"
+                                    style={{ height: '2rem', width: 18, paddingLeft: '24' }}
+                                />
                             </Box>
                         </Box>
-
-                        {/* </Box> */}
-
-                        <Box sx={{ marginLeft: 'auto' }}>
-                            <img
-                                src={Vector}
-                                alt="image"
-                                style={{ height: '2rem', width: 18, paddingLeft: '24' }}
-                            />
-                        </Box>
-                    </Box>
                     ))}
 
                     <Button
@@ -314,10 +318,10 @@ const SettingsContent: React.FC = () => {
                             fontWeight: 500,
                             cursor: 'pointer',
                             fontFamily: 'Poppins, sans-serif',
-                            textTransform: "none"
+                            textTransform: 'none',
                         }}
-                        startIcon ={<AddIcon/>}
-                        onClick = {() => handleAdd()}
+                        startIcon={<AddIcon />}
+                        onClick={() => handleAdd()}
                     >
                         Add another Meta data
                     </Button>
@@ -333,73 +337,80 @@ const SettingsContent: React.FC = () => {
                             fontWeight: '500',
                             backgroundColor: '#1093FF',
                             boxShadow: 'none',
-                            marginTop: "20px",
+                            marginTop: '20px',
                         }}
                     >
                         <p>Submit</p>
                     </Button>
 
-                    <Modal open = {addAnotherModal}>
-                <Box className = "anotherbox"
-                sx = {{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    bgcolor: 'background.paper',
-                    boxShadow: 24,
-                    p: "20px 32px",
-                    borderRadius: 4,
-
-                }}>
-                    <img src = {InfoBigIcon} style={{width: "131.22x", height: "86.65px"}}/>
-                    <p className='suretext'>Do u want to continue your progress of New Extraction in the Dashboard page</p>
-                    <Box className = "sureandcan">
-                        <Button
-                        onClick={() => {
-                            setAddAnotherModal(false);
-                        }}
-                        variant="outlined"
-                        style={{
-                            textTransform: 'none',
-                            fontSize: '14px',
-                            padding: '10px 24px',
-                            border: '1px solid gray',
-                            fontFamily: 'Poppins',
-                            color: '#1093FF',
-                        }}
-                        // className="actions"
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            navigate("/dashboard", {
-                                state: {
-                                    fromloc: "dashboard"
-                                }
-                            });
-                            setAddAnotherModal(false);
-                        }}
-                        variant="contained"
-                        sx={{
-                            textTransform: 'none',
-                            fontSize: '14px',
-                            padding: '10px 24px',
-                            fontFamily: 'Poppins',
-                            backgroundColor: '#1093FF',
-                            boxShadow: 'none',
-                            '&.Mui-disabled': {
-                                backgroundColor: 'rgba(0, 0, 0, 0.12)',
-                            },
-                        }}
-                        // className="actions"
-                    >
-                        Next
-                    </Button>
-                    </Box>
-                </Box>
-            </Modal>
+                    <Modal open={addAnotherModal}>
+                        <Box
+                            className="anotherbox"
+                            sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                bgcolor: 'background.paper',
+                                boxShadow: 24,
+                                p: '20px 32px',
+                                borderRadius: 4,
+                            }}
+                        >
+                            <img
+                                src={InfoBigIcon}
+                                style={{ width: '131.22x', height: '86.65px' }}
+                            />
+                            <p className="suretext">
+                                Do u want to continue your progress of New Extraction in the
+                                Dashboard page
+                            </p>
+                            <Box className="sureandcan">
+                                <Button
+                                    onClick={() => {
+                                        setAddAnotherModal(false);
+                                    }}
+                                    variant="outlined"
+                                    style={{
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        border: '1px solid gray',
+                                        fontFamily: 'Poppins',
+                                        color: '#1093FF',
+                                    }}
+                                    // className="actions"
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        navigate('/dashboard', {
+                                            state: {
+                                                fromloc: 'dashboard',
+                                            },
+                                        });
+                                        setAddAnotherModal(false);
+                                    }}
+                                    variant="contained"
+                                    sx={{
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        padding: '10px 24px',
+                                        fontFamily: 'Poppins',
+                                        backgroundColor: '#1093FF',
+                                        boxShadow: 'none',
+                                        '&.Mui-disabled': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.12)',
+                                        },
+                                    }}
+                                    // className="actions"
+                                >
+                                    Next
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Modal>
                 </Box>
             </div>
         </Box>
