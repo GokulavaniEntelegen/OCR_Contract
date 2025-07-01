@@ -48,7 +48,7 @@ const ChatBotPop: React.FC = () => {
 
     return (
         <>
-            <IconButton onClick={handleOpen}>
+            <IconButton onClick={handleOpen} sx={{ zIndex: '2' }}>
                 <img src={ChatBotBlueIcon} style={{ width: '60px', height: '60px' }} />
             </IconButton>
 

@@ -638,7 +638,7 @@ function DashboardLayout() {
                         // position: 'fixed',
                         top: 0,
                         left: 0,
-                        zIndex: 1000,
+                        zIndex: 1,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -787,7 +787,9 @@ function DashboardLayout() {
                             }}
                         >
                             <IconButton
-                            onClick={() => {navigate("/dashboard/settings")}}
+                                onClick={() => {
+                                    navigate('/dashboard/settings');
+                                }}
                                 sx={{
                                     color: 'black',
                                     border: '1px solid lightgray',
