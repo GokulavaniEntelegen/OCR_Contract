@@ -11,9 +11,12 @@ import Tabletry from 'client/src/components/Table/Tables';
 import ImportContractPop from 'client/src/components/ImportContractPop/importcontractpop';
 import UploadCustomIcon from '../../assets/UploadCustom.svg';
 import ShowWidgetsIcon from '../../assets/ShowWidgets.svg';
+import UploadContract from '../Dashboard/UploadContract';
 
 function AllContracts() {
     const [show, setShow] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
     const handleShow = () => {
         if (show) {
             setShow(false);
@@ -66,7 +69,9 @@ function AllContracts() {
                             <ImportContractPop fromtext="allcontracts" />
 
                             <Button
-                                // onClick={}
+                                onClick={() => {
+                                    setShowModal(true);
+                                }}
                                 variant="contained"
                                 startIcon={
                                     <img
@@ -94,6 +99,7 @@ function AllContracts() {
                     <div className="contracttable" style={{ marginTop: '60px' }}>
                         <Tabletry show={show} />
                     </div>
+                    <UploadContract showModal={showModal} setShowModal={setShowModal} />
                 </div>
             </Box>
         </div>
