@@ -1,8 +1,9 @@
-@use "../../global_styles/typography.scss" as *;
+@use '../../global_styles/typography.scss' as *;
 
 .fullcontract {
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 10px;
+    overflow-y: hidden;
 
     .contracttext {
         font-family: Poppins;
@@ -14,33 +15,33 @@
     .fileandforms {
         display: flex;
         flex-direction: row;
-        border: 1px solid #9A9A9A80;
+        border: 1px solid #9a9a9a80;
         border-radius: 16px;
         margin-top: 15px;
+        height: 48.5rem;
 
         .file {
             flex: 1;
             // border-right: 1px solid #9A9A9A80;
-            height: 51.94rem;
+            // height: 5.94rem;
             width: 41.94rem;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 24px;
-            background-color: #F6F6F6;
+            background-color: #f6f6f6;
             border-radius: 16px;
             flex-direction: column;
-            border-right: 1px solid #9A9A9A80;
+            border-right: 1px solid #9a9a9a80;
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
 
             .upl {
-                    
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-                    
+
                 .upltext {
                     font-family: Poppins;
                     font-size: 24px;
@@ -49,16 +50,17 @@
             }
 
             .zoomactions {
-                display: inline-flex;
+                display: flex;
                 gap: 5px;
-                border: 1px solid #BBBBBB;
+                border: 1px solid #bbbbbb;
                 justify-content: flex-end;
                 align-items: flex-end;
-                background-color: #FFFFFF;
+                background-color: #ffffff;
                 // box-sizing: border-box;
                 border-radius: 7px;
                 width: fit-content;
                 margin-top: 10px;
+                margin-bottom: 10px;
             }
         }
 
@@ -66,9 +68,9 @@
             display: flex;
             flex-direction: column;
             flex: 1;
-            height: 51.94rem;
+            // height: 51.94rem;
             // border-left: 1px solid #9A9A9A80;
-            
+
             .formtop {
                 padding: 14px 20px;
                 display: flex;
@@ -91,50 +93,48 @@
                         font-weight: 500;
                         font-size: 14px;
                         letter-spacing: 0.1px;
-                        color: #1093FF;
+                        color: #1093ff;
                         padding-right: 10px;
                     }
                 }
-
             }
 
             .formdata {
                 padding: 13px;
                 flex: 1;
                 overflow-y: auto;
-                
 
                 .sectionheader {
                     font-family: Poppins;
                     font-weight: 600;
                     font-size: 16px;
-                    color: #25213B;
+                    color: #25213b;
                     // margin-top: 30px;
                 }
                 .viewedit {
-                        padding: 12px 24px;
-                        // width: 100%;
-                        background-color: #EBF1FF;
-                        border: 1px solid #D0D5DD;
-                        border-radius: 4px;
-                        margin-bottom: 8px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-start;
-                        gap: 8px;
+                    padding: 12px 24px;
+                    // width: 100%;
+                    background-color: #ebf1ff;
+                    border: 1px solid #d0d5dd;
+                    border-radius: 4px;
+                    margin-bottom: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 8px;
 
-                        .outof {
-                            color: #475467;
-                            font-family: Poppins;
-                            font-weight: 500;
-                            font-size: 12px;
-                        }
-                        .view {
-                            @include label-medium;
-                            font-weight: 500;
-                            color: #1093FF;
-                        }
+                    .outof {
+                        color: #475467;
+                        font-family: Poppins;
+                        font-weight: 500;
+                        font-size: 12px;
                     }
+                    .view {
+                        @include label-medium;
+                        font-weight: 500;
+                        color: #1093ff;
+                    }
+                }
 
                 .fields {
                     display: grid;
@@ -144,7 +144,7 @@
                 }
             }
             .formbottom {
-                padding: 10px;
+                // padding: 10px;
                 flex-shrink: 0;
                 border-top: 1px solid lightgray;
             }

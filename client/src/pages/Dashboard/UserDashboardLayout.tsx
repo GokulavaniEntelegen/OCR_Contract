@@ -87,9 +87,9 @@ import MainLogoIcon from '../../assets/MainLogo.svg';
 import SettingsCustomIcon from '../../assets/Setting.svg';
 import NotificationIcon from '../../assets/Notification.svg';
 import PsaiImg from '../../assets/Psai.png';
-import SearchCustomIcon from "../../assets/SearchCustomIcon.svg";
-import DownArrowIcon from "../../assets/DownArrow.svg";
-import {Link} from "react-router-dom";
+import SearchCustomIcon from '../../assets/SearchCustomIcon.svg';
+import DownArrowIcon from '../../assets/DownArrow.svg';
+import { Link } from 'react-router-dom';
 import ChatBotPop from 'client/src/components/ChatBotPop/ChatBotPop';
 import HistoryIcon from '@mui/icons-material/History';
 
@@ -369,13 +369,23 @@ function DashboardLayout() {
     const [selectedKey, setSelectedKey] = useState(null);
 
     const icons = [
-        { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard', link: "/dashboard" },
-        { key: 'recent-extraction', icon: RecentExtractionIcon, tooltip: 'Recent Extraction', link: "/dashboard/all-contracts" },
-        { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download', link: "#" },
-        { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template', link: "#" },
-        { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription', link: "#" },
-        { key: 'help', icon: HelpIcon, tooltip: 'Help', link: "/dashboard/AI-Chat" },
-        { key: 'history', icon: UploadCustomIcon, tooltip: 'Activity History', link: "/dashboard/activity-history" },
+        { key: 'dashboard', icon: DashboardCustomIcon, tooltip: 'Dashboard', link: '/dashboard' },
+        {
+            key: 'recent-extraction',
+            icon: RecentExtractionIcon,
+            tooltip: 'Recent Extraction',
+            link: '/dashboard/all-contracts',
+        },
+        { key: 'reports-download', icon: ReportIcon, tooltip: 'Reports Download', link: '#' },
+        { key: 'create-template', icon: CreateTemplateIcon, tooltip: 'Create Template', link: '#' },
+        { key: 'subscription', icon: SubscriptionIcon, tooltip: 'Subscription', link: '#' },
+        { key: 'help', icon: HelpIcon, tooltip: 'Help', link: '/dashboard/AI-Chat' },
+        {
+            key: 'history',
+            icon: UploadCustomIcon,
+            tooltip: 'Activity History',
+            link: '/dashboard/activity-history',
+        },
     ];
 
     const toggleHamburger = () => {
@@ -526,7 +536,10 @@ function DashboardLayout() {
     const [step, setStep] = useState(0);
 
     return (
-        <div className="container" style={{ display: 'flex', flex: 1, height: "100vh", overflowY: "hidden" }}>
+        <div
+            className="container"
+            style={{ display: 'flex', flex: 1, height: '100vh', overflowY: 'hidden' }}
+        >
             {/* <Box sx={{ display: 'flex', height: '100vh'}}>
       
       <IconButton
@@ -610,75 +623,93 @@ function DashboardLayout() {
       />
       </Box> */}
 
-            <Box className = "sidebar" sx={{ display: 'flex', height: '100vh'}}>
-                <Box className = "sidebar"
+            <Box className="sidebar" sx={{ display: 'flex', height: '100vh' }}>
+                <Box
+                    className="sidebar"
                     sx={{
                         minwidth: '15px',
-                        maxWidth: "400px",
-                        width: "52px",
-                        overflow: "hidden",
+                        maxWidth: '400px',
+                        width: '52px',
+                        overflow: 'hidden',
                         flexShrink: 0,
                         height: '100vh',
                         backgroundColor: '#051235',
-                        paddingTop: "5px",
+                        paddingTop: '5px',
                         // position: 'fixed',
                         top: 0,
                         left: 0,
-                        zIndex: 1,
+                        zIndex: 1000,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         gap: '15px',
-                        transition: "all 0.3s ease",
-                        "&: hover": {
-                            width: "250px",
-                            alignItems: "flex-start",
+                        transition: 'all 0.3s ease',
+                        '&: hover': {
+                            width: '250px',
+                            alignItems: 'flex-start',
                         },
-                        color: "white"
+                        color: 'white',
                     }}
                 >
-                    <Box sx = {{marginLeft: "10px",".sidebar:hover &": {marginLeft: "10px"}}}>
-                    <IconButton
-                        onClick={() => navigate("/dashboard")}
-                        style={{ display: 'flex', alignItems: 'center', marginBottom: '25px', marginLeft: "-5px"}}
-                    >
-                        <img src={MainLogoIcon} alt="icon" width={40} height={40} />
-                    </IconButton>
-                    {icons.map(({ key, icon, tooltip, link }) => (
-                        <Link key = {key} to = {link} style={{textDecoration: "none", color: "inherit"}}>
-                        <Box style={{display: "flex", alignItems: "center", marginTop: "15px"}}>
-                        <Tooltip title={tooltip} placement="right" key={key}>
-                            <IconButton
-                                // onClick={() => handleIconClick(key)}
-                                sx={{
-                                    color: selectedKey === key ? '#3399FF' : '#fff',
-                                    marginY: 1,
-                                }}
-                            >
-                                <img src={icon} alt="icon" width={20} height={20} />
-                            </IconButton>
-                        </Tooltip>
-                        <Typography
-                        className="sidebar-label"
-                        sx={{
-                            whiteSpace: "nowrap",
-                            opacity: 0,
-                            width: 0,
-                            visibility: "hidden",
-                            marginLeft: "15px",
-                            transition: "opacity 0.5s ease, visibility 0.5s ease",
-                            ".sidebar:hover &": {
-                            opacity: 1,
-                            visibility: "visible",
-                            width: "auto"
-                            },
-                        }}
+                    <Box sx={{ marginLeft: '10px', '.sidebar:hover &': { marginLeft: '10px' } }}>
+                        <IconButton
+                            onClick={() => navigate('/dashboard')}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                marginBottom: '25px',
+                                marginLeft: '-5px',
+                            }}
                         >
-                        <p style={{fontFamily: "Poppins", fontSize: "14px"}}>{tooltip}</p>
-                        </Typography>
-                        </Box>
-                        </Link>
-                    ))}
+                            <img src={MainLogoIcon} alt="icon" width={40} height={40} />
+                        </IconButton>
+                        {icons.map(({ key, icon, tooltip, link }) => (
+                            <Link
+                                key={key}
+                                to={link}
+                                style={{ textDecoration: 'none', color: 'inherit' }}
+                            >
+                                <Box
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        marginTop: '15px',
+                                    }}
+                                >
+                                    <Tooltip title={tooltip} placement="right" key={key}>
+                                        <IconButton
+                                            // onClick={() => handleIconClick(key)}
+                                            sx={{
+                                                color: selectedKey === key ? '#3399FF' : '#fff',
+                                                marginY: 1,
+                                            }}
+                                        >
+                                            <img src={icon} alt="icon" width={20} height={20} />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Typography
+                                        className="sidebar-label"
+                                        sx={{
+                                            whiteSpace: 'nowrap',
+                                            opacity: 0,
+                                            width: 0,
+                                            visibility: 'hidden',
+                                            marginLeft: '15px',
+                                            transition: 'opacity 0.5s ease, visibility 0.5s ease',
+                                            '.sidebar:hover &': {
+                                                opacity: 1,
+                                                visibility: 'visible',
+                                                width: 'auto',
+                                            },
+                                        }}
+                                    >
+                                        <p style={{ fontFamily: 'Poppins', fontSize: '14px' }}>
+                                            {tooltip}
+                                        </p>
+                                    </Typography>
+                                </Box>
+                            </Link>
+                        ))}
                     </Box>
                 </Box>
             </Box>
@@ -699,8 +730,8 @@ function DashboardLayout() {
                                     '& input': {
                                         fontSize: '14px', // 👈 Increase text size here
                                         marginLeft: '5px',
-                                        fontFamily: "Poppins",
-                                        padding: "6px"
+                                        fontFamily: 'Poppins',
+                                        padding: '6px',
                                     },
                                     '& .MuiInputAdornment-root svg': {
                                         fontSize: '25px', // 👈 Optional: increase icon size
@@ -714,10 +745,30 @@ function DashboardLayout() {
                             }}
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start" style={{paddingRight: "10px",borderRight: '1px solid lightgray'}}>
-                                        <div style={{display: "flex", gap: "5px",alignItems: "center"}}>
-                                        <img src = {SearchCustomIcon} style={{width: "13.54px", height: "13.54px"}}/>
-                                        <IconButton><img src = {DownArrowIcon} style={{width:"8px", height: "5px"}}/></IconButton>
+                                    <InputAdornment
+                                        position="start"
+                                        style={{
+                                            paddingRight: '10px',
+                                            borderRight: '1px solid lightgray',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                gap: '5px',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <img
+                                                src={SearchCustomIcon}
+                                                style={{ width: '13.54px', height: '13.54px' }}
+                                            />
+                                            <IconButton>
+                                                <img
+                                                    src={DownArrowIcon}
+                                                    style={{ width: '8px', height: '5px' }}
+                                                />
+                                            </IconButton>
                                         </div>
                                     </InputAdornment>
                                 ),
@@ -730,8 +781,8 @@ function DashboardLayout() {
                     >
                         <div
                             style={{
-                                paddingRight: "15px",
-                                paddingLeft: "15px",
+                                paddingRight: '15px',
+                                paddingLeft: '15px',
                                 borderLeft: '1px solid #F0F0F0',
                             }}
                         >
@@ -742,18 +793,22 @@ function DashboardLayout() {
                                     border: '1px solid lightgray',
                                     borderRadius: '18px',
                                     backgroundColor: '#F9F9F94D',
-                                    width: "36px",
-                                    height: "31.76px"
+                                    width: '36px',
+                                    height: '31.76px',
                                 }}
                             >
-                                <img src={SettingsCustomIcon} alt="icon" style = {{width: "24px", height: "24px"}} />
+                                <img
+                                    src={SettingsCustomIcon}
+                                    alt="icon"
+                                    style={{ width: '24px', height: '24px' }}
+                                />
                             </IconButton>
                         </div>
 
                         <div
                             style={{
-                                paddingRight: "15px",
-                                paddingLeft: "15px",
+                                paddingRight: '15px',
+                                paddingLeft: '15px',
                                 borderLeft: '1px solid #F0F0F0',
                                 borderRight: '1px solid #F0F0F0',
                             }}
@@ -764,45 +819,56 @@ function DashboardLayout() {
                                     border: '1px solid lightgray',
                                     borderRadius: '18px',
                                     backgroundColor: '',
-                                    width: "36px",
-                                    height: "31.76px"
+                                    width: '36px',
+                                    height: '31.76px',
                                 }}
                             >
-                                <img src={NotificationIcon} alt="icon" style = {{width: "24px", height: "24px"}} />
+                                <img
+                                    src={NotificationIcon}
+                                    alt="icon"
+                                    style={{ width: '24px', height: '24px' }}
+                                />
                             </IconButton>
                         </div>
 
-                        <Box sx = {{py:"5px"}}>
-                        <div
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                padding: '3px 10px',
-                                width: 'fit-content',
-                                marginLeft: '20px',
-                                borderRadius: '30px',
-                                border: '1px solid #F0F0F0',
-                                marginRight: '30px',
-                            }}
-                        >
-                            <Avatar sx={{ bgcolor: '#3f51b5', marginRight: 1, height: "32px", width: "32px"}}>
-                                {getInitials(name)}
-                            </Avatar>
-                            <Typography variant="body1" sx={{ fontFamily: 'Poppins', fontSize: "16px" }}>
-                                {name}
-                            </Typography>
-                        </div>
+                        <Box sx={{ py: '5px' }}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    padding: '3px 10px',
+                                    width: 'fit-content',
+                                    marginLeft: '20px',
+                                    borderRadius: '30px',
+                                    border: '1px solid #F0F0F0',
+                                    marginRight: '30px',
+                                }}
+                            >
+                                <Avatar
+                                    sx={{
+                                        bgcolor: '#3f51b5',
+                                        marginRight: 1,
+                                        height: '32px',
+                                        width: '32px',
+                                    }}
+                                >
+                                    {getInitials(name)}
+                                </Avatar>
+                                <Typography
+                                    variant="body1"
+                                    sx={{ fontFamily: 'Poppins', fontSize: '16px' }}
+                                >
+                                    {name}
+                                </Typography>
+                            </div>
                         </Box>
                     </div>
                 </div>
 
-                <div style={{ flex: 1, overflowY: 'auto' }}>
-                    <Outlet />
-                   
-                </div>
-                 <Box className="chat-bot">
-                    <ChatBotPop/>
-                    </Box>
+                <Outlet />
+                <Box className="chat-bot">
+                    <ChatBotPop />
+                </Box>
             </div>
         </div>
     );

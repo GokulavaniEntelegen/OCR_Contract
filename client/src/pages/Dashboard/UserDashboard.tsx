@@ -13,7 +13,7 @@ import { useRef } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from 'client/api';
 import CloseIcon from '@mui/icons-material/Close';
-import InfoBigIcon from "../../assets/InfoBig.svg";
+import InfoBigIcon from '../../assets/InfoBig.svg';
 
 import {
     AppBar,
@@ -667,7 +667,7 @@ function Dashboard() {
     };
 
     return (
-        <div>
+        <div style={{ overflowY: 'auto' }}>
             <Box sx={{ width: '100%', minHeight: '100vh' }}>
                 {/* Removed the original Paper with "Welcome" and "Navigate" text */}
                 {/* Purple Gradient Banner/Card - Integrated here */}
@@ -1016,14 +1016,16 @@ function Dashboard() {
                                 ))}
                                 <Button
                                     // onClick={handleAddViewClick}
-                                    onClick={() => {setAddAnotherModal(true)}}
+                                    onClick={() => {
+                                        setAddAnotherModal(true);
+                                    }}
                                     variant="text"
                                     startIcon={<AddIcon />}
                                     sx={{
                                         textTransform: 'none',
                                         fontSize: '14px',
                                         color: '#1093FF',
-                                        fontFamily: "Poppins"
+                                        fontFamily: 'Poppins',
                                     }}
                                 >
                                     Add another
@@ -1362,64 +1364,68 @@ function Dashboard() {
                 </Box>
             </Modal>
 
-            <Modal open = {addAnotherModal}>
-                <Box className = "anotherbox"
-                sx = {{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    bgcolor: 'background.paper',
-                    boxShadow: 24,
-                    p: "20px 32px",
-                    borderRadius: 4,
-
-                }}>
-                    <img src = {InfoBigIcon} style={{width: "131.22x", height: "86.65px"}}/>
-                    <p className='suretext'>To add another metadata entry, you need to navigate away from this page. Would you like to proceed?</p>
-                    <Box className = "sureandcan">
+            <Modal open={addAnotherModal}>
+                <Box
+                    className="anotherbox"
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        p: '20px 32px',
+                        borderRadius: 4,
+                    }}
+                >
+                    <img src={InfoBigIcon} style={{ width: '131.22x', height: '86.65px' }} />
+                    <p className="suretext">
+                        To add another metadata entry, you need to navigate away from this page.
+                        Would you like to proceed?
+                    </p>
+                    <Box className="sureandcan">
                         <Button
-                        onClick={() => {
-                            setAddAnotherModal(false);
-                        }}
-                        variant="outlined"
-                        style={{
-                            textTransform: 'none',
-                            fontSize: '14px',
-                            padding: '10px 24px',
-                            border: '1px solid gray',
-                            fontFamily: 'Poppins',
-                            color: '#1093FF',
-                        }}
-                        // className="actions"
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            navigate("/dashboard/settings", {
-                                state: {
-                                    fromloc: "dashboard"
-                                }
-                            });
-                            setAddAnotherModal(false);
-                        }}
-                        variant="contained"
-                        sx={{
-                            textTransform: 'none',
-                            fontSize: '14px',
-                            padding: '10px 24px',
-                            fontFamily: 'Poppins',
-                            backgroundColor: '#1093FF',
-                            boxShadow: 'none',
-                            '&.Mui-disabled': {
-                                backgroundColor: 'rgba(0, 0, 0, 0.12)',
-                            },
-                        }}
-                        // className="actions"
-                    >
-                        Next
-                    </Button>
+                            onClick={() => {
+                                setAddAnotherModal(false);
+                            }}
+                            variant="outlined"
+                            style={{
+                                textTransform: 'none',
+                                fontSize: '14px',
+                                padding: '10px 24px',
+                                border: '1px solid gray',
+                                fontFamily: 'Poppins',
+                                color: '#1093FF',
+                            }}
+                            // className="actions"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                navigate('/dashboard/settings', {
+                                    state: {
+                                        fromloc: 'dashboard',
+                                    },
+                                });
+                                setAddAnotherModal(false);
+                            }}
+                            variant="contained"
+                            sx={{
+                                textTransform: 'none',
+                                fontSize: '14px',
+                                padding: '10px 24px',
+                                fontFamily: 'Poppins',
+                                backgroundColor: '#1093FF',
+                                boxShadow: 'none',
+                                '&.Mui-disabled': {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+                                },
+                            }}
+                            // className="actions"
+                        >
+                            Next
+                        </Button>
                     </Box>
                 </Box>
             </Modal>
