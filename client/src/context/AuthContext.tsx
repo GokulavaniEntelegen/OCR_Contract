@@ -15,14 +15,13 @@ interface Ifield {
     datatype: string;
 }
 
-
 interface FormSection {
     type: string;
     field: Ifield[];
 }
 
-interface TableRow {
-  fields: Ifield[];
+export interface TableRow {
+    fields: Ifield[];
 }
 
 interface jsonDataType {
@@ -31,7 +30,7 @@ interface jsonDataType {
         tags: string[];
     };
     formsections: Ifield[];
-    tablerows : TableRow[];
+    tablerows: TableRow[];
 }
 
 interface ContractContextType {
@@ -60,4 +59,3 @@ export const useContractContext = () => {
     if (!context) throw new Error('useContractContext must be used within a ContractProvider');
     return context;
 };
-
