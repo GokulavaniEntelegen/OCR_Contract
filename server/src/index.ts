@@ -1,27 +1,31 @@
-import 'reflect-metadata';
+import express, { Application } from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import path from 'path';
+import { config } from 'dotenv';
 
-import { createExpressServer } from 'routing-controllers';
+import ContractRoute from '../src/route/ContractRoute';
+import CustomFieldRoute from '../src/route/CustomFieldRoute';
+import DocumentTypeRoute from '../src/route/DocumentTypeRoute';
+const app: Application = express();
+config();
 
-import { config } from './config';
-import { UserController } from './controllers/UserController';
-import { AppDataSource } from './data-source';
+app.use(cors());
+app.use(bodyParser.json());
 
-async function startServer() {
-    try {
-        await AppDataSource.initialize();
-        console.log('💽 Connected to SQLite database.');
+mongoose
+    .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/documentApp')
+    .then(() => console.log('MongoDB connected'))
+    .catch((err: Error) => console.error('MongoDB connection error:', err));
 
-        const app = createExpressServer({
-            controllers: [UserController],
-            cors: true,
-        });
+app.use('/api', DocumentTypeRoute);
+app.use('/api', CustomFieldRoute);
+app.use('/api', ContractRoute);
 
-        app.listen(config.port, () => {
-            console.log(`🚀 Server running at http://localhost:${config.port}`);
-        });
-    } catch (error) {
-        console.error('Error starting server:', error);
-    }
-}
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-startServer();
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
