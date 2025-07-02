@@ -17,7 +17,7 @@ import LoadingAIICon from '../../assets/LoadingAI.svg';
 // import ChatBotPop from "client/src/components/ChatBotPop/ChatBotPop";
 import AlertIcon from '../../assets/Alert.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useContractContext } from 'client/src/context/AuthContext';
+import { TableRow, useContractContext } from 'client/src/context/AuthContext';
 
 function ContractScan() {
     const navigate = useNavigate();
@@ -155,7 +155,10 @@ function ContractScan() {
         // const newRow= {fields: formData};
         setJsonData(prev => ({
             ...prev,
-            tablerows: [...prev.tablerows, { fields: formData.map(field => ({ ...field })) }],
+            tablerows: [
+                ...prev.tablerows,
+                { fields: formData.map(field => ({ ...field })) } as TableRow,
+            ],
         }));
         setFormData(jsonData.formsections);
         setFieldData(jsonData.formsections.map(field => field.value));
