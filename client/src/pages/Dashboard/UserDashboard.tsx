@@ -954,6 +954,9 @@ function Dashboard() {
                             </div>
                         </Box>
                     )}
+                    {/* {step===0&&(
+                        // <ImportContractModal  contract={contractTypes}/>
+                    )} */}
 
                     {step === 1 && (
                         <Box className="step1">
